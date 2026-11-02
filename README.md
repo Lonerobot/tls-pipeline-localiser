@@ -1,32 +1,22 @@
 # Pipeline Localiser: Planning Blueprint
 
-This document set describes the intended design for a lightweight, host-aware pipeline localiser for THE LINE. It is a planning and implementation-directive package for a Copilot coding agent. **It is not an instruction to start implementing immediately.** The first task is to inspect the existing environment, identify lifecycle constraints, and produce a plan that can be reviewed before code changes.
+Planning and R&D for THE LINE's lightweight, host-aware pipeline localiser. Resolve one effective release for Maya, Blender or Nuke, copy and verify its immutable zip bundle locally, then expose it at the correct host startup stage.
 
-## Documents
+**Status: planning, not implementation.** The original eight planning documents have been consolidated into:
 
-1. [`01_brief.md`](01_brief.md) — problem, goals, non-goals, and success criteria.
-2. [`02_architecture.md`](02_architecture.md) — components, responsibilities, and boundaries.
-3. [`03_runtime_procedure.md`](03_runtime_procedure.md) — resolution and startup flows.
-4. [`04_configuration_and_releases.md`](04_configuration_and_releases.md) — configuration, release manifests, caching, and integrity.
-5. [`05_host_adapters.md`](05_host_adapters.md) — host-specific integration requirements and load-order concerns.
-6. [`06_implementation_plan.md`](06_implementation_plan.md) — staged discovery, planning, testing, and implementation sequence.
-7. [`07_copilot_directives.md`](07_copilot_directives.md) — direct instructions for the coding agent.
-8. [`08_open_decisions.md`](08_open_decisions.md) — unresolved questions that must not be silently guessed.
+| Document | Contents |
+|---|---|
+| [Design brief](.copilot/01_design_brief.md) | Scope, architecture, manifests, runtime flow, host research, trust model, testing strategy and phased implementation plan. |
+| [Open decisions and risks](.copilot/02_open_decisions.md) | Confirmed decisions, unresolved questions and deployment/host validation gates. Recommendations are not decisions. |
 
-## Core design in one sentence
+The [platform and installer assessment](.copilot/01_design_brief.md#51-rd-assessment-platform-locations-and-lightweight-installation) compares Windows, macOS and Linux user/system directories and recommends a **shared workstation-local store**, not separate pipelines per user. A lightweight installer would provision protected bootstrap/configuration, writable data directories for an approved studio group, and stable host discovery. Unrestricted public write access is not recommended for executable pipeline code.
 
-Resolve one effective pipeline release for a DCC, ensure that immutable release is available locally, then let a host-specific adapter configure and initialise the DCC at the correct lifecycle stage.
+A TD's pre-launch override selects a bundle in that shared store and pulls it if missing; it does not change the studio default or other running sessions. Explicit repair of an already-cached bundle is separate. Exact permissions, installer details and supported OSes remain subject to review.
 
-## Current assumptions
+## Scope and research
 
-- The pipeline is modular by DCC. Maya, Blender, and Nuke releases are independently versioned.
-- Studio defaults are selected by a small network-hosted JSON configuration.
-- AYON can provide project launch context and can pre-cache required releases before starting a DCC.
-- Vanilla DCC launches must also be supported through a small native-host bootstrap.
-- The localiser should be reusable outside AYON.
-- Release content is immutable once published. A changed build gets a new release ID.
-- The first deliverable is a reviewed design and implementation plan, not production code.
+V1 covers a stdlib-only core, publisher, lightweight installer, native-host stubs, per-DCC release selection and offline reuse of cached bundles. AYON integration, project overrides and manifest signing are deferred; future AYON integration must call the same core.
 
-## Agent operating rule
+[`reference/`](reference/) contains existing pipeline code used for lifecycle research, not a localiser implementation. Key findings are in the design brief's host sections: Nuke needs location-independent root resolution, Maya's startup/discovery ordering needs confirmation, and Blender 5.0+ needs an in-session add-on/preset discovery test before its adapter can be designed.
 
-Do not make code changes during the initial planning pass. Inspect the repository and available runtime constraints, map the existing startup mechanisms, identify unknowns, then return a proposed file layout, lifecycle sequence, risk list, test plan, and phased implementation plan for approval.
+Review the brief and open decisions before writing production code, installing dependencies or changing host settings. Verify platform permissions and host behaviour on the supported workstation images rather than assuming the proposed mechanisms work.
