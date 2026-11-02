@@ -7,6 +7,7 @@ Working log for [01_design_brief.md](./01_design_brief.md). `[x]` = decided (by 
 - [x] AYON integration, project overrides and signing are deferred; AYON will later call the same core.
 - [x] Release contents are out of scope; the localiser only localises and sets the path.
 - [x] Per-DCC local state; no single shared state file as source of truth.
+- [x] Deployment direction: pipelines are not per user; target a shared workstation-local bundle store, with a deliberate TD override to pull/select a bundle. Exact paths, permissions and installer contract remain recommendations (brief §5.1).
 
 - [x] `python_root` kept in the manifest as an **optional** field (default `"."`); the pipeline resolves further paths itself.
 - [x] Nuke: versioned `core/X.X.X` is no longer needed under the bundle model; Nuke only needs `NUKE_PATH` to reach the core inside the localised release (needs pipeline refactor, brief §8.1).
@@ -20,11 +21,11 @@ Working log for [01_design_brief.md](./01_design_brief.md). `[x]` = decided (by 
 - [ ] Local override for `config.json` debug flag, since it will live in an immutable release.
 
 - [x] Blender: **5.0+ only**, no backward compatibility. (The add-on `bl_info` still says 4.2; update when the add-ons are next touched.)
-- [x] Blender: **vanilla (non-AYON) launches are in scope.** A `--python` argument can't be the bootstrap, since local files live in a user account and vanilla has no such argument.
+- [x] Blender: **vanilla (non-AYON) launches are in scope.** An AYON-only `--python` argument cannot be the sole bootstrap. The earlier per-user-path objection is superseded by the shared workstation direction; vanilla discovery is still required.
 
 ## Blender (see brief §8.3)
 - [ ] **Gating test:** in Blender 5.0, does a release exposed at runtime from a `startup/` stub (script-directory entry and/or `sys.path` and/or `addon_utils.enable`) get its `addons/` and `presets/` picked up in the same session? The manual says script-directory preference changes need a restart.
-- [ ] Mechanism: `BLENDER_SYSTEM_SCRIPTS` (set as a user env var by the install script) pointing at a stable local stub directory with a `startup/` stub. Recommended over preference writes. Confirm it works for AYON launches too, and that AYON doesn't already set `BLENDER_SYSTEM_SCRIPTS`.
+- [ ] Mechanism: `BLENDER_SYSTEM_SCRIPTS` pointing at a stable shared local stub directory with a `startup/` stub, provisioned through machine/session integration (brief §5.1). Recommended over preference writes. Confirm GUI/vanilla and future AYON launch inheritance, and that AYON doesn't already set `BLENDER_SYSTEM_SCRIPTS`.
 - [ ] If runtime exposure doesn't work in-session: what does vanilla Blender do (launcher/wrapper, accept a one-launch lag, or document the limit)?
 - [ ] PySide6 install / `QT_API` setup in `startup.py`: stays in the stable stub, moves to the install script, or stays separate? (Out of scope for the localiser itself.)
 - [ ] Windows-only? `startup.py` uses `ctypes.windll` and `python.exe`.
@@ -44,11 +45,12 @@ Working log for [01_design_brief.md](./01_design_brief.md). `[x]` = decided (by 
 - [ ] Network paths for `studio-pipelines.json` and `releases/`, and who has write access.
 - [ ] Zip layout: confirm `python_root` per DCC (top-level folder or not).
 - [ ] Override mechanism: env var name (`STUDIO_PIPELINE_<DCC>` is a placeholder; check against existing studio variables) and how TDs set it deliberately.
+- [ ] Confirm TD workflow: launch-scoped selection pulls a new ID only if missing; explicit `resync` repairs an already-cached ID. Neither persists a user default nor changes other running hosts (brief §5.1).
 - [ ] Same-ID repair: *Recommend: never change content behind an ID; resync restores identical verified content only.*
 - [ ] Trust model beyond a write-protected share (signing / separately held digest).
 
 ## Platform and versions
-- [ ] Supported OSes (brief assumes Windows; confirm).
+- [ ] Supported OSes: Windows, macOS and Linux assessed in brief §5.1; inclusion in the supported deployment matrix is not yet confirmed.
 - [ ] Supported Maya, Blender, Nuke versions and their Python versions (limits stub syntax).
 
 ## Host lifecycle (verify per version)
@@ -59,8 +61,19 @@ Working log for [01_design_brief.md](./01_design_brief.md). `[x]` = decided (by 
 - [ ] What happens if the localiser/stub is missing or damaged, per DCC.
 
 ## Cache and ops
-- [ ] Portable locking strategy for the supported OSes.
+- [ ] Portable cross-account locking strategy for supported OSes, including a separate shared studio-config snapshot lock and safe concurrent logging.
 - [ ] Retention/cleanup of old releases and staging leftovers.
 - [ ] Log location, rotation, and user-facing error mechanism.
 - [ ] Startup-time baseline and acceptance targets.
 - [ ] How the install script is distributed and updated, and how stubs are updated independently of releases.
+
+## Workstation installation and permissions (assessment in brief §5.1)
+- [ ] Approve machine-wide roots: ProgramData on Windows; `/Library/Application Support` on macOS; `/opt` + `/etc/opt` + `/var/opt` on Linux. Confirm local disks, space, filesystem semantics and managed custom-root discovery.
+- [ ] Approve local code-execution trust boundary: managed runtime group can pull/write and therefore influence every cache reader, versus read-only artists with TD/IT pre-warming (a privileged updater would be later scope). No unrestricted world/Everyone write.
+- [ ] Define group membership and ACL/default-ACL inheritance across accounts, including any render/service identities; verify actual permissions after atomic publication.
+- [ ] Confirm protected `install.json` schema and host/package mapping; distinguish installation config, studio defaults, release manifests and diagnostic state.
+- [ ] Repository addressing per OS/account: UNC versus managed mounts, availability before launch, credentials/access for runtime identities; no dependency on the installer's drive mappings.
+- [ ] Machine/session host-discovery deployment for macOS GUI and Linux desktop launches; Windows environment refresh and existing launcher behaviour. Do not rely solely on interactive shell profiles.
+- [ ] Installer packaging/distribution, elevation boundary, optional pre-warm, idempotent repair, safe bootstrap updates and explicit cache-root migration.
+- [ ] Design safe same-ID repair with active readers; immutable paths must not be replaced while running DCCs use them.
+- [ ] Verify cited platform conventions against official sources and managed workstation images; external source retrieval was blocked by DNS during this assessment.

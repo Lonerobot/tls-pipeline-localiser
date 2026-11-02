@@ -16,6 +16,7 @@ What is *inside* a pipeline release is out of scope. The localiser only moves a 
 - A host-independent, stdlib-only Python core: resolve → check local → sync if missing.
 - A thin per-DCC stub that calls the core and then exposes the local release to the host.
 - A one-time local install script that places the core and stubs in a stable local location.
+- A shared workstation cache, not a separate pipeline installation or release selection per user; see §5.1 for platform and permission assessment.
 - A publisher script that builds a release zip and manifest from a source folder.
 - A TD override (env var) that replaces the default release for one DCC.
 - Offline use of the last successfully read studio config and already-cached releases.
@@ -46,7 +47,7 @@ What is *inside* a pipeline release is out of scope. The localiser only moves a 
 |---|---|
 | **Core** (`localiser/`) | Config parsing/validation, resolution, cache query, copy + verify + extract + publish, locking, state, logging. No host imports. |
 | **Host stubs** (`bootstrap/<dcc>/`) | Tiny, stdlib-only, idempotent. Call the core, then expose the local root to the host in the way that host requires. |
-| **Install script** | One-time/idempotent local setup: create cache dirs, copy core + stubs to the stable local location, wire each DCC's discovery mechanism. |
+| **Install script** | One-time/idempotent workstation setup: provision paths and permissions, persist repository/cache locations, copy core + stubs, wire each DCC's discovery mechanism. See §5.1. |
 | **Publisher** (`publisher/`) | Zip a source folder → compute SHA-256 → write manifest → place on share. Refuses to overwrite an existing release ID. |
 | **Repair/status CLI** | `status` (cached releases + validity), `resync <host> [release]` (transactional reinstall). Small, may follow core. |
 
@@ -79,14 +80,19 @@ Unknown schema version or malformed content is an error — never guess. Version
 
 **Contract principle:** the localiser's job ends at "here is a verified local release root". It does not know about toolchains, templates or sub-paths. The pipeline inside the release derives everything else from its own location (`__file__`) or from the root the localiser exposes.
 
-### Local cache (per-user app data; Windows: `%LOCALAPPDATA%/TheLine/Pipeline/`)
+### Local workstation layout (recommended; paths and permissions in §5.1)
 ```text
-bootstrap/                     # stable: core module + stubs (NOT inside a release)
-releases/<package_id>/<release_id>/.complete   (+ extracted files)
-state/<host>.json              # per-DCC cache of last resolution: release_id, root, installed_at
-state/studio-pipelines.json    # last-known-good copy of studio config
-staging/  locks/  logs/
+<install root>/
+  install.json                 # protected machine configuration; NOT a release manifest
+  bootstrap/                   # protected, stable core + stubs (NOT inside a release)
+<data root>/
+  releases/<package_id>/<release_id>/.complete   (+ extracted files)
+  state/<host>.json             # per-DCC cache of last resolution: release_id, root, installed_at
+  state/studio-pipelines.json   # last-known-good copy of studio config
+  state/manifests/<package_id>/<release_id>.json # verified release manifest
+  staging/  locks/  logs/
 ```
+`<install root>` and `<data root>` are logical boundaries: they may share a parent on Windows/macOS, but must have different write permissions. A cached copy of each verified release manifest must also be retained outside the extracted payload, keyed by package/release, for status and repair.
 
 ### Where "complete" state lives
 - **Source of truth:** the `.complete` marker inside the release directory.
@@ -94,9 +100,60 @@ staging/  locks/  logs/
 - **Not** a single shared `config.json`: concurrent DCCs/instances would race on read-modify-write.
 - The last-known-good studio config and local install state are separate files with separate lifecycles.
 
+### 5.1 R&D assessment: platform locations and lightweight installation
+
+**Direction supplied for this planning pass:** pipelines are not deployed per user. Normal launches use the studio default in one workstation-local store; a TD can deliberately select another immutable bundle and trigger a pull. The earlier `%LOCALAPPDATA%`-only layout is superseded. The locations below are recommendations, not evidence that these OSes or host integrations have been tested.
+
+#### User versus system locations
+
+| Platform | User-level candidate | Shared workstation recommendation | Deployment implications |
+|---|---|---|---|
+| **Windows** | `%LOCALAPPDATA%\TheLine\Pipeline` is normally writable by that account and avoids roaming profiles, but duplicates bundles and state across users. `%APPDATA%` may roam and is unsuitable for large local bundles. | Resolve the Windows **ProgramData known folder**, typically `C:\ProgramData`; provision `TheLine\Pipeline` below it. Protected `bootstrap/` and `install.json`; writable `releases/`, `state/`, `staging/`, `locks/`, `logs/` for the approved runtime group. | Shared application data belongs here rather than `Program Files` or `C:\Users\Public`. ProgramData is **not a blanket guarantee of cross-user modify access**: elevated provisioning must set explicit inheritable ACLs on the mutable subtrees, including access to files created by another account. Do not hardcode the drive or rely on creator-owner defaults. |
+| **macOS** | `~/Library/Application Support/TheLine/Pipeline` is account-specific. `~/Library/Caches` is disposable, so not suitable as the only offline copy. | `/Library/Application Support/TheLine/Pipeline`, with protected `bootstrap/` and `install.json` and separately writable data subtrees. | `/Library` is the local-machine domain, unlike the user's `~/Library`. Administrator/MDM provisioning creates the tree and runtime group permissions. `/Users/Shared` is an alternative shared container, not a permission or integrity policy; do not assume files created there are writable by other users. Avoid `/System` and application bundles. |
+| **Linux** | `$XDG_DATA_HOME/theline/pipeline` (default `~/.local/share/theline/pipeline`) could hold persistent bundles; `$XDG_CONFIG_HOME` holds user config and `$XDG_CACHE_HOME` disposable data. All remain per-account. | Protected core/stubs in `/opt/theline/pipeline-localiser/bootstrap`, machine descriptor at `/etc/opt/theline/pipeline-localiser/install.json`, persistent data in `/var/opt/theline/pipeline-localiser/`. | This follows FHS's split for an add-on package. Root provisions ownership and a dedicated runtime group; use setgid directories plus default ACLs where supported so newly created files remain usable across accounts. Verify the effective umask/ACLs. `/var/cache` may be purged and `/tmp` is neither durable nor appropriate for trusted executable bundles. |
+
+Use persistent application data, despite calling it a "cache": an offline workstation depends on retained bundles and last-known-good configuration. Avoid network-mounted/roaming homes, cloud-synchronised folders and temporary directories. The installer may accept a different **machine-wide local data root** (e.g. a larger local disk), but must validate permissions, available space and filesystem semantics. Staging and final releases must be on the same filesystem for atomic publication.
+
+#### What "publicly writable" can safely mean
+
+Shared across accounts does not mean safe for **Everyone/world write**. These directories contain Python that DCCs execute. An account able to replace a release, its `.complete` marker or cached selection metadata can cause another account to execute its code. A manifest hash does not prevent this if the same account can replace both files. A sticky bit alone does not solve this, and localiser processes must never execute user-writable pipeline code with elevated privileges.
+
+**Recommended lightweight v1:** an administrator provisions the protected bootstrap/configuration and grants a named, managed studio runtime group read/traverse plus the create/modify/delete rights needed on the data subtrees. Keep their common parent protected too, so runtime writers cannot rename or replace bootstrap/configuration entries through parent-directory permissions. Every identity that may pull a bundle must belong to that group, including render/service accounts if those are later supported. All such writers are consequently in the same code-execution trust boundary; accept that explicitly before rollout. Do not grant unrelated local accounts write access, or use `chmod 777`/an unrestricted Everyone ACL. Validate child-file inheritance and cross-account lock/release access, not just whether the parent directory is writable.
+
+If artists must only read releases and only TDs may publish locally, an ordinary artist DCC **cannot** perform a cold pull under its own identity. The deployment then needs a TD/IT pre-warm step or, later, a privileged installer/updater service that validates and publishes bundles while DCCs remain readers. This is stronger isolation but is not supplied by a lightweight copy script alone. A service is not proposed for v1; this trust/deployment choice remains open in the decisions log.
+
+#### Installer and manifest discovery contract (proposed)
+
+1. **Provision once per workstation.** Use a small idempotent installer, with elevation only for protected files, machine integration and permission setup. It takes the studio repository location, the local data root and enabled DCCs; it does not install a separate pipeline for the installing account. Runtime pulls run unelevated.
+2. **Persist a machine descriptor.** Write a schema-versioned `install.json` atomically at the protected platform location above. Proposed fields are `schema_version`, `repository_root`, `data_root` and a host-to-`package_id` mapping (e.g. `maya` → `maya-tools`); exact schema/API needs review. This fills the mapping not present in the illustrative studio config. Roots are absolute and explicitly configured per OS; a Windows mapped drive such as `Y:` must not be assumed available to other users or services. Prefer an accessible UNC path on Windows and a managed mount on macOS/Linux.
+3. **Discover without user profiles.** Installed stubs know the platform's descriptor location (or an installer-recorded absolute path for a managed custom installation). The descriptor locates the shared data and repository roots. Read `<repository_root>/config/studio-pipelines.json`, then `<repository_root>/releases/<package_id>/<release_id>/manifest.json` and its zip. `install.json` is installation configuration, `studio-pipelines.json` selects studio defaults, and `manifest.json` describes one release: do not conflate their lifecycles. Missing/malformed/inaccessible installation configuration is a repairable error, never a silent fallback to a new user cache or another repository.
+4. **Wire discovery for every intended launch.** Configure the stable Maya/Nuke/Blender stub paths using managed machine/session launch integration, preserving existing path entries. Windows machine environment changes require a newly started launcher/session; an existing AYON process retains its old environment. macOS Finder/Dock launches do not generally inherit shell startup files, and Linux desktop launches may not read interactive shell profiles. A shell `export` alone is not machine deployment. Verify vanilla GUI, shell and future AYON launches separately; the exact macOS/Linux mechanism remains an implementation gate.
+5. **Validate and optionally pre-warm.** Check repository access as the intended runtime identity, path writability, permission inheritance, lock creation and atomic publication. Optionally pull current studio bundles before the first DCC launch; report failure explicitly rather than claiming a usable offline install. Record installation status/version without conflating it with a release ID.
+6. **Repair without disturbing sessions.** Re-running the installer preserves configuration unless explicitly changed and repairs permissions/stubs. Updating the protected bootstrap is separate from releasing pipeline bundles and must not replace files being imported by a running host. Cache-root migration is an explicit maintenance operation; no automatic split into old and new stores.
+
+User-level installation avoids administrator rights but creates account-specific storage and host wiring. It is an assessed alternative for an unmanaged pilot, **not the target deployment or an automatic fallback**. Shared storage saves duplicate downloads and lets the same machine reuse bundles across logins, but requires elevated initial provisioning and genuinely cross-account locks, permissions and state updates. It does not by itself solve host startup ordering (especially Blender's in-session discovery gate).
+
+#### TD override and forced pull on a shared store
+
+Keep selection and storage scope separate. A pre-launch `STUDIO_PIPELINE_<DCC>=<release_id>` override selects that release for the TD's new DCC process, localising it into the **same shared store** if absent. It does not create a per-user pipeline, persist a user default, change the machine descriptor or alter another running DCC. Setting a machine-wide environment override would affect subsequent launches by other users and is not the recommended TD workflow.
+
+A new release ID causes a pull on cache miss; selecting an already-cached ID reuses it. If "force pull" means repairing a cached ID, use an explicit `resync <host> <release>` operation, not a second meaning for the selection variable. It must fetch and verify identical content under the existing ID, coordinate with other users and never delete/replace a tree in use. The safe replacement/quiescence mechanism remains to be designed; do not promise live same-ID replacement.
+
+Shared `state/<host>.json` is only last-resolution diagnostic state: a TD override must not turn it into the next user's default. Offline default selection still comes from `state/studio-pipelines.json`; an override failure must never rewrite that file or fall back to another release. Atomic writes also need a dedicated lock for concurrent refreshes of the shared studio-config snapshot; per-release locks alone do not serialize that file. Logs need unique per-process files or a coordinated writer, and multi-account tests must cover both.
+
+#### Sources and verification boundary
+
+Platform conventions to verify against deployment targets:
+- [Microsoft: Known Folder IDs](https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid) — `FOLDERID_ProgramData`, `FOLDERID_LocalAppData` and `FOLDERID_RoamingAppData`.
+- [Apple: File System Programming Guide — File System Overview](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html) — user/local domains and Application Support versus Caches.
+- [freedesktop.org: XDG Base Directory Specification](https://specifications.freedesktop.org/basedir/latest/) — user data/config/cache defaults; not a machine-wide deployment specification.
+- [Filesystem Hierarchy Standard 3.0](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) — `/opt`, `/etc/opt`, `/var/opt` and `/var/cache`.
+
+These are reference links, not a claim of fresh source verification: external documentation retrieval failed due to DNS resolution during this planning pass. Directory/permission recommendations are based on established platform conventions; ACL behaviour, host discovery and supported OS/DCC combinations must be verified on actual managed workstations before implementation approval.
+
 ## 6. Runtime flow
 
-1. **Install script (once):** create the cache tree; copy core + stubs to `bootstrap/`; wire each DCC (§8). A stub that finds no local cache or core treats it as first run and reports clearly.
+1. **Install script (once per workstation):** provision protected bootstrap/config and shared data permissions; record repository/data roots in `install.json`; wire each DCC (§5.1, §8). A stub that finds no descriptor or core reports that installation/repair is required; it does not silently create a per-user install.
 2. **DCC starts → stub runs** (idempotent: guard against double execution).
 3. **Resolve release:** override env var (`STUDIO_PIPELINE_<DCC>`) if set, else studio config for that DCC (network, falling back to last-known-good with a stale-config warning).
 4. **Check local:** `releases/<pkg>/<id>/.complete` present? If yes → step 6.
@@ -130,6 +187,7 @@ Forced resync reinstalls transactionally under the same ID **only to restore ide
 - Precedence: **override env var → studio default** (per DCC).
 - `STUDIO_PIPELINE_<DCC>=<release_id>` replaces the release for that DCC only. Override use is logged prominently.
 - Changing `os.environ` inside a running DCC does not retroactively fix inherited environment or already-imported modules; overrides must be set before the DCC process starts.
+- Overrides are launch-scoped selections into the shared workstation store, not per-user installations or persistent studio defaults. A missing ID triggers a bundle pull; same-ID forced repair is a separate explicit operation (§5.1).
 - Project (AYON) selection will slot in later between these two; it is not designed here.
 
 ## 8. Host exposure (to be verified against the installed DCC versions — do not assume)
@@ -138,7 +196,7 @@ Forced resync reinstalls transactionally under the same ID **only to restore ide
 |---|---|---|
 | **Maya** | Core pipeline = one folder (`v1.1.0/`) whose root goes on the Python path (`python_root` = `.`). A small **stub `userSetup.py` in a stable local directory** (on `PYTHONPATH`, outside any release) localises, then does `sys.path.insert(0, root)` once (idempotent). AYON-supplied tools untouched. See §8.2. | Which `userSetup.py` Maya actually runs when several are on the path; how `MAYA_CORE` is consumed and when (§8.2); supported Maya/Python versions (reference says Maya 2026 / Py 3.11; `__pycache__` in the folder shows 3.7–3.11 history). |
 | **Nuke** | `NUKE_PATH` points at a **stable local stub directory** whose `init.py` localises, then calls `nuke.pluginAddPath(<release root>/<python_root>)` (expected `core/` inside the bundle). The stub path never changes between releases; only the resolved root does. Everything the pipeline needs must be set up in `init.py` (application start); `menu.py` only runs when the UI loads, which is too late. The source of `NUKE_PATH` (AYON env injection, or a system env var outside AYON) doesn't affect the design. See §8.1. | Whether `pluginAddPath` called from the stub's `init.py` makes Nuke run the added directory's `init.py` (and later `menu.py`) in the right order; Nuke Python version(s). |
-| **Blender** | **5.0+ only; vanilla launches in scope.** Use the documented studio-deployment route: `BLENDER_SYSTEM_SCRIPTS` points at a **stable local stub script directory** (the install script sets it as a user environment variable, same pattern as Nuke's `NUKE_PATH`). Its `startup/` stub runs at Blender start, localises, then exposes the release (a scripts directory with `addons/`, `presets/`). No `--python` argument and no preference writes required. How the stub exposes the release in-session is the key item to test. See §8.3. | Whether a script directory (or `sys.path` / add-on path) added at runtime by the stub is honoured **in the same session** for add-ons and presets (the 5.0 manual says script-directory preference changes need a restart); that AYON does not already set `BLENDER_SYSTEM_SCRIPTS`; Python 3.13 syntax. |
+| **Blender** | **5.0+ only; vanilla launches in scope.** Use the documented studio-deployment route: `BLENDER_SYSTEM_SCRIPTS` points at a **stable local stub script directory**, provisioned through managed machine/session integration (§5.1), like Nuke's `NUKE_PATH`. Its `startup/` stub runs at Blender start, localises, then exposes the release (a scripts directory with `addons/`, `presets/`). No `--python` argument and no preference writes required. How the stub exposes the release in-session is the key item to test. See §8.3. | Whether a script directory (or `sys.path` / add-on path) added at runtime by the stub is honoured **in the same session** for add-ons and presets (the 5.0 manual says script-directory preference changes need a restart); that AYON does not already set `BLENDER_SYSTEM_SCRIPTS`; Python 3.13 syntax. |
 
 ### 8.1 Nuke pipeline refactor (finding from `reference/nuke/init.py`)
 
@@ -181,7 +239,7 @@ Stub constraints: the reference uses the walrus operator (Python 3.8+), so the M
 
 Decided: **Blender 5.0+ only** (no backward compatibility) and **vanilla launches are in scope**.
 
-Current launch (stated by user): AYON runs Blender with `--python-use-system-env --python Y:/PIPELINE/config/blender/_core/2.0.0/startup.py`. The reference `startup.py` is WIP because 5.0 changed script-directory handling. A `--python` argument cannot serve as the bootstrap going forward: local files live in a user account (so shared AYON settings can't hardcode the path), and vanilla launches have no such argument.
+Current launch (stated by user): AYON runs Blender with `--python-use-system-env --python Y:/PIPELINE/config/blender/_core/2.0.0/startup.py`. The reference `startup.py` is WIP because 5.0 changed script-directory handling. Earlier research rejected `--python` because of per-user local paths and vanilla launches having no such argument. The proposed shared workstation root (§5.1) removes the per-user-path issue, but vanilla launches still require a discoverable stable bootstrap rather than an AYON-only argument.
 
 Confirmed from the reference:
 - `startup.py` itself lives on the share inside a **versioned** `_core/<version>/` folder, so today the bootstrap is part of what is versioned. Under the localiser the bootstrap must be a **stable local file outside any release**. Reading even one file from the share at every launch would keep the network dependency and break offline use.
@@ -198,7 +256,7 @@ Confirmed from the Blender 5.0 manual (Deploying Blender in Production; Blender'
 - Python is Blender's bundled interpreter unless `--python-use-system-env` is used; the interpreter version is tied to the Blender version.
 
 Candidate design (mirrors Nuke's `NUKE_PATH`):
-1. The install script sets `BLENDER_SYSTEM_SCRIPTS` (user environment variable) to a **stable local stub script directory**. A user-level variable is inherited by AYON-launched Blender, so no per-user path needs to go into shared AYON settings. If AYON already sets `BLENDER_SYSTEM_SCRIPTS`, that must be reconciled.
+1. The install script provisions `BLENDER_SYSTEM_SCRIPTS` to point at a **stable shared local stub script directory**, using managed machine/session integration (§5.1), not an account-specific path. Newly started AYON and vanilla Blender must receive it. If AYON already sets `BLENDER_SYSTEM_SCRIPTS`, that must be reconciled; inheritance from an existing launcher must not be assumed.
 2. The stub directory's `startup/` script localises the release, then exposes it. Exposure options, to be tested in Blender 5.0 in this order: (i) add/refresh a named script-directory entry plus `sys.path` for `modules/`, then check that add-ons and presets are discovered in the same session; (ii) enable the release's add-ons explicitly with `addon_utils` from the stub; (iii) if neither works in-session, the release path must be known **before** process creation (launcher or wrapper sets `BLENDER_SYSTEM_SCRIPTS` to the release directly), which a vanilla launch cannot guarantee. Document the limit if so.
 3. No `--python` argument is needed, so AYON launches and vanilla launches use the same mechanism.
 
@@ -213,7 +271,7 @@ Stubs: stdlib-only, syntax compatible with the oldest supported interpreter, no 
 
 ## 9. Trust (v1 position)
 
-The SHA-256 lives in the manifest next to the zip on the same share, so it detects corruption/truncation, not tampering. v1 relies on the share's `config/` and `releases/` being write-protected to the publishing group. Signing or a separately held digest is a possible later hardening, recorded in open decisions.
+The SHA-256 lives in the manifest next to the zip on the same share, so it detects corruption/truncation, not tampering. v1 relies on the share's `config/` and `releases/` being write-protected to the publishing group. A shared writable local cache also trusts every local runtime writer (§5.1); share permissions alone do not protect executable files after localisation. Protect the bootstrap and machine descriptor separately and approve the local writer group before rollout. Signing or a separately held digest is a possible later hardening, recorded in open decisions.
 
 ## 10. Testing strategy
 
@@ -228,14 +286,19 @@ Tests precede core implementation, use temp dirs and synthetic zips (no share ac
 - Interrupted extraction leaves no valid release.
 - Concurrent installers of the same release (multiprocess).
 - Per-DCC state files do not conflict.
+- Two different OS accounts can reuse a release, acquire locks and publish with the intended inherited permissions; unrelated accounts cannot modify bootstrap/configuration or cached code.
+- Concurrent studio-config refreshes and logs remain intact; a TD override never becomes another account's default, including offline.
+- Installation/repair is idempotent; descriptor discovery, custom local roots, inaccessible repositories and invalid permissions produce explicit outcomes without a per-user fallback.
+- Vanilla GUI/shell launches receive the stable stub paths on each supported OS; restarted launchers receive machine/session environment changes.
+- Offline launches retain usable bundles after logout/reboot; same-ID repair is refused or deferred while unsafe.
 - Stub idempotency (run twice → one path entry).
 - Failure messaging when localiser missing / install fails.
 - In-host smoke test per DCC version (manual checklist).
 
 ## 11. Phased plan
 
-0. **Discovery (read-only):** current ways each DCC finds the pipeline; supported DCC/Python versions; OS scope; repo conventions. Output: short report + host matrix (§8).
-1. **Design review:** confirm module/API layout, schemas, locking approach, open decisions.
+0. **Discovery (read-only):** current ways each DCC finds the pipeline; supported DCC/Python versions; OS scope; repo conventions. Output: short report + host matrix (§8), and verify the directory/ACL/GUI-launch assessment (§5.1) on supported workstation images.
+1. **Design review:** confirm module/API layout, schemas, locking approach, open decisions; approve runtime writer trust boundary, machine paths, descriptor discovery and TD force-pull semantics.
 2. **Test design:** write the test list above as failing/skipped tests.
 3. **Core + publisher:** smallest testable core (config → resolve → state → verify → extract → publish) and the publisher script.
 4. **Maya stub + install script**, validated in the real Maya.
