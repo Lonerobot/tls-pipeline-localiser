@@ -1,0 +1,341 @@
+[
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_global\",\"loadProjectStudioLibrary.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Load Project Studio Library",
+        "tooltip": ""
+    },
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_global\",\"playblastPlus.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Playblast Plus",
+        "tooltip": ""
+    },
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_global\",\"publishPlus.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Publish Plus",
+        "tooltip": ""
+    },
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_scene\",\"CreateTaskOverride.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Create Task Override",
+        "tooltip": ""
+    },
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_scene\",\"SetOverscanRes.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Set Overscan Res",
+        "tooltip": ""
+    },
+    {
+        "type": "action",
+        "command": "from mayaScriptLibrary import run_script ; run_script (\"_scene\",\"SetShotOverride.py\")",
+        "sourcetype": "python",
+        "tags": [],
+        "title": "Set Shot Override",
+        "tooltip": ""
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Anim",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"animbot.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Animbot",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"bakeToLocators.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Bake To Locators",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"openSmearDeform.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Open Smear Deform",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"pBakery.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "P Bakery",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"toggleImagePlane.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Toggle Image Plane",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"anim\",\"toggleVertexDisplay.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Toggle Vertex Display",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Camera",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"camera\",\"openFspy.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Open Fspy",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Light",
+        "items": []
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Model",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"model\",\"fixShapeNodes.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Fix Shape Nodes",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"model\",\"vertexColorShells.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Vertex Color Shells",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Pipeline",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"pipeline\",\"enableColorSetExport.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Enable Color Set Export",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"pipeline\",\"enablePublishSettings.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Enable Publish Settings",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Render",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"render\",\"AddRenderAttribute.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Add Render Attribute",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Rig",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"rig\",\"jointToObjectPivot.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Joint To Object Pivot",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"rig\",\"launchNgskintools.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Launch Ngskintools",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"rig\",\"unlockAttrs.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Unlock Attrs",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Texture",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"texture\",\"copyUVSets.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Copyuv Sets",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"texture\",\"enableColorSetExport.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Enable Color Set Export",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"texture\",\"toggleVertexDisplay.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Toggle Vertex Display",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"texture\",\"UdimTools.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Udim Tools",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "separator"
+    },
+    {
+        "type": "menu",
+        "title": "Tools",
+        "items": [
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"tools\",\"generate_udim_preview.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Generate Udim Preview",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"tools\",\"ig_EzRename.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Ig  Ez Rename",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"tools\",\"transcodeEXR.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Transcodeexr",
+                "tooltip": ""
+            },
+            {
+                "type": "action",
+                "command": "from mayaScriptLibrary import run_script ; run_script (\"tools\",\"transcodeH264.py\")",
+                "sourcetype": "python",
+                "tags": [],
+                "title": "Transcodeh264",
+                "tooltip": ""
+            }
+        ]
+    },
+    {
+        "type": "separator"
+    }
+]
