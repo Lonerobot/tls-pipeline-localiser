@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 Thumbs.db
+*.egg-info/
+structure/THE-LINE/pipeline/localiser/
+structure/THE-LINE/pipeline/bundles/
+structure/THE-LINE/pipeline/fake_remote_repository/hosts/
+*.vscode
+.vscode/settings.json

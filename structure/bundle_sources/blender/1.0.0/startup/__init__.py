@@ -1,0 +1,1 @@
+print("Blender host initialized")

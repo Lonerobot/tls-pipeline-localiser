@@ -1,0 +1,184 @@
+"""Parsing and validation of the local config, studio (remote) config and release manifest.
+
+Anything malformed or of an unknown schema version is an error; nothing is guessed.
+Top-level keys starting with "_" (such as "_comment_hosts") are comments and are ignored.
+"""
+import json
+import os
+import re
+from dataclasses import dataclass
+from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
+from urllib.request import url2pathname
+
+from .errors import ConfigError
+
+SCHEMA_VERSION = 1
+
+_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$")
+_HOST_RE = re.compile(r"^[a-z][a-z0-9_]{0,31}$")
+_SERIES_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,31}$")
+_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+def validate_id(value, what: str) -> str:
+    """IDs become path components, so they must be a single safe component."""
+    if not isinstance(value, str) or not _ID_RE.match(value):
+        raise ConfigError(f"invalid {what}: {value!r}")
+    return value
+
+
+def validate_host(value) -> str:
+    if not isinstance(value, str) or not _HOST_RE.match(value):
+        raise ConfigError(f"invalid host name: {value!r}")
+    return value
+
+
+def validate_series(value) -> str:
+    """The DCC version an entry applies to, such as '2026' (Maya), '5.2' (Blender) or '17.0' (Nuke)."""
+    if not isinstance(value, str) or not _SERIES_RE.match(value):
+        raise ConfigError(f"invalid DCC series: {value!r}")
+    return value
+
+
+def validate_python_root(value) -> str:
+    """Return a normalised relative POSIX path inside the release, '.' meaning the release root."""
+    if not isinstance(value, str) or not value or "\\" in value or ":" in value or "\x00" in value:
+        raise ConfigError(f"invalid python_root: {value!r}")
+    path = PurePosixPath(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise ConfigError(f"python_root must stay inside the release: {value!r}")
+    return path.as_posix()
+
+
+def _load_object(text: str, what: str) -> dict:
+    try:
+        data = json.loads(text)
+    except ValueError as exc:
+        raise ConfigError(f"{what} is not valid JSON: {exc}") from None
+    if not isinstance(data, dict):
+        raise ConfigError(f"{what} must be a JSON object")
+    return data
+
+
+def _check_schema(data: dict, what: str) -> None:
+    version = data.get("schema_version")
+    # bool is an int subclass, so True would otherwise pass as version 1.
+    if type(version) is not int or version != SCHEMA_VERSION:
+        raise ConfigError(f"{what} has unsupported schema_version: {version!r}")
+
+
+@dataclass(frozen=True)
+class StudioConfig:
+    """The studio default: hosts[<host>][<dcc series>] -> bundle version."""
+
+    hosts: dict[str, dict[str, str]]
+
+    def bundle_version(self, host: str, series: str) -> str:
+        versions = self.hosts.get(host)
+        if versions is None:
+            raise ConfigError(f"studio config has no entry for host {host!r}")
+        if series not in versions:
+            raise ConfigError(
+                f"studio config has no entry for {host} {series!r}; available: {', '.join(sorted(versions))}"
+            )
+        return versions[series]
+
+
+def parse_studio_config(text: str) -> StudioConfig:
+    data = _load_object(text, "studio config")
+    _check_schema(data, "studio config")
+    raw_hosts = data.get("hosts")
+    if not isinstance(raw_hosts, dict):
+        raise ConfigError("studio config 'hosts' must be an object")
+    hosts = {}
+    for host, raw_series in raw_hosts.items():
+        validate_host(host)
+        if not isinstance(raw_series, dict):
+            raise ConfigError(f"studio config 'hosts.{host}' must be an object")
+        hosts[host] = {}
+        for series, entry in raw_series.items():
+            validate_series(series)
+            if not isinstance(entry, dict):
+                raise ConfigError(f"studio config 'hosts.{host}.{series}' must be an object")
+            hosts[host][series] = validate_id(entry.get("bundle_version"), f"bundle_version for {host} {series}")
+    return StudioConfig(hosts=hosts)
+
+
+@dataclass(frozen=True)
+class Manifest:
+    package_id: str
+    release_id: str
+    artifact: str
+    sha256: str
+    python_root: str = "."
+
+    def to_json(self) -> str:
+        data = {
+            "schema_version": SCHEMA_VERSION,
+            "package_id": self.package_id,
+            "release_id": self.release_id,
+            "artifact": self.artifact,
+            "sha256": self.sha256,
+            "python_root": self.python_root,
+        }
+        return json.dumps(data, indent=2, sort_keys=True) + "\n"
+
+
+def parse_manifest(text: str) -> Manifest:
+    data = _load_object(text, "manifest")
+    _check_schema(data, "manifest")
+    artifact = data.get("artifact")
+    if not isinstance(artifact, str) or artifact in ("", ".", "..") or re.search(r"[/\\:\x00]", artifact):
+        raise ConfigError(f"manifest artifact must be a plain file name: {artifact!r}")
+    sha256 = data.get("sha256")
+    if not isinstance(sha256, str) or not _SHA256_RE.match(sha256.lower()):
+        raise ConfigError("manifest sha256 must be 64 hex characters")
+    return Manifest(
+        package_id=validate_id(data.get("package_id"), "package_id"),
+        release_id=validate_id(data.get("release_id"), "release_id"),
+        artifact=artifact,
+        sha256=sha256.lower(),
+        python_root=validate_python_root(data.get("python_root", ".")),
+    )
+
+
+@dataclass(frozen=True)
+class LocalConfig:
+    """Machine configuration in the pipeline root's config.json: where bundles come from and go to."""
+
+    remote_repository: Path
+    bundle_repository: Path
+
+
+def _folder(value, base: Path, what: str) -> Path:
+    """A folder path, relative to `base` (the config file's folder) unless absolute. URLs are not supported yet."""
+    if not isinstance(value, str) or not value.strip():
+        raise ConfigError(f"{what} must be a folder path")
+    parts = urlsplit(value)
+    if parts.scheme.lower() == "file":
+        path = Path(url2pathname(parts.path))
+    elif len(parts.scheme) > 1:  # a one-letter scheme is a drive letter, not a URL
+        raise ConfigError(f"{what} {value!r} is not a folder path; web repositories are not supported yet")
+    else:
+        path = Path(value)
+    return Path(os.path.normpath(base / path))
+
+
+def parse_local_config(text: str, base: Path) -> LocalConfig:
+    """Parse config.json text; relative paths resolve against `base`, the folder containing the file."""
+    data = _load_object(text, "local config")
+    _check_schema(data, "local config")
+    return LocalConfig(
+        remote_repository=_folder(data.get("remote_repository"), base, "remote_repository"),
+        bundle_repository=_folder(data.get("bundle_repository", "./bundles"), base, "bundle_repository"),
+    )
+
+
+def load_local_config(path: Path) -> LocalConfig:
+    path = Path(path).absolute()
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except OSError as exc:
+        raise ConfigError(f"local config not readable ({exc}); installation or repair is required") from None
+    return parse_local_config(text, path.parent)
