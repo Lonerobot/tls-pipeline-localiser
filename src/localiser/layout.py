@@ -1,7 +1,7 @@
 """Paths inside the local data root."""
 from pathlib import Path
 
-from .config import validate_host, validate_id
+from .config import validate_host, validate_id, validate_series
 
 COMPLETE_MARKER = ".complete"
 HOSTS_DIR = "hosts"  # bundles live at <root>/hosts/<host>/<bundle_version>, on the remote and locally
@@ -27,6 +27,9 @@ class DataLayout:
 
     def host_state_file(self, host: str) -> Path:
         return self.state / f"{validate_host(host)}.json"
+
+    def prepared_file(self, host: str, series: str) -> Path:
+        return self.state / "prepared" / validate_host(host) / f"{validate_series(series)}.json"
 
     def manifest_cache(self, package_id: str, release_id: str) -> Path:
         package_id = validate_id(package_id, "package_id")

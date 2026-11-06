@@ -4,7 +4,8 @@
     python structure/run_host.py nuke --gui      # full application
     python structure/run_host.py blender --exe "D:\\Blender\\blender.exe"
 
-Run build_test_workstation.py first. The variables each host needs are in ENVIRONMENT below.
+Run build_test_workstation.py and explicitly sync the host/series first (see README).
+The variables each host needs are in ENVIRONMENT below.
 """
 import argparse
 import os
