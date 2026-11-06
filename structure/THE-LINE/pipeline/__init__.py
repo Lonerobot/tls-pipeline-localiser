@@ -6,10 +6,10 @@ import sys
 
 
 def start(host, series):
-    """Localise the bundle for this host and DCC version, expose it, and run the bundle's entry point."""
-    from .localiser import ensure_local_release, expose_environment
+    """Load a prepared local bundle, expose it, and run its entry point without syncing."""
+    from .localiser import load_prepared_release, expose_environment
 
-    release = ensure_local_release(host, series)
+    release = load_prepared_release(host, series)
     expose_environment(release)  # sets TLS_PIPELINE_<HOST> to the resolved bundle path
     _run_entry(release)
     return release
