@@ -1,0 +1,4 @@
+Placeholder preset file so fake_release_v1/presets/tls_discovery_presets is non-empty.
+Used only to manually confirm (by eye, in Blender's preset menus) whether a release's
+presets/ folder becomes visible once its script directory is registered. See
+.copilot/03_user_discovery.md G1.

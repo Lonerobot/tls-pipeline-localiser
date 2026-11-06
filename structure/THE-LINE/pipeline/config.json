@@ -1,0 +1,8 @@
+{
+    "schema_version": 1,
+    "_comment_local_config": "Machine configuration for this pipeline root (the folder TLS_PIPELINE points at). Read-only at runtime. Which bundle each DCC uses is decided by the remote config.json, not here.",
+    "_comment_remote_repository": "Folder holding the pipeline bundles and the studio config.json. Usually a network drive. A web URL is inferred from the value and rejected until web repositories are supported. Relative paths resolve against this file's folder, not the working directory.",
+    "remote_repository": "./fake_remote_repository",
+    "_comment_bundle_repository": "Local folder bundles are copied to, at <bundle_repository>/hosts/<host>/<bundle_version>. Defaults to ./bundles.",
+    "bundle_repository": "./bundles"
+}

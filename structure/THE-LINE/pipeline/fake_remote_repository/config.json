@@ -1,0 +1,23 @@
+{
+    "schema_version": 1,
+    "_comment_studio_config": "The studio default: which bundle each DCC version uses. Lives in the remote repository, next to hosts/. The localiser keeps a last-known-good copy for offline launches.",
+    "_comment_hosts": "hosts[<host>][<dcc series>]. The series is the DCC version the entry applies to. Bundles are found at <remote_repository>/hosts/<host>/<bundle_version>. Comments are only allowed as top-level _comment keys.",
+    "_comment_bundle_version": "Plain numbers for standard builds (1.0.0). A '+tag' suffix marks a variant such as 1.0.0+dev. IDs are opaque; selection is by exact match, never by ordering.",
+    "hosts": {
+        "maya": {
+            "2026": {
+                "bundle_version": "1.0.0"
+            }
+        },
+        "blender": {
+            "5.2": {
+                "bundle_version": "1.0.0"
+            }
+        },
+        "nuke": {
+            "17.0": {
+                "bundle_version": "1.0.0"
+            }
+        }
+    }
+}
