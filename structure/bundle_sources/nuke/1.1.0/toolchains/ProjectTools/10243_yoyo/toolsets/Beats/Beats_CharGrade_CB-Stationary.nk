@@ -1,0 +1,226 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read23
+ selected true
+ xpos 20245
+ ypos 7353
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.723055 0.630757 0.584078 0}
+ name Constant1
+ selected true
+ xpos 20200
+ ypos 7239
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read47
+ selected true
+ xpos 20795
+ ypos 6897
+}
+Dot {
+ name Dot33
+ selected true
+ xpos 20829
+ ypos 7194
+}
+set N582fbc00 [stack 0]
+Dot {
+ name Dot34
+ selected true
+ xpos 20609
+ ypos 7194
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge28
+ selected true
+ xpos 20575
+ ypos 7263
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy9
+ selected true
+ xpos 20575
+ ypos 7377
+}
+Premult {
+ name Premult17
+ selected true
+ xpos 20575
+ ypos 7407
+}
+push $N582fbc00
+Merge2 {
+ inputs 2
+ name Merge30
+ selected true
+ xpos 20795
+ ypos 7407
+}
+set N582fa800 [stack 0]
+Dot {
+ name Dot35
+ selected true
+ xpos 20719
+ ypos 7506
+}
+Dot {
+ name Dot36
+ selected true
+ xpos 20719
+ ypos 7938
+}
+push $N582fa800
+HSVTool {
+ srccolor {0.1301259398 0.2232279032 0.4072196484}
+ huesrcs {219.840332 219.840332}
+ huerolloffrange 2
+ satsrcs {0.6804527044 0.6804527044}
+ satrolloffrange 0.3
+ brtsrcs {0.4072196484 0.4072196484}
+ brightness 1.18
+ brtrolloffrange 0.3
+ output none
+ name HSVTool7
+ selected true
+ xpos 20795
+ ypos 7473
+}
+HSVTool {
+ srccolor {0.3519607782 0.00647150958 0.007666549645}
+ huesrcs {359.79245 359.79245}
+ huerolloffrange 1
+ satsrcs {0.9816129804 0.9816129804}
+ satrolloffrange 0.3
+ brtsrcs {0.3519607782 0.3519607782}
+ brightness -0.13
+ brtrolloffrange 0.3
+ output none
+ name HSVTool8
+ selected true
+ xpos 20795
+ ypos 7545
+}
+HSVTool {
+ srccolor {0.5647113919 0.5332523584 0.5332523584}
+ huesrcs {0 0}
+ huerolloffrange 50
+ satsrcs {0.05570816249 0.05570816249}
+ satrolloffrange 0.3
+ brtsrcs {0.5647113919 0.5647113919}
+ brightness 0.15
+ brtrolloffrange 0.3
+ output none
+ name HSVTool9
+ selected true
+ xpos 20795
+ ypos 7617
+}
+Dot {
+ name Dot37
+ selected true
+ xpos 20829
+ ypos 7698
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/stationTint.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read7
+ selected true
+ xpos 20465
+ ypos 7761
+}
+STMap {
+ inputs 2
+ uv rgba
+ name STMap3
+ selected true
+ xpos 20795
+ ypos 7785
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy10
+ selected true
+ xpos 20795
+ ypos 7929
+}
+ColorLookup {
+ channels rgb
+ lut {master {curve C 0 x0.304194957 0.09228861332 x0.7756235003 0.9542288184 x1 1}
+   red {curve C 0 x0.9103173614 0.9744645953 x1 1}
+   green {curve C 0 x0.2543083429 0.3268687725 x1 1}
+   blue {curve C 0 x0.7955781221 0.9214286804 x1 1}
+   alpha {}}
+ name ColorLookup3
+ selected true
+ xpos 20795
+ ypos 8079
+}
+ColorCorrect {
+ shadows.offset {0.051 0.022 0.017 0.008}
+ shadows.offset_panelDropped true
+ name ColorCorrect23
+ selected true
+ xpos 20795
+ ypos 8103
+}
+Premult {
+ name Premult18
+ selected true
+ xpos 20795
+ ypos 8199
+}
+Transform {
+ translate {-263 -29}
+ center {1024 576}
+ name Transform1
+ selected true
+ xpos 20795
+ ypos 8271
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/stationcolourblockCharGrade.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read48
+ selected true
+ xpos 21235
+ ypos 8193
+}
+Merge2 {
+ inputs 2
+ name Merge31
+ selected true
+ xpos 20795
+ ypos 8391
+}

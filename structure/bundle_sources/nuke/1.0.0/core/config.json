@@ -1,0 +1,100 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Nuke Pipeline Configuration - Override default settings and paths",
+  "grid_settings": {
+    "enabled": false,
+    "width": 120,
+    "height": 25,
+    "snap_threshold": 5,
+    "overlay_color": 1145324799,
+    "show_grid": true,
+    "snap_to_grid": true
+  },
+  "shortcuts": {
+    "enabled": false
+  },
+  "development": {
+    "debug_mode": false,
+    "verbose_logging": true,
+    "reload_modules": true
+  },
+  "logging": {
+    "console_level": "DEBUG",
+    "file_level": "DEBUG",
+    "max_log_files": 10,
+    "performance_logging": true
+  },
+  "environment": {
+    "min_python_version": "3.7",
+    "min_nuke_version": "15.0",
+    "strict_validation": false,
+    "extra_env_vars": {
+      "PIPELINE_ROOT": "${PIPELINE_ROOT}",
+      "NUKE_PLUGINS_PATH": "${NUKE_PLUGINS_PATH}",
+      "CUSTOM_GIZMO_PATH": "./gizmos:./custom_gizmos"
+    }
+  },
+  "ui_preferences": {
+    "auto_save_interval": 300,
+    "backup_count": 5,
+    "show_performance_stats": false
+  },
+  "menu_commands": {
+    "gizmo_command": "nuke.createNode",
+    "script_command": "nuke.load",
+    "toolset_command": "nuke.nodePaste"
+  },
+  "content_paths": {
+    "gizmos": {
+      "folder": "gizmos",
+      "extensions": [
+        ".gizmo"
+      ]
+    },
+    "scripts": {
+      "folder": "scripts",
+      "extensions": [
+        ".py"
+      ]
+    },
+    "python": {
+      "folder": "python",
+      "extensions": [
+        ".py"
+      ]
+    },
+    "toolsets": {
+      "folder": "toolsets",
+      "extensions": [
+        ".nk"
+      ]
+    }
+  },
+  "icons": {
+    "defaults": {
+      "folder": "folder.png",
+      "gizmo": "gizmo.png",
+      "script": "python.png",
+      "python": "python.png",
+      "toolset": "toolset.png"
+    },
+    "categories": {
+      "Image": "ToolbarImage.png",
+      "Draw": "ToolbarDraw.png",
+      "Time": "ToolbarTime.png",
+      "Channel": "ToolbarChannel.png",
+      "Color": "ToolbarColor.png",
+      "Filter": "ToolbarFilter.png",
+      "Expression": "Expression.png",
+      "Keyer": "ToolbarKeyer.png",
+      "Merge": "ToolbarMerge.png",
+      "Transform": "ToolbarTransform.png",
+      "3D": "GeoCube_3D@2x.png",
+      "Deep": "ToolbarDeep.png",
+      "CG": "RenderManShader.png",
+      "Curves": "ParticleCurve.png",
+      "Utilities": "Modify.png",
+      "Templates": "PointsTo3D.png"
+    }
+  }
+}

@@ -1,0 +1,421 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+import bpy
+from bpy.props import (
+    BoolProperty,
+    EnumProperty,
+    FloatProperty,
+    FloatVectorProperty,
+    IntProperty,
+    PointerProperty,
+    StringProperty,
+)
+
+from .core.board import PRESETS as BOARD_PRESETS
+from .core.layout import PAGE_SIZES_MM
+
+
+def _board_chosen(self, context):
+    """A board preset fills in its thickness, fold and join styles (all still
+    adjustable) and the rig's sheet thickness."""
+    preset = BOARD_PRESETS.get(self.board)
+    if preset is not None:
+        _label, t, fold, radius, join, cut_valleys, _desc = preset
+        self.board_thickness = t
+        self.fold_style = fold
+        self.fold_radius = radius
+        self.join_style = join
+        self.cut_valleys = cut_valleys
+        self.paper_thickness = t
+    _changed(self, context)
+
+
+def _changed(self, context):
+    from . import live
+
+    if self.live and self.role == "SOURCE":
+        live.schedule(self.id_data)
+
+
+def _layout_changed(self, context):
+    """Page and layout settings: re-pack the pieces already unfolded (no new
+    unfold), even with Live Update off, once the model has a layout."""
+    from . import live
+    from . import targets as T
+
+    if self.role == "SOURCE" and (self.live or T.output(self.id_data, T.ROLE_LAYOUT) is not None):
+        live.schedule(self.id_data)
+
+
+def _live_toggled(self, context):
+    from . import live
+
+    if self.live and self.role == "SOURCE":
+        live.schedule(self.id_data, force=True)
+
+
+ROLE_ITEMS = [
+    ("NONE", "None", ""),
+    ("SOURCE", "Model", "A model being unfolded"),
+    ("LAYOUT", "Layout", "Paper layout generated from a model"),
+    ("RIG", "Rig", "Fold rig generated from a model"),
+    ("FOLDING", "Folding Mesh", "Mesh deformed by the fold rig"),
+    ("TARGET", "Assembly Target", "Where a piece lands when assembled"),
+]
+
+
+PAPER_ITEMS = [(k, k.title() if len(k) > 3 else k, f"{w:g} x {h:g} mm") for k, (w, h) in PAGE_SIZES_MM.items()]
+PAPER_ITEMS.append(("CUSTOM", "Custom", "Custom page size"))
+
+
+class PapercraftSettings(bpy.types.PropertyGroup):
+    """Per-object settings: each model keeps its own papercraft setup."""
+
+    role: EnumProperty(name="Role", items=ROLE_ITEMS, default="NONE")
+    source_obj: PointerProperty(
+        name="Model", type=bpy.types.Object,
+        description="Model this generated object belongs to",
+    )
+    live: BoolProperty(
+        name="Live Layout",
+        default=False,
+        update=_live_toggled,
+        description="Re-unfold automatically while you edit the model or mark seams",
+    )
+
+    # Unfolding --------------------------------------------------------
+    priority: EnumProperty(
+        name="Cut For",
+        items=[
+            ("auto", "Auto", "Try both and keep the better layout: fewest pieces, avoiding "
+             "comb-shaped pieces that are fiddly to cut and assemble"),
+            ("long", "Fewest Pieces", "Fold the longest edges first: fewer, larger pieces"),
+            ("flat", "Seams on Creases", "Fold the flattest edges first: seams sit on sharp "
+             "edges where they show least, usually more pieces"),
+        ],
+        default="auto",
+        update=_changed,
+    )
+    valley_bias: FloatProperty(
+        name="Prefer Valley Cuts", default=0.5, min=0.0, max=1.0, subtype="FACTOR",
+        update=_changed,
+        description="Put cuts on valley (inward) edges where possible: seams hide in "
+        "the creases and mountain ridges stay crisp. 0 = cut wherever is sharpest",
+    )
+    max_faces: IntProperty(
+        name="Max Faces per Piece",
+        default=0,
+        min=0,
+        update=_changed,
+        description="Split pieces larger than this (0 = no limit). Smaller pieces "
+        "leave more room for tabs on round models",
+    )
+
+    # Cuts ---------------------------------------------------------------
+    cut_seams: BoolProperty(
+        name="Seams", default=True, update=_changed,
+        description="Cut along edges marked as seams (and edges cut with the Edit Cuts tool)",
+    )
+    cut_materials: BoolProperty(
+        name="Material Boundaries", default=False, update=_changed,
+        description="Cut wherever the material changes, so each material becomes its own piece",
+    )
+    cut_colors: BoolProperty(
+        name="Colour Boundaries", default=False, update=_changed,
+        description="Cut wherever the painted colour (active colour attribute) changes. "
+        "Paint regions in Vertex Paint mode to define the pieces",
+    )
+    cut_sharp: BoolProperty(
+        name="Sharp Edges", default=False, update=_changed,
+        description="Cut along edges marked Sharp",
+    )
+
+    # Paper --------------------------------------------------------------
+    paper: EnumProperty(name="Paper", items=PAPER_ITEMS, default="A4", update=_layout_changed)
+    landscape: BoolProperty(name="Landscape", default=False, update=_layout_changed)
+    custom_w: FloatProperty(name="Width", default=210.0, min=20.0, unit="NONE", update=_layout_changed)
+    custom_h: FloatProperty(name="Height", default=297.0, min=20.0, update=_layout_changed)
+    margin: FloatProperty(
+        name="Margin", default=10.0, min=0.0, max=60.0, update=_layout_changed,
+        description="Unprintable border in mm",
+    )
+    spacing: FloatProperty(
+        name="Spacing", default=3.0, min=0.0, max=30.0, update=_layout_changed,
+        description="Gap between pieces in mm",
+    )
+    arrange: EnumProperty(
+        name="Arrange",
+        items=[
+            ("COMPACT", "Fewest Pages", "Pack the pieces tightly, biggest first, onto as few "
+             "pages as possible"),
+            ("EVEN", "Spread Evenly", "Same number of pages, but the pieces shared out so each "
+             "page holds a similar amount, centred, with more room to cut round them"),
+            ("NEIGHBOURS", "Neighbours Together", "Pieces that glue to each other sit side by "
+             "side, in assembly order across the pages (piece letters follow it too)"),
+        ],
+        default="COMPACT",
+        update=_layout_changed,
+    )
+
+    # Scale --------------------------------------------------------------
+    scale_mode: EnumProperty(
+        name="Scale",
+        items=[
+            ("FIT", "Fit to Pages", "Largest model that fits on the chosen number of pages"),
+            ("HEIGHT", "Model Size", "Model's largest dimension in millimetres"),
+            ("RATIO", "Fixed Ratio", "Millimetres of paper per Blender unit"),
+        ],
+        default="FIT",
+        update=_layout_changed,
+    )
+    pages: IntProperty(name="Pages", default=1, min=1, max=200, update=_layout_changed)
+    model_size_mm: FloatProperty(name="Size (mm)", default=150.0, min=5.0, update=_layout_changed)
+    ratio: FloatProperty(name="mm per Unit", default=100.0, min=0.001, update=_layout_changed)
+
+    # Tabs ---------------------------------------------------------------
+    tab_height: FloatProperty(name="Tab Height", default=5.0, min=0.5, max=30.0, update=_layout_changed)
+    tab_angle: FloatProperty(name="Tab Angle", default=45.0, min=15.0, max=89.0, update=_layout_changed)
+
+    # Material -----------------------------------------------------------
+    board: EnumProperty(
+        name="Material",
+        items=[(k, v[0], v[6]) for k, v in BOARD_PRESETS.items()],
+        default="CARDSTOCK",
+        update=_board_chosen,
+    )
+    board_thickness: FloatProperty(
+        name="Thickness", default=0.3, min=0.0, max=20.0, precision=2, update=_changed,
+        description="Board thickness in mm (behind the printed surface)",
+    )
+    fold_style: EnumProperty(
+        name="Folds",
+        items=[
+            ("CREASE", "Crease", "Score and bend: the board curves round the Fold Radius "
+             "and pieces are shortened to suit"),
+            ("VGROOVE", "V-Groove", "Carve a V out of the back so the printed liner folds "
+             "sharp on the line (corrugated board); grooves are marked on Back Marks pages"),
+        ],
+        default="CREASE",
+        update=_changed,
+    )
+    fold_radius: FloatProperty(
+        name="Fold Radius", default=0.0, min=0.0, max=30.0, precision=2, update=_changed,
+        description="Outside radius of a creased fold in mm (about the thickness for "
+        "greyboard). 0 = sharp folds, nothing shortened",
+    )
+    join_style: EnumProperty(
+        name="Joins",
+        items=[
+            ("TABS", "Glue Tabs", "Glue tabs along the seams, as for paper"),
+            ("MITRE", "Mitre", "Edge to edge, no tabs. Outside corners are bevelled away "
+             "at the back (marked on Back Marks pages) so the boards sit flush"),
+        ],
+        default="TABS",
+        update=_changed,
+    )
+    cut_valleys: BoolProperty(
+        name="Cut Valley Folds", default=False, update=_changed,
+        description="Cut every inward (valley) fold: thick board can't fold that way "
+        "neatly. A Join made with Edit Cuts still wins",
+    )
+
+    # Export -------------------------------------------------------------
+    export_content: EnumProperty(
+        name="Content",
+        items=[
+            ("PRINT", "Print", "Art, tabs, lines and numbers for printing"),
+            ("ART_CUT", "Art + Cut Lines", "Art on the pieces and carried onto the tabs, "
+             "outlined by cut lines only: no fold lines over the art; file name ends _art"),
+            ("CUT", "Cut Lines Only", "Piece and tab outlines only, as plain solid lines "
+             "(cutting machine template); file name ends _cut"),
+            ("CREASE", "Crease Lines Only", "Fold lines only, for scoring; file name ends _crease"),
+            ("LINES", "Cut + Crease", "Both in one file, creases in red so they import as a "
+             "separate colour layer; file name ends _lines"),
+            ("BACK", "Back Marks", "The back of each sheet, mirrored so it lines up when "
+             "printed on the reverse or traced: outlines, glue guides, and for thick board "
+             "V-grooves and mitre bevels; file name ends _back"),
+        ],
+        default="PRINT",
+    )
+    dashed_folds: BoolProperty(
+        name="Dashed Folds", default=True,
+        description="Dash the fold lines. Turn off for cutting machines, which score a "
+        "dashed line as many short pieces",
+    )
+    texture_mode: EnumProperty(
+        name="Print",
+        items=[
+            ("BAKE", "Baked Material",
+             "Bake what the material shows onto each page with Cycles: works with "
+             "layered or node-group materials, procedurals and vertex colours"),
+            ("IMAGE", "Image Textures", "Print image textures directly through the UVs (fast)"),
+            ("COLOR", "Flat Colours", "Each piece in its material's base colour"),
+            ("WHITE", "Lines Only", "No fill: white paper with lines (cutting machines)"),
+        ],
+        default="BAKE",
+    )
+    bake_pass: EnumProperty(
+        name="Bake",
+        items=[
+            ("AUTO", "Auto", "Base colour; falls back to emission for materials that colour "
+             "through an emission shader, then to a full render"),
+            ("BASE", "Base Colour", "The material's colour without lighting (usual for papercraft)"),
+            ("EMIT", "Emission", "For materials that output colour through an Emission shader"),
+            ("COMBINED", "Full Render", "Colour with the scene's lighting and shading "
+             "(matte: no glossy reflections)"),
+        ],
+        default="AUTO",
+    )
+    bake_dpi: IntProperty(
+        name="Bake DPI", default=300, min=50, max=600,
+        description="Print resolution of the baked pages (300 for fine detail; slower)",
+    )
+    tab_texture: BoolProperty(
+        name="Texture on Tabs", default=False,
+        description="Continue each face's art onto its tabs, so small gaps at glued "
+        "seams don't show the tab colour",
+    )
+    fold_one_by_one: BoolProperty(
+        name="One at a Time", default=False,
+        description="Fold the hinges in turn, from the extremities inwards: glue tabs, "
+        "then the tips, the root piece last (Rebuild Rig to apply)",
+    )
+    fold_overlap: FloatProperty(
+        name="Overlap", default=0.15, min=0.0, max=1.0, subtype="FACTOR",
+        description="How much each fold overlaps the next: 0 = strictly one after "
+        "another, 1 = all together (Rebuild Rig to apply)",
+    )
+    paper_thickness: FloatProperty(
+        name="Paper Thickness", default=0.0, min=0.0, max=20.0, precision=2,
+        description="Give the folding sheet real thickness in mm (e.g. 0.3 for card). "
+        "Glue tabs then sit one thickness behind the wall they glue to (in front, for "
+        "outside tabs) instead of showing through it. 0 = flat sheet (Rebuild Rig to apply)",
+    )
+    true_colours: BoolProperty(
+        name="True Colours While Painting", default=True,
+        description="In Texture Paint, show the paint unlit with the Standard view "
+        "transform, so the eyedropper picks the colour you painted (put back when you leave "
+        "Texture Paint). Materials built from layer stacks keep their own nodes",
+    )
+    assembly_page: BoolProperty(
+        name="Assembly Page", default=True,
+        description="Add a page showing where every piece goes: the model from four sides, "
+        "each piece in its own colour and lettered, with the page each one is on",
+    )
+    piece_letters: BoolProperty(
+        name="Piece Letters", default=True,
+        description="Letter each piece (A, B, C ...) to match the assembly page: inside the "
+        "piece with Numbers On Faces, on the scrap below it with Tabs & Scrap",
+    )
+    glue_guides: BoolProperty(
+        name="Glue Guides", default=True,
+        description="Outline where each tab lands on the face it glues to. Inside tabs "
+        "glue to the back of that face, so their guides print on Back Marks pages; "
+        "outside tabs' guides print on the front, under the tab",
+    )
+    glue_guides_front: BoolProperty(
+        name="Inside Guides on Front", default=False,
+        description="Print the inside tabs' guides on the front too: for plain models you "
+        "paint after building (on printed art they would show on the finished model)",
+    )
+    tab_fill: BoolProperty(
+        name="Grey Tabs", default=True,
+        description="Fill plain tabs light grey. Off: tabs stay paper white, outlined "
+        "by their cut lines",
+    )
+    number_mode: EnumProperty(
+        name="Numbers",
+        items=[
+            ("FACES", "On Faces", "Matching numbers just inside both glued edges"),
+            ("CLEAN", "Tabs & Scrap",
+             "Number on the tab, and on the scrap just outside the other edge: "
+             "nothing printed on the art"),
+            ("OFF", "Off", "No glue numbers"),
+        ],
+        default="FACES",
+    )
+    texture_max: IntProperty(
+        name="Max Texture Size", default=2048, min=128, max=16384,
+        description="Larger images are downsampled to this many pixels when embedded",
+    )
+    bleed: FloatProperty(
+        name="Bleed", default=0.2, min=0.0, max=3.0,
+        description="Millimetres of colour printed past each edge so slightly "
+        "off cuts don't show white",
+    )
+    line_style: EnumProperty(
+        name="Lines",
+        items=[
+            ("DEFAULT", "Default", "Black cuts, red mountain folds, blue valley folds"),
+            ("CUSTOM", "Custom Colour",
+             "All lines in one colour and opacity, e.g. white over dark art or soft black over light art"),
+            ("NONE", "No Lines", "Print the art only (lines stay in the file as hidden layers)"),
+        ],
+        default="CUSTOM",
+    )
+    line_color: FloatVectorProperty(
+        name="Line Colour", subtype="COLOR", size=3, min=0.0, max=1.0,
+        default=(0.0, 0.0, 0.0),
+    )
+    line_opacity: FloatProperty(
+        name="Line Opacity", default=0.1, min=0.0, max=1.0, subtype="FACTOR",
+    )
+    line_width: FloatProperty(name="Line Width", default=0.25, min=0.05, max=2.0)
+    fold_min_angle: FloatProperty(
+        name="Hide Folds Under", default=1.0, min=0.0, max=45.0,
+        description="Don't draw fold lines flatter than this many degrees",
+    )
+
+    # Read-only info -----------------------------------------------------
+    info_islands: IntProperty(default=0)
+    info_pages: IntProperty(default=0)
+    info_scale: FloatProperty(default=0.0)
+    info_size_mm: FloatProperty(default=0.0)
+    info_glue: IntProperty(default=0)
+    info_message: StringProperty(default="")
+    info_fits: BoolProperty(default=True)
+
+    def page_size(self):
+        if self.paper == "CUSTOM":
+            w, h = self.custom_w, self.custom_h
+        else:
+            w, h = PAGE_SIZES_MM[self.paper]
+        return (h, w) if self.landscape else (w, h)
+
+    def unfold_key(self):
+        """Settings that change where the cuts go (need a new unfold)."""
+        return (
+            self.priority, self.valley_bias, self.max_faces,
+            self.cut_seams, self.cut_materials, self.cut_colors, self.cut_sharp,
+            self.cut_valleys, round(self.fold_min_angle, 3) if self.cut_valleys else None,
+        )
+
+    def layout_key(self):
+        """Settings that only change how the pieces sit on the pages."""
+        return (
+            self.page_size(), self.margin, self.spacing, self.arrange,
+            self.scale_mode, self.pages, self.model_size_mm, self.ratio,
+            self.tab_height, self.tab_angle,
+            round(self.board_thickness, 4), self.fold_style, round(self.fold_radius, 4),
+            self.join_style,
+        )
+
+    def settings_key(self):
+        return self.unfold_key() + self.layout_key()
+
+    def cut_rules(self):
+        return {
+            "seams": self.cut_seams,
+            "materials": self.cut_materials,
+            "colors": self.cut_colors,
+            "sharp": self.cut_sharp,
+        }
+
+
+def register():
+    bpy.utils.register_class(PapercraftSettings)
+    bpy.types.Object.papercraft = PointerProperty(type=PapercraftSettings)
+
+
+def unregister():
+    del bpy.types.Object.papercraft
+    bpy.utils.unregister_class(PapercraftSettings)

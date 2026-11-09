@@ -9,6 +9,10 @@ class ConfigError(LocaliserError):
     """Malformed or unsupported config or manifest."""
 
 
+class UnsupportedSeriesError(ConfigError):
+    """The studio config has no release for this host or DCC series."""
+
+
 class ReleaseUnavailableError(LocaliserError):
     """The requested release cannot be resolved or fetched. The message names the host and release."""
 

@@ -1,0 +1,301 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ name Read403
+ selected true
+ xpos -3953
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read404
+ selected true
+ xpos -3403
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read405
+ selected true
+ xpos -3293
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read406
+ selected true
+ xpos -3183
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 6
+ origlast 6
+ origset true
+ name Read407
+ selected true
+ xpos -3073
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read408
+ selected true
+ xpos -2963
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ name Read409
+ selected true
+ xpos -2853
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read410
+ selected true
+ xpos -2853
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read412
+ selected true
+ xpos -4833
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_13.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read414
+ selected true
+ xpos -4613
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_14.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ name Read415
+ selected true
+ xpos -4503
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_15.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ name Read416
+ selected true
+ xpos -4393
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_16.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ name Read417
+ selected true
+ xpos -4283
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_17.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ name Read418
+ selected true
+ xpos -4173
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_18.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 6
+ origlast 6
+ origset true
+ name Read419
+ selected true
+ xpos -4063
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_19.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ name Read420
+ selected true
+ xpos -3953
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_21.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read422
+ selected true
+ xpos -3733
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_22.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ name Read423
+ selected true
+ xpos -3623
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_23.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 2
+ origlast 2
+ origset true
+ name Read424
+ selected true
+ xpos -3513
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read402
+ selected true
+ xpos -5053
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read411
+ selected true
+ xpos -4943
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_12.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read413
+ selected true
+ xpos -4723
+ ypos 1944
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_20.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ name Read421
+ selected true
+ xpos -3843
+ ypos 1944
+}

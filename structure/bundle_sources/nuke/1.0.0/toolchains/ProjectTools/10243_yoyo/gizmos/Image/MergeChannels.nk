@@ -1,0 +1,91 @@
+#! C:/Program Files/Nuke9.0v5/nuke-9.0.5.dll -nx
+version 9.0 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-8" y="-8" w="1936" h="1176" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1876" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1115"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1920" y="0" w="1920" h="1200" maximized="1" screen="0">
+        <splitter orientation="2">
+            <split size="1166"/>
+            <dock id="" activePageId="DAG.1" focus="true">
+                <page id="DopeSheet.1"/>
+                <page id="Curve Editor.1"/>
+                <page id="DAG.1"/>
+                <page id="jaytsang.NukeTestWindow"/>
+                <page id="DAG.2"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name T:/BBC/0975s_TreeFuTom5/TFT_300_Shared/05_CompAssets/03_Nuke_Resources/01_Gizmos/Channel/MergeChannels.nk
+}
+Read {
+ inputs 0
+ file //bzfile11/frames/BBC/0975f_TreeFuTom5/TFT_301_STU_Stuck/TFT_301_STU_012/TFT_301_STU_012_120_R/ENV/ENV_POND/ENV_DF_COL/ENV_DF_COL.%04d.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 160
+ last 160
+ origlast 15
+ origset true
+ auto_alpha true
+ name Read32
+ xpos -1613
+ ypos -349
+}
+Group {
+ name MergeChannel
+ xpos -1613
+ ypos -211
+ addUserKnob {20 Pass}
+ addUserKnob {41 in l "in 1" T Shuffle16.in}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1010
+  ypos -174
+ }
+set N362e800 [stack 0]
+ Shuffle {
+  name Shuffle16
+  selected true
+  xpos -912
+  ypos -88
+ }
+push $N362e800
+ Merge2 {
+  inputs 2
+  name Merge27
+  xpos -1010
+  ypos -25
+ }
+ Output {
+  name Output1
+  xpos -1010
+  ypos 75
+ }
+end_group
+Viewer {
+ frame 1
+ frame_range 1-100
+ fps 25
+ name Viewer1
+ xpos -1613
+ ypos -96
+}

@@ -1,0 +1,246 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+Gizmo {
+ inputs 2
+ tile_color 0x443925ff
+ addUserKnob {20 User l "Wes Vignette"}
+ addUserKnob {4 imageFormat l Orientation t "Pick an orientation to set the initial size correctly." M {Landscape Portrait "" "" "" ""}}
+ addUserKnob {6 preview l Preview t "Test vignette on a white background." -STARTLINE}
+ addUserKnob {41 disable_1 l Disable -STARTLINE T Grade2.disable}
+ addUserKnob {26 ""}
+ addUserKnob {7 size l Size R 0.5 1.5}
+ size 1
+ addUserKnob {7 squash l Squash t "Real vignetting is circular. Use this to cheat for effect." R 0.3 1}
+ squash 1
+ addUserKnob {16 softness l Softness}
+ softness 0.5
+ addUserKnob {7 falloff l Falloff R 0.1 1.9}
+ falloff 1
+ addUserKnob {41 white l Tint T Grade2.white}
+ addUserKnob {7 lightness l Lightness}
+ lightness 0.1
+ addUserKnob {41 mix l Mix T Grade2.mix}
+ addUserKnob {26 ""}
+ addUserKnob {26 mask l Mask T "defines an are not affected by vignette"}
+ addUserKnob {7 blurSize l "Mask Blur" R 0 300}
+ blurSize 100
+ addUserKnob {41 mix_1 l Amount T ChannelMerge1.mix}
+ addUserKnob {41 disable_2 l "Disable Mask" -STARTLINE T ChannelMerge1.disable}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x7171c600
+  label Landscape
+  note_font_size 20
+  xpos -244
+  ypos -409
+  bdwidth 155
+  bdheight 158
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x7171c600
+  label Portrait
+  note_font_size 20
+  xpos -64
+  ypos -409
+  bdwidth 155
+  bdheight 158
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x7171c600
+  label Preview
+  note_font_size 20
+  xpos -325
+  ypos -186
+  bdwidth 153
+  bdheight 238
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  label "Size of the outline"
+  xpos -29
+  ypos -142
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote4
+  label "Tint and Lightness"
+  xpos 209
+  ypos -1
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote3
+  label "Controls the Falloff"
+  xpos -31
+  ypos -101
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "The scale of this transform node\nwill be regarded as 1"
+  xpos -31
+  ypos -194
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 253
+  ypos -463
+  number 1
+ }
+ Blur {
+  channels alpha
+  size {{parent.blurSize i}}
+  name Blur1
+  xpos 253
+  ypos -396
+ }
+ Dot {
+  name Dot4
+  xpos 287
+  ypos -47
+ }
+ Radial {
+  inputs 0
+  cliptype none
+  area {{(root.format.w-root.format.h)/2 i} {root.format.y i} {root.format.w-area.x i} {root.format.h i}}
+  softness {{parent.softness i}}
+  name Radial2
+  xpos -26
+  ypos -327
+ }
+ Transform {
+  scale {{parent.squash i} {1 i}}
+  center {{root.format.w/2 i} {root.format.h/2 i}}
+  name SquashP
+  xpos -26
+  ypos -292
+ }
+ Dot {
+  name Dot2
+  xpos 8
+  ypos -228
+ }
+ Radial {
+  inputs 0
+  cliptype none
+  area {{root.format.x i} {(root.format.h-root.format.w)/2 i} {root.format.w i} {root.format.h-area.y i}}
+  softness {{parent.softness i}}
+  name Radial1
+  xpos -204
+  ypos -325
+ }
+ Transform {
+  scale {{1 i} {parent.squash i}}
+  center {{root.format.w/2 i} {root.format.h/2 i}}
+  name SquashL
+  xpos -204
+  ypos -290
+ }
+ Dot {
+  name Dot1
+  xpos -170
+  ypos -228
+ }
+ Switch {
+  inputs 2
+  which {{parent.imageFormat i}}
+  name Switch2
+  xpos -117
+  ypos -231
+ }
+ Transform {
+  scale 1.2
+  center {{root.format.w/2 i} {root.format.h/2 i}}
+  name Transform2
+  xpos -117
+  ypos -193
+ }
+ Transform {
+  scale {{parent.size i}}
+  center {{root.format.w/2 i} {root.format.h/2 i}}
+  name Transform1
+  xpos -117
+  ypos -141
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.falloff i}}
+  name Grade1
+  xpos -117
+  ypos -105
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge1
+  selected true
+  xpos -117
+  ypos -62
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -117
+  ypos -5
+ }
+set N7f17e800 [stack 0]
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  name Constant1
+  xpos -290
+  ypos -144
+ }
+ Grade {
+  inputs 1+1
+  multiply {{parent.lightness i}}
+  name Grade2
+  xpos -290
+  ypos 1
+ }
+ set C7f17e000 [stack 0]
+ Dot {
+  name Dot3
+  xpos -256
+  ypos 67
+ }
+push $N7f17e800
+ Input {
+  inputs 0
+  name Input1
+  xpos 124
+  ypos -463
+ }
+clone $C7f17e000 {
+  inputs 1+1
+  xpos 124
+  ypos 1
+  selected false
+ }
+ Switch {
+  inputs 2
+  which {{parent.preview i}}
+  name Switch1
+  xpos 124
+  ypos 64
+ }
+ Output {
+  name Output1
+  xpos 124
+  ypos 122
+ }
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos -205
+  ypos 183
+ }
+end_group

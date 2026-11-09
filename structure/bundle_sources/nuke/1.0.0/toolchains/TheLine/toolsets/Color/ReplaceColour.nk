@@ -1,0 +1,78 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name ReplaceColour
+ tile_color 0x88b7ffff
+ selected true
+ xpos 6890
+ ypos 13166
+ addUserKnob {20 User}
+ addUserKnob {41 srccolor T HSVTool6.srccolor}
+ addUserKnob {41 dstcolor T HSVTool6.dstcolor}
+ addUserKnob {41 huerolloffrange l "Range Rolloff" T HSVTool6.huerolloffrange}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 617
+  ypos 374
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 617
+  ypos 400
+ }
+ Dot {
+  name Dot85
+  xpos 651
+  ypos 488
+ }
+set N75c5f800 [stack 0]
+ Dot {
+  name Dot87
+  xpos 541
+  ypos 488
+ }
+ Dot {
+  name Dot86
+  xpos 541
+  ypos 608
+ }
+push $N75c5f800
+ HSVTool {
+  srccolor {0.147027269 0.2501582205 0.0742135644}
+  dstcolor {0.6 0.07 0.008}
+  dstcolor_panelDropped true
+  huesrcs {95.16934204 95.16934204}
+  huerotation -88.88555908
+  huerolloffrange 56
+  satsrcs {0.703333497 0.703333497}
+  saturation 0.2833331227
+  satrolloffrange 0.3
+  brtsrcs {0.2501582205 0.2501582205}
+  brightness 0.3498418033
+  brtrolloffrange 0.3
+  name HSVTool6
+  xpos 617
+  ypos 526
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy7
+  xpos 617
+  ypos 598
+ }
+ Premult {
+  name Premult1
+  xpos 620
+  ypos 662
+ }
+ Output {
+  name Output1
+  xpos 617
+  ypos 710
+ }
+end_group

@@ -1,0 +1,49 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name f_hueShift
+ tile_color 0x312f84ff
+ selected true
+ xpos 510
+ ypos 2943
+ addUserKnob {20 param l Param}
+ addUserKnob {7 hue l Hueshift R -180 180}
+ addUserKnob {7 sat l Saturation R 0 2}
+ sat 1
+ addUserKnob {7 lum l Luminance R 0 2}
+ lum 1
+}
+ Input {
+  inputs 0
+  name Input
+  xpos 248
+  ypos 14
+ }
+ Colorspace {
+  colorspace_out HSL
+  name Colorspace1
+  xpos 248
+  ypos 85
+ }
+ Grade {
+  white {1 {parent.sat} {parent.lum} 1}
+  add {{parent.hue/180} 0 0 0}
+  gamma {1 1 {parent.lum} 1}
+  black_clamp false
+  name Grade1
+  xpos 248
+  ypos 182
+ }
+ Colorspace {
+  colorspace_in HSL
+  name Colorspace2
+  xpos 248
+  ypos 242
+ }
+ Output {
+  name Output1
+  xpos 248
+  ypos 342
+ }
+end_group

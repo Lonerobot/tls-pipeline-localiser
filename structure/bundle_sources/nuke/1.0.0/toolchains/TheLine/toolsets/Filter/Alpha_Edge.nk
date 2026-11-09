@@ -1,0 +1,65 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name AlphaEdge4
+ selected true
+ xpos -2837
+ ypos -618
+ addUserKnob {20 "" l User}
+ addUserKnob {41 size l innerBlur T innerBlur.size}
+ addUserKnob {41 filter l innerBlurFilter T innerBlur.filter}
+ addUserKnob {41 size_1 l outerBlur T outerBlur.size}
+ addUserKnob {41 filter_1 l outerBlurFilter T outerBlur.filter}
+ addUserKnob {41 value l gain T Multiply1.value}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 46
+  ypos 82
+ }
+ Dot {
+  name Dot2
+  xpos -176
+  ypos 86
+ }
+set Na46b3400 [stack 0]
+ Blur {
+  channels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name outerBlur
+  xpos -258
+  ypos 140
+ }
+push $Na46b3400
+ Blur {
+  channels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  size 200
+  name innerBlur
+  xpos -145
+  ypos 140
+ }
+ Merge2 {
+  inputs 2
+  operation out
+  Achannels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  Bchannels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  output {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge4
+  xpos -208
+  ypos 232
+ }
+ Multiply {
+  channels alpha
+  value 2
+  name Multiply1
+  xpos -208
+  ypos 296
+ }
+ Output {
+  name Output1
+  selected true
+  xpos -208
+  ypos 364
+ }
+end_group

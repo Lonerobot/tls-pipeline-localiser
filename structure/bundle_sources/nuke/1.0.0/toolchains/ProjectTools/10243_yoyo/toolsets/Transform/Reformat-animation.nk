@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 10.5 v3
+push $cut_paste_input
+Reformat {
+ format "4496 2704 0 0 4496 2704 1 Animation"
+ name Reformat1
+ selected true
+ xpos 321
+ ypos 363
+}

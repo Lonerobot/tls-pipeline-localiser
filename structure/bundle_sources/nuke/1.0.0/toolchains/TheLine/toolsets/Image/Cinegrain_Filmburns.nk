@@ -1,0 +1,438 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Roll_Out_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 243
+ origlast 243
+ origset true
+ name Read284
+ selected true
+ xpos -2083
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Perf_Light_Leak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 153
+ origlast 153
+ origset true
+ name Read283
+ selected true
+ xpos -2193
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Perf_Flash.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 8
+ origlast 8
+ origset true
+ name Read282
+ selected true
+ xpos -2303
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lens_Turret_Rotation_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 163
+ origlast 163
+ origset true
+ name Read281
+ selected true
+ xpos -2303
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lens_Turret_Rotation_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 191
+ origlast 191
+ origset true
+ name Read280
+ selected true
+ xpos -2413
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lab_Roll_Splice_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 46
+ origlast 46
+ origset true
+ name Read279
+ selected true
+ xpos -2523
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lab_Roll_Splice_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 94
+ origlast 94
+ origset true
+ name Read278
+ selected true
+ xpos -2633
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HeavyLightLeak_FullGate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1249
+ origlast 1249
+ origset true
+ name Read277
+ selected true
+ xpos -2743
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HandCrank_Jam_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 387
+ origlast 387
+ origset true
+ name Read276
+ selected true
+ xpos -2853
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HandCrank_Jam_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 53
+ origlast 53
+ origset true
+ name Read275
+ selected true
+ xpos -2963
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Perf_Shift.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 141
+ origlast 141
+ origset true
+ name Read274
+ selected true
+ xpos -3073
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_Into_Grain.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 901
+ origlast 901
+ origset true
+ name Read273
+ selected true
+ xpos -3183
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 21
+ origlast 21
+ origset true
+ name Read272
+ selected true
+ xpos -3293
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 31
+ origlast 31
+ origset true
+ name Read271
+ selected true
+ xpos -3403
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 277
+ origlast 277
+ origset true
+ name Read270
+ selected true
+ xpos -3403
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 209
+ origlast 209
+ origset true
+ name Read269
+ selected true
+ xpos -3513
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 178
+ origlast 178
+ origset true
+ name Read268
+ selected true
+ xpos -3623
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read267
+ selected true
+ xpos -3733
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read266
+ selected true
+ xpos -3843
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read265
+ selected true
+ xpos -3953
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read264
+ selected true
+ xpos -4063
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 239
+ origlast 239
+ origset true
+ name Read263
+ selected true
+ xpos -4173
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 336
+ origlast 336
+ origset true
+ name Read262
+ selected true
+ xpos -4283
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 329
+ origlast 329
+ origset true
+ name Read261
+ selected true
+ xpos -4393
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 139
+ origlast 139
+ origset true
+ name Read260
+ selected true
+ xpos -4503
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 129
+ origlast 129
+ origset true
+ name Read259
+ selected true
+ xpos -4503
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 45
+ origlast 45
+ origset true
+ name Read258
+ selected true
+ xpos -4613
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 74
+ origlast 74
+ origset true
+ name Read257
+ selected true
+ xpos -4723
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 111
+ origlast 111
+ origset true
+ name Read256
+ selected true
+ xpos -4833
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 164
+ origlast 164
+ origset true
+ name Read255
+ selected true
+ xpos -4943
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 31
+ origlast 31
+ origset true
+ name Read254
+ selected true
+ xpos -5053
+ ypos 48
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Jam.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 272
+ origlast 272
+ origset true
+ name Read253
+ selected true
+ xpos -5163
+ ypos 48
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet31
+ tile_color 0xe955ffff
+ selected true
+ xpos -2083
+ ypos 174
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

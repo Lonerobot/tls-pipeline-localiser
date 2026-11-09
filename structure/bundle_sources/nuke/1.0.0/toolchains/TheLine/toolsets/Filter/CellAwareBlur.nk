@@ -1,0 +1,200 @@
+set cut_paste_input [stack 0]
+version 15.1 v2
+push $cut_paste_input
+Group {
+ name CellAwareBlur
+ onCreate "node = nuke.thisNode()\n\nfor k in \[\"size\"]:\n    node\[k].setFlag(0x00000004)\n    \n\nknob_defaults = \{\n    'quality': \[16],\n\}\nfor knob_name, default_value in knob_defaults.items():\n    if knob_name in node.knobs():\n        knob = node\[knob_name]\n        value = knob.value()\n        not_default = knob.notDefault()\n        \n        knob.setDefaultValue(default_value)\n        if not_default:\n            knob.setValue(value)\n"
+ knobChanged "\n\ncheck = nuke.thisNode().knob(\"inputEdge\").value()\ncontrols = nuke.thisNode().knob('CellSelect')\nif check:\n    controls.setValue(False)\nelse:\n    controls.setValue(True)\n\n"
+ tile_color 0xcc804eff
+ selected true
+ xpos -8101
+ ypos 3483
+ addUserKnob {20 CellAwareBlur}
+ addUserKnob {6 inputEdge l "use edge input" +STARTLINE}
+ addUserKnob {20 CellSelect l "cell selection" n 1}
+ addUserKnob {26 enableColAtxt l enable T "<span>&#8203;"}
+ addUserKnob {6 enableColA l "" -STARTLINE}
+ addUserKnob {18 colorA l "color A" -STARTLINE}
+ colorA {0 0 0}
+ addUserKnob {26 enableColBtxt l enable T "<span>&#8203;"}
+ addUserKnob {6 enableColB l "" -STARTLINE}
+ addUserKnob {18 colorB l "color B" -STARTLINE}
+ colorB {0 0 0}
+ addUserKnob {26 enableColCtxt l enable T "<span>&#8203;"}
+ addUserKnob {6 enableColC l "" -STARTLINE}
+ addUserKnob {18 colorC l "color C" -STARTLINE}
+ colorC {0 0 0}
+ addUserKnob {26 enableColDtxt l enable T "<span>&#8203;"}
+ addUserKnob {6 enableColD l "" -STARTLINE}
+ addUserKnob {18 colorD l "color D" -STARTLINE}
+ colorD {0 0 0}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {6 colorA_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 colorB_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {6 color_rgb_1_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 colorC_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {6 colorD_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {7 size R 0 200}
+ addUserKnob {41 tolerance T mask1.tolerance}
+ addUserKnob {3 quality t "This is a multi-directionnal blur. This number defines the number of directions. Higher is smoother but might be slower." R 0 16}
+ quality 17
+ addUserKnob {26 credit l "" +STARTLINE +INVISIBLE T "Renaud Tissandie - 2026"}
+}
+ Input {
+  inputs 0
+  name edge
+  xpos -353
+  ypos 135
+  number 1
+ }
+ Expression {
+  name Expression2
+  xpos -353
+  ypos 159
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 15
+  ypos -9
+ }
+ Expression {
+  name Expression1
+  xpos 15
+  ypos 15
+ }
+ Dot {
+  name Dot53
+  xpos 49
+  ypos 90
+ }
+set Nbb0d2000 [stack 0]
+ Expression {
+  temp_name0 colA
+  temp_expr0 "enableColA == 1 ? (sqrt((r-colorA.r)*(r-colorA.r) + (g-colorA.g)*(g-colorA.g) + (b-colorA.b)*(b-colorA.b)) <= tolerance) : 0"
+  temp_name1 colB
+  temp_expr1 "enableColB == 1 ? (sqrt((r-colorB.r)*(r-colorB.r) + (g-colorB.g)*(g-colorB.g) + (b-colorB.b)*(b-colorB.b)) <= tolerance) : 0"
+  temp_name2 colC
+  temp_expr2 "enableColC == 1 ? (sqrt((r-colorC.r)*(r-colorC.r) + (g-colorC.g)*(g-colorC.g) + (b-colorC.b)*(b-colorC.b)) <= tolerance) : 0"
+  temp_name3 colD
+  temp_expr3 "enableColD == 1 ? (sqrt((r-colorD.r)*(r-colorD.r) + (g-colorD.g)*(g-colorD.g) + (b-colorD.b)*(b-colorD.b)) <= tolerance) : 0"
+  channel0 rgba
+  expr0 "colA || colB || colC || colD"
+  name mask1
+  xpos -95
+  ypos 114
+  addUserKnob {20 User}
+  addUserKnob {7 tolerance R 0 0.1}
+  tolerance 0.01
+ }
+ Switch {
+  inputs 2
+  which {{parent.inputEdge}}
+  name Switch1
+  xpos -95
+  ypos 159
+ }
+set Ne2cc7700 [stack 0]
+ Dot {
+  name Dot54
+  xpos -61
+  ypos 282
+ }
+set N8ab5b000 [stack 0]
+push $N8ab5b000
+push $Ne2cc7700
+push $Ne2cc7700
+push $Nbb0d2000
+ BlinkScript {
+  inputs 2
+  recompileCount 11
+  ProgramGroup 1
+  KernelDescription "2 \"MultiDirBlur\" iterate pixelWise 6b748b30e11b7ca6f9a1a8df8fc6794fcb1bd585e871d281365ee414dc286926 3 \"src\" Read Random \"mask\" Read Random \"dst\" Write Point 3 \"BlurRadius\" Float 1 AACgQQ== \"NumDirections\" Int 1 EAAAAA== \"AngleOffset\" Float 1 AAC0Qg== 3 \"radius\" 1 1 \"numDirections\" 1 1 \"angleOffset\" 1 1 3 \"iRadius\" Int 1 1 AAAAAA== \"sigmaSq2\" Float 1 1 AAAAAA== \"angleOffsetRad\" Float 1 1 AAAAAA=="
+  kernelSource "kernel MultiDirBlur : ImageComputationKernel<ePixelWise>\n\{\n    Image<eRead, eAccessRandom, eEdgeClamped> src;\n    Image<eRead, eAccessRandom, eEdgeClamped> mask;\n    Image<eWrite> dst;\n\n    param:\n        float radius;\n        int   numDirections;\n        float angleOffset; // in degrees, 0 to (180 / numDirections)\n\n    local:\n        int   iRadius;\n        float sigmaSq2;\n        float angleOffsetRad;\n\n    void define() \{\n        defineParam(radius,        \"BlurRadius\",      20.0f);\n        defineParam(numDirections, \"NumDirections\",   16);\n        defineParam(angleOffset,   \"AngleOffset\",     90.0f);\n    \}\n\n    void init() \{\n        iRadius         = (int)radius;\n        float sigma     = max(radius / 2.0f, 0.1f);\n        sigmaSq2        = 2.0f * sigma * sigma;\n        // Convert once in init, not per pixel\n        angleOffsetRad  = angleOffset * 3.14159265f / 180.0f;\n    \}\n\n    float4 blur1D(int2 pos, float dx, float dy) \{\n        float4 sumColor  = float4(0.0f);\n        float  sumWeight = 0.0f;\n\n        for (int k = 0; k <= iRadius; k++) \{\n            int nx = pos.x + (int)floor((float)k * dx + 0.5f);\n            int ny = pos.y + (int)floor((float)k * dy + 0.5f);\n\n            if (mask(nx, ny).w < 0.5f) break;\n\n            float weight  = exp(-(float)(k * k) / sigmaSq2);\n            sumColor     += src(nx, ny) * weight;\n            sumWeight    += weight;\n        \}\n\n        for (int k = 1; k <= iRadius; k++) \{\n            int nx = pos.x - (int)floor((float)k * dx + 0.5f);\n            int ny = pos.y - (int)floor((float)k * dy + 0.5f);\n\n            if (mask(nx, ny).w < 0.5f) break;\n\n            float weight  = exp(-(float)(k * k) / sigmaSq2);\n            sumColor     += src(nx, ny) * weight;\n            sumWeight    += weight;\n        \}\n\n        return (sumWeight > 0.0f) ? sumColor / sumWeight : src(pos.x, pos.y);\n    \}\n\n    void process(int2 pos) \{\n        if (mask(pos.x, pos.y).w < 0.5f) \{\n            dst() = src(pos.x, pos.y);\n            return;\n        \}\n\n        float4 result    = float4(0.0f);\n        int    validDirs = 0;\n\n        for (int d = 0; d < numDirections; d++) \{\n            // angleOffsetRad shifts all directions uniformly\n            float angle = 3.14159265f * (float)d / (float)numDirections + angleOffsetRad;\n            float dx    = cos(angle);\n            float dy    = sin(angle);\n\n            result    += blur1D(pos, dx, dy);\n            validDirs += 1;\n        \}\n\n        dst() = result / (float)validDirs;\n    \}\n\};"
+  rebuild ""
+  MultiDirBlur_BlurRadius {{size/2}}
+  MultiDirBlur_NumDirections {{quality}}
+  MultiDirBlur_AngleOffset 0
+  rebuild_finalise ""
+  name BlinkScript_blank33
+  xpos 15
+  ypos 153
+ }
+ BlinkScript {
+  inputs 2
+  recompileCount 11
+  ProgramGroup 1
+  KernelDescription "2 \"MultiDirBlur\" iterate pixelWise 6b748b30e11b7ca6f9a1a8df8fc6794fcb1bd585e871d281365ee414dc286926 3 \"src\" Read Random \"mask\" Read Random \"dst\" Write Point 3 \"BlurRadius\" Float 1 AACgQQ== \"NumDirections\" Int 1 EAAAAA== \"AngleOffset\" Float 1 AAC0Qg== 3 \"radius\" 1 1 \"numDirections\" 1 1 \"angleOffset\" 1 1 3 \"iRadius\" Int 1 1 AAAAAA== \"sigmaSq2\" Float 1 1 AAAAAA== \"angleOffsetRad\" Float 1 1 AAAAAA=="
+  kernelSource "kernel MultiDirBlur : ImageComputationKernel<ePixelWise>\n\{\n    Image<eRead, eAccessRandom, eEdgeClamped> src;\n    Image<eRead, eAccessRandom, eEdgeClamped> mask;\n    Image<eWrite> dst;\n\n    param:\n        float radius;\n        int   numDirections;\n        float angleOffset; // in degrees, 0 to (180 / numDirections)\n\n    local:\n        int   iRadius;\n        float sigmaSq2;\n        float angleOffsetRad;\n\n    void define() \{\n        defineParam(radius,        \"BlurRadius\",      20.0f);\n        defineParam(numDirections, \"NumDirections\",   16);\n        defineParam(angleOffset,   \"AngleOffset\",     90.0f);\n    \}\n\n    void init() \{\n        iRadius         = (int)radius;\n        float sigma     = max(radius / 2.0f, 0.1f);\n        sigmaSq2        = 2.0f * sigma * sigma;\n        // Convert once in init, not per pixel\n        angleOffsetRad  = angleOffset * 3.14159265f / 180.0f;\n    \}\n\n    float4 blur1D(int2 pos, float dx, float dy) \{\n        float4 sumColor  = float4(0.0f);\n        float  sumWeight = 0.0f;\n\n        for (int k = 0; k <= iRadius; k++) \{\n            int nx = pos.x + (int)floor((float)k * dx + 0.5f);\n            int ny = pos.y + (int)floor((float)k * dy + 0.5f);\n\n            if (mask(nx, ny).w < 0.5f) break;\n\n            float weight  = exp(-(float)(k * k) / sigmaSq2);\n            sumColor     += src(nx, ny) * weight;\n            sumWeight    += weight;\n        \}\n\n        for (int k = 1; k <= iRadius; k++) \{\n            int nx = pos.x - (int)floor((float)k * dx + 0.5f);\n            int ny = pos.y - (int)floor((float)k * dy + 0.5f);\n\n            if (mask(nx, ny).w < 0.5f) break;\n\n            float weight  = exp(-(float)(k * k) / sigmaSq2);\n            sumColor     += src(nx, ny) * weight;\n            sumWeight    += weight;\n        \}\n\n        return (sumWeight > 0.0f) ? sumColor / sumWeight : src(pos.x, pos.y);\n    \}\n\n    void process(int2 pos) \{\n        if (mask(pos.x, pos.y).w < 0.5f) \{\n            dst() = src(pos.x, pos.y);\n            return;\n        \}\n\n        float4 result    = float4(0.0f);\n        int    validDirs = 0;\n\n        for (int d = 0; d < numDirections; d++) \{\n            // angleOffsetRad shifts all directions uniformly\n            float angle = 3.14159265f * (float)d / (float)numDirections + angleOffsetRad;\n            float dx    = cos(angle);\n            float dy    = sin(angle);\n\n            result    += blur1D(pos, dx, dy);\n            validDirs += 1;\n        \}\n\n        dst() = result / (float)validDirs;\n    \}\n\};"
+  rebuild ""
+  MultiDirBlur_BlurRadius {{parent.BlinkScript_blank33.MultiDirBlur_BlurRadius}}
+  MultiDirBlur_NumDirections {{parent.BlinkScript_blank33.MultiDirBlur_NumDirections}}
+  MultiDirBlur_AngleOffset {{parent.BlinkScript_blank33.MultiDirBlur_AngleOffset}}
+  rebuild_finalise ""
+  name BlinkScript_blank34
+  xpos 15
+  ypos 201
+ }
+ BlinkScript {
+  inputs 2
+  recompileCount 6
+  ProgramGroup 1
+  KernelDescription "2 \"IterativeMaskedBlur\" iterate pixelWise 4868b2f437900eafa19c6684bb0fba1243d8ac3787ff71372c0df27c5ad2578f 3 \"src\" Read Random \"mask\" Read Random \"dst\" Write Point 0 0 0"
+  kernelSource "kernel IterativeMaskedBlur : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> mask;\n  Image<eWrite> dst;\n\n  void process(int2 pos) \{\n    // If the current pixel is outside the mask (e.g., a black line or different color), \n    // we bypass the blur and output the original pixel to preserve crisp edges.\n    if (mask(pos.x, pos.y).w < 0.5f) \{\n      dst() = src(pos.x, pos.y);\n      return;\n    \}\n\n    float4 sumColor = float4(0.0f);\n    float sumWeight = 0.0f;\n\n    // 3x3 matrix for 1-pixel iterative diffusion\n    for (int j = -1; j <= 1; j++) \{\n      for (int i = -1; i <= 1; i++) \{\n        \n        // Only sample the neighbor if it is also allowed by the mask\n        if (mask(pos.x + i, pos.y + j).w > 0.5f) \{\n          \n          // Custom weights to simulate a smoother, more rounded Gaussian diffusion\n          // Center = 2.0, Edges = 1.0, Corners = 0.5\n          float weight = (i == 0 && j == 0) ? 2.0f : ((i*j != 0) ? 0.5f : 1.0f);\n          \n          sumColor += src(pos.x + i, pos.y + j) * weight;\n          sumWeight += weight;\n        \}\n      \}\n    \}\n    \n    // Normalize the accumulated color values and output\n    dst() = sumColor / sumWeight;\n  \}\n\};"
+  rebuild ""
+  rebuild_finalise ""
+  name IterativeBlur
+  xpos 15
+  ypos 273
+  disable {{"!(size > 4)"}}
+ }
+ BlinkScript {
+  inputs 2
+  recompileCount 6
+  ProgramGroup 1
+  KernelDescription "2 \"IterativeMaskedBlur\" iterate pixelWise 4868b2f437900eafa19c6684bb0fba1243d8ac3787ff71372c0df27c5ad2578f 3 \"src\" Read Random \"mask\" Read Random \"dst\" Write Point 0 0 0"
+  kernelSource "kernel IterativeMaskedBlur : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> src;\n  Image<eRead, eAccessRandom, eEdgeClamped> mask;\n  Image<eWrite> dst;\n\n  void process(int2 pos) \{\n    // If the current pixel is outside the mask (e.g., a black line or different color), \n    // we bypass the blur and output the original pixel to preserve crisp edges.\n    if (mask(pos.x, pos.y).w < 0.5f) \{\n      dst() = src(pos.x, pos.y);\n      return;\n    \}\n\n    float4 sumColor = float4(0.0f);\n    float sumWeight = 0.0f;\n\n    // 3x3 matrix for 1-pixel iterative diffusion\n    for (int j = -1; j <= 1; j++) \{\n      for (int i = -1; i <= 1; i++) \{\n        \n        // Only sample the neighbor if it is also allowed by the mask\n        if (mask(pos.x + i, pos.y + j).w > 0.5f) \{\n          \n          // Custom weights to simulate a smoother, more rounded Gaussian diffusion\n          // Center = 2.0, Edges = 1.0, Corners = 0.5\n          float weight = (i == 0 && j == 0) ? 2.0f : ((i*j != 0) ? 0.5f : 1.0f);\n          \n          sumColor += src(pos.x + i, pos.y + j) * weight;\n          sumWeight += weight;\n        \}\n      \}\n    \}\n    \n    // Normalize the accumulated color values and output\n    dst() = sumColor / sumWeight;\n  \}\n\};"
+  rebuild ""
+  rebuild_finalise ""
+  name IterativeBlur324
+  xpos 15
+  ypos 321
+  disable {{"!(size > 8)"}}
+ }
+ Output {
+  name Output1
+  xpos 15
+  ypos 591
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Fast 1 pixel wide cell aware blur \nto smooth possible artefacts.\n2 iterations for smoother result"
+  xpos 131
+  ypos 291
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  label "Multi-directionnal cell aware blur.\nWay faster than a true radial blur.\n2 iterations looks prettier"
+  xpos 130
+  ypos 171
+ }
+push $Nbb0d2000
+ Expression {
+  temp_name0 colA
+  temp_expr0 "enableColA == 1 ? (r==colorA.r && g==colorA.g && b==colorA.b) : 0"
+  temp_name1 colB
+  temp_expr1 "enableColB == 1 ? (r==colorB.r && g==colorB.g && b==colorB.b) : 0"
+  temp_name2 colC
+  temp_expr2 "enableColC == 1 ? (r==colorC.r && g==colorC.g && b==colorC.b) : 0"
+  temp_name3 colD
+  temp_expr3 "enableColD == 1 ? (r==colorD.r && g==colorD.g && b==colorD.b) : 0"
+  channel0 rgba
+  expr0 "colA || colB || colC || colD"
+  name mask6
+  xpos -205
+  ypos 87
+ }
+end_group

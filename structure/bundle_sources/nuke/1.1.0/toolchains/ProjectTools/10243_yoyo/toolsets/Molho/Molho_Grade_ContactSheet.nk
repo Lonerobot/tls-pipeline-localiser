@@ -1,0 +1,629 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name Molho_Comp_ContactSheet
+ tile_color 0x8e388e00
+ label "Molho Comp ContactSheet"
+ note_font_size 42
+ selected true
+ xpos 1855
+ ypos 4804
+ bdwidth 1424
+ bdheight 891
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh340/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 44
+ origlast 44
+ origset true
+ name Read39
+ selected true
+ xpos 2445
+ ypos 5478
+}
+FrameHold {
+ first_frame 5
+ name FrameHold21
+ selected true
+ xpos 2445
+ ypos 5562
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh330/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 21
+ origlast 21
+ origset true
+ name Read37
+ selected true
+ xpos 2331
+ ypos 5474
+}
+FrameHold {
+ first_frame 5
+ name FrameHold19
+ selected true
+ xpos 2331
+ ypos 5558
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh320/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 38
+ origlast 38
+ origset true
+ name Read38
+ selected true
+ xpos 2220
+ ypos 5476
+}
+FrameHold {
+ first_frame 21
+ name FrameHold18
+ selected true
+ xpos 2220
+ ypos 5560
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh310/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 67
+ origlast 67
+ origset true
+ name Read36
+ selected true
+ xpos 2112
+ ypos 5477
+}
+FrameHold {
+ first_frame 9
+ name FrameHold16
+ selected true
+ xpos 2112
+ ypos 5561
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh300/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 20
+ origlast 20
+ origset true
+ name Read35
+ selected true
+ xpos 3052
+ ypos 5268
+}
+FrameHold {
+ first_frame 9
+ name FrameHold20
+ selected true
+ xpos 3052
+ ypos 5352
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh290/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 61
+ origlast 61
+ origset true
+ name Read33
+ selected true
+ xpos 2955
+ ypos 5269
+}
+FrameHold {
+ first_frame 9
+ name FrameHold22
+ selected true
+ xpos 2955
+ ypos 5353
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh280/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 39
+ origlast 39
+ origset true
+ name Read32
+ selected true
+ xpos 2843
+ ypos 5270
+}
+FrameHold {
+ first_frame 30
+ name FrameHold17
+ selected true
+ xpos 2843
+ ypos 5354
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh270/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 134
+ origlast 134
+ origset true
+ name Read31
+ selected true
+ xpos 2736
+ ypos 5268
+}
+FrameHold {
+ first_frame 10
+ name FrameHold15
+ selected true
+ xpos 2736
+ ypos 5352
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh260/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 141
+ origlast 141
+ origset true
+ name Read30
+ selected true
+ xpos 2635
+ ypos 5271
+}
+FrameHold {
+ first_frame 92
+ name FrameHold14
+ selected true
+ xpos 2635
+ ypos 5355
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh250/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 26
+ origlast 26
+ origset true
+ name Read29
+ selected true
+ xpos 2527
+ ypos 5273
+}
+FrameHold {
+ first_frame 9
+ name FrameHold13
+ selected true
+ xpos 2527
+ ypos 5357
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh240/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 56
+ origlast 56
+ origset true
+ name Read28
+ selected true
+ xpos 2425
+ ypos 5275
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh230/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 32
+ origlast 32
+ origset true
+ name Read27
+ selected true
+ xpos 2323
+ ypos 5280
+}
+FrameHold {
+ first_frame 4
+ name FrameHold2
+ selected true
+ xpos 2323
+ ypos 5364
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh220/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 25
+ origlast 25
+ origset true
+ name Read26
+ selected true
+ xpos 2217
+ ypos 5279
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh210/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 25
+ origlast 25
+ origset true
+ name Read25
+ selected true
+ xpos 2104
+ ypos 5279
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh200/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 48
+ origlast 48
+ origset true
+ name Read23
+ selected true
+ xpos 3040
+ ypos 5089
+}
+FrameHold {
+ first_frame 11
+ name FrameHold1
+ selected true
+ xpos 3040
+ ypos 5173
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh190/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 75
+ origlast 75
+ origset true
+ name Read22
+ selected true
+ xpos 2934
+ ypos 5091
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh180/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 43
+ origlast 43
+ origset true
+ name Read24
+ selected true
+ xpos 2821
+ ypos 5094
+}
+FrameHold {
+ first_frame 30
+ name FrameHold12
+ selected true
+ xpos 2821
+ ypos 5178
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh170/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 16
+ origlast 16
+ origset true
+ name Read34
+ selected true
+ xpos 2719
+ ypos 5093
+}
+FrameHold {
+ first_frame 1
+ name FrameHold11
+ selected true
+ xpos 2719
+ ypos 5177
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh160/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 17
+ origlast 17
+ origset true
+ name Read40
+ selected true
+ xpos 2618
+ ypos 5097
+}
+FrameHold {
+ first_frame 3
+ name FrameHold10
+ selected true
+ xpos 2618
+ ypos 5181
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh150/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 46
+ origlast 46
+ origset true
+ name Read41
+ selected true
+ xpos 2515
+ ypos 5100
+}
+FrameHold {
+ first_frame 15
+ name FrameHold9
+ selected true
+ xpos 2515
+ ypos 5184
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh140/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 26
+ origlast 26
+ origset true
+ name Read42
+ selected true
+ xpos 2415
+ ypos 5102
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh130/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 28
+ origlast 28
+ origset true
+ name Read43
+ selected true
+ xpos 2306
+ ypos 5104
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh120/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 19
+ origlast 19
+ origset true
+ name Read44
+ selected true
+ xpos 2204
+ ypos 5103
+}
+FrameHold {
+ first_frame 15
+ name FrameHold8
+ selected true
+ xpos 2204
+ ypos 5187
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh110/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 28
+ origlast 28
+ origset true
+ name Read45
+ selected true
+ xpos 2093
+ ypos 5100
+}
+FrameHold {
+ first_frame 26
+ name FrameHold7
+ selected true
+ xpos 2093
+ ypos 5184
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh100/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 64
+ origlast 64
+ origset true
+ name Read46
+ selected true
+ xpos 3047
+ ypos 4923
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh090/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 43
+ origlast 43
+ origset true
+ name Read47
+ selected true
+ xpos 2940
+ ypos 4921
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh080/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 36
+ origlast 36
+ origset true
+ name Read48
+ selected true
+ xpos 2831
+ ypos 4922
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh070/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 29
+ origlast 29
+ origset true
+ name Read49
+ selected true
+ xpos 2722
+ ypos 4922
+}
+FrameHold {
+ first_frame 6
+ name FrameHold6
+ selected true
+ xpos 2722
+ ypos 5006
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh060/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 12
+ origlast 12
+ origset true
+ name Read50
+ selected true
+ xpos 2615
+ ypos 4923
+}
+FrameHold {
+ first_frame 6
+ name FrameHold5
+ selected true
+ xpos 2615
+ ypos 5007
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh050/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 28
+ origlast 28
+ origset true
+ name Read51
+ selected true
+ xpos 2518
+ ypos 4922
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh040/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 68
+ origlast 68
+ origset true
+ name Read52
+ selected true
+ xpos 2417
+ ypos 4922
+}
+FrameHold {
+ first_frame 66
+ name FrameHold4
+ selected true
+ xpos 2417
+ ypos 5006
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh030/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 22
+ origlast 22
+ origset true
+ name Read53
+ selected true
+ xpos 2309
+ ypos 4922
+}
+FrameHold {
+ first_frame 13
+ name FrameHold3
+ selected true
+ xpos 2309
+ ypos 5006
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh020/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 21
+ origlast 21
+ origset true
+ name Read54
+ selected true
+ xpos 2203
+ ypos 4922
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10147_molho/shots/Sh010/work/comp/renders/nuke/renderCompMain/renderCompMain.####.png
+ format "2048 1152 0 0 2048 1152 1 10147_molho"
+ last 50
+ origlast 50
+ origset true
+ name Read55
+ selected true
+ xpos 2097
+ ypos 4922
+}
+ContactSheet {
+ inputs 34
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet15
+ tile_color 0xe955ffff
+ selected true
+ xpos 1909
+ ypos 4951
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

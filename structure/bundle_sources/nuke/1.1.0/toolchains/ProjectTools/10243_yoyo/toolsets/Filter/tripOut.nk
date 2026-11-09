@@ -1,0 +1,50 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name TripOut3
+ selected true
+ xpos -2721
+ ypos -613
+ addUserKnob {20 User}
+ addUserKnob {41 thick l thickness T Expression1.thick}
+ addUserKnob {41 speed T Expression1.speed}
+}
+ Input {
+  inputs 0
+  name image
+  xpos -540
+  ypos -411
+ }
+ Reformat {
+  inputs 0
+  name Reformat1
+  xpos -688
+  ypos -360
+ }
+ Expression {
+  expr0 (sin((y+frame*speed)/thick)+1)/2
+  expr1 (sin((y+frame*speed)/thick)+1)/2
+  expr2 (sin((y+frame*speed)/thick)+1)/2
+  name Expression1
+  xpos -688
+  ypos -319
+  addUserKnob {20 User}
+  addUserKnob {7 thick l thickness R 1 20}
+  thick 60
+  addUserKnob {7 speed R 1 100}
+  speed 17.5
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos -570
+  ypos -239
+ }
+ Output {
+  name Output1
+  xpos -570
+  ypos -139
+ }
+end_group

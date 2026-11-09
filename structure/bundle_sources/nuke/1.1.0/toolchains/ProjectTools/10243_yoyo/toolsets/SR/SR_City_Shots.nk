@@ -1,0 +1,611 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0xb76675ff
+ label "CITY STREETS"
+ note_font_size 42
+ selected true
+ xpos -831
+ ypos -6885
+ bdwidth 2543
+ bdheight 561
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x2e2524ff
+ label "COLOUR KEYS "
+ note_font_size 48
+ selected true
+ xpos -823
+ ypos -6643
+ bdwidth 768
+ bdheight 230
+ z_order 2
+ addUserKnob {20 mainTabTK l backdropTK}
+ addUserKnob {41 label_1 l label T BackdropNode13.label}
+ addUserKnob {22 rndClrs0 l "<font style=\"background-color:#7d97a7\"> <img size=\"8\" src=\"Read.png\"> PAINT </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.561, 0.246, 0.655]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PAINT ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PAINT '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs1 l "<font style=\"background-color:#27465e\"> <img size=\"8\" src=\"Read.png\"> 2D ANIMATION </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.57, 0.585, 0.369]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' 2D ANIMATION ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' 2D ANIMATION '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs2 l "<font style=\"background-color:#121d25\"> <img size=\"8\" src=\"Camera.png\"> CAMERA </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Camera.png')\nR,G,B= \[0.567, 0.526, 0.149]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' CAMERA ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' CAMERA '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs3 l "<font style=\"background-color:#426b53\"> <img size=\"8\" src=\"TimeClip.png\"> RETIME </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('TimeClip.png')\nR,G,B= \[0.4, 0.375, 0.42]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' RETIME ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' RETIME '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs4 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Group.png\"> GROUP </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Group.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' GROUP ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' GROUP '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs5 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Geometry.png\">3D SCENE</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Geometry.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('3D SCENE')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % '3D SCENE'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs6 l "<font style=\"background-color:#4a4a4a\"> <img size=\"8\" src=\"Read.png\"> REFERENCE </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.0, 0.0, 0.294]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' REFERENCE ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' REFERENCE '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs7 l "<font style=\"background-color:#7f7f7f\"> <img size=\"8\" src=\"Write.png\"> PUBLISHED </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Write.png')\nR,G,B= \[0.0, 0.0, 0.5]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PUBLISHED ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PUBLISHED '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs8 l "<font style=\"background-color:#862929\"> <img size=\"8\" src=\"Glow.png\">IMPORTANT</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Glow.png')\nR,G,B= \[0.0, 0.696, 0.529]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('IMPORTANT')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % 'IMPORTANT'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndColors l " <img src=\"ColorBars.png\">Randomize color " T "import colorsys, random\nn=nuke.thisNode()\nR,G,B= colorsys.hsv_to_rgb(random.random(),.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )" +STARTLINE}
+ addUserKnob {22 rndTint l " <img src=\"HueShift.png\">Randomize tint " -STARTLINE T "import colorsys, random\nn=nuke.thisNode()\nV=int(n\['tile_color'].getValue())\nR = (0xFF & V >> 24) / 255.0\nG = (0xFF & V >> 16) / 255.0\nB = (0xFF & V >> 8) / 255.0\n\nR,G,B= colorsys.rgb_to_hsv(R,G,B)\n\nR,G,B= colorsys.hsv_to_rgb(R,.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )"}
+ addUserKnob {22 grow l " <img src=\"MergeMin.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Grow(n,50)"}
+ addUserKnob {22 shrink l " <img src=\"MergeMax.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Shrink(n,50)"}
+ addUserKnob {20 version}
+ addUserKnob {26 nodeClass l Class: T backdropTK}
+ addUserKnob {26 nodeVersion l Version: T "v 2.1"}
+ addUserKnob {22 chHelp l "<img src=\":qrc/images/Help.png\"> HELP" t "Opens web page with tool's manual" -STARTLINE T "nukescripts.openurl.start (tk.getHelpUrl(nuke.thisNode()))"}
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/004_REFERENCE/comp-reference/Street/Colourkeys.png"
+ format "3336 1992 0 0 3336 1992 1 "
+ origset true
+ name Read65
+ selected true
+ xpos -149
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/004_REFERENCE/comp-reference/Street/ConseptBike.png"
+ format "3404 1616 0 0 3404 1616 1 "
+ origset true
+ name Read148
+ selected true
+ xpos -259
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/assets/colourkeys/colourkeys/publish/comp/comp/image-sequence/ColourOnly/SR_colourkey_sc02-sh020_v001.jpg"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ origset true
+ name Read9
+ selected true
+ xpos -809
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/assets/colourkeys/colourkeys/publish/comp/comp/image-sequence/ColourOnly/SR_colourkey_sc01-sh040_v001.jpg"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ origset true
+ name Read10
+ selected true
+ xpos -699
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/assets/colourkeys/colourkeys/publish/comp/comp/image-sequence/ColourOnly/SR_colourkey_sc01-sh180_v001.jpg"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ origset true
+ name Read136
+ selected true
+ xpos -589
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/assets/colourkeys/colourkeys/publish/comp/comp/image-sequence/ColourOnly/SR_colourkey_sc01-sh190_v001.jpg"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ origset true
+ name Read138
+ selected true
+ xpos -479
+ ypos -6520
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/assets/colourkeys/colourkeys/publish/comp/comp/image-sequence/ColourOnly/SR_colourkey_sc01-sh080_v001.jpg"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ origset true
+ name Read143
+ selected true
+ xpos -369
+ ypos -6520
+}
+ContactSheet {
+ inputs 7
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet14
+ tile_color 0xe955ffff
+ selected true
+ xpos -149
+ ypos -6586
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc02-sh020/publish/comp/comp/movie/default/SR_sc02-sh020_comp_default_v018.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 74
+ origlast 74
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read46
+ tile_color 0xccccccff
+ selected true
+ xpos 1390
+ ypos -6784
+}
+FrameHold {
+ name FrameHold21
+ selected true
+ xpos 1390
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc02-sh010/publish/comp/comp/movie/default/SR_sc02-sh010_comp_default_v014.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 58
+ origlast 58
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read15
+ selected true
+ xpos 1280
+ ypos -6784
+}
+FrameHold {
+ name FrameHold20
+ selected true
+ xpos 1280
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh190/publish/comp/comp/movie/default/SR_sc01-sh190_comp_default_v021.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 60
+ origlast 60
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read16
+ tile_color 0xccccccff
+ selected true
+ xpos 1170
+ ypos -6784
+}
+FrameHold {
+ name FrameHold19
+ selected true
+ xpos 1170
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh170/publish/comp/comp/movie/default/SR_sc01-sh170_comp_default_v013.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 38
+ origlast 38
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read33
+ selected true
+ xpos 1060
+ ypos -6784
+}
+FrameHold {
+ name FrameHold18
+ selected true
+ xpos 1060
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh160/publish/comp/comp/movie/default/SR_sc01-sh160_comp_default_v017.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 59
+ origlast 59
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read32
+ tile_color 0xbbbbbbff
+ selected true
+ xpos 950
+ ypos -6784
+}
+FrameHold {
+ name FrameHold17
+ selected true
+ xpos 950
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh150/publish/comp/comp/movie/default/SR_sc01-sh150_comp_default_v010.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 22
+ origlast 22
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read39
+ selected true
+ xpos 840
+ ypos -6784
+}
+FrameHold {
+ name FrameHold16
+ selected true
+ xpos 840
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh140/publish/comp/comp/movie/default/SR_sc01-sh140_comp_default_v009.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 48
+ origlast 48
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read38
+ selected true
+ xpos 730
+ ypos -6784
+}
+FrameHold {
+ name FrameHold15
+ selected true
+ xpos 730
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh130/publish/comp/comp/movie/default/SR_sc01-sh130_comp_default_v012.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 49
+ origlast 49
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read44
+ selected true
+ xpos 620
+ ypos -6784
+}
+FrameHold {
+ name FrameHold14
+ selected true
+ xpos 620
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh120/publish/comp/comp/movie/default/SR_sc01-sh120_comp_default_v015.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 17
+ origlast 17
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read36
+ selected true
+ xpos 510
+ ypos -6784
+}
+FrameHold {
+ name FrameHold13
+ selected true
+ xpos 510
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh110/publish/comp/comp/movie/default/SR_sc01-sh110_comp_default_v005.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 9
+ origlast 9
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read40
+ selected true
+ xpos 400
+ ypos -6784
+}
+FrameHold {
+ name FrameHold12
+ selected true
+ xpos 400
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh100/publish/comp/comp/movie/default/SR_sc01-sh100_comp_default_v008.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 3
+ origlast 3
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read43
+ selected true
+ xpos 290
+ ypos -6784
+}
+FrameHold {
+ name FrameHold11
+ selected true
+ xpos 290
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh090/publish/comp/comp/movie/default/SR_sc01-sh090_comp_default_v026.mov"
+ format "2048 871 0 0 2048 871 1 SR_P871"
+ last 15
+ origlast 15
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read42
+ selected true
+ xpos 180
+ ypos -6784
+}
+FrameHold {
+ name FrameHold10
+ selected true
+ xpos 180
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh080/publish/comp/comp/movie/default/SR_sc01-sh080_comp_default_v014.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 58
+ origlast 58
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read31
+ selected true
+ xpos 70
+ ypos -6784
+}
+FrameHold {
+ first_frame 20
+ name FrameHold7
+ selected true
+ xpos 70
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh070/publish/comp/comp/movie/default/SR_sc01-sh070_comp_default_v010.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 13
+ origlast 13
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read41
+ selected true
+ xpos -40
+ ypos -6784
+}
+FrameHold {
+ first_frame 6
+ name FrameHold6
+ selected true
+ xpos -40
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh060/publish/comp/comp/movie/default/SR_sc01-sh060_comp_default_v010.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 13
+ origlast 13
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read34
+ selected true
+ xpos -150
+ ypos -6784
+}
+FrameHold {
+ name FrameHold5
+ selected true
+ xpos -150
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh050/publish/comp/comp/movie/default/SR_sc01-sh050_comp_default_v018.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 23
+ origlast 23
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read45
+ selected true
+ xpos -260
+ ypos -6784
+}
+FrameHold {
+ name FrameHold4
+ selected true
+ xpos -260
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh040/publish/comp/comp/movie/default/SR_sc01-sh040_comp_default_v016.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 20
+ origlast 20
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read37
+ selected true
+ xpos -370
+ ypos -6784
+}
+FrameHold {
+ name FrameHold9
+ selected true
+ xpos -370
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh030/publish/comp/comp/movie/default/SR_sc01-sh030_comp_default_v012.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 23
+ origlast 23
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read35
+ selected true
+ xpos -480
+ ypos -6784
+}
+FrameHold {
+ name FrameHold8
+ selected true
+ xpos -480
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh025/publish/comp/comp/movie/default/SR_sc01-sh025_comp_default_v012.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 43
+ origlast 43
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read149
+ selected true
+ xpos -590
+ ypos -6784
+}
+FrameHold {
+ first_frame 38
+ name FrameHold3
+ selected true
+ xpos -590
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh020/publish/comp/comp/movie/default/SR_sc01-sh020_comp_default_v019.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 39
+ origlast 39
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read30
+ selected true
+ xpos -699
+ ypos -6784
+}
+FrameHold {
+ first_frame 7
+ name FrameHold2
+ selected true
+ xpos -699
+ ypos -6698
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc01-sh010/publish/comp/comp/movie/default/SR_sc01-sh010_comp_default_v018.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 58
+ origlast 58
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read29
+ selected true
+ xpos -809
+ ypos -6784
+}
+FrameHold {
+ name FrameHold1
+ selected true
+ xpos -809
+ ypos -6698
+}
+ContactSheet {
+ inputs 21
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet1
+ tile_color 0xe955ffff
+ selected true
+ xpos 1610
+ ypos -6850
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

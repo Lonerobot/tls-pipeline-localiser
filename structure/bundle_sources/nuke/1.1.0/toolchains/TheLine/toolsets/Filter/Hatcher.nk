@@ -1,0 +1,139 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name Hatcher
+ tile_color 0xff
+ gl_color 0xffa3a3ff
+ selected true
+ xpos -776
+ ypos 539
+ addUserKnob {20 _1 l "" -STARTLINE +INVISIBLE}
+ addUserKnob {20 Thresher_V01 l Hatcher_V01}
+ addUserKnob {41 thresh l Threshold T Expression1.thresh}
+ addUserKnob {41 mood l Exposure T Expression1.mood}
+ addUserKnob {41 cover l Cover T Expression1.cover}
+ addUserKnob {41 Rotate T Expression1.Rotate}
+ addUserKnob {41 mult l Size T Expression1.mult}
+ addUserKnob {26 ""}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {26 ""}
+ addUserKnob {26 Created_by l "" +STARTLINE T "for questions ask @\nlremy@artfx.fr"}
+ addUserKnob {20 Color t "Choose the color of yours hatches"}
+ addUserKnob {41 color T Constant1.color}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -453
+  ypos 122
+ }
+set N18a4bc00 [stack 0]
+ Input {
+  inputs 0
+  name Mask
+  xpos -284
+  ypos 287
+  number 1
+ }
+push $N18a4bc00
+ Dot {
+  name Dot1
+  xpos -580
+  ypos 126
+ }
+ Expression {
+  temp_name0 mult
+  temp_expr0 Expression1.mult
+  temp_name1 tresh
+  temp_expr1 Expression1.thresh
+  temp_name2 mood
+  temp_expr2 Expression1.mood
+  temp_name3 cover
+  temp_expr3 Expression1.cover
+  expr0 (clamp((sin(((cx/Expression1.Rotate)-cy)*mult))+(r*cover)-tresh)*mood)
+  expr1 (clamp((sin(((cx/Expression1.Rotate)-cy)*mult))+(r*cover)-tresh)*mood)
+  expr2 (clamp((sin(((cx/Expression1.Rotate)-cy)*mult))+(r*cover)-tresh)*mood)
+  expr3 (clamp((sin(((cx/Expression1.Rotate)-cy)*mult))+(r*cover)-tresh)*mood)
+  name Expression1
+  label Thresher_V01
+  selected true
+  xpos -720
+  ypos 117
+  addUserKnob {20 Thresher_V01}
+  addUserKnob {7 Rotate R -10 10}
+  addUserKnob {7 cover R -360 360}
+  addUserKnob {7 mood R -5 5}
+  mood 1
+  addUserKnob {7 thresh R -10 10}
+  addUserKnob {7 mult R 0 1000}
+  mult 500
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -720
+  ypos 163
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos -885
+  ypos 204
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -720
+  ypos 221
+ }
+ Premult {
+  name Premult1
+  xpos -720
+  ypos 287
+ }
+push $N18a4bc00
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos -453
+  ypos 287
+ }
+push $N18a4bc00
+ Dot {
+  name Dot2
+  xpos -106
+  ypos 126
+ }
+ Dot {
+  name Dot3
+  xpos -106
+  ypos 329
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos -453
+  ypos 325
+ }
+set N18a49000 [stack 0]
+ Viewer {
+  inputs 2
+  frame_range 1-100
+  colour_sample_bbox {0.07187499851 -0.2291666716 0.07291666418 -0.228125006}
+  samplepoints {{0.07187499851 -0.2291666716}
+    }
+  name Viewer1
+  xpos -549
+  ypos 487
+ }
+push $N18a49000
+ Output {
+  name Output1
+  xpos -453
+  ypos 410
+ }
+end_group

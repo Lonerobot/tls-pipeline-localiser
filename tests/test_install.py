@@ -46,6 +46,30 @@ class InstallTests(WorkstationTestCase):
         self.assertEqual((release.python_root / "tool.py").read_text(), "X = 1\n")
         self.assertTrue((release.release_root / COMPLETE_MARKER).is_file())
 
+    def test_transient_access_denied_on_the_final_rename_is_retried(self):
+        self.publish("maya-tools", "2.9.0")
+        real_rename = os.rename
+        calls = []
+
+        def flaky(source, destination):
+            calls.append(source)
+            if len(calls) < 3:
+                raise PermissionError(13, "Access is denied")
+            return real_rename(source, destination)
+
+        with mock.patch("localiser.fsutil.os.rename", side_effect=flaky), mock.patch("localiser.fsutil.time.sleep"):
+            release = self.ensure()
+        self.assertEqual(len(calls), 3)
+        self.assertTrue((release.release_root / COMPLETE_MARKER).is_file())
+
+    def test_persistent_access_denied_is_raised_and_publishes_nothing(self):
+        self.publish("maya-tools", "2.9.0")
+        with mock.patch("localiser.fsutil.os.rename", side_effect=PermissionError(13, "Access is denied")), \
+                mock.patch("localiser.fsutil.time.sleep"):
+            with self.assertRaises(PermissionError):
+                self.ensure()
+        self.assert_nothing_published()
+
     def test_manifest_copy_kept_outside_the_payload(self):
         manifest = self.publish("maya-tools", "2.9.0")
         self.ensure()

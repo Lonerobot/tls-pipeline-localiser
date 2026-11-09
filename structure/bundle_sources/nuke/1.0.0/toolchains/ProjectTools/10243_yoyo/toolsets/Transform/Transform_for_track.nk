@@ -1,0 +1,19 @@
+set cut_paste_input [stack 0]
+version 9.0 v6
+push $cut_paste_input
+Transform {
+ translate {{-center} {-center}}
+ center {960 540}
+ black_outside false
+ name Transform6
+ selected true
+ xpos 904
+ ypos 5617
+}
+Transform {
+ black_outside false
+ name Transform7
+ selected true
+ xpos 904
+ ypos 5643
+}

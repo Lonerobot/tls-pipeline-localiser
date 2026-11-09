@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<PRESETS>
+	<random_01>
+		<startFrame>1</startFrame>
+		<endFrame>50</endFrame>
+		<startValue>0</startValue>
+		<endValue>10</endValue>
+		<easeType>0</easeType>
+		<minValue>0</minValue>
+		<maxValue>16</maxValue>
+		<waveLength>7</waveLength>
+		<offset>0</offset>
+		<bcutoff>0.95</bcutoff>
+		<waveType>1</waveType>
+		<normalWave>True</normalWave>
+		<waveEase>False</waveEase>
+		<squarify>False</squarify>
+		<blip>False</blip>
+		<animType>wave</animType>
+	</random_01>
+</PRESETS>

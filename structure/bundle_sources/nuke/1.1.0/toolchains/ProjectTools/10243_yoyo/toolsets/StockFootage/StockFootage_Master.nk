@@ -1,0 +1,6524 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2557" h="1368" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1894" stretch="1"/>
+            <splitter orientation="2">
+                <split size="777"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="546"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/nuke/NukeTools_Library/03_ToolSets/StockFootage/StockFootage_Master.nk
+ frame 0
+ last_frame 164
+ lock_range true
+ format "3372 1606 0 0 3372 1606 1 10235_cayenne2"
+ colorManagement OCIO
+ OCIO_config custom
+ customOCIOConfigPath "\[regsub -all \{\\\\\} \[getenv OPENPYPE_PROJECT_ROOT_WORK] \"/\"]resources/ocio_configs/aces_1.2/config_fredPimTest.ocio"
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT "ACES - ACEScg"
+ monitorLut sRGB
+ int8Lut matte_paint
+ int16Lut texture_paint
+ logLut compositing_log
+ floatLut scene_linear
+ addUserKnob {20 User}
+ addUserKnob {1 publish_instance +INVISIBLE}
+ publish_instance "JSON:::\{\"handleEnd\": 0, \"handleStart\": 0\}"
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode42
+ tile_color 0x71c67100
+ label "Stock footage "
+ note_font_size 300
+ selected true
+ xpos 20286
+ ypos -5664
+ appearance Border
+ bdwidth 10896
+ bdheight 8780
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode43
+ tile_color 0x8e388e00
+ label "CINE GRAIN"
+ note_font_size 300
+ selected true
+ xpos 20590
+ ypos -2848
+ appearance Border
+ bdwidth 4648
+ bdheight 4314
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode38
+ tile_color 0x388e8e00
+ label 8mm
+ note_font_size 42
+ selected true
+ xpos 20806
+ ypos -2363
+ appearance Border
+ bdwidth 2903
+ bdheight 257
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode40
+ tile_color 0x8e388e00
+ label "16mm "
+ note_font_size 42
+ selected true
+ xpos 20806
+ ypos -2006
+ appearance Border
+ bdwidth 3392
+ bdheight 256
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode41
+ tile_color 0x8e388e00
+ label 35mm
+ note_font_size 42
+ selected true
+ xpos 20816
+ ypos -1681
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode44
+ tile_color 0x999999ff
+ label Cutting_Room_Floor
+ note_font_size 42
+ selected true
+ xpos 20810
+ ypos -1329
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode45
+ tile_color 0x7171c600
+ label "Defocus kernels"
+ note_font_size 42
+ selected true
+ xpos 25521
+ ypos -2859
+ appearance Border
+ bdwidth 560
+ bdheight 574
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode46
+ tile_color 0x999999ff
+ label Flash_Frames
+ note_font_size 42
+ selected true
+ xpos 20810
+ ypos -897
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode47
+ tile_color 0x999999ff
+ label Head_Tail_Leader
+ note_font_size 42
+ selected true
+ xpos 20810
+ ypos -537
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode48
+ tile_color 0x999999ff
+ label Looks
+ note_font_size 42
+ selected true
+ xpos 20820
+ ypos -153
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode49
+ tile_color 0x999999ff
+ label Optical_Filters
+ note_font_size 42
+ selected true
+ xpos 20820
+ ypos 207
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode50
+ tile_color 0x999999ff
+ label Lens_Flares
+ note_font_size 42
+ selected true
+ xpos 20830
+ ypos 591
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode51
+ tile_color 0x999999ff
+ label Splices
+ note_font_size 42
+ selected true
+ xpos 20830
+ ypos 975
+ appearance Border
+ bdwidth 3385
+ bdheight 290
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode53
+ tile_color 0xaaaaaa00
+ label "Action essentials - Dust"
+ note_font Verdana
+ note_font_size 300
+ selected true
+ xpos 20558
+ ypos -4121
+ appearance Border
+ bdwidth 3317
+ bdheight 946
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode54
+ tile_color 0xaaaaaa00
+ label "Action essentials - Atmos"
+ note_font Verdana
+ note_font_size 300
+ selected true
+ xpos 20558
+ ypos -5177
+ appearance Border
+ bdwidth 3317
+ bdheight 946
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode55
+ tile_color 0xaaaaaa00
+ label "Action essentials - Smoke"
+ note_font Verdana
+ note_font_size 300
+ selected true
+ xpos 24038
+ ypos -5170
+ appearance Border
+ bdwidth 3317
+ bdheight 946
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode56
+ tile_color 0xaaaaaa00
+ label "Action essentials - Sparks"
+ note_font Verdana
+ note_font_size 300
+ selected true
+ xpos 24028
+ ypos -4121
+ appearance Border
+ bdwidth 3317
+ bdheight 946
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 451
+ origlast 451
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read20
+ selected true
+ xpos 20656
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 351
+ origlast 351
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read21
+ selected true
+ xpos 20756
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 401
+ origlast 401
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read22
+ selected true
+ xpos 20856
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 161
+ origlast 161
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read23
+ selected true
+ xpos 20956
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 458
+ origlast 458
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read24
+ selected true
+ xpos 21056
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read25
+ selected true
+ xpos 21156
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read26
+ selected true
+ xpos 21256
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 92
+ origlast 92
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read27
+ selected true
+ xpos 20706
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 79
+ origlast 79
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read28
+ selected true
+ xpos 20806
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 100
+ origlast 100
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read29
+ selected true
+ xpos 20906
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 75
+ origlast 75
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read30
+ selected true
+ xpos 21006
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 84
+ origlast 84
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read31
+ selected true
+ xpos 21106
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_06.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 70
+ origlast 70
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read32
+ selected true
+ xpos 21206
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_07.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 73
+ origlast 73
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read33
+ selected true
+ xpos 21306
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_08.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 93
+ origlast 93
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read34
+ selected true
+ xpos 21406
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_09.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 117
+ origlast 117
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read35
+ selected true
+ xpos 21506
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_10.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 61
+ origlast 61
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read36
+ selected true
+ xpos 21606
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_11.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 40
+ origlast 40
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read37
+ selected true
+ xpos 21706
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_12.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 124
+ origlast 124
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read38
+ selected true
+ xpos 21806
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_13.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 138
+ origlast 138
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read39
+ selected true
+ xpos 21906
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_14.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 140
+ origlast 140
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read40
+ selected true
+ xpos 22006
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_15.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 207
+ origlast 207
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read41
+ selected true
+ xpos 22106
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_16.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 283
+ origlast 283
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read42
+ selected true
+ xpos 22206
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_17.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 110
+ origlast 110
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read43
+ selected true
+ xpos 22306
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_18.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 126
+ origlast 126
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read44
+ selected true
+ xpos 22406
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_19.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 130
+ origlast 130
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read45
+ selected true
+ xpos 22506
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_20.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 236
+ origlast 236
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read46
+ selected true
+ xpos 22606
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_21.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 255
+ origlast 255
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read47
+ selected true
+ xpos 22706
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_22.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 205
+ origlast 205
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read48
+ selected true
+ xpos 22806
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_23.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 150
+ origlast 150
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read49
+ selected true
+ xpos 22906
+ ypos -3790
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 226
+ origlast 226
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read50
+ selected true
+ xpos 20706
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 400
+ origlast 400
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read51
+ selected true
+ xpos 20806
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 251
+ origlast 251
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read52
+ selected true
+ xpos 20906
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read53
+ selected true
+ xpos 21006
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 111
+ origlast 111
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read54
+ selected true
+ xpos 21106
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Blowout.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 71
+ origlast 71
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read55
+ selected true
+ xpos 21206
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Falling_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 235
+ origlast 235
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read56
+ selected true
+ xpos 21306
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Falling_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 187
+ origlast 187
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read57
+ selected true
+ xpos 21406
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 376
+ origlast 376
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read58
+ selected true
+ xpos 21506
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read59
+ selected true
+ xpos 21606
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read60
+ selected true
+ xpos 21706
+ ypos -3622
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 170
+ origlast 170
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read61
+ selected true
+ xpos 20706
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 226
+ origlast 226
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read62
+ selected true
+ xpos 20806
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_06.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read63
+ selected true
+ xpos 20906
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_07.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read64
+ selected true
+ xpos 21006
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_08.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read65
+ selected true
+ xpos 21106
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read66
+ selected true
+ xpos 21206
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read67
+ selected true
+ xpos 21306
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 111
+ origlast 111
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read69
+ selected true
+ xpos 21506
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Puffy_Smoke_01.mov"
+ format "2048 1020 0 0 2048 1020 1 "
+ last 449
+ origlast 449
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read70
+ selected true
+ xpos 24246
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Puffy_Smoke_02.mov"
+ format "2048 1020 0 0 2048 1020 1 "
+ last 603
+ origlast 603
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read71
+ selected true
+ xpos 24346
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 501
+ origlast 501
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read72
+ selected true
+ xpos 24446
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 501
+ origlast 501
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read73
+ selected true
+ xpos 24546
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 500
+ origlast 500
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read74
+ selected true
+ xpos 24646
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_01.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 100
+ origlast 100
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read75
+ selected true
+ xpos 24746
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_02.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 105
+ origlast 105
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read76
+ selected true
+ xpos 24846
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_03.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 118
+ origlast 118
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read77
+ selected true
+ xpos 24946
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_04.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 138
+ origlast 138
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read78
+ selected true
+ xpos 25046
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_05.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 176
+ origlast 176
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read79
+ selected true
+ xpos 25146
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_06.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 142
+ origlast 142
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read80
+ selected true
+ xpos 25246
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_07.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 280
+ origlast 280
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read81
+ selected true
+ xpos 25346
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_08.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 204
+ origlast 204
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read82
+ selected true
+ xpos 25446
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_09.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 215
+ origlast 215
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read83
+ selected true
+ xpos 25546
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Dark_Smoke.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 409
+ origlast 409
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read84
+ selected true
+ xpos 24146
+ ypos -4839
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 199
+ origlast 199
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read85
+ selected true
+ xpos 24146
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 251
+ origlast 251
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read86
+ selected true
+ xpos 24246
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_03.mov"
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 226
+ origlast 226
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read87
+ selected true
+ xpos 24346
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 299
+ origlast 299
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read88
+ selected true
+ xpos 24446
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 208
+ origlast 208
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read89
+ selected true
+ xpos 24546
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read90
+ selected true
+ xpos 24646
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 216
+ origlast 216
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read91
+ selected true
+ xpos 24746
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 300
+ origlast 300
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read92
+ selected true
+ xpos 24846
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 352
+ origlast 352
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read93
+ selected true
+ xpos 24946
+ ypos -4671
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 12
+ origlast 12
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read94
+ selected true
+ xpos 24186
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 10
+ origlast 10
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read95
+ selected true
+ xpos 24286
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read96
+ selected true
+ xpos 24386
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 9
+ origlast 9
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read97
+ selected true
+ xpos 24486
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 14
+ origlast 14
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read98
+ selected true
+ xpos 24586
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 30
+ origlast 30
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read99
+ selected true
+ xpos 24686
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 38
+ origlast 38
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read100
+ selected true
+ xpos 24786
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 27
+ origlast 27
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read101
+ selected true
+ xpos 24886
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 20
+ origlast 20
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read102
+ selected true
+ xpos 24986
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_10.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 27
+ origlast 27
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read103
+ selected true
+ xpos 25086
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_11.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 21
+ origlast 21
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read104
+ selected true
+ xpos 25186
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_12.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 23
+ origlast 23
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read105
+ selected true
+ xpos 25286
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_13.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 10
+ origlast 10
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read106
+ selected true
+ xpos 25386
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_14.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 15
+ origlast 15
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read107
+ selected true
+ xpos 25486
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_15.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 22
+ origlast 22
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read108
+ selected true
+ xpos 25586
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 164
+ origlast 164
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read109
+ selected true
+ xpos 25686
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 87
+ origlast 87
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read110
+ selected true
+ xpos 25786
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 118
+ origlast 118
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read111
+ selected true
+ xpos 25886
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 202
+ origlast 202
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read112
+ selected true
+ xpos 25986
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 302
+ origlast 302
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read113
+ selected true
+ xpos 26086
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 188
+ origlast 188
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read114
+ selected true
+ xpos 26186
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 252
+ origlast 252
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read115
+ selected true
+ xpos 26286
+ ypos -3759
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 275
+ origlast 275
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read116
+ selected true
+ xpos 24186
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 241
+ origlast 241
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read117
+ selected true
+ xpos 24286
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 267
+ origlast 267
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read118
+ selected true
+ xpos 24386
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 142
+ origlast 142
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read119
+ selected true
+ xpos 24486
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 217
+ origlast 217
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read120
+ selected true
+ xpos 24586
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 303
+ origlast 303
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read121
+ selected true
+ xpos 24686
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 72
+ origlast 72
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read122
+ selected true
+ xpos 24786
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 52
+ origlast 52
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read123
+ selected true
+ xpos 24886
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 42
+ origlast 42
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read124
+ selected true
+ xpos 24986
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read125
+ selected true
+ xpos 25086
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 38
+ origlast 38
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read126
+ selected true
+ xpos 25186
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 91
+ origlast 91
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read127
+ selected true
+ xpos 25286
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 41
+ origlast 41
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read128
+ selected true
+ xpos 25386
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 40
+ origlast 40
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read129
+ selected true
+ xpos 25486
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Drops_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 213
+ origlast 213
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read130
+ selected true
+ xpos 25586
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Drops_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 401
+ origlast 401
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read131
+ selected true
+ xpos 25686
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Out-of-Focus_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 383
+ origlast 383
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read132
+ selected true
+ xpos 25786
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Out-of-Focus_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 279
+ origlast 279
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read133
+ selected true
+ xpos 25886
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 271
+ origlast 271
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read134
+ selected true
+ xpos 25986
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 36
+ origlast 36
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read135
+ selected true
+ xpos 26086
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 43
+ origlast 43
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read136
+ selected true
+ xpos 26186
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 33
+ origlast 33
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read137
+ selected true
+ xpos 26286
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 271
+ origlast 271
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read138
+ selected true
+ xpos 26386
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 61
+ origlast 61
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read139
+ selected true
+ xpos 26486
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read140
+ selected true
+ xpos 26586
+ ypos -3639
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read142
+ selected true
+ xpos 20956
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 827
+ origlast 827
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read143
+ selected true
+ xpos 21056
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 592
+ origlast 592
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read144
+ selected true
+ xpos 21156
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 871
+ origlast 871
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read146
+ selected true
+ xpos 21356
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read147
+ selected true
+ xpos 21456
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 897
+ origlast 897
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read148
+ selected true
+ xpos 21556
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1021
+ origlast 1021
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read149
+ selected true
+ xpos 21656
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 459
+ origlast 459
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read150
+ selected true
+ xpos 21756
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read151
+ selected true
+ xpos 21856
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 734
+ origlast 734
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read152
+ selected true
+ xpos 21956
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 702
+ origlast 702
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read153
+ selected true
+ xpos 22056
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1008
+ origlast 1008
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read154
+ selected true
+ xpos 22156
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read155
+ selected true
+ xpos 22256
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 905
+ origlast 905
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read156
+ selected true
+ xpos 22356
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 783
+ origlast 783
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read157
+ selected true
+ xpos 22456
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_250D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read158
+ selected true
+ xpos 22556
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_500T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read159
+ selected true
+ xpos 22656
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_50D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read160
+ selected true
+ xpos 22756
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Auto.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read161
+ selected true
+ xpos 22856
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_AutoWind.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read162
+ selected true
+ xpos 22956
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read163
+ selected true
+ xpos 23056
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Vignette_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read164
+ selected true
+ xpos 23156
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Vignette_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read165
+ selected true
+ xpos 23256
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 586
+ origlast 586
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read166
+ selected true
+ xpos 23356
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1022
+ origlast 1022
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read167
+ selected true
+ xpos 23456
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 454
+ origlast 454
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read168
+ selected true
+ xpos 23556
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 953
+ origlast 953
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read141
+ selected true
+ xpos 20856
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 617
+ origlast 617
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read169
+ selected true
+ xpos 20816
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_FilterTrayLightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 667
+ origlast 667
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read170
+ selected true
+ xpos 20916
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 790
+ origlast 790
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read171
+ selected true
+ xpos 21016
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 436
+ origlast 436
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read172
+ selected true
+ xpos 21116
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 858
+ origlast 858
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read173
+ selected true
+ xpos 21216
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 711
+ origlast 711
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read174
+ selected true
+ xpos 21316
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100T_EXP_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 719
+ origlast 719
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read175
+ selected true
+ xpos 21416
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_250D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read176
+ selected true
+ xpos 21516
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_500T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read177
+ selected true
+ xpos 21616
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_50D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read178
+ selected true
+ xpos 21716
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Archival.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read179
+ selected true
+ xpos 21816
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Archival_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read180
+ selected true
+ xpos 21916
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Handcrank.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read181
+ selected true
+ xpos 22016
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read182
+ selected true
+ xpos 22116
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Reversal.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read183
+ selected true
+ xpos 22216
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read184
+ selected true
+ xpos 22316
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read185
+ selected true
+ xpos 22416
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read186
+ selected true
+ xpos 22516
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read187
+ selected true
+ xpos 22616
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read188
+ selected true
+ xpos 22716
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_FilterTrayLightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 670
+ origlast 670
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read189
+ selected true
+ xpos 22816
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_Rough_Edge.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 645
+ origlast 645
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read190
+ selected true
+ xpos 22916
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_Rougher_Edges.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 640
+ origlast 640
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read191
+ selected true
+ xpos 23016
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_UnlockedPressurePlate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 618
+ origlast 618
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read192
+ selected true
+ xpos 23116
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_EXP_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read193
+ selected true
+ xpos 23216
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_EXP_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read194
+ selected true
+ xpos 23316
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Over_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read195
+ selected true
+ xpos 23416
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Over_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read196
+ selected true
+ xpos 23516
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Under_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read197
+ selected true
+ xpos 23616
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Under_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read198
+ selected true
+ xpos 23716
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 655
+ origlast 655
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read199
+ selected true
+ xpos 23816
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera_FullGate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 611
+ origlast 611
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read200
+ selected true
+ xpos 23916
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera_LightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 321
+ origlast 321
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read201
+ selected true
+ xpos 24016
+ ypos -1926
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/250D_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read202
+ selected true
+ xpos 20826
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/250D_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read203
+ selected true
+ xpos 20926
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/250D_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read204
+ selected true
+ xpos 21026
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_200T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read205
+ selected true
+ xpos 21126
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_400T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read206
+ selected true
+ xpos 21226
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_50D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read207
+ selected true
+ xpos 21326
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_50D_Gentle.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read208
+ selected true
+ xpos 21426
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_64D_Fine.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read209
+ selected true
+ xpos 21526
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_64D_Fine_Gentle.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read210
+ selected true
+ xpos 21626
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_Fine_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read212
+ selected true
+ xpos 21726
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_Reversal_BW.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read215
+ selected true
+ xpos 21926
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/400T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read216
+ selected true
+ xpos 22026
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/400T_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read217
+ selected true
+ xpos 22126
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/400T_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read218
+ selected true
+ xpos 22226
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1078
+ origlast 1078
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read219
+ selected true
+ xpos 22326
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_EXP_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1079
+ origlast 1079
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read220
+ selected true
+ xpos 22426
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read221
+ selected true
+ xpos 22526
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_Over_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read222
+ selected true
+ xpos 22626
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read223
+ selected true
+ xpos 22726
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Discontinued_Under_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read224
+ selected true
+ xpos 22826
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read225
+ selected true
+ xpos 22926
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_EXP_Long.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 2880
+ origlast 2880
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read226
+ selected true
+ xpos 23026
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read227
+ selected true
+ xpos 23126
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/500T_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read228
+ selected true
+ xpos 23226
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/50D_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read229
+ selected true
+ xpos 23326
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/50D_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read230
+ selected true
+ xpos 23426
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/50D_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read231
+ selected true
+ xpos 23526
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/64D_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read232
+ selected true
+ xpos 23626
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/64D_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read233
+ selected true
+ xpos 23726
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/64D_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read234
+ selected true
+ xpos 23826
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read214
+ selected true
+ xpos 21826
+ ypos -1553
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read403
+ selected true
+ xpos 22202
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read404
+ selected true
+ xpos 22702
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read405
+ selected true
+ xpos 22802
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read406
+ selected true
+ xpos 22902
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 6
+ origlast 6
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read407
+ selected true
+ xpos 23002
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read408
+ selected true
+ xpos 23102
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read409
+ selected true
+ xpos 23202
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read410
+ selected true
+ xpos 23302
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read411
+ selected true
+ xpos 21202
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read412
+ selected true
+ xpos 21302
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_12.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read413
+ selected true
+ xpos 21402
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_13.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read414
+ selected true
+ xpos 21502
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_14.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read415
+ selected true
+ xpos 21602
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_15.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read416
+ selected true
+ xpos 21702
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_16.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read417
+ selected true
+ xpos 21802
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_17.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 5
+ origlast 5
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read418
+ selected true
+ xpos 21902
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_18.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 6
+ origlast 6
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read419
+ selected true
+ xpos 22002
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_19.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read420
+ selected true
+ xpos 22102
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_20.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read421
+ selected true
+ xpos 22302
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_21.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read422
+ selected true
+ xpos 22402
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_22.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 3
+ origlast 3
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read423
+ selected true
+ xpos 22502
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_23.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 2
+ origlast 2
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read424
+ selected true
+ xpos 22602
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Splices/Splice_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 4
+ origlast 4
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read402
+ selected true
+ xpos 21102
+ ypos 1105
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 936
+ origlast 936
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read145
+ selected true
+ xpos 21256
+ ypos -2259
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 561
+ origlast 561
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read401
+ selected true
+ xpos 24042
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 801
+ origlast 801
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read400
+ selected true
+ xpos 23942
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 647
+ origlast 647
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read399
+ selected true
+ xpos 23842
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 441
+ origlast 441
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read398
+ selected true
+ xpos 23742
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 848
+ origlast 848
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read397
+ selected true
+ xpos 23642
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 603
+ origlast 603
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read396
+ selected true
+ xpos 23542
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 98
+ origlast 98
+ origset true
+ colorspace sRGB
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read395
+ selected true
+ xpos 23442
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 176
+ origlast 176
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read394
+ selected true
+ xpos 23342
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 136
+ origlast 136
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read393
+ selected true
+ xpos 23242
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 68
+ origlast 68
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read392
+ selected true
+ xpos 23142
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 548
+ origlast 548
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read391
+ selected true
+ xpos 23042
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 274
+ origlast 274
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read390
+ selected true
+ xpos 22942
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Red_and_Blue_Flare_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 599
+ origlast 599
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read389
+ selected true
+ xpos 22842
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Red_and_Blue_Flare.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 435
+ origlast 435
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read388
+ selected true
+ xpos 22742
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 233
+ origlast 233
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read387
+ selected true
+ xpos 22642
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 117
+ origlast 117
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read386
+ selected true
+ xpos 22542
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 639
+ origlast 639
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read385
+ selected true
+ xpos 22442
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 320
+ origlast 320
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read384
+ selected true
+ xpos 22342
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_3_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 155
+ origlast 155
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read383
+ selected true
+ xpos 22242
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 78
+ origlast 78
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read382
+ selected true
+ xpos 22142
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 75
+ origlast 75
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read381
+ selected true
+ xpos 22042
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 57
+ origlast 57
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read380
+ selected true
+ xpos 21942
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 383
+ origlast 383
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read379
+ selected true
+ xpos 21842
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 192
+ origlast 192
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read378
+ selected true
+ xpos 21742
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_Blue_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 617
+ origlast 617
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read377
+ selected true
+ xpos 21642
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_Blue.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 309
+ origlast 309
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read376
+ selected true
+ xpos 21542
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_3_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 380
+ origlast 380
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read375
+ selected true
+ xpos 21442
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 190
+ origlast 190
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read374
+ selected true
+ xpos 21342
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 565
+ origlast 565
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read373
+ selected true
+ xpos 21242
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 283
+ origlast 283
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read372
+ selected true
+ xpos 21142
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 732
+ origlast 732
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read371
+ selected true
+ xpos 21042
+ ypos 697
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 366
+ origlast 366
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read370
+ selected true
+ xpos 20942
+ ypos 697
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet27
+ tile_color 0xe955ffff
+ selected true
+ xpos 24026
+ ypos 843
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read369
+ selected true
+ xpos 24032
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read368
+ selected true
+ xpos 23932
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read367
+ selected true
+ xpos 23832
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read366
+ selected true
+ xpos 23732
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read365
+ selected true
+ xpos 23632
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read364
+ selected true
+ xpos 23532
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read363
+ selected true
+ xpos 23432
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_4_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read362
+ selected true
+ xpos 23332
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read361
+ selected true
+ xpos 23232
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_3_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read360
+ selected true
+ xpos 23132
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read359
+ selected true
+ xpos 23032
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_2_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read358
+ selected true
+ xpos 22932
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read357
+ selected true
+ xpos 22832
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read356
+ selected true
+ xpos 22732
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read355
+ selected true
+ xpos 22632
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read354
+ selected true
+ xpos 22532
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_2_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read353
+ selected true
+ xpos 22432
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read352
+ selected true
+ xpos 22332
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read351
+ selected true
+ xpos 22232
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read350
+ selected true
+ xpos 22132
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Half_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read349
+ selected true
+ xpos 22032
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Half.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read348
+ selected true
+ xpos 21932
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Full_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read347
+ selected true
+ xpos 21832
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Full.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read346
+ selected true
+ xpos 21732
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Double_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read345
+ selected true
+ xpos 21632
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Double.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read344
+ selected true
+ xpos 21532
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Half_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read343
+ selected true
+ xpos 21432
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Half.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read342
+ selected true
+ xpos 21332
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Full_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read341
+ selected true
+ xpos 21232
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Full.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read340
+ selected true
+ xpos 21132
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Double_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read339
+ selected true
+ xpos 21032
+ ypos 313
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Double.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read338
+ selected true
+ xpos 20932
+ ypos 313
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet28
+ tile_color 0xe955ffff
+ selected true
+ xpos 24031
+ ypos 442
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Zapruder_Film.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read337
+ selected true
+ xpos 22972
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Xmas55.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read336
+ selected true
+ xpos 22872
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Worlds_Fair.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read335
+ selected true
+ xpos 22772
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Woodstock_1969.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read334
+ selected true
+ xpos 22672
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/War_Correspondent.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read333
+ selected true
+ xpos 22572
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Vignette.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 840
+ origlast 840
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read332
+ selected true
+ xpos 22472
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Silent_Movie.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read331
+ selected true
+ xpos 22372
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Saloon_Fight.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read330
+ selected true
+ xpos 22272
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Roswell.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read329
+ selected true
+ xpos 22172
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Jaques_Custeau.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read328
+ selected true
+ xpos 22072
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Hindenburg.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read327
+ selected true
+ xpos 21972
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/HandCrank_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1320
+ origlast 1320
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read326
+ selected true
+ xpos 21872
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/HandCrank.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read325
+ selected true
+ xpos 21772
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Grandmas_Attic.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read324
+ selected true
+ xpos 21672
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 568
+ origlast 568
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read323
+ selected true
+ xpos 21572
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 191
+ origlast 191
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read322
+ selected true
+ xpos 21472
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 702
+ origlast 702
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read321
+ selected true
+ xpos 21372
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 544
+ origlast 544
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read320
+ selected true
+ xpos 21272
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Fifties_Educational_Film.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read319
+ selected true
+ xpos 21172
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Endless_Summer.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read318
+ selected true
+ xpos 21072
+ ypos -47
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/60s_Summer_Fun.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read317
+ selected true
+ xpos 20972
+ ypos -47
+}
+ContactSheet {
+ inputs 21
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet29
+ tile_color 0xe955ffff
+ selected true
+ xpos 23146
+ ypos 75
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 28
+ origlast 28
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read314
+ selected true
+ xpos 24032
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 34
+ origlast 34
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read313
+ selected true
+ xpos 23932
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 41
+ origlast 41
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read312
+ selected true
+ xpos 23832
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 51
+ origlast 51
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read311
+ selected true
+ xpos 23732
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 17
+ origlast 17
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read310
+ selected true
+ xpos 23632
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 51
+ origlast 51
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read309
+ selected true
+ xpos 23532
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 33
+ origlast 33
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read308
+ selected true
+ xpos 23432
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 69
+ origlast 69
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read307
+ selected true
+ xpos 23332
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 45
+ origlast 45
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read316
+ selected true
+ xpos 23232
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 42
+ origlast 42
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read315
+ selected true
+ xpos 23132
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 25
+ origlast 25
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read306
+ selected true
+ xpos 23032
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 154
+ origlast 154
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read305
+ selected true
+ xpos 22932
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 77
+ origlast 77
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read304
+ selected true
+ xpos 22832
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 204
+ origlast 204
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read303
+ selected true
+ xpos 22732
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 25
+ origlast 25
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read293
+ selected true
+ xpos 22632
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 111
+ origlast 111
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read292
+ selected true
+ xpos 22532
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 104
+ origlast 104
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read291
+ selected true
+ xpos 22432
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read290
+ selected true
+ xpos 22332
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 117
+ origlast 117
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read289
+ selected true
+ xpos 22232
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 71
+ origlast 71
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read288
+ selected true
+ xpos 22132
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 66
+ origlast 66
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read287
+ selected true
+ xpos 22032
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 288
+ origlast 288
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read286
+ selected true
+ xpos 21932
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_18.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 67
+ origlast 67
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read302
+ selected true
+ xpos 21832
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_17.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 44
+ origlast 44
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read301
+ selected true
+ xpos 21732
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_16.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 123
+ origlast 123
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read300
+ selected true
+ xpos 21632
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_15.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 284
+ origlast 284
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read299
+ selected true
+ xpos 21532
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_14.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 103
+ origlast 103
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read298
+ selected true
+ xpos 21432
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_13.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 61
+ origlast 61
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read297
+ selected true
+ xpos 21332
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_12.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 138
+ origlast 138
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read296
+ selected true
+ xpos 21232
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 54
+ origlast 54
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read295
+ selected true
+ xpos 21132
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read294
+ selected true
+ xpos 21032
+ ypos -479
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read285
+ selected true
+ xpos 20932
+ ypos -479
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet30
+ tile_color 0xe955ffff
+ selected true
+ xpos 24032
+ ypos -333
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Roll_Out_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 243
+ origlast 243
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read284
+ selected true
+ xpos 24052
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Perf_Light_Leak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 153
+ origlast 153
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read283
+ selected true
+ xpos 23952
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Perf_Flash.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 8
+ origlast 8
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read282
+ selected true
+ xpos 23852
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lens_Turret_Rotation_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 163
+ origlast 163
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read281
+ selected true
+ xpos 23752
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lens_Turret_Rotation_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 191
+ origlast 191
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read280
+ selected true
+ xpos 23652
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lab_Roll_Splice_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 46
+ origlast 46
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read279
+ selected true
+ xpos 23552
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Lab_Roll_Splice_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 94
+ origlast 94
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read278
+ selected true
+ xpos 23452
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HeavyLightLeak_FullGate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1249
+ origlast 1249
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read277
+ selected true
+ xpos 23352
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HandCrank_Jam_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 387
+ origlast 387
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read276
+ selected true
+ xpos 23252
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/HandCrank_Jam_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 53
+ origlast 53
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read275
+ selected true
+ xpos 23152
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Perf_Shift.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 141
+ origlast 141
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read274
+ selected true
+ xpos 23052
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_Into_Grain.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 901
+ origlast 901
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read273
+ selected true
+ xpos 22952
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 21
+ origlast 21
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read272
+ selected true
+ xpos 22852
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Full_Gate_8mm_Flash_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 31
+ origlast 31
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read271
+ selected true
+ xpos 22752
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 277
+ origlast 277
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read270
+ selected true
+ xpos 22652
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 209
+ origlast 209
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read269
+ selected true
+ xpos 22552
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Flash_Frame_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 178
+ origlast 178
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read268
+ selected true
+ xpos 22452
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read267
+ selected true
+ xpos 22352
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read266
+ selected true
+ xpos 22252
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read265
+ selected true
+ xpos 22152
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read264
+ selected true
+ xpos 22052
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Eyepiece_Refraction_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 239
+ origlast 239
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read263
+ selected true
+ xpos 21952
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 336
+ origlast 336
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read262
+ selected true
+ xpos 21852
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 329
+ origlast 329
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read261
+ selected true
+ xpos 21752
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 139
+ origlast 139
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read260
+ selected true
+ xpos 21652
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Crystal_Sync_Failure_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 129
+ origlast 129
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read259
+ selected true
+ xpos 21552
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 45
+ origlast 45
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read258
+ selected true
+ xpos 21452
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 74
+ origlast 74
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read257
+ selected true
+ xpos 21352
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 111
+ origlast 111
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read256
+ selected true
+ xpos 21252
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 164
+ origlast 164
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read255
+ selected true
+ xpos 21152
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Start_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 31
+ origlast 31
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read254
+ selected true
+ xpos 21052
+ ypos -791
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Flash_Frames/Camera_Jam.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 272
+ origlast 272
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read253
+ selected true
+ xpos 20952
+ ypos -791
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet31
+ tile_color 0xe955ffff
+ selected true
+ xpos 24050
+ ypos -659
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read252
+ selected true
+ xpos 22742
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1262
+ origlast 1262
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read251
+ selected true
+ xpos 22642
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1263
+ origlast 1263
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read250
+ selected true
+ xpos 22542
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read249
+ selected true
+ xpos 22442
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1237
+ origlast 1237
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read248
+ selected true
+ xpos 22342
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1253
+ origlast 1253
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read247
+ selected true
+ xpos 22242
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read246
+ selected true
+ xpos 22142
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1244
+ origlast 1244
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read245
+ selected true
+ xpos 22042
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1253
+ origlast 1253
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read244
+ selected true
+ xpos 21942
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read243
+ selected true
+ xpos 21842
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 931
+ origlast 931
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read242
+ selected true
+ xpos 21742
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1275
+ origlast 1275
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read241
+ selected true
+ xpos 21642
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1283
+ origlast 1283
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read240
+ selected true
+ xpos 21542
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read239
+ selected true
+ xpos 21442
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1329
+ origlast 1329
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read238
+ selected true
+ xpos 21342
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1266
+ origlast 1266
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read237
+ selected true
+ xpos 21242
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1272
+ origlast 1272
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read236
+ selected true
+ xpos 21142
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read235
+ selected true
+ xpos 21042
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read213
+ selected true
+ xpos 20942
+ ypos -1223
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read211
+ selected true
+ xpos 20842
+ ypos -1223
+}
+ContactSheet {
+ inputs 20
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet32
+ tile_color 0xe955ffff
+ selected true
+ xpos 22751
+ ypos -1096
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 101
+ origlast 101
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read68
+ selected true
+ xpos 21406
+ ypos -3454
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/TOOLS/Resources/StockFootage/bokeh/bokeh_03.jpg
+ format "685 700 0 0 685 700 1 "
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read426
+ selected true
+ xpos 25851
+ ypos -2703
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/TOOLS/Resources/StockFootage/bokeh/bokeh_02.jpg
+ format "691 700 0 0 691 700 1 "
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read425
+ selected true
+ xpos 25590
+ ypos -2703
+}
+Read {
+ inputs 0
+ file_type exr
+ file Y:/TOOLS/Resources/StockFootage/bokeh/Lens_Kernels/Lens_kernel_compositingpro.###.exr
+ format "512 512 0 0 512 512 1 square_512"
+ last 206
+ origlast 206
+ origset true
+ in_colorspace scene_linear
+ out_colorspace scene_linear
+ name Read435
+ selected true
+ xpos 25590
+ ypos -2487
+}
+Convolve2 {
+ inputs 0
+ name Convolve1
+ selected true
+ xpos 25810
+ ypos -2463
+}

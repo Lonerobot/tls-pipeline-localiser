@@ -1,0 +1,153 @@
+set cut_paste_input [stack 0]
+version 13.0 v1
+push $cut_paste_input
+Group {
+ name BidirectionalGodRays
+ selected true
+ xpos 1266
+ ypos 1407
+ addUserKnob {20 User l GodRays}
+ addUserKnob {41 mode T Switch1.mode}
+ addUserKnob {41 Bchannels l channels T Merge1.Bchannels}
+ addUserKnob {41 translate T GodRays2.translate}
+ addUserKnob {41 rotate T GodRays2.rotate}
+ addUserKnob {41 scale T GodRays2.scale}
+ addUserKnob {41 skew T GodRays2.skew}
+ addUserKnob {41 center T GodRays2.center}
+ addUserKnob {41 centreCentre l "centre centre" -STARTLINE T GodRays2.centreCentre}
+ addUserKnob {41 from_color l "from color" T GodRays2.from_color}
+ addUserKnob {41 to_color l "to color" T GodRays2.to_color}
+ addUserKnob {41 gamma T GodRays2.gamma}
+ addUserKnob {41 steps T GodRays2.steps}
+ addUserKnob {41 max -STARTLINE T GodRays2.max}
+ addUserKnob {41 maskChannelInput l mask T Merge1.maskChannelInput}
+ addUserKnob {41 inject -STARTLINE T Merge1.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Merge1.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T Merge1.fringe}
+ addUserKnob {41 mix T Merge1.mix}
+}
+ Input {
+  inputs 0
+  name Inputmask
+  xpos 204
+  ypos -77
+  number 1
+ }
+ Dot {
+  name Dot4
+  xpos 238
+  ypos 111
+ }
+ Input {
+  inputs 0
+  name Inputimg
+  xpos -63
+  ypos -207
+ }
+ Dot {
+  name Dot3
+  xpos -29
+  ypos -150
+ }
+set Nbc0eb400 [stack 0]
+ Dot {
+  name Dot7
+  xpos -193
+  ypos -150
+ }
+ Dot {
+  name Dot2
+  xpos -193
+  ypos -98
+ }
+set Nbc0eac00 [stack 0]
+ Dot {
+  name Dot5
+  xpos -435
+  ypos -98
+ }
+ GodRays {
+  translate {{parent.GodRays2.translate/2} {parent.GodRays2.translate/2}}
+  rotate {{parent.GodRays2.rotate/2}}
+  scale {{1+(parent.GodRays2.scale-1)/2} {1+(parent.GodRays2.scale-1)/2}}
+  skew {{parent.GodRays2.skew/2}}
+  center {{parent.GodRays2.center} {parent.GodRays2.center}}
+  from_color {{parent.GodRays2.from_color} {parent.GodRays2.from_color} {parent.GodRays2.from_color} {parent.GodRays2.from_color}}
+  to_color {{parent.GodRays2.to_color} {parent.GodRays2.to_color} {parent.GodRays2.to_color} {parent.GodRays2.to_color}}
+  gamma {{parent.GodRays2.gamma} {parent.GodRays2.gamma} {parent.GodRays2.gamma} {parent.GodRays2.gamma}}
+  steps {{parent.GodRays2.steps}}
+  max {{parent.GodRays2.max}}
+  name GodRays1
+  xpos -469
+  ypos -67
+ }
+ GodRays {
+  translate {{-parent.GodRays2.translate/2} {-parent.GodRays2.translate/2}}
+  rotate {{-parent.GodRays2.rotate/2}}
+  scale {{1/(1+(parent.GodRays2.scale-1)/2)} {1/(1+(parent.GodRays2.scale-1)/2)}}
+  skew {{-parent.GodRays2.skew/2}}
+  center {{parent.GodRays2.center} {parent.GodRays2.center}}
+  from_color {{parent.GodRays2.from_color} {parent.GodRays2.from_color} {parent.GodRays2.from_color} {parent.GodRays2.from_color}}
+  to_color {{parent.GodRays2.to_color} {parent.GodRays2.to_color} {parent.GodRays2.to_color} {parent.GodRays2.to_color}}
+  gamma {{parent.GodRays2.gamma} {parent.GodRays2.gamma} {parent.GodRays2.gamma} {parent.GodRays2.gamma}}
+  steps {{parent.GodRays2.steps}}
+  max {{parent.GodRays2.max}}
+  name GodRays3
+  xpos -469
+  ypos -31
+ }
+ Dot {
+  name Dot6
+  xpos -435
+  ypos 36
+ }
+push $Nbc0eac00
+ Transform {
+  translate {{parent.GodRays2.translate/2} {parent.GodRays2.translate/2}}
+  rotate {{parent.GodRays2.rotate/2}}
+  scale {{1+(parent.GodRays2.scale-1)*.5} {1+(parent.GodRays2.scale-1)*.5}}
+  skewX {{parent.GodRays2.skew*.5}}
+  center {{parent.GodRays2.center} {parent.GodRays2.center}}
+  invert_matrix true
+  name Transform1
+  xpos -227
+  ypos -49
+ }
+ GodRays {
+  center {0 0}
+  name GodRays2
+  xpos -227
+  ypos -25
+  addUserKnob {20 User}
+  addUserKnob {22 centreCentre l "centre centre" T "nuke.thisNode()\['center'].setValue(\[ nuke.thisNode().width()/2,nuke.thisNode().height()/2])" +STARTLINE}
+ }
+ Switch {
+  inputs 2
+  which {{mode}}
+  name Switch1
+  xpos -227
+  ypos 33
+  addUserKnob {20 User}
+  addUserKnob {4 mode M {single "stacked (softer but to/from colour breaks)" "" ""}}
+ }
+ Dot {
+  name Dot1
+  xpos -193
+  ypos 111
+ }
+push $Nbc0eb400
+ Merge2 {
+  inputs 2+1
+  operation copy
+  Achannels {{{Bchannels}}}
+  output {{{Bchannels}}}
+  name Merge1
+  xpos -63
+  ypos 108
+ }
+ Output {
+  name Output1
+  xpos -63
+  ypos 187
+ }
+end_group

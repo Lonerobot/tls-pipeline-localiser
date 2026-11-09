@@ -6,14 +6,20 @@ Top-level keys starting with "_" (such as "_comment_hosts") are comments and are
 import json
 import os
 import re
-from dataclasses import dataclass
+import sys
+from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
+from typing import Mapping
 from urllib.parse import urlsplit
 from urllib.request import url2pathname
 
-from .errors import ConfigError
+from .errors import ConfigError, UnsupportedSeriesError
+from .repository import WebRepository, parse_web_url
 
 SCHEMA_VERSION = 1
+DEFAULT_CHECK_INTERVAL_MINUTES = 240
+MIN_CHECK_INTERVAL_MINUTES = 5
+MAX_CHECK_INTERVAL_MINUTES = 7 * 24 * 60
 
 _ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$")
 _HOST_RE = re.compile(r"^[a-z][a-z0-9_]{0,31}$")
@@ -77,9 +83,9 @@ class StudioConfig:
     def bundle_version(self, host: str, series: str) -> str:
         versions = self.hosts.get(host)
         if versions is None:
-            raise ConfigError(f"studio config has no entry for host {host!r}")
+            raise UnsupportedSeriesError(f"studio config has no entry for host {host!r}")
         if series not in versions:
-            raise ConfigError(
+            raise UnsupportedSeriesError(
                 f"studio config has no entry for {host} {series!r}; available: {', '.join(sorted(versions))}"
             )
         return versions[series]
@@ -147,31 +153,90 @@ def parse_manifest(text: str) -> Manifest:
 class LocalConfig:
     """Machine configuration in the pipeline root's config.json: where bundles come from and go to."""
 
-    remote_repository: Path
+    remote_repository: Path | WebRepository  # a folder (a share) or an https address
     bundle_repository: Path
+    hosts: dict = field(default_factory=dict)  # host -> series the user has enabled, for sync-all and the tray app
+    check_interval_minutes: int = DEFAULT_CHECK_INTERVAL_MINUTES
+    auto_sync: bool = True  # whether the tray app applies updates itself
+
+
+def default_pipeline_root(environ: Mapping[str, str] | None = None, platform: str | None = None) -> Path | None:
+    """Where a per-user installation puts the pipeline root when TLS_PIPELINE isn't set, or None if unknown."""
+    environ = os.environ if environ is None else environ
+    platform = sys.platform if platform is None else platform
+    if platform.startswith("win"):
+        base = environ.get("LOCALAPPDATA", "").strip()
+        return Path(base) / "TheLine" / "Pipeline" if base else None
+    home = environ.get("HOME", "").strip()
+    if platform == "darwin":
+        return Path(home) / "Library" / "Application Support" / "TheLine" / "Pipeline" if home else None
+    data = environ.get("XDG_DATA_HOME", "").strip() or (str(Path(home) / ".local" / "share") if home else "")
+    return Path(data) / "theline" / "pipeline" if data else None
+
+
+def _hosts(value) -> dict:
+    if value is None:
+        return {}
+    if not isinstance(value, dict):
+        raise ConfigError("local config 'hosts' must be an object of host -> list of series")
+    hosts = {}
+    for host, series in value.items():
+        validate_host(host)
+        if not isinstance(series, list):
+            raise ConfigError(f"local config 'hosts.{host}' must be a list of series")
+        hosts[host] = tuple(dict.fromkeys(validate_series(item) for item in series))
+    return hosts
+
+
+def _interval(value) -> int:
+    if value is None:
+        return DEFAULT_CHECK_INTERVAL_MINUTES
+    if type(value) is not int or not MIN_CHECK_INTERVAL_MINUTES <= value <= MAX_CHECK_INTERVAL_MINUTES:
+        raise ConfigError(
+            f"check_interval_minutes must be a whole number from {MIN_CHECK_INTERVAL_MINUTES} "
+            f"to {MAX_CHECK_INTERVAL_MINUTES}: {value!r}"
+        )
+    return value
 
 
 def _folder(value, base: Path, what: str) -> Path:
-    """A folder path, relative to `base` (the config file's folder) unless absolute. URLs are not supported yet."""
+    """A folder path, relative to `base` (the config file's folder) unless absolute."""
     if not isinstance(value, str) or not value.strip():
         raise ConfigError(f"{what} must be a folder path")
     parts = urlsplit(value)
     if parts.scheme.lower() == "file":
         path = Path(url2pathname(parts.path))
     elif len(parts.scheme) > 1:  # a one-letter scheme is a drive letter, not a URL
-        raise ConfigError(f"{what} {value!r} is not a folder path; web repositories are not supported yet")
+        raise ConfigError(f"{what} {value!r} is not a folder path")
     else:
         path = Path(value)
     return Path(os.path.normpath(base / path))
+
+
+def _remote(value, base: Path, what: str):
+    """The remote repository: an https address, or a folder as for _folder."""
+    if isinstance(value, str):
+        scheme = urlsplit(value.strip()).scheme.lower()
+        if scheme in ("http", "https"):
+            return WebRepository(parse_web_url(value, what))
+        if len(scheme) > 1 and scheme != "file":  # a one-letter scheme is a drive letter
+            raise ConfigError(f"{what} {value!r} must be a folder path or an https address")
+    return _folder(value, base, what)
 
 
 def parse_local_config(text: str, base: Path) -> LocalConfig:
     """Parse config.json text; relative paths resolve against `base`, the folder containing the file."""
     data = _load_object(text, "local config")
     _check_schema(data, "local config")
+    auto_sync = data.get("auto_sync", True)
+    if type(auto_sync) is not bool:
+        raise ConfigError(f"auto_sync must be true or false: {auto_sync!r}")
     return LocalConfig(
-        remote_repository=_folder(data.get("remote_repository"), base, "remote_repository"),
+        remote_repository=_remote(data.get("remote_repository"), base, "remote_repository"),
         bundle_repository=_folder(data.get("bundle_repository", "./bundles"), base, "bundle_repository"),
+        hosts=_hosts(data.get("hosts")),
+        check_interval_minutes=_interval(data.get("check_interval_minutes")),
+        auto_sync=auto_sync,
     )
 
 

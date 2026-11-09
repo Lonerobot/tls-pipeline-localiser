@@ -1,0 +1,23 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push $cut_paste_input
+NoOp {
+ name bboxValues1
+ selected true
+ xpos 635
+ ypos -55
+ addUserKnob {20 User}
+ addUserKnob {7 bboxw l "bbox w" R 0 2048}
+ bboxw {{"\[value input.bbox.w]"}}
+ addUserKnob {7 bboxh l "bbox h" R 0 2000}
+ bboxh {{"\[value input.bbox.h]"}}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {7 bboxy l "bbox y" R 0 1080}
+ bboxy {{"\[value input.bbox.y]"}}
+ addUserKnob {7 bboxt l "bbox t" R 0 1080}
+ bboxt {{"\[value input.bbox.t]"}}
+ addUserKnob {7 bboxx l "bbox x" R 0 1920}
+ bboxx {{"\[value input.bbox.x]"}}
+ addUserKnob {7 bboxr l "bbox r" R 0 1920}
+ bboxr {{"\[value input.bbox.r]"}}
+}

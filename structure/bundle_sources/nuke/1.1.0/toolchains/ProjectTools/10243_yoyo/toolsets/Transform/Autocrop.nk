@@ -1,0 +1,82 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name Autocrop1
+ selected true
+ xpos 1280
+ ypos 3159
+ addUserKnob {20 Param}
+ addUserKnob {26 text l "@b;Analyze"}
+ addUserKnob {26 text_2 l " " T " "}
+ addUserKnob {41 channels T CurveTool2.channels}
+ addUserKnob {41 preset T Crop_Input.preset}
+ addUserKnob {41 reset l Reset -STARTLINE T Crop_Input.reset}
+ addUserKnob {41 box T Crop_Input.box}
+ addUserKnob {26 text_1 l " " T " "}
+ addUserKnob {26 _1 l "@b;AutoCrop"}
+ addUserKnob {41 go l Go! T CurveTool2.go}
+ addUserKnob {41 numpixels l "Adjust Bbox" T AdjBBox1.numpixels}
+}
+ Crop {
+  inputs 0
+  box {{"parent.CurveTool2.autocropdata == 0 ? 1: parent.CurveTool2.autocropdata"} {"parent.CurveTool2.autocropdata == 0 ? 1: parent.CurveTool2.autocropdata"} {"parent.CurveTool2.autocropdata == 0 ? 1: parent.CurveTool2.autocropdata"} {"parent.CurveTool2.autocropdata == 0 ? 1: parent.CurveTool2.autocropdata"}}
+  crop false
+  name Crop_BBOX
+  xpos -480
+  ypos -33
+ }
+ AdjBBox {
+  name AdjBBox1
+  xpos -480
+  ypos -9
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -588
+  ypos -225
+ }
+ Dot {
+  name Dot15
+  xpos -554
+  ypos -176
+ }
+set Ne3ae9c00 [stack 0]
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -588
+  ypos -9
+ }
+set Ne3ae9800 [stack 0]
+ Output {
+  name Output
+  xpos -588
+  ypos 65
+ }
+push $Ne3ae9c00
+ Crop {
+  box {0 0 3072 1306}
+  name Crop_Input
+  xpos -478
+  ypos -179
+ }
+push $Ne3ae9800
+ Viewer {
+  frame_range 1-81
+  name Viewer1
+  xpos -370
+  ypos 63
+ }
+push $Ne3ae9c00
+ CurveTool {
+  operation "Auto Crop"
+  channels rgba
+  ROI {{parent.Crop_Input.box} {parent.Crop_Input.box} {parent.Crop_Input.box} {parent.Crop_Input.box}}
+  intensitydata {{curve}}
+  name CurveTool2
+  xpos -478
+  ypos -107
+ }
+end_group

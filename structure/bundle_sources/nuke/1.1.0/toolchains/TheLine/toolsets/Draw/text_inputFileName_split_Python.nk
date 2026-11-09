@@ -1,0 +1,29 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Text2 {
+ font_size_toolbar 100
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[lindex \[split \[lindex \[split \[lindex \[split \[knob \[topnode].file] .] 0] /] 4] _] end]"
+ old_message {{115 104 49 50 48}
+   }
+ old_expression_markers {{0 4}
+   }
+ box {86.5 945.5 351.5 1046.5}
+ transforms {{0 2}
+   }
+ cursor_position 86
+ center {2592 1080}
+ cursor_initialised true
+ initial_cursor_position {{86.5 1046.5}
+   }
+ group_animations {{0} imported: 0 selected: items: "root transform/"}
+ animation_layers {{1 11 2592 1080 0 0 1 1 0 0 0 0}
+   }
+ enable_background true
+ name Text1
+ selected true
+ xpos -4880
+ ypos -8217
+}

@@ -1,0 +1,1158 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-1" y="-9" w="2560" h="1361" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="2510" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1316"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="0"/>
+                <dock id=""/>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="-1920" y="0" w="1920" h="1016" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="442"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+            <split size="1474"/>
+            <splitter orientation="2">
+                <split size="866"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="146"/>
+                <dock id="" activePageId="DopeSheet.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/nuke/NukeTools_Library/03_ToolSets/reference/animeRef.nk
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode10
+ tile_color 0x7171c600
+ label dof
+ note_font_size 42
+ xpos 27953
+ ypos 14068
+ bdwidth 1075
+ bdheight 280
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode11
+ tile_color 0x7171c600
+ label sparks
+ note_font_size 42
+ xpos 28043
+ ypos 9677
+ bdwidth 1774
+ bdheight 373
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x71c67100
+ label "muzzle flash "
+ note_font_size 42
+ xpos 28000
+ ypos 10153
+ bdwidth 1736
+ bdheight 425
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x222222ff
+ label "smoke reference"
+ note_font_size 42
+ xpos 27969
+ ypos 10681
+ bdwidth 5227
+ bdheight 647
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x222222ff
+ label "explosions reference"
+ note_font_size 42
+ xpos 28036
+ ypos 11526
+ bdwidth 3768
+ bdheight 612
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x222222ff
+ label "bloom reference "
+ note_font_size 42
+ xpos 27929
+ ypos 12298
+ bdwidth 3762
+ bdheight 555
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x222222ff
+ label "smears "
+ note_font_size 42
+ xpos 27949
+ ypos 12933
+ bdwidth 3723
+ bdheight 533
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x388e8e00
+ label water
+ note_font_size 42
+ xpos 27906
+ ypos 13527
+ bdwidth 3766
+ bdheight 485
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode8
+ tile_color 0x8e8e3800
+ label glints
+ note_font_size 42
+ xpos 28008
+ ypos 14833
+ bdwidth 1185
+ bdheight 429
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode9
+ tile_color 0x388e8e00
+ label magic
+ note_font_size 42
+ xpos 27984
+ ypos 14405
+ bdwidth 1232
+ bdheight 277
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.07.50 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read8
+ xpos 28780
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.07.33 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read6
+ xpos 28320
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-11 at 23.43.26.png"
+ format "1411 843 0 0 1411 843 1 "
+ origset true
+ name Read29
+ xpos 28520
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.47.16.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read88
+ xpos 28120
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 02.06.12.png"
+ format "1300 780 0 0 1300 780 1 "
+ origset true
+ name Read90
+ xpos 28620
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.07.33.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read92
+ xpos 28420
+ ypos 11673
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.33.39.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read94
+ xpos 28220
+ ypos 11673
+}
+ContactSheet {
+ inputs 7
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet2
+ tile_color 0xe955ffff
+ xpos 28120
+ ypos 11967
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.38.47.png"
+ format "3976 2334 0 0 3976 2334 1 "
+ origset true
+ name Read3
+ xpos 28780
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.36.54.png"
+ format "3976 2334 0 0 3976 2334 1 "
+ origset true
+ name Read2
+ xpos 28670
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.36.42 (1).png"
+ format "3976 2334 0 0 3976 2334 1 "
+ origset true
+ name Read4
+ xpos 28560
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.31.24.png"
+ format "3976 2334 0 0 3976 2334 1 "
+ origset true
+ name Read1
+ xpos 28450
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.04.48 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read9
+ xpos 28340
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 02.06.50.png"
+ format "1300 780 0 0 1300 780 1 "
+ origset true
+ name Read121
+ xpos 28230
+ ypos 13017
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.24.01.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read85
+ xpos 28120
+ ypos 13017
+}
+ContactSheet {
+ inputs 7
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet1
+ tile_color 0xe955ffff
+ xpos 28120
+ ypos 13311
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 13.18.17.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read13
+ xpos 28450
+ ypos 13641
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 20.46.28.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read32
+ xpos 28010
+ ypos 13641
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.52.07.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read36
+ xpos 28120
+ ypos 13641
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.09.24.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read42
+ xpos 28230
+ ypos 13641
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.35.28.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read40
+ xpos 28340
+ ypos 13641
+}
+ContactSheet {
+ inputs 5
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet4
+ tile_color 0xe955ffff
+ xpos 28010
+ ypos 13815
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 02.02.40.png"
+ format "1392 800 0 0 1392 800 1 "
+ origset true
+ name Read27
+ xpos 28230
+ ypos 14937
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-11 at 23.38.03.png"
+ format "1411 843 0 0 1411 843 1 "
+ origset true
+ name Read28
+ xpos 28120
+ ypos 14937
+}
+ContactSheet {
+ inputs 2
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet6
+ tile_color 0xe955ffff
+ xpos 28120
+ ypos 15159
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.50.09 (1).png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read10
+ xpos 31750
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-11 at 23.43.18.png"
+ format "1411 843 0 0 1411 843 1 "
+ origset true
+ name Read30
+ xpos 31640
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.08.34.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read43
+ xpos 31530
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.08.26.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read44
+ xpos 31420
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.08.21.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read45
+ xpos 31310
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.07.52.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read46
+ xpos 31200
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.04.41 (1).png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read38
+ xpos 31090
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.57.47.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read48
+ xpos 30980
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.54.46 (1).png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read37
+ xpos 30760
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.56.44.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read47
+ xpos 30870
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.43.48.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read50
+ xpos 30540
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.44.02.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read49
+ xpos 30650
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.04.29.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read33
+ xpos 30430
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 20.47.05.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read35
+ xpos 30320
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 20.46.50.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read34
+ xpos 30210
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 15.00.58.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read16
+ xpos 30100
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 14.56.07.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read17
+ xpos 29990
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 10.57.52.png"
+ format "1790 1056 0 0 1790 1056 1 "
+ origset true
+ name Read130
+ xpos 29770
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 02.08.32.png"
+ format "1300 780 0 0 1300 780 1 "
+ origset true
+ name Read120
+ xpos 29660
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 14.53.26.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read18
+ xpos 29880
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 01.09.32.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read125
+ xpos 29550
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.44.58.png"
+ format "1348 758 0 0 1348 758 1 "
+ origset true
+ name Read95
+ xpos 29440
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.06.13.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read96
+ xpos 29330
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.50.09.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read97
+ xpos 29220
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.50.02.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read98
+ xpos 29110
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 00.04.41.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read99
+ xpos 29000
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.58.53.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read100
+ xpos 28890
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.57.14.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read101
+ xpos 28780
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 23.54.46.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read102
+ xpos 28670
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.52.38.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read103
+ xpos 28560
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.47.32.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read104
+ xpos 28450
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.47.14.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read105
+ xpos 28340
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 15.08.18.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read106
+ xpos 28230
+ ypos 10833
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 15.23.41.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read107
+ xpos 28120
+ ypos 10833
+}
+ContactSheet {
+ inputs 34
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet3
+ tile_color 0xe955ffff
+ xpos 28120
+ ypos 11103
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 01.24.56.png"
+ format "1405 839 0 0 1405 839 1 "
+ origset true
+ name Read26
+ xpos 30320
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.52.33.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read108
+ xpos 30210
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.39.39.png"
+ format "1092 620 0 0 1092 620 1 "
+ origset true
+ name Read84
+ xpos 30100
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-07 at 17.43.28.png"
+ format "1013 543 0 0 1013 543 1 "
+ origset true
+ name Read83
+ xpos 29990
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/colour ref 2.png"
+ format "1988 1108 0 0 1988 1108 1 "
+ origset true
+ name Read113
+ xpos 29880
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/colour ref 001.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read117
+ xpos 29770
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 18.08.51.png"
+ format "2032 1150 0 0 2032 1150 1 "
+ origset true
+ name Read118
+ xpos 29660
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 18.05.09.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read119
+ xpos 29550
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 18.04.40.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read127
+ xpos 29440
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 18.03.40.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read128
+ xpos 29330
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 17.58.26.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read129
+ xpos 29220
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.45.49.png"
+ format "3888 2246 0 0 3888 2246 1 "
+ origset true
+ name Read114
+ xpos 29000
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-12 at 17.58.01.png"
+ format "2032 1152 0 0 2032 1152 1 "
+ origset true
+ name Read111
+ xpos 29110
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 15.39.18.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read131
+ xpos 28890
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 13.18.54.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read132
+ xpos 28780
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 15.17.40.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read112
+ xpos 28890
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.33.57.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read87
+ xpos 28340
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.56.01.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read115
+ xpos 28560
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.55.50.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read116
+ xpos 28450
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 13.07.16.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read133
+ xpos 28670
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.20.16.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read122
+ xpos 28230
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 21.05.50.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read123
+ xpos 28120
+ ypos 12393
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 20.30.48.png"
+ format "1392 802 0 0 1392 802 1 "
+ origset true
+ name Read124
+ xpos 28010
+ ypos 12393
+}
+ContactSheet {
+ inputs 23
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet
+ tile_color 0xe955ffff
+ xpos 28010
+ ypos 12663
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.24.47.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read41
+ xpos 28010
+ ypos 14145
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-11 at 23.36.48.png"
+ format "1411 843 0 0 1411 843 1 "
+ origset true
+ name Read31
+ xpos 28010
+ ypos 14481
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 12.23.56 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read39
+ xpos 28120
+ ypos 10305
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.08.08 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read7
+ xpos 28560
+ ypos 9753
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 16.07.01 (1).png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read5
+ xpos 28450
+ ypos 9753
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 14.52.39.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read15
+ xpos 28340
+ ypos 9753
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-09 at 15.06.41.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read93
+ xpos 28120
+ ypos 9753
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10124_Bandito/003_REFERENCE/lookRef/Screenshot 2021-04-08 at 14.52.34.png"
+ format "1136 664 0 0 1136 664 1 "
+ origset true
+ name Read14
+ xpos 28230
+ ypos 9753
+}
+ContactSheet {
+ inputs 5
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet5
+ tile_color 0xe955ffff
+ xpos 28120
+ ypos 9951
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Viewer {
+ frame 1
+ frame_range 1-100
+ name Viewer1
+ selected true
+ xpos 27350
+ ypos 13143
+}

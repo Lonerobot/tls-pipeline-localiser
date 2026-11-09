@@ -1,0 +1,439 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 561
+ origlast 561
+ origset true
+ name Read401
+ selected true
+ xpos -2083
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 801
+ origlast 801
+ origset true
+ name Read400
+ selected true
+ xpos -2193
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 647
+ origlast 647
+ origset true
+ name Read399
+ selected true
+ xpos -2303
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 441
+ origlast 441
+ origset true
+ name Read398
+ selected true
+ xpos -2413
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 848
+ origlast 848
+ origset true
+ name Read397
+ selected true
+ xpos -2413
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 603
+ origlast 603
+ origset true
+ name Read396
+ selected true
+ xpos -2523
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 98
+ origlast 98
+ origset true
+ colorspace sRGB
+ name Read395
+ selected true
+ xpos -2633
+ ypos 1530
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Telecine_Glass_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 176
+ origlast 176
+ origset true
+ name Read394
+ selected true
+ xpos -2743
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 136
+ origlast 136
+ origset true
+ name Read393
+ selected true
+ xpos -2853
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 68
+ origlast 68
+ origset true
+ name Read392
+ selected true
+ xpos -2963
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 548
+ origlast 548
+ origset true
+ name Read391
+ selected true
+ xpos -3073
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Rotating_Lens_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 274
+ origlast 274
+ origset true
+ name Read390
+ selected true
+ xpos -3183
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Red_and_Blue_Flare_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 599
+ origlast 599
+ origset true
+ name Read389
+ selected true
+ xpos -3293
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Red_and_Blue_Flare.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 435
+ origlast 435
+ origset true
+ name Read388
+ selected true
+ xpos -3403
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 233
+ origlast 233
+ origset true
+ name Read387
+ selected true
+ xpos -3513
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 117
+ origlast 117
+ origset true
+ name Read386
+ selected true
+ xpos -3513
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 639
+ origlast 639
+ origset true
+ name Read385
+ selected true
+ xpos -3623
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_Blue_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 320
+ origlast 320
+ origset true
+ name Read384
+ selected true
+ xpos -3733
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_3_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 155
+ origlast 155
+ origset true
+ name Read383
+ selected true
+ xpos -3843
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 78
+ origlast 78
+ origset true
+ name Read382
+ selected true
+ xpos -3953
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 75
+ origlast 75
+ origset true
+ name Read381
+ selected true
+ xpos -4063
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 57
+ origlast 57
+ origset true
+ name Read380
+ selected true
+ xpos -4173
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 383
+ origlast 383
+ origset true
+ name Read379
+ selected true
+ xpos -4283
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Old_Coating_Flare_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 192
+ origlast 192
+ origset true
+ name Read378
+ selected true
+ xpos -4393
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_Blue_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 617
+ origlast 617
+ origset true
+ name Read377
+ selected true
+ xpos -4503
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_Blue.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 309
+ origlast 309
+ origset true
+ name Read376
+ selected true
+ xpos -4613
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_3_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 380
+ origlast 380
+ origset true
+ name Read375
+ selected true
+ xpos -4613
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 190
+ origlast 190
+ origset true
+ name Read374
+ selected true
+ xpos -4723
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 565
+ origlast 565
+ origset true
+ name Read373
+ selected true
+ xpos -4833
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 283
+ origlast 283
+ origset true
+ name Read372
+ selected true
+ xpos -4943
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_1_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 732
+ origlast 732
+ origset true
+ name Read371
+ selected true
+ xpos -5053
+ ypos 1536
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Specialty_Lens_Flares/Lens_Flare_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 366
+ origlast 366
+ origset true
+ name Read370
+ selected true
+ xpos -5163
+ ypos 1536
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet27
+ tile_color 0xe955ffff
+ selected true
+ xpos -2083
+ ypos 1686
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

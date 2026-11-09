@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Expression {
+ expr0 "\n\n isnan(r)?0:r\n "
+ expr1 "\n\n isnan(g)?0:g\n "
+ expr2 "\n\n isnan(b)?0:b\n "
+ expr3 "\n\n isnan(a)?0:a\n "
+ name NanTo0
+ selected true
+ xpos 256
+ ypos 290
+}

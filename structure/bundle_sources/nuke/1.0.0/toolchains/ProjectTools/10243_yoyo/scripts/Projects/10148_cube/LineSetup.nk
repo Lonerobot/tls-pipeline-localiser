@@ -1,0 +1,334 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x71c67100
+ label Line
+ note_font_size 42
+ selected true
+ xpos 4325
+ ypos 5483
+ appearance Border
+ bdwidth 811
+ bdheight 842
+}
+push 0
+Group {
+ inputs 0
+ name NoiseAdvanced11
+ help "Noise node with various time sliders.  Can quickly create animated noise.\n\nAdded an Overscan Slider for when you need the noise pattern to extend beyond the format edges."
+ onCreate "n = nuke.thisNode()\no = n.knob('overscan')\no.setRange(0, 500)"
+ tile_color 0x5f5f5fff
+ note_font "Verdana Bold"
+ note_font_color 0xffffffff
+ selected true
+ xpos 4843
+ ypos 5958
+ addUserKnob {20 Noise}
+ addUserKnob {41 output T Noise1.output}
+ addUserKnob {41 premult T Noise1.premult}
+ addUserKnob {41 cliptype l "clip to" T Noise1.cliptype}
+ addUserKnob {41 replace -STARTLINE T Noise1.replace}
+ addUserKnob {41 invert -STARTLINE T Noise1.invert}
+ addUserKnob {41 opacity T Noise1.opacity}
+ addUserKnob {41 maskChannelInput l mask T Noise1.maskChannelInput}
+ addUserKnob {41 inject -STARTLINE T Noise1.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Noise1.invert_mask}
+ addUserKnob {26 ""}
+ addUserKnob {14 overscan l Overscan R 0 500}
+ addUserKnob {26 ""}
+ addUserKnob {41 type T Noise1.type}
+ addUserKnob {41 size l x/ysize T FOR_SETTINGS.size}
+ addUserKnob {7 speedSizeX l "Speed of size X" R 0 4}
+ addUserKnob {7 speedSizeY l "Speed of size Y" R 0 4}
+ addUserKnob {26 ""}
+ addUserKnob {41 zoffset l z T FOR_SETTINGS.zoffset}
+ addUserKnob {7 speedZ l "Speed of Z" R 0 0.25}
+ speedZ 6
+ addUserKnob {26 ""}
+ addUserKnob {41 octaves T Noise1.octaves}
+ addUserKnob {41 nyquist l "clip at Nyquist limit" -STARTLINE T Noise1.nyquist}
+ addUserKnob {41 lacunarity T Noise1.lacunarity}
+ addUserKnob {41 gain T Noise1.gain}
+ addUserKnob {41 gamma T Noise1.gamma}
+ addUserKnob {20 Transform}
+ addUserKnob {41 transform T Noise1.transform}
+ addUserKnob {41 translate T FOR_SETTINGS.translate}
+ addUserKnob {7 transX l "Speed of Trans X" R 0 400}
+ addUserKnob {7 transY l "Speed of Trans Y" R 0 400}
+ addUserKnob {26 ""}
+ addUserKnob {41 rotate T FOR_SETTINGS.rotate}
+ addUserKnob {7 rotSpeed l "Speed of Rotation" R 0 60}
+ addUserKnob {26 ""}
+ addUserKnob {41 scale T FOR_SETTINGS.scale}
+ addUserKnob {7 speedScaleX l "Speed of Scale X" R 0 4}
+ addUserKnob {7 speedScaleY l "Speed of Scale Y" R 0 4}
+ addUserKnob {26 ""}
+ addUserKnob {41 skew +INVISIBLE T Noise1.skew}
+ addUserKnob {41 skewX l "skew X" T FOR_SETTINGS.skewX}
+ addUserKnob {41 skewY l "skew Y" T FOR_SETTINGS.skewY}
+ addUserKnob {41 skew_order l "skew order" T FOR_SETTINGS.skew_order}
+ addUserKnob {41 center T FOR_SETTINGS.center}
+ addUserKnob {41 xrotate T Noise1.xrotate}
+ addUserKnob {41 yrotate T Noise1.yrotate}
+ addUserKnob {20 "" l Color}
+ addUserKnob {41 color T Noise1.color}
+ addUserKnob {20 info l Info}
+ addUserKnob {26 creator l Creator: T "<b><big>Tony Lyons"}
+ addUserKnob {26 desc l Name: T NoiseAdvanced}
+ addUserKnob {26 ver l Version: T v03}
+}
+ Input {
+  inputs 0
+  name Inputmask
+  xpos -79
+  ypos -147
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -205
+  ypos -295
+ }
+ Group {
+  name CropBBox
+  onCreate "n = nuke.thisNode()\ninputFormat = n.knob(\"inputFormat\")\ninputBBox = n.knob(\"inputBBox\")\ncrop = nuke.toNode(\"Crop6\")\ncropb = crop.knob('box')\n\n\ninputFormat.setFlag(0x0000000000008000)\ninputBBox.setFlag(0x0000000000008000)\ncropb.setFlag(0x0000000000008000)"
+  tile_color 0xa57aaaff
+  note_font "Verdana Bold"
+  note_font_color 0xffffffff
+  xpos -205
+  ypos -256
+  disable {{"\[exists parent.input0]\n"}}
+  addUserKnob {20 CropBBox}
+  addUserKnob {4 type l Type +INVISIBLE M {"To Format" "To BBox"}}
+  addUserKnob {41 intersect T Crop6.intersect}
+  addUserKnob {6 blackOutside l "Black Outside" -STARTLINE}
+  addUserKnob {20 inputBbox l "input Bbox Data" n 1}
+  inputBbox 0
+  addUserKnob {15 inputFormat l "Input Format"}
+  inputFormat {0 0 {input.width} {input.height}}
+  addUserKnob {15 inputBBox l "Input BBox"}
+  inputBBox {{input.bbox.x} {input.bbox.y} {input.bbox.r} {input.bbox.t}}
+  addUserKnob {14 bboxCenter l "BBox Center" R 0 100}
+  bboxCenter {{"(this.Crop6.box.r-this.Crop6.box.x)/2 + this.Crop6.box.x"} {"(this.Crop6.box.t-this.Crop6.box.y)/2 + this.Crop6.box.y"}}
+  addUserKnob {20 endGroup n -1}
+  addUserKnob {20 info_1 l Info}
+  addUserKnob {26 creator l Creator: T "<b><big>Tony Lyons"}
+  addUserKnob {26 desc l Description: t "crop to inputformat\n\ndisplays values of input bbox" T CropBBox}
+  addUserKnob {26 ver l Version: T v02}
+ }
+  Input {
+   inputs 0
+   name Input
+   xpos 261
+   ypos 369
+  }
+  Crop {
+   box {{curve} {curve} {input.width} {input.height}}
+   crop {{parent.blackOutside}}
+   name Crop6
+   xpos 261
+   ypos 466
+  }
+  Output {
+   name Output1
+   xpos 261
+   ypos 583
+  }
+ end_group
+set N75b93900 [stack 0]
+ AdjBBox {
+  numpixels {{parent.overscan} {parent.overscan}}
+  name AdjBBox1
+  xpos -205
+  ypos -206
+ }
+ Noise {
+  inputs 1+1
+  cliptype none
+  size {{parent.FOR_SETTINGS.size.0+(t*parent.speedSizeX)} {parent.FOR_SETTINGS.size.1+(t*parent.speedSizeY)}}
+  zoffset {{parent.FOR_SETTINGS.zoffset+(frame*speedZ)}}
+  octaves 2
+  translate {{parent.FOR_SETTINGS.translate.x+t*transX} {parent.FOR_SETTINGS.translate.y+t*transY}}
+  rotate {{parent.FOR_SETTINGS.rotate+(t*rotSpeed)}}
+  scale {{parent.FOR_SETTINGS.scale.w+(t*speedScaleX)} {parent.FOR_SETTINGS.scale.h+(t*speedScaleY)}}
+  center {{parent.FOR_SETTINGS.center} {parent.FOR_SETTINGS.center}}
+  name Noise1
+  selected true
+  xpos -205
+  ypos -147
+ }
+ Output {
+  name Output1
+  xpos -205
+  ypos -35
+ }
+push $N75b93900
+ Noise {
+  size 800
+  center {{input.width/2} {input.height/2}}
+  name FOR_SETTINGS
+  xpos -331
+  ypos -200
+ }
+end_group
+Grade {
+ channels alpha
+ blackpoint 0.28
+ whitepoint 0.22
+ name Grade16
+ selected true
+ xpos 4843
+ ypos 6016
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {1 1 1 1}
+ color_panelDropped true
+ format "3372 2028 0 0 3372 2028 1 "
+ name Constant17
+ selected true
+ xpos 4445
+ ypos 5895
+}
+push 0
+PostageStamp {
+ name PostageStamp10
+ selected true
+ xpos 4445
+ ypos 5578
+ hide_input true
+ postage_stamp true
+}
+Grade {
+ channels alpha
+ blackpoint 0.3
+ whitepoint 0.8
+ name Grade28
+ selected true
+ xpos 4445
+ ypos 5733
+}
+Clamp {
+ name Clamp9
+ selected true
+ xpos 4445
+ ypos 5769
+}
+Grade {
+ black {0.22 0 0 0}
+ black_panelDropped true
+ unpremult rgba.alpha
+ name Grade17
+ selected true
+ xpos 4445
+ ypos 5804
+}
+Dot {
+ name Dot92
+ selected true
+ xpos 4479
+ ypos 5869
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.7099999785 0.4617447555 0.4330999851 0.8100000024}
+ format "3372 2028 0 0 3372 2028 1 "
+ name Constant8
+ selected true
+ xpos 4623
+ ypos 5703
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy4
+ selected true
+ xpos 4623
+ ypos 5860
+}
+Merge2 {
+ inputs 2
+ operation under
+ name Merge30
+ selected true
+ xpos 4623
+ ypos 5919
+}
+Sharpen {
+ size 8.5
+ name Sharpen5
+ selected true
+ xpos 4623
+ ypos 5961
+}
+Clamp {
+ name Clamp13
+ selected true
+ xpos 4623
+ ypos 6009
+}
+set N75b7c400 [stack 0]
+push $N75b7c400
+Keymix {
+ inputs 3
+ name Keymix3
+ selected true
+ xpos 4690
+ ypos 6053
+}
+Reformat {
+ resize none
+ name Reformat8
+ selected true
+ xpos 4690
+ ypos 6089
+}
+Transform {
+ translate {18 -22}
+ scale 0.97
+ center {1536 864}
+ name Transform9
+ selected true
+ xpos 4690
+ ypos 6113
+}
+push 0
+Dot {
+ name Dot17
+ selected true
+ xpos 5164
+ ypos 5466
+}
+Merge2 {
+ inputs 2+1
+ operation multiply
+ name Merge17
+ selected true
+ xpos 5130
+ ypos 6111
+}
+Reformat {
+ format "3372 2028 0 0 3372 2028 1 "
+ resize none
+ name Reformat3
+ selected true
+ xpos 5130
+ ypos 6369
+}
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Transform/X_Distort_EK.gizmo {
+ name X_Distort_EK3
+ selected true
+ xpos 5130
+ ypos 6495
+ distort 2
+ distort_from Noise
+ noise_size 20
+ blur_map 0
+ mask rgba.alpha
+}

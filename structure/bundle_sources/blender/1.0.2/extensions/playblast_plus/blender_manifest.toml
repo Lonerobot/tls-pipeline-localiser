@@ -1,0 +1,43 @@
+schema_version = "1.0.0"
+
+id = "playblast_plus"
+version = "1.6.11"
+name = "Playblast Plus"
+tagline = "Viewport playblast capture with FFmpeg encoding"
+maintainer = "Lonerobot"
+type = "add-on"
+
+# # Optional: link to documentation, support, source files, etc
+# website = "https://extensions.blender.org/add-ons/my-example-package/"
+
+blender_version_min = "4.5.0"
+
+tags = ["Render", "Pipeline"]
+
+license = ["SPDX:GPL-3.0-or-later"]
+
+
+[permissions]
+files = "Read and write playblast output to disk"
+network = "To download FFmpeg binaries"
+clipboard = "Storing temporary media"
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  ".git",
+  ".github",
+  ".gitignore",
+  "tests/",
+  ".env",
+  ".env.example",
+  "_deploy.py",
+  "README.md",
+  "image/",
+  "bin/",
+  "releases/",
+  "logs/",
+  "wheels/",
+  "*.zip",
+  "*.pyc",
+]

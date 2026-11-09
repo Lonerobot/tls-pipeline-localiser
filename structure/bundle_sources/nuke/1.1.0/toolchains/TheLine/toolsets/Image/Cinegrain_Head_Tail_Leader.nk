@@ -1,0 +1,438 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 28
+ origlast 28
+ origset true
+ name Read314
+ selected true
+ xpos -2083
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 34
+ origlast 34
+ origset true
+ name Read313
+ selected true
+ xpos -2193
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 41
+ origlast 41
+ origset true
+ name Read312
+ selected true
+ xpos -2303
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 51
+ origlast 51
+ origset true
+ name Read311
+ selected true
+ xpos -2413
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 17
+ origlast 17
+ origset true
+ name Read310
+ selected true
+ xpos -2523
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 51
+ origlast 51
+ origset true
+ name Read309
+ selected true
+ xpos -2523
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 33
+ origlast 33
+ origset true
+ name Read308
+ selected true
+ xpos -2633
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 69
+ origlast 69
+ origset true
+ name Read307
+ selected true
+ xpos -2743
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 45
+ origlast 45
+ origset true
+ name Read316
+ selected true
+ xpos -2853
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 42
+ origlast 42
+ origset true
+ name Read315
+ selected true
+ xpos -2963
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Tails_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 25
+ origlast 25
+ origset true
+ name Read306
+ selected true
+ xpos -3073
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_2_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 154
+ origlast 154
+ origset true
+ name Read305
+ selected true
+ xpos -3183
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 77
+ origlast 77
+ origset true
+ name Read304
+ selected true
+ xpos -3293
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Old_Countdown_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 204
+ origlast 204
+ origset true
+ name Read303
+ selected true
+ xpos -3403
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_9.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 25
+ origlast 25
+ origset true
+ name Read293
+ selected true
+ xpos -3513
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_8.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 111
+ origlast 111
+ origset true
+ name Read292
+ selected true
+ xpos -3623
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_7.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 104
+ origlast 104
+ origset true
+ name Read291
+ selected true
+ xpos -3623
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_6.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ name Read290
+ selected true
+ xpos -3733
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_5.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 117
+ origlast 117
+ origset true
+ name Read289
+ selected true
+ xpos -3843
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 71
+ origlast 71
+ origset true
+ name Read288
+ selected true
+ xpos -3953
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 66
+ origlast 66
+ origset true
+ name Read287
+ selected true
+ xpos -4063
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 288
+ origlast 288
+ origset true
+ name Read286
+ selected true
+ xpos -4173
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_18.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 67
+ origlast 67
+ origset true
+ name Read302
+ selected true
+ xpos -4283
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_17.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 44
+ origlast 44
+ origset true
+ name Read301
+ selected true
+ xpos -4393
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_16.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 123
+ origlast 123
+ origset true
+ name Read300
+ selected true
+ xpos -4503
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_15.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 284
+ origlast 284
+ origset true
+ name Read299
+ selected true
+ xpos -4613
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_14.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 103
+ origlast 103
+ origset true
+ name Read298
+ selected true
+ xpos -4723
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_13.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 61
+ origlast 61
+ origset true
+ name Read297
+ selected true
+ xpos -4723
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_12.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 138
+ origlast 138
+ origset true
+ name Read296
+ selected true
+ xpos -4833
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_11.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 54
+ origlast 54
+ origset true
+ name Read295
+ selected true
+ xpos -4943
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_10.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ name Read294
+ selected true
+ xpos -5053
+ ypos 360
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Head_Tail_Leader/Header_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 114
+ origlast 114
+ origset true
+ name Read285
+ selected true
+ xpos -5163
+ ypos 360
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet30
+ tile_color 0xe955ffff
+ selected true
+ xpos -2083
+ ypos 510
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

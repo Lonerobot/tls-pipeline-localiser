@@ -3,6 +3,7 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest import mock
 
 from localiser import PublishError, publish_release
 from localiser.archive import safe_extract
@@ -20,6 +21,10 @@ class PublisherTests(unittest.TestCase):
         (self.src / "pkg" / "__pycache__" / "mod.cpython-311.pyc").write_bytes(b"\0")
         (self.src / "stray.pyc").write_bytes(b"\0")
         (self.src / "Thumbs.db").write_bytes(b"\0")
+        (self.src / ".DS_Store").write_bytes(b"\0")
+        (self.src / "pkg" / "scene.nk~").write_bytes(b"\0")
+        (self.src / "__MACOSX").mkdir()
+        (self.src / "__MACOSX" / "._init.py").write_bytes(b"\0")
         (self.src / "core").mkdir()
         (self.src / "core" / "init.py").write_text("pass\n")
 
@@ -30,6 +35,21 @@ class PublisherTests(unittest.TestCase):
         with zipfile.ZipFile(release / manifest.artifact) as zf:
             self.assertEqual(sorted(zf.namelist()), ["core/init.py", "pkg/mod.py"])
         self.assertEqual([p.name for p in release.parent.iterdir()], ["2.9.0"])
+
+    def test_transient_access_denied_on_the_final_rename_is_retried(self):
+        real_rename = os.rename
+        calls = []
+
+        def flaky(source, destination):
+            calls.append(source)
+            if len(calls) < 3:
+                raise PermissionError(13, "Access is denied")
+            return real_rename(source, destination)
+
+        with mock.patch("localiser.fsutil.os.rename", side_effect=flaky), mock.patch("localiser.fsutil.time.sleep"):
+            publish_release(self.src, self.repo, "p", "1")
+        self.assertEqual(len(calls), 3)
+        self.assertTrue((self.repo / "hosts" / "p" / "1" / "manifest.json").is_file())
 
     def test_refuses_to_overwrite_existing_release(self):
         publish_release(self.src, self.repo, "maya-tools", "2.9.0")

@@ -1,0 +1,50 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name constant_under
+ selected true
+ xpos 5130
+ ypos 638
+ addUserKnob {20 User}
+ addUserKnob {41 white l gain T Grade1.white}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 617
+  ypos 370
+ }
+ Dot {
+  name Dot8
+  xpos 651
+  ypos 410
+ }
+set N4ed99c00 [stack 0]
+push $N4ed99c00
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle3
+  xpos 727
+  ypos 406
+ }
+ Grade {
+  name Grade1
+  xpos 727
+  ypos 478
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 617
+  ypos 478
+ }
+ Output {
+  name Output1
+  xpos 617
+  ypos 578
+ }
+end_group

@@ -1,0 +1,29 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Grade {
+ channels rgba
+ gamma 0.2
+ black_clamp false
+ name Grade4
+ selected true
+ xpos 3897
+ ypos -1308
+}
+Blur {
+ name Blur4
+ selected true
+ xpos 3897
+ ypos -1282
+}
+Grade {
+ channels rgba
+ whitepoint {{parent.Grade4.whitepoint}}
+ gamma {{parent.Grade4.gamma}}
+ reverse true
+ white_clamp true
+ name Grade5
+ selected true
+ xpos 3897
+ ypos -1212
+}

@@ -1,0 +1,165 @@
+set cut_paste_input [stack 0]
+version 7.0 v6
+Camera2 {
+ inputs 0
+ translate {0 0 6.574999809}
+ name Camera1
+ selected true
+ xpos 252
+ ypos 394
+}
+Dot {
+ inputs 0
+ name Dot5
+ selected true
+ xpos 130
+ ypos -34
+}
+Radial {
+ inputs 0
+ area {{960-parent.ScaleFromCenter.Scale} {540-parent.ScaleFromCenter.Scale} {960+parent.ScaleFromCenter.Scale} {540+parent.ScaleFromCenter.Scale}}
+ softness 0
+ name Radial1
+ selected true
+ xpos 240
+ ypos -157
+ addUserKnob {20 User}
+}
+Crop {
+ box {{parent.Radial1.area} {parent.Radial1.area} {parent.Radial1.area} {parent.Radial1.area}}
+ reformat true
+ crop false
+ name Crop1
+ selected true
+ xpos 240
+ ypos -129
+}
+NoOp {
+ name ScaleFromCenter
+ selected true
+ xpos 240
+ ypos -105
+ addUserKnob {20 User}
+ addUserKnob {7 Scale R 0 540}
+ Scale 168
+}
+Switch {
+ inputs 2
+ name Switch4
+ selected true
+ xpos 240
+ ypos -37
+}
+Dot {
+ name Dot1
+ selected true
+ xpos 274
+ ypos 14
+}
+Axis2 {
+ inputs 0
+ name Axis1
+ selected true
+ xpos 792
+ ypos -10
+}
+Card2 {
+ inputs 0
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ selected true
+ xpos 492
+ ypos -185
+}
+Dot {
+ name Dot3
+ selected true
+ xpos 526
+ ypos -79
+}
+Sphere {
+ inputs 0
+ name Sphere1
+ selected true
+ xpos 601
+ ypos -184
+}
+push $cut_paste_input
+Cylinder {
+ rows 2
+ radius 0.25
+ height 0.125
+ translate {0 0.05999999866 0}
+ rotate {0 {frame*2} 0}
+ name Cylinder2
+ selected true
+ xpos 707
+ ypos -186
+}
+Dot {
+ name Dot4
+ selected true
+ xpos 741
+ ypos -79
+}
+Switch {
+ inputs 3
+ which 1
+ name Switch3
+ selected true
+ xpos 601
+ ypos -82
+}
+TransformGeo {
+ inputs 2
+ uniform_scale 0.17
+ name TransformGeo2
+ selected true
+ xpos 601
+ ypos 11
+}
+push 0
+ParticleEmitter {
+ inputs 3
+ velocity 0.0165
+ size 0.031
+ name ParticleEmitter1
+ selected true
+ xpos 400
+ ypos 11
+}
+Scene {
+ name Scene1
+ selected true
+ xpos 410
+ ypos 306
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos 400
+ ypos 415
+}
+Viewer {
+ frame 70
+ fps 25
+ freezeGuiWhenPlayBack true
+ input_process false
+ name Viewer1
+ selected true
+ xpos 400
+ ypos 534
+}

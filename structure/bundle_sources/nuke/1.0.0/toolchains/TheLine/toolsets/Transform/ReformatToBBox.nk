@@ -1,0 +1,23 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+push $cut_paste_input
+CopyBBox {
+ inputs 2
+ name CopyBBox1
+ selected true
+ xpos 1524
+ ypos -697
+}
+Reformat {
+ type "to box"
+ box_width {{bbox.w}}
+ box_height {{bbox.h}}
+ box_fixed true
+ scale {1 1}
+ resize none
+ name Reformat11
+ selected true
+ xpos 1524
+ ypos -671
+}

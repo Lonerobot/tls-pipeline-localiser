@@ -9,5 +9,11 @@ description = "Resolve, localise and expose versioned pipeline releases for DCC 
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+tray = ["PySide6>=6.6"]  # only the tray app needs it; the core stays stdlib-only
+
+[project.gui-scripts]
+theline-pipeline = "localiser_tray.app:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]

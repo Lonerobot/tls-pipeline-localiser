@@ -1,0 +1,146 @@
+set cut_paste_input [stack 0]
+version 17.0 v3
+push $cut_paste_input
+Group {
+ name Noise_Distort
+ tile_color 0xa57aaa00
+ selected true
+ xpos 21
+ ypos -798
+ addUserKnob {20 User}
+ addUserKnob {26 noise l Noise}
+ addUserKnob {41 scale l Quality t "Setting directions speed to 0,0 lets you adjust quality without seeing a transate " T Reformat_Down.scale}
+ addUserKnob {41 Scale T NoOp1.Scale}
+ addUserKnob {41 Evolution_Speed T NoOp1.Evolution_Speed}
+ addUserKnob {41 Directional_Speed T NoOp1.Directional_Speed}
+ addUserKnob {41 Anim_Steps T FrameHold1.increment}
+ addUserKnob {41 Blur T Blur1.size}
+ addUserKnob {6 Show_Noise +STARTLINE}
+}
+ NoOp {
+  inputs 0
+  name NoOp1
+  xpos -1081
+  ypos -268
+  addUserKnob {20 User}
+  addUserKnob {7 Scale R 1 2000}
+  Scale 10
+  addUserKnob {7 Evolution_Speed R 0 25}
+  Evolution_Speed 0.7
+  addUserKnob {12 Directional_Speed}
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -506
+  ypos -467
+ }
+ Dot {
+  name Dot8
+  xpos -472
+  ypos -392
+ }
+set Nf8fd8000 [stack 0]
+ Dot {
+  name Dot9
+  xpos -742
+  ypos -392
+ }
+ Reformat {
+  type scale
+  scale 0.82
+  filter impulse
+  name Reformat_Down
+  xpos -776
+  ypos -333
+ }
+ Noise {
+  replace true
+  size {{Noise_Distort.NoOp1.Scale*parent.Reformat_Down.scale x78 260}}
+  zoffset {{frame*(Noise_Distort.NoOp1.Evolution_Speed/100)}}
+  translate {{frame*(Noise_Distort.NoOp1.Directional_Speed.x/100)} {frame*(Noise_Distort.NoOp1.Directional_Speed.y/100)}}
+  name Noise1
+  xpos -895
+  ypos -268
+ }
+set Nf8f87e00 [stack 0]
+ Reformat {
+  type scale
+  scale {{1/(parent.Reformat_Down.scale)}}
+  filter impulse
+  name Reformat_up
+  xpos -774
+  ypos -198
+ }
+ FrameHold {
+  firstFrame 78
+  increment 5
+  name FrameHold1
+  xpos -774
+  ypos -141
+ }
+ Grade {
+  name Grade1
+  xpos -774
+  ypos -65
+ }
+ Blur {
+  name Blur1
+  xpos -774
+  ypos 4
+ }
+ Dot {
+  name Dot10
+  xpos -740
+  ypos 138
+ }
+set Nf8fd8d80 [stack 0]
+push $Nf8fd8d80
+push $Nf8fd8000
+ BlinkScript {
+  inputs 2
+  recompileCount 1
+  ProgramGroup 1
+  KernelDescription "3 \"NoiseDisplacement\" iterate pixelWise d9036aaa9e8e03752946881272302207420a6042ab944c26eb15c728b43dc578 3 \"src\" Read Random \"noise\" Read Point \"dst\" Write Point 4 \"Displacement\" Float 2 AADIQQAAyEE= \"Noise Centre\" Float 1 AAAAPw== \"Mix\" Float 1 AACAPw== \"Green Drives Y\" Bool 1 AQ== 4 \"displacement\" 2 1 Default \"centre\" 1 1 Default \"blend\" 1 1 Default \"useGreenForY\" 1 1 Default 0"
+  kernelSource "kernel NoiseDisplacement : ImageComputationKernel<ePixelWise>\n\{\n    // Input 0: image\n    Image<eRead, eAccessRandom, eEdgeClamped> src;\n\n    // Input 1: noise map\n    Image<eRead, eAccessPoint> noise;\n\n    Image<eWrite, eAccessPoint> dst;\n\nparam:\n    float2 displacement;\n    float centre;\n    float blend;\n    bool useGreenForY;\n\n    void define()\n    \{\n        defineParam(displacement, \"Displacement\", float2(25.0f, 25.0f));\n        defineParam(centre, \"Noise Centre\", 0.5f);\n        defineParam(blend, \"Mix\", 1.0f);\n        defineParam(useGreenForY, \"Green Drives Y\", true);\n    \}\n\n    void process(int2 pos)\n    \{\n        SampleType(noise) noisePixel = noise();\n\n        float noiseX = noisePixel.x - centre;\n        float noiseY = useGreenForY\n            ? noisePixel.y - centre\n            : noisePixel.x - centre;\n\n        float sampleX = (float)pos.x + noiseX * displacement.x;\n        float sampleY = (float)pos.y + noiseY * displacement.y;\n\n        SampleType(src) original = src(pos.x, pos.y);\n        SampleType(src) displaced = bilinear(src, sampleX, sampleY);\n\n        float mixValue = clamp(blend, 0.0f, 1.0f);\n        dst() = lerp(original, displaced, mixValue);\n    \}\n\};"
+  rebuild ""
+  NoiseDisplacement_Displacement {100 80}
+  NoiseDisplacement_NoiseCentre 0.335
+  rebuild_finalise ""
+  name BlinkScript1
+  xpos -506
+  ypos 129
+ }
+set Nf8f88d00 [stack 0]
+ Merge2 {
+  inputs 2
+  mix 0.51
+  name Merge1
+  xpos -650
+  ypos 265
+ }
+push $Nf8f88d00
+ Switch {
+  inputs 2
+  which {{parent.Show_Noise}}
+  name Switch1
+  xpos -506
+  ypos 324
+ }
+ Output {
+  name Output1
+  xpos -506
+  ypos 392
+ }
+push $Nf8f87e00
+ Viewer {
+  frame 29
+  frame_range 1-104
+  viewerProcess "ACES 2.0 - SDR 100 nits (Rec.709) (sRGB - Display)"
+  monitorOutNDISenderName "NukeX - art_A1_sh160_comp_v001 - Viewer1"
+  monitorOutOutputTransform "Un-tone-mapped (sRGB - Display)"
+  name Viewer1
+  xpos -675
+  ypos -274
+ }
+end_group

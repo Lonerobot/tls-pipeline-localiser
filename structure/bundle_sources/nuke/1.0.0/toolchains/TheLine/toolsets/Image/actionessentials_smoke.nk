@@ -1,0 +1,314 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Puffy_Smoke_01.mov"
+ format "2048 1020 0 0 2048 1020 1 "
+ last 449
+ origlast 449
+ origset true
+ name Read70
+ selected true
+ xpos -5273
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Puffy_Smoke_02.mov"
+ format "2048 1020 0 0 2048 1020 1 "
+ last 603
+ origlast 603
+ origset true
+ name Read71
+ selected true
+ xpos -5163
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 501
+ origlast 501
+ origset true
+ name Read72
+ selected true
+ xpos -5053
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 501
+ origlast 501
+ origset true
+ name Read73
+ selected true
+ xpos -5053
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Smoke_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 500
+ origlast 500
+ origset true
+ name Read74
+ selected true
+ xpos -4943
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_01.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 100
+ origlast 100
+ origset true
+ name Read75
+ selected true
+ xpos -4833
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_02.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 105
+ origlast 105
+ origset true
+ name Read76
+ selected true
+ xpos -4723
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_03.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 118
+ origlast 118
+ origset true
+ name Read77
+ selected true
+ xpos -4613
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_04.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 138
+ origlast 138
+ origset true
+ name Read78
+ selected true
+ xpos -4503
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_05.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 176
+ origlast 176
+ origset true
+ name Read79
+ selected true
+ xpos -4393
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_06.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 142
+ origlast 142
+ origset true
+ name Read80
+ selected true
+ xpos -4283
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_07.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 280
+ origlast 280
+ origset true
+ name Read81
+ selected true
+ xpos -4173
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_08.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 204
+ origlast 204
+ origset true
+ name Read82
+ selected true
+ xpos -4063
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Wisp_09.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 215
+ origlast 215
+ origset true
+ name Read83
+ selected true
+ xpos -3953
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/14. Smoke/Dark_Smoke.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 409
+ origlast 409
+ origset true
+ name Read84
+ selected true
+ xpos -5383
+ ypos -3144
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 199
+ origlast 199
+ origset true
+ name Read85
+ selected true
+ xpos -5383
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 251
+ origlast 251
+ origset true
+ name Read86
+ selected true
+ xpos -5273
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_03.mov"
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ last 226
+ origlast 226
+ origset true
+ name Read87
+ selected true
+ xpos -5163
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 299
+ origlast 299
+ origset true
+ name Read88
+ selected true
+ xpos -5053
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 208
+ origlast 208
+ origset true
+ name Read89
+ selected true
+ xpos -5053
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ name Read90
+ selected true
+ xpos -4943
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 216
+ origlast 216
+ origset true
+ name Read91
+ selected true
+ xpos -4833
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 300
+ origlast 300
+ origset true
+ name Read92
+ selected true
+ xpos -4723
+ ypos -2976
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/15. Smoke_Charges/Smoke_Charge_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 352
+ origlast 352
+ origset true
+ name Read93
+ selected true
+ xpos -4613
+ ypos -2976
+}

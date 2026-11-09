@@ -1,0 +1,43 @@
+sequenceDiagram
+    participant R as Remote repository
+    participant S as localiser sync
+    participant L as Local bundle store
+
+    Note over S: you run: sync blender 5.2
+
+    rect rgb(244, 246, 248)
+        Note over R,L: 1. Resolve the version
+        alt override variable is set
+            Note over S: use the override version
+        else normal case
+            S->>R: read config.json
+            alt remote reachable
+                R-->>S: studio config
+                S->>L: refresh last-known copy
+            else offline
+                L-->>S: last-known config
+            end
+            Note over S: look up version for blender 5.2
+        end
+    end
+
+    rect rgb(244, 246, 248)
+        Note over R,L: 2. Make sure it is installed locally
+        S->>L: .complete marker present?
+        alt already installed
+            L-->>S: reuse it, no network
+        else not installed
+            S->>L: lock, clear partial folder
+            R-->>S: manifest.json and pipeline.zip
+            Note over S: verify sha256
+            Note over S: extract, check python_root
+            S->>L: write .complete, rename into place
+        end
+    end
+
+    rect rgb(244, 246, 248)
+        Note over R,L: 3. Select it for future sessions
+        S->>L: write prepared selection
+    end
+
+    Note over S: Prepared. Restart the DCC to use it

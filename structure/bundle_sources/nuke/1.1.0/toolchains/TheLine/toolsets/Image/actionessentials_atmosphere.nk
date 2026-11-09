@@ -1,0 +1,93 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 451
+ origlast 451
+ origset true
+ name Read20
+ selected true
+ xpos 20420
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 351
+ origlast 351
+ origset true
+ name Read21
+ selected true
+ xpos 20530
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 401
+ origlast 401
+ origset true
+ name Read22
+ selected true
+ xpos 20640
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 161
+ origlast 161
+ origset true
+ name Read23
+ selected true
+ xpos 20750
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 458
+ origlast 458
+ origset true
+ name Read24
+ selected true
+ xpos 20750
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ name Read25
+ selected true
+ xpos 20860
+ ypos -4959
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/01. Atmospheres/Atmosphere_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ name Read26
+ selected true
+ xpos 20970
+ ypos -4959
+}

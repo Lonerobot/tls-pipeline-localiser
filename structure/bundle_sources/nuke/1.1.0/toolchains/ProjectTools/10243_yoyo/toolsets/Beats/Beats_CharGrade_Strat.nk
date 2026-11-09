@@ -1,0 +1,134 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Constant {
+ inputs 0
+ color {0.5972016454 0.07036009431 0.9999998808 1}
+ name Constant5
+ selected true
+ xpos -920
+ ypos -9339
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read40
+ selected true
+ xpos -1250
+ ypos -9633
+}
+Constant {
+ inputs 0
+ color {0.3712376058 0.3467040062 0.9999998808 1}
+ name Constant4
+ selected true
+ xpos -1250
+ ypos -9747
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read41
+ selected true
+ xpos -700
+ ypos -10089
+}
+ColorCorrect {
+ shadows.offset {0.035 0.02 0.012 0.02}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.109637171 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ unpremult rgba.alpha
+ name ColorCorrect21
+ selected true
+ xpos -700
+ ypos -10005
+}
+Dot {
+ name Dot18
+ selected true
+ xpos -666
+ ypos -9792
+}
+set Nb03ff800 [stack 0]
+Dot {
+ name Dot19
+ selected true
+ xpos -886
+ ypos -9792
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge13
+ selected true
+ xpos -920
+ ypos -9723
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy3
+ selected true
+ xpos -920
+ ypos -9609
+}
+Premult {
+ name Premult11
+ selected true
+ xpos -920
+ ypos -9573
+}
+push $Nb03ff800
+Merge2 {
+ inputs 2
+ name Merge14
+ selected true
+ xpos -700
+ ypos -9573
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge15
+ selected true
+ xpos -700
+ ypos -9315
+}
+Transform {
+ translate {-382 144}
+ center {1024 576}
+ name Transform4
+ selected true
+ xpos -700
+ ypos -9129
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stratos.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read20
+ selected true
+ xpos -480
+ ypos -9231
+}
+Merge2 {
+ inputs 2
+ name Merge19
+ selected true
+ xpos -480
+ ypos -9033
+}

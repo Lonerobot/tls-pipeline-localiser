@@ -1,0 +1,1399 @@
+#! C:/Program Files/Nuke15.1v2/nuke-15.1.2.dll -nx
+version 15.1 v2
+Gizmo {
+ inputs 0
+ tile_color 0xff034cff
+ gl_color 0xffffffff
+ note_font "Verdana Bold"
+ note_font_color 0xffffffff
+}
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh260/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 114
+  origlast 114
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov24
+  tile_color 0x4ecd25ff
+  xpos 639
+  ypos 597
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh260
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 4f6362f2c0a911f0951cf889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 3
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 114
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh260/work/comp/jor_sh260_comp_v003.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId SEZ0ZL3R9M
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh250/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 148
+  origlast 148
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov23
+  tile_color 0x4ecd25ff
+  xpos 526
+  ypos 598
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh250
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 71bc2d69c14711f0a30c2c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 24
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 148
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh250/work/comp/jor_sh250_comp_v025.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId G726SR1W1K
+ }
+ FrameHold {
+  firstFrame 110
+  name FrameHold25
+  xpos 526
+  ypos 694
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh240/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 91
+  origlast 91
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov22
+  tile_color 0x4ecd25ff
+  xpos 428
+  ypos 603
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh240
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation d82dabf8c08411f08bec2c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 12
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 91
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh240/work/comp/jor_sh240_comp_v013.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId NUM30YXO1Z
+ }
+ FrameHold {
+  firstFrame 17
+  name FrameHold24
+  xpos 428
+  ypos 699
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh230/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 40
+  origlast 40
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov21
+  tile_color 0x4ecd25ff
+  xpos 335
+  ypos 600
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh230
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation ac2cbed1c09b11f089d2dc215c051152
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 6
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 40
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh230/work/comp/jor_sh230_comp_v007.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId AMN531H5D6
+ }
+ FrameHold {
+  firstFrame 9
+  name FrameHold23
+  xpos 335
+  ypos 696
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh220/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 127
+  origlast 127
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov20
+  tile_color 0x4ecd25ff
+  xpos 244
+  ypos 601
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh220
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation d1315b0ebfdd11f08f992c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 4
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 127
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh220/work/comp/jor_sh220_comp_v005.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId YDSQPK1GGO
+ }
+ FrameHold {
+  firstFrame 25
+  name FrameHold22
+  xpos 244
+  ypos 697
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh210/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  format "3372 2028 0 0 3372 2028 1 10247_jordan"
+  last 82
+  frame_mode "start at"
+  frame 1.0
+  origlast 82
+  origset true
+  version 8
+  colorspace "Output - sRGB"
+  name Read3
+  xpos 137
+  ypos 599
+ }
+ FrameHold {
+  firstFrame 25
+  name FrameHold21
+  xpos 137
+  ypos 695
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh200/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 20
+  origlast 20
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov18
+  tile_color 0x4ecd25ff
+  xpos 30
+  ypos 596
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh200
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation f36169bdbbee11f08d1ddc215c05114f
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 9
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 20
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh200/work/comp/jor_sh200_comp_v009.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId RR3CKG8ND7
+ }
+ FrameHold {
+  firstFrame 19
+  name FrameHold20
+  xpos 30
+  ypos 692
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh190/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 31
+  origlast 31
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov17
+  tile_color 0x4ecd25ff
+  xpos -110
+  ypos 603
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh190
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 72541593c16d11f0a4ffdc215c051152
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 6
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 31
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh190/work/comp/jor_sh190_comp_v008.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId V8RUJVA630
+ }
+ FrameHold {
+  firstFrame 71
+  name FrameHold19
+  xpos -110
+  ypos 699
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh180/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 86
+  origlast 86
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov16
+  tile_color 0x4ecd25ff
+  xpos -234
+  ypos 595
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh180
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation ce7815f6c16b11f0a539dc215c051152
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 12
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 86
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh180/work/comp/jor_sh180_comp_v015.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId PMBK5USVDE
+ }
+ FrameHold {
+  firstFrame 81
+  name FrameHold18
+  xpos -234
+  ypos 691
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh170/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 157
+  origlast 157
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov15
+  tile_color 0x4ecd25ff
+  xpos -345
+  ypos 595
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh170
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation aba9e44dc17811f0b5662c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 21
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 157
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh170/work/comp/jor_sh170_comp_v021.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId CO5OQGHDRY
+ }
+ FrameHold {
+  firstFrame 140
+  name FrameHold17
+  xpos -345
+  ypos 691
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh160/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 43
+  origlast 43
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov14
+  tile_color 0x4ecd25ff
+  xpos -437
+  ypos 597
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh160
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 76856c4dc14e11f0bda8f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 8
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 43
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh160/work/comp/jor_sh160_comp_v009.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId J10HFGXYE1
+ }
+ FrameHold {
+  firstFrame 14
+  name FrameHold16
+  xpos -437
+  ypos 693
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh150/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 47
+  origlast 47
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov13
+  tile_color 0x4ecd25ff
+  xpos -529
+  ypos 592
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh150
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation cce8255ebfca11f09ce0f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 2
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 47
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh150/work/comp/jor_sh150_comp_v002.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId Z0M9OSNBG3
+ }
+ FrameHold {
+  firstFrame 14
+  name FrameHold15
+  xpos -529
+  ypos 688
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh140/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 26
+  origlast 26
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov12
+  tile_color 0x4ecd25ff
+  xpos -627
+  ypos 591
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh140
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 870c6049c17511f09c5c2c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 7
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 26
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh140/work/comp/jor_sh140_comp_v007.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 9VOM98TDXQ
+ }
+ FrameHold {
+  firstFrame 9
+  name FrameHold14
+  xpos -627
+  ypos 687
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh130/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 32
+  origlast 32
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov11
+  tile_color 0x4ecd25ff
+  xpos 670
+  ypos 325
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh130
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation f8f9af5bc16a11f0bd952c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 9
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 32
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh130/work/comp/jor_sh130_comp_v011.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId KR2CCEDZIW
+ }
+ FrameHold {
+  firstFrame 32
+  name FrameHold13
+  xpos 670
+  ypos 421
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh110/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 104
+  origlast 104
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov10
+  tile_color 0x4ecd25ff
+  xpos 560
+  ypos 325
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh110
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 7a0d61cbc14a11f0bda0f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 15
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 104
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh110/work/comp/jor_sh110_comp_v016.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 1XHPOC02YB
+ }
+ FrameHold {
+  firstFrame 32
+  name FrameHold12
+  xpos 560
+  ypos 421
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh100/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 27
+  origlast 27
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov9
+  tile_color 0x4ecd25ff
+  xpos 442
+  ypos 324
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh100
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 77ff23a0bfb011f08349f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 6
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 27
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh100/work/comp/jor_sh100_comp_v006.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 0E4P0OL2HN
+ }
+ FrameHold {
+  firstFrame 5
+  name FrameHold11
+  xpos 442
+  ypos 420
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh090/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 45
+  origlast 45
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov8
+  tile_color 0x4ecd25ff
+  xpos 328
+  ypos 330
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh090
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 688ff116ba6611f096b3f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 5
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 45
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh090/work/comp/jor_sh090_comp_v005.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 4PE882SJOI
+ }
+ FrameHold {
+  firstFrame 21
+  name FrameHold10
+  xpos 328
+  ypos 426
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh080/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 74
+  origlast 74
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov7
+  tile_color 0x4ecd25ff
+  xpos 225
+  ypos 340
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh080
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 8b81c8e3c0c011f0b4f22c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 5
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 74
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh080/work/comp/jor_sh080_comp_v006.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 4UQLM0M3QU
+ }
+ FrameHold {
+  firstFrame 9
+  name FrameHold9
+  xpos 225
+  ypos 436
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh070/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 210
+  origlast 210
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov25
+  tile_color 0x4ecd25ff
+  xpos 129
+  ypos 340
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh070
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation e5e0659bc13f11f088bc2c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 15
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 210
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh070/work/comp/jor_sh070_comp_v016.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 0XSAFMQC62
+ }
+ FrameHold {
+  firstFrame 150
+  name FrameHold8
+  xpos 129
+  ypos 436
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh070/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 210
+  origlast 210
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov6
+  tile_color 0x4ecd25ff
+  xpos 15
+  ypos 338
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh070
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation e5e0659bc13f11f088bc2c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 15
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 210
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh070/work/comp/jor_sh070_comp_v016.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId 0XSAFMQC62
+ }
+ FrameHold {
+  firstFrame 31
+  name FrameHold7
+  xpos 15
+  ypos 434
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh060/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 18
+  origlast 18
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov5
+  tile_color 0x4ecd25ff
+  xpos -95
+  ypos 331
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh060
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation c636d983ba3211f08cdb2c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 12
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 18
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh060/work/comp/jor_sh060_comp_v014.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId R2ZYWRNO2M
+ }
+ FrameHold {
+  firstFrame 7
+  name FrameHold6
+  xpos -95
+  ypos 427
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh050/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 32
+  origlast 32
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov4
+  tile_color 0x4ecd25ff
+  xpos -205
+  ypos 339
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh050
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation fa77c9ccc14011f086d7dc215c051152
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 3
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 32
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh050/work/comp/jor_sh050_comp_v003.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId GWS1QT1SOS
+ }
+ FrameHold {
+  firstFrame 24
+  name FrameHold5
+  xpos -205
+  ypos 435
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh040/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 12
+  origlast 12
+  origset true
+  version 1
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov3
+  tile_color 0x4ecd25ff
+  xpos -312
+  ypos 335
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh040
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation f2a450d0c16c11f098d12c33586150bb
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 4
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 12
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh040/work/comp/jor_sh040_comp_v004.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId VVXQ0Y54RE
+ }
+ FrameHold {
+  firstFrame 17
+  name FrameHold4
+  xpos -312
+  ypos 431
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh030/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 79
+  origlast 79
+  origset true
+  version 1
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov2
+  tile_color 0x4ecd25ff
+  xpos -418
+  ypos 341
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh030
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation b685b17abfe411f09c77f889d279f102
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 10
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 79
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh030/work/comp/jor_sh030_comp_v012.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId GKJ2WRI6ZE
+ }
+ FrameHold {
+  firstFrame 17
+  name FrameHold3
+  xpos -418
+  ypos 437
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh020/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 27
+  origlast 27
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov1
+  tile_color 0x4ecd25ff
+  xpos -525
+  ypos 339
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh020
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation 276d009abfc311f0a472dc215c051152
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 17
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 27
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh020/work/comp/jor_sh020_comp_v020.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId MIKAM5KFEO
+ }
+ FrameHold {
+  firstFrame 21
+  name FrameHold2
+  xpos -525
+  ypos 435
+ }
+ Read {
+  inputs 0
+  file_type mov
+  file P:/10247_jordan/shots/sh010/work/comp/renders/nuke/render_Comp_Main/render_Comp_Main.baking.mov
+  last 106
+  origlast 106
+  origset true
+  colorspace "Output - sRGB"
+  name LoadClip_baking_FullRes_review_mov
+  tile_color 0x4ecd25ff
+  xpos -640
+  ypos 339
+  addUserKnob {20 AYON}
+  addUserKnob {20 AyonDataGroup l "Ayon Data Group" n 2}
+  addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+  addUserKnob {26 divd l "" +STARTLINE}
+  addUserKnob {1 avalon:schema l schema}
+  avalon:schema ayon:container-3.0
+  addUserKnob {1 avalon:id l id}
+  avalon:id pyblish.avalon.container
+  addUserKnob {1 avalon:name l name}
+  avalon:name render_Comp_Main
+  addUserKnob {1 avalon:namespace l namespace}
+  avalon:namespace sh010
+  addUserKnob {1 avalon:loader l loader}
+  avalon:loader LoadClip
+  addUserKnob {1 avalon:representation l representation}
+  avalon:representation cb4409a8b97611f094e82c33582a013a
+  addUserKnob {1 avalon:project_name l project_name}
+  avalon:project_name 10247_jordan
+  addUserKnob {1 avalon:version l version}
+  avalon:version 4
+  addUserKnob {1 avalon:frameStart l frameStart}
+  avalon:frameStart 1
+  addUserKnob {1 avalon:frameEnd l frameEnd}
+  avalon:frameEnd 106
+  addUserKnob {1 avalon:source l source}
+  avalon:source "\{root\[work]\}/10247_jordan/shots/sh010/work/comp/jor_sh010_comp_v005.nk"
+  addUserKnob {1 avalon:fps l fps}
+  avalon:fps 24.0
+  addUserKnob {1 avalon:handleStart l handleStart}
+  avalon:handleStart 0
+  addUserKnob {1 avalon:handleEnd l handleEnd}
+  avalon:handleEnd 0
+  addUserKnob {20 AyonDataGroup_End l "Ayon Data Group" n -1}
+  addUserKnob {1 containerId +HIDDEN}
+  containerId LA0DR8CZ8M
+ }
+ FrameHold {
+  firstFrame 45
+  name FrameHold1
+  xpos -640
+  ypos 435
+ }
+ ContactSheet {
+  inputs 26
+  width {{input.width*columns*resMult}}
+  height {{input.height*rows*resMult}}
+  rows {{"\[expr \{int( (sqrt( \[numvalue inputs] ) ) )\} ] * \[expr \{int( ceil ( (\[numvalue inputs] /(sqrt( \[numvalue inputs] ) ) )) )\} ] < \[numvalue inputs]   ? \[expr \{int( (sqrt( \[numvalue inputs] ) ) )\} ] +1 : \[expr \{int( (sqrt( \[numvalue inputs] ) ) )\} ]"}}
+  columns {{"\[expr \{int( ceil ( (\[numvalue inputs] /(sqrt( \[numvalue inputs] )) )) )\} ]"}}
+  center true
+  roworder TopBottom
+  name ContactSheetAuto
+  tile_color 0xff69f7ff
+  xpos -640
+  ypos 886
+  addUserKnob {20 Settings}
+  addUserKnob {7 resMult l "Resolution Multiplier" R 0.1 2}
+  resMult 1
+ }
+ Output {
+  name Output1
+  xpos -640
+  ypos 986
+ }
+end_group

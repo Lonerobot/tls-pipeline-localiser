@@ -1,0 +1,379 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name Edge_RimLight
+ autolabel nuke.thisNode().name()
+ tile_color 0xff6e00ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos 2270
+ ypos 662
+ addUserKnob {20 RimLight}
+ addUserKnob {41 channels T MatrixSUPER.channels}
+ addUserKnob {41 which l rotate T Switch1.which}
+ addUserKnob {26 ""}
+ addUserKnob {20 matrix_1 l Matrix n 1}
+ addUserKnob {41 matrix T MatrixSUPER.matrix}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 parameters l Parameters n 1}
+ addUserKnob {41 size l innerEdgeErode T FilterErode_inner.size}
+ addUserKnob {41 filter -STARTLINE T FilterErode_inner.filter}
+ addUserKnob {41 size_1 l innerEdgeBlur T Blur_inner.size}
+ addUserKnob {26 ""}
+ addUserKnob {6 keep_alpha l "keep original alpha" +STARTLINE}
+ addUserKnob {41 size_2 l "alpha Erode" T FilterErode_alpha.size}
+ addUserKnob {41 filter_1 l filter -STARTLINE T FilterErode_alpha.filter}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 email l @}
+ addUserKnob {26 created l "" +STARTLINE T "Tool created by Andrea Geremia"}
+ addUserKnob {26 ""}
+ addUserKnob {26 website l "" +STARTLINE T "andrea.geremia89@gmail.com\nwww.andreageremia.it/tutorial.html"}
+}
+ Dot {
+  inputs 0
+  name Dot16
+  xpos 303
+  ypos -114
+ }
+set Na2710c00 [stack 0]
+ Matrix {
+  matrix {
+      {0 1 1}
+      {-1 0 1}
+      {-1 -1 0}
+    }
+  name Matrix15
+  xpos 269
+  ypos -1
+ }
+push $Na2710c00
+ Dot {
+  name Dot1
+  xpos 170
+  ypos -114
+ }
+set Na2710400 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 1}
+      {-1 0 1}
+      {-1 -1 -1}
+    }
+  name Matrix14
+  xpos 136
+  ypos -2
+ }
+push $Na2710400
+ Dot {
+  name Dot14
+  xpos 40
+  ypos -114
+ }
+set N6f371c00 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 1}
+      {0 0 0}
+      {-1 -1 -1}
+    }
+  name Matrix13
+  xpos 6
+  ypos -2
+ }
+push $N6f371c00
+ Dot {
+  name Dot13
+  xpos -106
+  ypos -114
+ }
+set N6f371400 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 1}
+      {1 0 -1}
+      {-1 -1 -1}
+    }
+  name Matrix12
+  xpos -140
+ }
+push $N6f371400
+ Dot {
+  name Dot12
+  xpos -240
+  ypos -114
+ }
+set N6f370c00 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 0}
+      {1 0 -1}
+      {0 -1 -1}
+    }
+  name Matrix11
+  xpos -274
+  ypos -2
+ }
+push $N6f370c00
+ Dot {
+  name Dot11
+  xpos -391
+  ypos -114
+ }
+set N6f370400 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 -1}
+      {0 0 0}
+      {1 -1 -1}
+    }
+  name Matrix10
+  xpos -425
+  ypos -2
+ }
+push $N6f370400
+ Dot {
+  name Dot10
+  xpos -523
+  ypos -114
+ }
+set N5610fc00 [stack 0]
+ Matrix {
+  matrix {
+      {1 1 -1}
+      {1 0 -1}
+      {1 -1 -1}
+    }
+  name Matrix9
+  xpos -557
+  ypos -5
+ }
+push $N5610fc00
+ Dot {
+  name Dot9
+  xpos -672
+  ypos -114
+ }
+set N5610f400 [stack 0]
+ Matrix {
+  matrix {
+      {1 0 -1}
+      {1 0 -1}
+      {1 0 -1}
+    }
+  name Matrix8
+  xpos -706
+  ypos -2
+ }
+push $N5610f400
+ Dot {
+  name Dot8
+  xpos -812
+  ypos -114
+ }
+set N5610ec00 [stack 0]
+ Matrix {
+  matrix {
+      {1 -1 -1}
+      {1 0 -1}
+      {1 1 -1}
+    }
+  name Matrix7
+  xpos -846
+  ypos -2
+ }
+push $N5610ec00
+ Dot {
+  name Dot15
+  xpos -917
+  ypos -114
+ }
+set N5610e400 [stack 0]
+ Matrix {
+  matrix {
+      {0 -1 -1}
+      {1 0 -1}
+      {1 1 0}
+    }
+  name Matrix6
+  xpos -951
+  ypos -3
+ }
+push $N5610e400
+ Dot {
+  name Dot7
+  xpos -1023
+  ypos -114
+ }
+set N3ebb7c00 [stack 0]
+ Matrix {
+  matrix {
+      {-1 -1 -1}
+      {1 0 -1}
+      {1 1 1}
+    }
+  name Matrix5
+  xpos -1057
+  ypos -2
+ }
+push $N3ebb7c00
+ Dot {
+  name Dot6
+  xpos -1133
+  ypos -114
+ }
+set N3ebb7400 [stack 0]
+ Matrix {
+  matrix {
+      {-1 -1 -1}
+      {0 0 0}
+      {1 1 1}
+    }
+  name Matrix4
+  xpos -1167
+  ypos -3
+ }
+push $N3ebb7400
+ Dot {
+  name Dot5
+  xpos -1254
+  ypos -114
+ }
+set N3ebb6c00 [stack 0]
+ Matrix {
+  matrix {
+      {-1 -1 -1}
+      {-1 0 1}
+      {1 1 1}
+    }
+  name Matrix3
+  xpos -1288
+  ypos -3
+ }
+push $N3ebb6c00
+ Dot {
+  name Dot4
+  xpos -1375
+  ypos -114
+ }
+set N3ebb6400 [stack 0]
+ Matrix {
+  matrix {
+      {-1 -1 0}
+      {-1 0 1}
+      {0 1 1}
+    }
+  name Matrix2
+  xpos -1409
+  ypos -2
+ }
+push $N3ebb6400
+ Dot {
+  name Dot3
+  xpos -1491
+  ypos -114
+ }
+set Na27ddc00 [stack 0]
+ Matrix {
+  matrix {
+      {-1 -1 1}
+      {-1 0 1}
+      {-1 1 1}
+    }
+  name Matrix1
+  xpos -1525
+  ypos -2
+ }
+push $Na27ddc00
+ Dot {
+  name Dot2
+  xpos -1624
+  ypos -114
+ }
+ Matrix {
+  matrix {
+      {-1 0 1}
+      {-1 0 1}
+      {-1 0 1}
+    }
+  name Matrix0
+  xpos -1658
+  ypos -2
+ }
+ Switch {
+  inputs 16
+  which 2
+  name Switch1
+  xpos -706
+  ypos 288
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 332
+  ypos 170
+ }
+ Dot {
+  name Dot18
+  xpos 366
+  ypos 217
+ }
+set Na27dc400 [stack 0]
+ Dot {
+  name Dot19
+  xpos 539
+  ypos 217
+ }
+ FilterErode {
+  channels all
+  size 0
+  name FilterErode_alpha
+  xpos 505
+  ypos 363
+ }
+ Dot {
+  name Dot17
+  xpos 539
+  ypos 554
+ }
+push $Na27dc400
+ Matrix {
+  channels rgba
+  matrix {
+      {{"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(0,0)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(0,1)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(0,2)]"}}
+      {{"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(1,0)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(1,1)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(1,2)]"}}
+      {{"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(2,0)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(2,1)]"} {"\[python nuke.toNode('Matrix'\\ +\\nstr(int(nuke.toNode('Switch1').knob('which').value()))).knob('matrix').value(2,2)]"}}
+    }
+  name MatrixSUPER
+  xpos 332
+  ypos 274
+ }
+ FilterErode {
+  channels {{{parent.MatrixSUPER.channels}}}
+  size -5
+  name FilterErode_inner
+  xpos 332
+  ypos 391
+ }
+ Blur {
+  channels {{{parent.MatrixSUPER.channels}}}
+  quality 30
+  name Blur_inner
+  xpos 332
+  ypos 478
+ }
+ Merge2 {
+  inputs 2
+  operation in
+  name Merge2
+  xpos 332
+  ypos 551
+  disable {{!parent.keep_alpha}}
+ }
+ Output {
+  name Output1
+  xpos 332
+  ypos 690
+ }
+end_group

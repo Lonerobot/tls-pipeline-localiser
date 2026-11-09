@@ -1,0 +1,262 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 400
+ origlast 400
+ origset true
+ name Read51
+ selected true
+ xpos -5273
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 251
+ origlast 251
+ origset true
+ name Read52
+ selected true
+ xpos -5163
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ name Read53
+ selected true
+ xpos -5053
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 111
+ origlast 111
+ origset true
+ name Read54
+ selected true
+ xpos -5053
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Blowout.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 71
+ origlast 71
+ origset true
+ name Read55
+ selected true
+ xpos -4943
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Falling_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 235
+ origlast 235
+ origset true
+ name Read56
+ selected true
+ xpos -4833
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Falling_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 187
+ origlast 187
+ origset true
+ name Read57
+ selected true
+ xpos -4723
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 376
+ origlast 376
+ origset true
+ name Read58
+ selected true
+ xpos -4613
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 301
+ origlast 301
+ origset true
+ name Read59
+ selected true
+ xpos -4503
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_Wave_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 201
+ origlast 201
+ origset true
+ name Read60
+ selected true
+ xpos -4393
+ ypos -3480
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 170
+ origlast 170
+ origset true
+ name Read61
+ selected true
+ xpos -5383
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 226
+ origlast 226
+ origset true
+ name Read62
+ selected true
+ xpos -5273
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_06.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ name Read63
+ selected true
+ xpos -5163
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_07.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ name Read64
+ selected true
+ xpos -5053
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Dust_Wave_08.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ name Read65
+ selected true
+ xpos -5053
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ name Read66
+ selected true
+ xpos -4943
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 151
+ origlast 151
+ origset true
+ name Read67
+ selected true
+ xpos -4833
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 101
+ origlast 101
+ origset true
+ name Read68
+ selected true
+ xpos -4723
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_B._Dust_Elements/Particle_Stream_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 111
+ origlast 111
+ origset true
+ name Read69
+ selected true
+ xpos -4613
+ ypos -3312
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/07_A._Dust_Elements/Dust_AtCam_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 226
+ origlast 226
+ origset true
+ name Read50
+ selected true
+ xpos -5376
+ ypos -3495
+}

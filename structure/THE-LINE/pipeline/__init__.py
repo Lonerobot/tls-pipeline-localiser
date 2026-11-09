@@ -6,13 +6,28 @@ import sys
 
 
 def start(host, series):
-    """Load a prepared local bundle, expose it, and run its entry point without syncing."""
-    from .localiser import load_prepared_release, expose_environment
+    """Load the bundle this session should use (local files only), expose it, and run its entry point.
 
+    Returns None, loading nothing, when this host and series isn't enabled in the local config."""
+    from .localiser import load_prepared_release, expose_environment, host_enabled
+
+    if not host_enabled(host, series):
+        print("TLS pipeline: {} {} is not enabled in the local config; not loading".format(host, series))
+        return None
     release = load_prepared_release(host, series)
-    expose_environment(release)  # sets TLS_PIPELINE_<HOST> to the resolved bundle path
+    _announce(release)
+    expose_environment(release)  # sets TLS_PIPELINE_<HOST> (bundle path), _RELEASE and _MODE for this session
     _run_entry(release)
     return release
+
+
+def _announce(release):
+    """Say so loudly when a session isn't running the selected, published release."""
+    if release.source == "dev":
+        source = os.environ.get("TLS_PIPELINE_{}_SOURCE".format(release.host.upper()), "")
+        print("TLS pipeline: RUNNING UNPUBLISHED SOURCE for {}: {}".format(release.host, source))
+    elif release.source == "pinned":
+        print("TLS pipeline: PINNED {} bundle {} (not the selected default)".format(release.host, release.release_id))
 
 
 def _run_entry(release):

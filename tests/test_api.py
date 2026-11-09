@@ -1,14 +1,17 @@
 import json
 import unittest
+from dataclasses import replace
 
 from localiser import (
     ConfigError,
+    LocalisedRelease,
     ReleaseUnavailableError,
     ensure_local_release,
     expose_environment,
     host_variable,
     localise,
 )
+from localiser.api import mode_variable, release_mode, release_variable
 from localiser.layout import DataLayout
 from localiser.resolve import SOURCE_LAST_KNOWN, SOURCE_OVERRIDE, SOURCE_STUDIO, override_variable
 
@@ -62,13 +65,34 @@ class LocaliseTests(WorkstationTestCase):
             ensure_local_release("maya", SERIES, {"TLS_PIPELINE": str(self.tmp / "nowhere")})
         self.assertIn("installation or repair", str(raised.exception))
 
-    def test_expose_environment_sets_the_resolved_path_for_that_host_only(self):
+    def test_expose_environment_sets_the_path_release_and_mode_for_that_host_only(self):
         self.write_studio_config({"maya": "2.9.0"})
         self.publish("maya", "2.9.0")
         environ = {}
         expose_environment(self.go(), environ)
-        self.assertEqual(environ, {"TLS_PIPELINE_MAYA": str(self.data / "hosts" / "maya" / "2.9.0")})
+        self.assertEqual(
+            environ,
+            {
+                "TLS_PIPELINE_MAYA": str(self.data / "hosts" / "maya" / "2.9.0"),
+                "TLS_PIPELINE_MAYA_RELEASE": "2.9.0",
+                "TLS_PIPELINE_MAYA_MODE": "studio",
+            },
+        )
         self.assertEqual(host_variable("nuke"), "TLS_PIPELINE_NUKE")
+        self.assertEqual(release_variable("nuke"), "TLS_PIPELINE_NUKE_RELEASE")
+        self.assertEqual(mode_variable("nuke"), "TLS_PIPELINE_NUKE_MODE")
+
+    def test_the_mode_names_pinned_and_dev_sessions_and_calls_everything_else_studio(self):
+        base = LocalisedRelease("maya", SERIES, "1.0", "prepared", self.data, self.data)
+        modes = {
+            source: release_mode(replace(base, source=source))
+            for source in ("prepared", "pinned", "dev", SOURCE_STUDIO, SOURCE_OVERRIDE, SOURCE_LAST_KNOWN)
+        }
+        self.assertEqual(
+            modes,
+            {"prepared": "studio", "pinned": "pinned", "dev": "dev", SOURCE_STUDIO: "studio",
+             SOURCE_OVERRIDE: "studio", SOURCE_LAST_KNOWN: "studio"},
+        )
 
     def test_offline_launch_after_caching_still_works(self):
         config = self.write_studio_config({"maya": "2.9.0"})

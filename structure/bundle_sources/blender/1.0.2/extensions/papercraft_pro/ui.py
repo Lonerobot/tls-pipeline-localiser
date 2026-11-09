@@ -1,0 +1,355 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+import bpy
+
+from . import build, live
+from . import targets as T
+from .editor import is_running as _editing
+
+
+def _edit_cuts_button(layout, text="Edit Cuts"):
+    """While the tool runs, the same button reads Done and finishes it."""
+    if _editing():
+        sub = layout.row(align=True)
+        sub.alert = True
+        sub.operator("papercraft.edit_cuts", text="Done Editing", icon="CHECKMARK", depress=True)
+    else:
+        layout.operator("papercraft.edit_cuts", text=text, icon="SCULPTMODE_HLT")
+
+
+class _Base:
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Papercraft"
+
+
+class _Child(_Base):
+    bl_parent_id = "PAPERCRAFT_PT_main"
+
+    @classmethod
+    def poll(cls, context):
+        return T.target(context) is not None
+
+
+class PAPERCRAFT_PT_main(_Base, bpy.types.Panel):
+    bl_label = "Papercraft Pro"
+
+    def draw(self, context):
+        layout = self.layout
+        obj = T.target(context)
+        if obj is None:
+            layout.label(text="Select a mesh to unfold", icon="INFO")
+            others = T.sources(context.scene)
+            if others:
+                layout.label(text=f"{len(others)} model(s) unfolded in this scene")
+            return
+        props = obj.papercraft
+        box = layout.box()
+        row = box.row()
+        row.label(text=obj.name, icon="MESH_DATA")
+        if props.role == T.ROLE_SOURCE:
+            row.operator("papercraft.clear", text="", icon="TRASH")
+
+        row = layout.row(align=True)
+        row.scale_y = 1.4
+        row.operator("papercraft.unfold", icon="MOD_UVPROJECT")
+        row.prop(props, "live", text="", icon="FILE_REFRESH", toggle=True)
+        row = layout.row(align=True)
+        row.operator("papercraft.frame_layout", icon="VIEW_ORTHO")
+        _edit_cuts_button(row)
+
+        if props.role == T.ROLE_SOURCE and props.info_islands:
+            box = layout.box()
+            col = box.column(align=True)
+            col.label(text=f"{props.info_islands} piece(s), {props.info_glue} glue edges")
+            entry = live.cached(obj)
+            if entry is not None and props.priority == "auto" and entry.res.priority:
+                col.label(text="Auto chose: " + (
+                    "Fewest Pieces" if entry.res.priority == "long" else "Seams on Creases"))
+            icon = "CHECKMARK" if props.info_fits else "ERROR"
+            col.label(text=f"{props.info_pages} page(s)", icon=icon)
+            col.label(text=f"Model size {props.info_size_mm:.0f} mm")
+            col.label(text=f"1 unit = {props.info_scale:.2f} mm")
+        if props.info_message:
+            box = layout.box()
+            for part in props.info_message.split("; "):
+                box.label(text=part, icon="INFO")
+
+        if context.mode == "EDIT_MESH":
+            box = layout.box()
+            box.label(text="Cuts (select edges)")
+            row = box.row(align=True)
+            row.operator("mesh.mark_seam", text="Cut Here").clear = False
+            row.operator("mesh.mark_seam", text="Join").clear = True
+            if not props.live:
+                box.label(text="Turn on Live Layout to see changes", icon="INFO")
+
+
+class PAPERCRAFT_PT_cuts(_Child, bpy.types.Panel):
+    bl_label = "Cut Along"
+
+    def draw(self, context):
+        layout = self.layout
+        props = T.target(context).papercraft
+        col = layout.column(align=True)
+        col.prop(props, "cut_seams")
+        col.prop(props, "cut_materials")
+        col.prop(props, "cut_colors")
+        col.prop(props, "cut_sharp")
+        box = layout.box()
+        col = box.column(align=True)
+        _edit_cuts_button(col, "Edit Cuts & Tabs")
+        col.label(text="Click edge: cut / join")
+        col.label(text="Click tab: other side of seam")
+        col.label(text="Shift+click tab: inside / outside")
+        col.label(text="Click open edge: flap on / off")
+
+
+class PAPERCRAFT_PT_paper(_Child, bpy.types.Panel):
+    bl_label = "Paper & Scale"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+        obj = T.target(context)
+        props = obj.papercraft
+        col = layout.column()
+        col.prop(props, "paper")
+        if props.paper == "CUSTOM":
+            sub = col.column(align=True)
+            sub.prop(props, "custom_w")
+            sub.prop(props, "custom_h")
+        col.prop(props, "landscape")
+        col.prop(props, "margin")
+        col.prop(props, "spacing")
+        col.prop(props, "arrange")
+        col.separator()
+        col.prop(props, "scale_mode")
+        if props.scale_mode == "FIT":
+            col.prop(props, "pages")
+        elif props.scale_mode == "HEIGHT":
+            col.prop(props, "model_size_mm")
+        else:
+            col.prop(props, "ratio")
+        if T.output(obj, T.ROLE_LAYOUT) is not None:
+            layout.operator("papercraft.reset_layout", icon="LOOP_BACK")
+
+
+class PAPERCRAFT_PT_material(_Child, bpy.types.Panel):
+    bl_label = "Material"
+
+    def draw(self, context):
+        import math
+
+        from .core.board import groove_width, mitre_inset
+
+        layout = self.layout
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+        props = T.target(context).papercraft
+        col = layout.column()
+        col.prop(props, "board")
+        col.prop(props, "board_thickness")
+        col.prop(props, "fold_style")
+        if props.fold_style == "CREASE":
+            col.prop(props, "fold_radius")
+        col.prop(props, "join_style")
+        col.prop(props, "cut_valleys")
+        t = props.board_thickness
+        if t >= 1.0:
+            box = layout.box()
+            box.scale_y = 0.8
+            right = math.radians(90)
+            if props.fold_style == "VGROOVE":
+                box.label(text=f"90° fold: V-groove {groove_width(t, right):.1f} mm wide",
+                          icon="MOD_BEVEL")
+            elif props.fold_radius > 0:
+                from .core.board import bend_shortening
+
+                box.label(text=f"90° fold: pieces {bend_shortening(props.fold_radius, right):.2f} "
+                               "mm shorter", icon="MOD_BEVEL")
+            if props.join_style == "MITRE":
+                box.label(text=f"90° corner: back bevelled {mitre_inset(t, right):.1f} mm",
+                          icon="MOD_BEVEL")
+            if props.fold_style == "VGROOVE" or props.join_style == "MITRE":
+                box.label(text="Export Back Marks for the back of the board", icon="INFO")
+
+
+class PAPERCRAFT_PT_pieces(_Child, bpy.types.Panel):
+    bl_label = "Pieces & Tabs"
+    bl_options = {"DEFAULT_CLOSED"}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+        props = T.target(context).papercraft
+        col = layout.column()
+        col.prop(props, "priority")
+        col.prop(props, "valley_bias")
+        col.prop(props, "max_faces")
+        col.separator()
+        sub = col.column()
+        sub.active = props.join_style == "TABS"
+        sub.prop(props, "tab_height")
+        sub.prop(props, "tab_angle")
+
+
+class PAPERCRAFT_PT_animate(_Child, bpy.types.Panel):
+    bl_label = "Fold Animation"
+
+    def draw(self, context):
+        layout = self.layout
+        obj = T.target(context)
+        arm = T.output(obj, T.ROLE_RIG)
+        if arm is None:
+            props = obj.papercraft
+            col = layout.column()
+            col.use_property_split = True
+            col.use_property_decorate = False
+            col.prop(props, "fold_one_by_one")
+            sub = col.column()
+            sub.active = props.fold_one_by_one
+            sub.prop(props, "fold_overlap")
+            col.prop(props, "paper_thickness")
+            layout.operator("papercraft.build_rig", icon="ARMATURE_DATA")
+            return
+        entry = live.cached(obj)
+        props = obj.papercraft
+        col = layout.column()
+        col.use_property_split = True
+        col.use_property_decorate = False
+        col.prop(props, "fold_one_by_one")
+        sub = col.column()
+        sub.active = props.fold_one_by_one
+        sub.prop(props, "fold_overlap")
+        col.prop(props, "paper_thickness")
+        if build.rig_is_stale(obj, entry):
+            box = layout.box()
+            box.alert = True
+            box.label(text="Rig is out of date: Rebuild Rig", icon="ERROR")
+        row = layout.row(align=True)
+        row.operator("papercraft.build_rig", text="Rebuild Rig", icon="FILE_REFRESH")
+        row.operator("papercraft.remove_rig", text="", icon="TRASH")
+        if "fold" in arm:
+            col = layout.column(align=True)
+            col.prop(arm, '["fold"]', text="Fold", slider=True)
+            col.prop(arm, '["assemble"]', text="Assemble", slider=True)
+            layout.operator("papercraft.animate", icon="KEY_HLT")
+
+
+def draw_export(layout, props):
+    """Export settings (sidebar panel and the export file dialog)."""
+    layout.use_property_split = True
+    layout.use_property_decorate = False
+    col = layout.column()
+    col.prop(props, "export_content")
+    art_cut = props.export_content == "ART_CUT"
+    if props.export_content not in ("PRINT", "ART_CUT"):
+        col.prop(props, "line_width")
+        col.prop(props, "dashed_folds")
+        col.prop(props, "fold_min_angle")
+        if props.dashed_folds:
+            col.label(text="Cutters score each dash separately", icon="INFO")
+        if props.export_content == "LINES":
+            col.label(text="Creases are red, cuts black", icon="INFO")
+        if props.export_content == "BACK":
+            col.prop(props, "glue_guides")
+        return
+    col.prop(props, "texture_mode")
+    if props.texture_mode == "BAKE":
+        col.prop(props, "bake_pass")
+        col.prop(props, "bake_dpi")
+    elif props.texture_mode == "IMAGE":
+        col.prop(props, "texture_max")
+    if props.texture_mode != "WHITE":
+        col.prop(props, "bleed")
+        if not art_cut:
+            col.prop(props, "tab_texture")
+    if props.texture_mode == "WHITE" or not (props.tab_texture or art_cut):
+        col.prop(props, "tab_fill")
+    col.separator()
+    col.prop(props, "number_mode")
+    sub = col.column()
+    sub.active = props.number_mode != "OFF"
+    sub.prop(props, "piece_letters")
+    col.prop(props, "assembly_page")
+    col.prop(props, "glue_guides")
+    sub = col.column()
+    sub.active = props.glue_guides
+    sub.prop(props, "glue_guides_front")
+    col.separator()
+    col.prop(props, "line_style")
+    if props.line_style == "CUSTOM":
+        col.prop(props, "line_color")
+        col.prop(props, "line_opacity")
+    sub = col.column()
+    sub.active = props.line_style != "NONE"
+    sub.prop(props, "line_width")
+    if not art_cut:
+        sub.prop(props, "dashed_folds")
+        sub.prop(props, "fold_min_angle")
+
+
+class PAPERCRAFT_PT_scene(_Child, bpy.types.Panel):
+    bl_label = "Scene & Render"
+    bl_options = {"DEFAULT_CLOSED"}
+
+    def draw(self, context):
+        from . import scene_setup as S
+
+        layout = self.layout
+        obj = T.target(context)
+        scene = context.scene
+        layout.operator("papercraft.setup_scene", icon="SCENE")
+        look = scene.get("papercraft_render_look")
+        names = {k: n for k, n, *_ in S.LOOKS}
+        row = layout.row(align=True)
+        row.operator_menu_enum("papercraft.render_look", "look",
+                               text=f"Render Look: {names.get(look, 'not set')}", icon="LIGHT_SUN")
+        row.operator("papercraft.frame_camera", text="", icon="VIEW_CAMERA")
+        layout.prop(obj.papercraft, "true_colours")
+        col = layout.column(align=True)
+        col.label(text="Show in Renders")
+        row = col.row(align=True)
+        row.prop(obj, "hide_render", text="Model", invert_checkbox=True, toggle=True)
+        for role, label in ((T.ROLE_LAYOUT, "Layout"), (T.ROLE_FOLDING, "Fold Rig")):
+            out = T.output(obj, role)
+            sub = row.row(align=True)
+            if out is None:
+                sub.enabled = False
+                sub.label(text=label)
+            else:
+                sub.prop(out, "hide_render", text=label, invert_checkbox=True, toggle=True)
+
+
+class PAPERCRAFT_PT_export(_Child, bpy.types.Panel):
+    bl_label = "Print & Export"
+
+    def draw(self, context):
+        draw_export(self.layout, T.target(context).papercraft)
+        row = self.layout.row(align=True)
+        row.operator("papercraft.export_svg", text="Export SVG Pages", icon="EXPORT")
+        row.operator("papercraft.export_pdf", text="Export PDF", icon="FILE")
+
+
+classes = (
+    PAPERCRAFT_PT_main,
+    PAPERCRAFT_PT_cuts,
+    PAPERCRAFT_PT_paper,
+    PAPERCRAFT_PT_material,
+    PAPERCRAFT_PT_pieces,
+    PAPERCRAFT_PT_animate,
+    PAPERCRAFT_PT_scene,
+    PAPERCRAFT_PT_export,
+)
+
+
+def register():
+    for c in classes:
+        bpy.utils.register_class(c)
+
+
+def unregister():
+    for c in reversed(classes):
+        bpy.utils.unregister_class(c)

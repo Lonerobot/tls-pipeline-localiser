@@ -1,0 +1,35 @@
+flowchart TB
+    classDef you fill:#fff4d6,stroke:#d6a419,color:#1f2933
+    classDef build fill:#e3f2fd,stroke:#5b9bd5,color:#1f2933
+    classDef sync fill:#e6f4ea,stroke:#4caf73,color:#1f2933
+
+    subgraph content ["Written by you: sources and config"]
+        direction LR
+        src["<b>bundle_sources/</b><br/>editable source,<br/>one folder per release"]:::you
+        shared["<b>shared_sources/</b><br/>packages every bundle gets,<br/>such as tls_common"]:::you
+        remotecfg["<b>fake_remote_repository/config.json</b><br/>studio default version<br/>per host and series"]:::you
+        localcfg["<b>pipeline/config.json</b><br/>where the remote and<br/>bundle store are"]:::you
+    end
+
+    subgraph built ["Written by build_test_workstation.py"]
+        direction LR
+        hosts["<b>fake_remote_repository/hosts/</b><br/>pipeline.zip + manifest.json per release<br/><i>wiped and republished every run</i>"]:::build
+        core["<b>pipeline/localiser/</b><br/>copy of src/localiser"]:::build
+    end
+
+    subgraph synced ["Written by localiser sync"]
+        direction LR
+        bundles["<b>pipeline/bundles/hosts/</b><br/>extracted releases"]:::sync
+        state["<b>pipeline/bundles/state/</b><br/>prepared selection, manifests,<br/>last-known config"]:::sync
+    end
+
+    subgraph tools ["Written by you: stubs and tools"]
+        direction LR
+        boot["<b>pipeline/bootstrap/host/</b><br/>stable stubs the DCCs<br/>find by env var"]:::you
+        entry["<b>pipeline/__init__.py</b><br/>shared entry<br/>the stubs call"]:::you
+        run["<b>run_host.py</b><br/>launches a DCC with<br/>the env vars"]:::you
+    end
+
+    content -- "publish" --> built
+    built -- "sync installs" --> synced
+    synced ~~~ tools

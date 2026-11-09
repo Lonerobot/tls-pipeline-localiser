@@ -1,0 +1,1847 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-1" y="-9" w="2560" h="1361" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="2510" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1316"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="0"/>
+                <dock id=""/>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="-1920" y="0" w="1920" h="1009" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="442"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+            <split size="1474"/>
+            <splitter orientation="2">
+                <split size="860"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="145"/>
+                <dock id="" activePageId="DopeSheet.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name "//NGQNAP2/The Line/TOOLS/CompTools/nuke/NukeTools_Library/03_ToolSets/Toban/Toban_CharTemplate.nk"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xd3d3d3ff
+ label CHAR_COREJJ
+ note_font "Helvetica Bold"
+ note_font_size 25
+ xpos 500
+ ypos -1905
+ bookmark true
+}
+Dot {
+ inputs 0
+ name Dot41
+ xpos 434
+ ypos -2046
+}
+set Nb020f800 [stack 0]
+Dot {
+ name Dot43
+ xpos 104
+ ypos -2046
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L080_eye_hl/v001/tob_sh090_render2d_colour_Corejj_L080_eye_hl_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png11
+ tile_color 0x4ecd25ff
+ xpos -810
+ ypos -5007
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L080_eye_hl
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81e84b21c408d527c4e
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId A0MCCEJ6GV
+}
+Dot {
+ name Dot17
+ label "EYE HIGHLIGHT"
+ note_font_size 40
+ xpos -776
+ ypos -4806
+}
+Premult {
+ name Premult24
+ xpos -810
+ ypos -4737
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L060_line/v001/tob_sh090_render2d_colour_Corejj_L060_line_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png12
+ tile_color 0x4ecd25ff
+ xpos -1360
+ ypos -5007
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L060_line
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81c84b21c408d527be0
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId PFKQF4MB42
+}
+Dot {
+ name Dot16
+ label LINE
+ note_font_size 40
+ xpos -1326
+ ypos -4806
+}
+Dot {
+ name Dot5
+ xpos -1326
+ ypos -4446
+}
+set Nb020d400 [stack 0]
+Dot {
+ name Dot11
+ xpos -1546
+ ypos -4446
+}
+Blur {
+ size 3.3
+ name Blur2
+ xpos -1580
+ ypos -4383
+}
+set Cb020cc00 [stack 0]
+push $Nb020d400
+Merge2 {
+ inputs 2
+ mix 0.415
+ name Merge3
+ xpos -1360
+ ypos -4377
+}
+Grade {
+ black {0.03622680902 0.00174840854 0.001198070822 1}
+ black_panelDropped true
+ unpremult rgba.alpha
+ name Grade_linecolour
+ xpos -1360
+ ypos -4167
+}
+Grade {
+ channels alpha
+ whitepoint 0.85
+ white_clamp true
+ name Grade18
+ xpos -1360
+ ypos -2943
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L040_shad/v001/tob_sh090_render2d_colour_Corejj_L040_shad_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png14
+ tile_color 0x4ecd25ff
+ xpos -4110
+ ypos -4455
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L040_shad
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81a84b21c408d527b72
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId 8EPTBWV4VD
+}
+Dot {
+ name Dot3
+ xpos -4076
+ ypos -4278
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L030_shad/v001/tob_sh090_render2d_colour_Corejj_L030_shad_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png15
+ tile_color 0x4ecd25ff
+ xpos -3780
+ ypos -5031
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L030_shad
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81984b21c408d527b3b
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId Q18QB8W6ER
+}
+Dot {
+ name Dot14
+ label SHAD
+ note_font_size 40
+ xpos -3746
+ ypos -4806
+}
+Merge2 {
+ inputs 2
+ name Merge39
+ xpos -3780
+ ypos -4281
+}
+Dot {
+ name Dot45
+ xpos -3746
+ ypos -3990
+}
+set Nb01b9c00 [stack 0]
+Dot {
+ name Dot46
+ label SHADOW_LINE
+ note_font_size 40
+ xpos -2316
+ ypos -3990
+}
+Dot {
+ name Dot55
+ label "SHADOW LINE THICKNESS"
+ xpos -2316
+ ypos -3822
+}
+set Nb01b9400 [stack 0]
+Erode {
+ size 3.5
+ name Erode2
+ xpos -2570
+ ypos -3831
+}
+Dot {
+ name Dot9
+ xpos -2536
+ ypos -3750
+}
+push $Nb01b9400
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge30
+ xpos -2350
+ ypos -3753
+}
+Dot {
+ name Dot21
+ xpos -2316
+ ypos -3575
+}
+set Nb01b8400 [stack 0]
+Dot {
+ name Dot18
+ xpos -2659
+ ypos -3575
+}
+set Nb016bc00 [stack 0]
+Noise {
+ output {-rgba.red rgba.green -rgba.blue rgba.alpha}
+ replace true
+ size 3.7
+ center {1536 653}
+ name Noise2
+ xpos -2583
+ ypos -3519
+}
+push $Nb016bc00
+Noise {
+ output {rgba.red -rgba.green -rgba.blue rgba.alpha}
+ replace true
+ size 2.9
+ center {1536 653}
+ name Noise1
+ xpos -2693
+ ypos -3519
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge7
+ xpos -2693
+ ypos -3417
+}
+push $Nb01b8400
+Shuffle2 {
+ inputs 2
+ fromInput1 {{0} B A}
+ fromInput2 {{1} B A}
+ in2 rgba
+ out2 forward
+ mappings "6 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3 rgba.red 1 0 forward.u 1 0 rgba.green 1 1 forward.v 1 1"
+ name Shuffle3
+ xpos -2350
+ ypos -3417
+}
+IDistort {
+ uv forward
+ uv_offset 0.185
+ uv_scale 4.6
+ name IDistort1
+ xpos -2350
+ ypos -3351
+}
+push $Nb01b9c00
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L050_line/v001/tob_sh090_render2d_colour_Corejj_L050_line_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png13
+ tile_color 0x4ecd25ff
+ xpos -5870
+ ypos -4575
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L050_line
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81b84b21c408d527ba9
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId G23OM1EUDJ
+}
+Premult {
+ name Premult19
+ xpos -5870
+ ypos -4473
+}
+Dot {
+ name Dot35
+ xpos -5836
+ ypos -4230
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L010_col/v001/tob_sh090_render2d_colour_Corejj_L010_col_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png17
+ tile_color 0x4ecd25ff
+ xpos -5430
+ ypos -5031
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L010_col
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81884b21c408d527acd
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId 5RJZFOVR2K
+}
+Dot {
+ name Dot12
+ label COLOUR
+ note_font_size 40
+ xpos -5396
+ ypos -4806
+}
+Premult {
+ name Premult21
+ xpos -5430
+ ypos -4737
+}
+Merge2 {
+ inputs 2
+ name Merge42
+ xpos -5430
+ ypos -4233
+}
+Premult {
+ name Premult18
+ xpos -5430
+ ypos -3945
+}
+Dot {
+ name Dot49
+ xpos -5396
+ ypos -3894
+}
+set Nb010f800 [stack 0]
+Dot {
+ name Dot50
+ xpos -4296
+ ypos -3894
+}
+Dot {
+ name Dot30
+ xpos -4296
+ ypos -3774
+}
+set Nb010f000 [stack 0]
+Dot {
+ name Dot31
+ xpos -4186
+ ypos -3774
+}
+set Nb010ec00 [stack 0]
+Dot {
+ name Dot32
+ xpos -4076
+ ypos -3774
+}
+set Nb010e800 [stack 0]
+Dot {
+ name Dot57
+ xpos -3966
+ ypos -3774
+}
+HSVTool {
+ srccolor {0.2422810793 0.304987222 0.3185467422}
+ dstcolor {0.0595112294 0.0742135644 0.07818741351}
+ huesrcs {190.6676025 190.6676025}
+ huerotation 2.098968506
+ satsrcs {0.2394174933 0.2394174933}
+ saturation -0.0005531609058
+ satrolloffrange 0.3
+ brtsrcs {0.3185467422 0.3185467422}
+ brightness -0.2403593361
+ brtrolloffrange 0.3
+ name HSVTool_LightblueJacket
+ xpos -4000
+ ypos -3735
+}
+Premult {
+ name Premult20
+ xpos -4000
+ ypos -3681
+}
+Multiply {
+ value 0
+ name Multiply6
+ xpos -4000
+ ypos -3633
+ disable true
+}
+push $Nb010f000
+HSVTool {
+ srccolor {0.4969329238 0.3419143856 0.2704977095}
+ dstcolor {0.2195262462 0.1022417471 0.08437620848}
+ huesrcs {18.92373657 18.92373657}
+ huerotation -10.99231243
+ huerolloffrange 3
+ satsrcs {0.4556655586 0.4556655586}
+ saturation 0.1599785984
+ satrolloffrange 0.3
+ brtsrcs {0.4969329238 0.4969329238}
+ brightness -0.2774066925
+ brtrolloffrange 0.3
+ name HSVTool_Skin
+ xpos -4330
+ ypos -3735
+}
+Premult {
+ name Premult16
+ xpos -4330
+ ypos -3681
+}
+Multiply {
+ value 0
+ name Multiply2
+ xpos -4330
+ ypos -3633
+ disable true
+}
+push $Nb010e800
+HSVTool {
+ srccolor {0.03560131043 0.04091518745 0.0595112294}
+ dstcolor {0.01599629037 0.01850021817 0.02518685535}
+ huesrcs {226.6652527 226.6652527}
+ huerotation -3.011978149
+ satsrcs {0.4017715454 0.4017715454}
+ saturation -0.03687626123
+ satrolloffrange 0.3
+ brtsrcs {0.0595112294 0.0595112294}
+ brightness -0.03432437405
+ brtrolloffrange 0.3
+ name HSVTool14
+ xpos -4110
+ ypos -3735
+}
+Premult {
+ name Premult23
+ xpos -4110
+ ypos -3681
+}
+Multiply {
+ value 0
+ name Multiply5
+ xpos -4110
+ ypos -3633
+ disable true
+}
+push 0
+push $Nb010ec00
+HSVTool {
+ srccolor {0.4452010691 0.3864293694 0.2581827939}
+ dstcolor {0.1980692595 0.1169707477 0.08228258044}
+ huesrcs {41.14461517 41.14461517}
+ huerotation -23.16940308
+ huerolloffrange 22
+ satsrcs {0.4200759828 0.4200759828}
+ saturation 0.1645007432
+ satrolloffrange 0.3
+ brtsrcs {0.4452010691 0.4452010691}
+ brightness -0.2471318096
+ brtrolloffrange 0.3
+ name HSVTool_HOOD_FUR
+ xpos -4220
+ ypos -3735
+}
+Premult {
+ name Premult22
+ xpos -4220
+ ypos -3681
+}
+Multiply {
+ value 0
+ name Multiply4
+ xpos -4220
+ ypos -3633
+ disable true
+}
+push $Nb010f000
+Dot {
+ name Dot64
+ xpos -4626
+ ypos -3774
+}
+ColorCorrect {
+ saturation 1.36
+ gain 0.44
+ name ColorCorrect2
+ xpos -4660
+ ypos -3681
+}
+Dot {
+ name Dot19
+ xpos -4626
+ ypos -3534
+}
+Merge2 {
+ inputs 5+1
+ name Merge35
+ xpos -4330
+ ypos -3537
+}
+Dot {
+ name Dot58
+ xpos -4296
+ ypos -3462
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge33
+ xpos -3780
+ ypos -3465
+}
+Dot {
+ name Dot20
+ xpos -3746
+ ypos -3126
+}
+set Nb00b5400 [stack 0]
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge6
+ xpos -2350
+ ypos -3129
+}
+ColorCorrect {
+ saturation 1.34
+ gain 0.6
+ name ColorCorrect4
+ xpos -2350
+ ypos -2961
+}
+Grade {
+ multiply {1.26 1 1 1}
+ multiply_panelDropped true
+ name Grade3
+ xpos -2350
+ ypos -2913
+}
+Dot {
+ name Dot7
+ xpos -2316
+ ypos -2790
+}
+set Nb00b4400 [stack 0]
+Dot {
+ name Dot10
+ xpos -2536
+ ypos -2790
+}
+clone $Cb020cc00 {
+ xpos -2570
+ ypos -2751
+ selected false
+}
+push $Nb00b4400
+Merge2 {
+ inputs 2
+ mix 0.415
+ name Merge4
+ xpos -2350
+ ypos -2745
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L020_matte/v001/tob_sh090_render2d_colour_Corejj_L020_matte_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png16
+ tile_color 0x4ecd25ff
+ xpos -3230
+ ypos -5031
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L020_matte
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81884b21c408d527b04
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId WKC1QWRL0G
+}
+Dot {
+ name Dot15
+ xpos -3196
+ ypos -4806
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.alpha 0 3 rgba.alpha 0 3 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2"
+ name Shuffle1
+ xpos -3230
+ ypos -4425
+}
+push $Nb00b5400
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/shots/sh090/publish/render/render2d_colour_Corejj_L070_hl/v001/tob_sh090_render2d_colour_Corejj_L070_hl_v001.####.png
+ last 24
+ frame_mode "start at"
+ frame 1
+ origlast 24
+ origset true
+ name LoadClip_png10
+ tile_color 0x4ecd25ff
+ xpos -4880
+ ypos -5031
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:schema l schema}
+ avalon:schema openpype:container-2.0
+ addUserKnob {1 avalon:id l id}
+ avalon:id pyblish.avalon.container
+ addUserKnob {1 avalon:name l name}
+ avalon:name render2d_colour_Corejj_L070_hl
+ addUserKnob {1 avalon:namespace l namespace}
+ avalon:namespace sh090
+ addUserKnob {1 avalon:loader l loader}
+ avalon:loader LoadClip
+ addUserKnob {1 avalon:representation l representation}
+ avalon:representation 62bad81d84b21c408d527c17
+ addUserKnob {1 avalon:objectName l objectName}
+ avalon:objectName LoadClip_png
+ addUserKnob {1 avalon:frameStart l frameStart}
+ avalon:frameStart 1
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart None
+ addUserKnob {1 avalon:author l author}
+ avalon:author skye
+ addUserKnob {1 avalon:frameEnd l frameEnd}
+ avalon:frameEnd 24
+ addUserKnob {1 avalon:source l source}
+ avalon:source "\{root\[work]\}/10145_toban/shots/sh090/work/2d_colour/tob_sh090_2d_colour_v003.tvpp"
+ addUserKnob {1 avalon:version l version}
+ avalon:version 1
+ addUserKnob {1 avalon:db_colorspace l db_colorspace}
+ avalon:db_colorspace None
+ addUserKnob {1 avalon:fps l fps}
+ avalon:fps 24.0
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd None
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {1 containerId +HIDDEN}
+ containerId W8QN61N7CZ
+}
+Dot {
+ name Dot13
+ label HIGHLIGHT
+ note_font_size 40
+ xpos -4846
+ ypos -4806
+}
+Premult {
+ name Premult17
+ xpos -4880
+ ypos -4737
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.alpha 0 3 rgba.alpha 0 3 rgba.alpha 0 3 rgba.red 0 0 rgba.alpha 0 3 rgba.green 0 1 rgba.alpha 0 3 rgba.blue 0 2"
+ name Shuffle2
+ xpos -4880
+ ypos -3465
+}
+Grade {
+ white {0.1274376512 0.1441284567 0.1946177483 1}
+ name Grade1
+ xpos -4880
+ ypos -3177
+}
+push $Nb010f800
+Dot {
+ name Dot59
+ xpos -5396
+ ypos -2598
+}
+Merge2 {
+ inputs 2
+ name Merge40
+ xpos -4880
+ ypos -2601
+}
+Merge2 {
+ inputs 2
+ name Merge34
+ xpos -3780
+ ypos -2601
+}
+Merge2 {
+ inputs 2
+ mix 0.315
+ name Merge5
+ xpos -3230
+ ypos -2601
+}
+Merge2 {
+ inputs 2
+ maskChannelInput rgba.alpha
+ name Merge36
+ xpos -2350
+ ypos -2607
+}
+Merge2 {
+ inputs 2
+ name Merge37
+ xpos -1360
+ ypos -2601
+}
+Merge2 {
+ inputs 2
+ name Merge43
+ xpos -810
+ ypos -2601
+}
+ColorCorrect {
+ highlights.gain {0.72 0.58 0.7 0.58}
+ highlights.gain_panelDropped true
+ name ColorCorrect3
+ xpos -810
+ ypos -2433
+}
+Reformat {
+ resize none
+ pbb true
+ name Reformat3
+ xpos -810
+ ypos -2169
+}
+Dot {
+ name Dot8
+ xpos -776
+ ypos -1902
+}
+Group {
+ inputs 2
+ name bm_Lightwrap
+ knobChanged "n1 = nuke.thisNode()\nk1 = nuke.thisKnob()\nif k1.name() == \"effectOnly\":\n    if k1.value() == 1:\n        n1\[\"mergeType\"].setEnabled(False)\n    else:\n        n1\[\"mergeType\"].setEnabled(True) \n\n\nn2 = nuke.thisNode()\nk2 = nuke.thisKnob()\nif k2.name() == \"useThresholdCheckbox\":\n    if k2.value() == 1:\n        n2\[\"viewRange\"].setEnabled(True)\n    else:\n        n2\[\"viewRange\"].setEnabled(False)"
+ tile_color 0x222222ff
+ xpos 70
+ ypos -1905
+ addUserKnob {20 Options}
+ addUserKnob {4 mergeType l "Merge Operation" M {Max Over Plus Screen ""}}
+ mergeType Plus
+ addUserKnob {26 spacer_01 l "" -STARTLINE T "      "}
+ addUserKnob {6 effectOnly l " Effect Only" -STARTLINE}
+ addUserKnob {4 glowType l "Glow Math" M {Double Fibonacci "" ""}}
+ glowType Fibonacci
+ addUserKnob {26 spacer_02 l "" -STARTLINE T "   "}
+ addUserKnob {6 useThresholdCheckbox l "Use Luminance-based wrap" -STARTLINE}
+ addUserKnob {26 spacer_05 l "" +STARTLINE T "                                                 "}
+ addUserKnob {6 viewRange l "View Range" -STARTLINE +DISABLED}
+ addUserKnob {41 size l "Pre-blur BG" T Blur11.size}
+ addUserKnob {26 ""}
+ addUserKnob {20 tGrp l "Luminance Selector" n 1}
+ tGrp 0
+ addUserKnob {26 spacer_03 l "" +STARTLINE T " "}
+ addUserKnob {41 range l "" +STARTLINE T Keyer1.range}
+ addUserKnob {26 spacer_04 l "" +STARTLINE T " "}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {7 glowSize l Size R 0 500}
+ glowSize 314
+ addUserKnob {7 glowAspect l Aspect R 0.5 2}
+ glowAspect 1
+ addUserKnob {7 glowBrightness l Brightness R 0 3}
+ glowBrightness 1
+ addUserKnob {18 glowGamma l Gamma R 0 2}
+ glowGamma 1
+ addUserKnob {6 glowGamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowGamma_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {18 glowSaturation l Saturation R 0 3}
+ glowSaturation 1
+ addUserKnob {6 glowSaturation_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 glowSaturation_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {4 alphaChoice l "Use Alpha From" M {None FG BG "FG & BG" "Glow Only" "" ""}}
+ alphaChoice FG
+ addUserKnob {7 glowMix l Mix}
+ glowMix 0.045
+ addUserKnob {26 ""}
+ addUserKnob {20 versionInfo l Info}
+ addUserKnob {26 ""}
+ addUserKnob {26 versionInfo_1 l "" +STARTLINE T "\nCreated by Ben McEwan\nwww.benmcewan.com\n\nVersion 3.1\nLast Updated: February 9th, 2018\n"}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name BG
+  xpos -1294
+  ypos -1111
+  number 1
+ }
+ Expression {
+  expr3 a==0?0:a
+  name Expression1
+  label "Alpha Error Fix"
+  xpos -1294
+  ypos -1041
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1260
+  ypos -918
+ }
+set Nd9bb1000 [stack 0]
+ Blur {
+  channels rgba
+  name Blur11
+  xpos -1159
+  ypos -921
+ }
+set Nd9bb0c00 [stack 0]
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -732
+  ypos -927
+ }
+set Nd9bb0800 [stack 0]
+ Dot {
+  name Dot27
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 554
+  ypos -918
+ }
+ Shuffle {
+  in alpha
+  red alpha
+  name Shuffle2
+  tile_color 0xffffff01
+  label "\[value alpha] > \[value out]"
+  xpos 520
+  ypos 983
+ }
+ Input {
+  inputs 0
+  name FG
+  xpos -1155
+  ypos -849
+ }
+ Expression {
+  expr3 a==0?0:a
+  name Expression2
+  label "Alpha Error Fix"
+  xpos -1155
+  ypos -784
+ }
+set Ne6dd3400 [stack 0]
+ Dot {
+  name Dot26
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1121
+  ypos 21
+ }
+set Ne6dd3000 [stack 0]
+ Dot {
+  name Dot28
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1121
+  ypos 104
+ }
+set Ne6dd2c00 [stack 0]
+ Dot {
+  name Dot35
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -943
+  ypos 140
+ }
+ Dot {
+  name Dot32
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -943
+  ypos 210
+ }
+set Ne6dd2400 [stack 0]
+ Dot {
+  name Dot33
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1053
+  ypos 210
+ }
+ Dot {
+  name Dot34
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1053
+  ypos 923
+ }
+push $Ne6dd3000
+push $Ne6dd3400
+push $Nd9bb0800
+ Premult {
+  name Premult1
+  xpos -732
+  ypos -891
+ }
+push $Nd9bb0c00
+ Dot {
+  name Dot31
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -855
+  ypos -807
+ }
+ Switch {
+  inputs 2
+  which {{useThresholdCheckbox}}
+  name Switch3
+  xpos -732
+  ypos -810
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  bbox A
+  name Merge14
+  xpos -732
+  ypos -778
+ }
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -698
+  ypos -754
+ }
+set Ne6dd0800 [stack 0]
+ Dot {
+  name Dot11
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -578
+  ypos -754
+ }
+set Ne6dd0400 [stack 0]
+ Dot {
+  name Dot10
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -444
+  ypos -754
+ }
+set Ne6d87c00 [stack 0]
+ Dot {
+  name Dot9
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -314
+  ypos -754
+ }
+set Ne6d87800 [stack 0]
+ Dot {
+  name Dot8
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -185
+  ypos -754
+ }
+set Ne6d87400 [stack 0]
+ Dot {
+  name Dot7
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -75
+  ypos -754
+ }
+set Ne6d87000 [stack 0]
+ Dot {
+  name Dot6
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 47
+  ypos -754
+ }
+set Ne6d86c00 [stack 0]
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 179
+  ypos -754
+ }
+set Ne6d86800 [stack 0]
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 301
+  ypos -754
+ }
+set Ne6d86400 [stack 0]
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 421
+  ypos -754
+ }
+ Blur {
+  size {{(glowType==0?(glowSize*25.6):(glowSize*5.5))*glowAspect} {glowType==0?(glowSize*25.6):(glowSize*5.5)}}
+  name Blur10
+  xpos 387
+  ypos -714
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/512):(glowBrightness/50)}}
+  name Multiply10
+  xpos 387
+  ypos -678
+ }
+ Dot {
+  name Dot13
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 421
+  ypos -92
+ }
+push $Ne6d86400
+ Blur {
+  size {{(glowType==0?(glowSize*12.8):(glowSize*3.4))*glowAspect} {glowType==0?(glowSize*12.8):(glowSize*3.4)}}
+  name Blur9
+  xpos 267
+  ypos -712
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/256):(glowBrightness/33)}}
+  name Multiply9
+  xpos 267
+  ypos -676
+ }
+ Dot {
+  name Dot14
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 301
+  ypos -156
+ }
+push $Ne6d86800
+ Blur {
+  size {{(glowType==0?(glowSize*6.4):(glowSize*2.1))*glowAspect} {glowType==0?(glowSize*6.4):(glowSize*2.1)}}
+  name Blur8
+  xpos 145
+  ypos -716
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/128):(glowBrightness/20)}}
+  name Multiply8
+  xpos 145
+  ypos -680
+ }
+ Dot {
+  name Dot15
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 179
+  ypos -221
+ }
+push $Ne6d86c00
+ Blur {
+  size {{(glowType==0?(glowSize*3.2):(glowSize*1.3))*glowAspect} {glowType==0?(glowSize*3.2):(glowSize*1.3)}}
+  name Blur7
+  xpos 13
+  ypos -717
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/64):(glowBrightness/12.5)}}
+  name Multiply7
+  xpos 13
+  ypos -681
+ }
+ Dot {
+  name Dot16
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 47
+  ypos -285
+ }
+push $Ne6d87000
+ Blur {
+  size {{(glowType==0?(glowSize*1.6):(glowSize/1.25))*glowAspect} {glowType==0?(glowSize*1.6):(glowSize/1.25)}}
+  name Blur6
+  xpos -109
+  ypos -716
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/32):(glowBrightness/7.68)}}
+  name Multiply6
+  xpos -109
+  ypos -680
+ }
+ Dot {
+  name Dot17
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -75
+  ypos -354
+ }
+push $Ne6d87400
+ Blur {
+  size {{(glowType==0?(glowSize/12.5):(glowSize/2))*glowAspect} {glowType==0?(glowSize/12.5):(glowSize/2)}}
+  name Blur5
+  xpos -219
+  ypos -719
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/16):(glowBrightness/4.75)}}
+  name Multiply5
+  xpos -219
+  ypos -683
+ }
+ Dot {
+  name Dot18
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -185
+  ypos -421
+ }
+push $Ne6d87800
+ Blur {
+  size {{(glowType==0?(glowSize/2.5):(glowSize/3.3333))*glowAspect} {glowType==0?(glowSize/2.5):(glowSize/3.3333)}}
+  name Blur4
+  xpos -348
+  ypos -721
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/8):(glowBrightness/2.94)}}
+  name Multiply4
+  xpos -348
+  ypos -685
+ }
+ Dot {
+  name Dot19
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -314
+  ypos -479
+ }
+push $Ne6d87c00
+ Blur {
+  size {{(glowSize/5)*glowAspect} {glowSize/5}}
+  name Blur3
+  xpos -478
+  ypos -723
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/4):(glowBrightness/1.815)}}
+  name Multiply3
+  xpos -478
+  ypos -687
+ }
+ Dot {
+  name Dot20
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -444
+  ypos -535
+ }
+push $Ne6dd0400
+ Blur {
+  size {{(glowSize/10)*glowAspect} {glowSize/10}}
+  name Blur2
+  xpos -612
+  ypos -723
+ }
+ Multiply {
+  channels rgb
+  value {{glowType==0?(glowBrightness/2):(glowBrightness/1.124)}}
+  name Multiply2
+  xpos -612
+  ypos -687
+ }
+ Dot {
+  name Dot12
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -578
+  ypos -592
+ }
+push $Ne6dd0800
+ Blur {
+  size {{glowSize/50}}
+  name Blur1
+  xpos -732
+  ypos -722
+ }
+ Multiply {
+  channels rgb
+  value {{glowBrightness}}
+  name Multiply1
+  xpos -732
+  ypos -686
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos -732
+  ypos -595
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge2
+  xpos -732
+  ypos -538
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge3
+  xpos -732
+  ypos -482
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge4
+  xpos -732
+  ypos -424
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  xpos -732
+  ypos -357
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge6
+  xpos -732
+  ypos -288
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge7
+  xpos -732
+  ypos -224
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge8
+  xpos -732
+  ypos -159
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge9
+  xpos -732
+  ypos -95
+ }
+ Multiply {
+  channels alpha
+  value 0.1
+  name Multiply22
+  xpos -732
+  ypos -57
+ }
+ ColorCorrect {
+  saturation {{glowSaturation} {glowSaturation} {glowSaturation} 1}
+  gamma {{glowGamma} {glowGamma} {glowGamma} 1}
+  name ColorCorrect1
+  xpos -732
+  ypos -21
+ }
+ Multiply {
+  value {{glowType==0?(glowMix):(glowMix/2.5)}}
+  name Multiply11
+  xpos -732
+  ypos 3
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge15
+  xpos -732
+  ypos 107
+ }
+set Ne6c72c00 [stack 0]
+ Dot {
+  name Dot22
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -472
+  ypos 296
+ }
+ Dot {
+  name Dot23
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -472
+  ypos 520
+ }
+set Ne6c72400 [stack 0]
+push $Ne6c72400
+push $Ne6c72c00
+ Dot {
+  name Dot24
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -698
+  ypos 218
+ }
+set Ne6c72000 [stack 0]
+push $Ne6dd2400
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge13
+  xpos -644
+  ypos 356
+ }
+push $Ne6c72000
+push $Ne6dd2400
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge12
+  xpos -752
+  ypos 355
+ }
+push $Ne6c72000
+push $Ne6dd2400
+ Merge2 {
+  inputs 2
+  name Merge11
+  xpos -859
+  ypos 359
+ }
+push $Ne6c72000
+push $Ne6dd2400
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge10
+  xpos -977
+  ypos 358
+ }
+ Switch {
+  inputs 4
+  which {{mergeType}}
+  name Switch1
+  xpos -819
+  ypos 440
+ }
+ Switch {
+  inputs 2
+  which {{effectOnly}}
+  name Switch2
+  xpos -819
+  ypos 516
+ }
+set Ne6c70800 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos -506
+  ypos 728
+ }
+ Dot {
+  name Dot30
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -472
+  ypos 821
+ }
+push $Ne6dd2c00
+ Dot {
+  name Dot29
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1121
+  ypos 682
+ }
+push $Ne6c70800
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -819
+  ypos 673
+ }
+set Ne6bef400 [stack 0]
+push $Nd9bb1000
+ Dot {
+  name Dot25
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -1260
+  ypos 561
+ }
+push $Ne6c70800
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -691
+  ypos 669
+ }
+set Ne6beec00 [stack 0]
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge1
+  xpos -691
+  ypos 764
+ }
+push $Ne6beec00
+push $Ne6bef400
+push $Ne6c70800
+ Shuffle {
+  in alpha
+  red black
+  out alpha
+  name Shuffle1
+  tile_color 0xff000000
+  label "Alpha = 0"
+  xpos -947
+  ypos 736
+ }
+ Switch {
+  inputs 5
+  which {{alphaChoice}}
+  name Switch4
+  xpos -819
+  ypos 818
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -819
+  ypos 920
+ }
+ Switch {
+  inputs 2
+  which {{viewRange x1 0}}
+  name Switch5
+  xpos -819
+  ypos 989
+ }
+ Output {
+  name Output1
+  xpos -819
+  ypos 1193
+ }
+end_group
+push $Nb020f800
+Merge2 {
+ inputs 2
+ name Merge23
+ xpos 400
+ ypos -1905
+}

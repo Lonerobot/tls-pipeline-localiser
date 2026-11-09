@@ -1,0 +1,1108 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-1" y="-8" w="1920" h="1017" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1251" stretch="1"/>
+            <splitter orientation="2">
+                <split size="979"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                    <page id="DAG.2"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="1919" y="-9" w="2560" h="1411" maximized="1" screen="1">
+        <splitter orientation="2">
+            <split size="1411"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+                <page id="Viewer.2"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/nuke/NukeTools_Library/03_ToolSets/Toban/Toban_Lens.nk
+ project_directory Y:/PROJECTS/10145_toban/compAssets/work/comp
+ last_frame 5
+ lock_range true
+ format "3072 1306 0 0 3072 1306 1 10145_toban"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ OCIO_config aces_1.0.3
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+ addUserKnob {20 OpenPype}
+ addUserKnob {20 OpenpypeDataGroup l "Openpype Data Group" n 2}
+ addUserKnob {26 warn l "" +STARTLINE T "Warning! Do not change following data!"}
+ addUserKnob {26 divd l "" +STARTLINE}
+ addUserKnob {1 avalon:handleEnd l handleEnd}
+ avalon:handleEnd 0
+ addUserKnob {1 avalon:handleStart l handleStart}
+ avalon:handleStart 0
+ addUserKnob {20 OpenpypeDataGroup_End l "Openpype Data Group" n -1}
+ addUserKnob {6 publish l Publish +STARTLINE}
+ publish true
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x4c4c4cff
+ label LENSING
+ note_font_size 42
+ xpos -1227
+ ypos -3794
+ bdwidth 1287
+ bdheight 1894
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0xaaaaaaff
+ label "CHROMA AB"
+ note_font_size 42
+ xpos -701
+ ypos -2600
+ bdwidth 270
+ bdheight 257
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0xaaaaaaff
+ label "EDGE DEFOCUS"
+ note_font_size 42
+ xpos -811
+ ypos -3152
+ bdwidth 540
+ bdheight 474
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0xaaaaaaff
+ label VIGNETTE
+ note_font_size 42
+ xpos -701
+ ypos -2240
+ bdwidth 270
+ bdheight 137
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0xaaaaaaff
+ label "LENS HAZE"
+ note_font_size 42
+ xpos -667
+ ypos -3461
+ bdwidth 396
+ bdheight 255
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0xaaaaaaff
+ label "LENS DISTORTION"
+ note_font_size 42
+ xpos -739
+ ypos -3714
+ bdwidth 397
+ bdheight 198
+}
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/MagicDefocus.gizmo {
+ inputs 0
+ name MagicDefocus10
+ xpos -801
+ ypos -2919
+ size 50
+ gamma_correction true
+ preserve_bounding_box true
+ preview_filter true
+ ring_color 0.9
+ inner_color 0.15
+ outer_blur 1
+ inner_blur 0.3
+ noise_size 0.25
+ noise_intensity 1
+ aspect_ratio 0.5
+}
+Blur {
+ size {0 35}
+ name Blur1
+ xpos -801
+ ypos -2859
+}
+Dot {
+ name Dot37
+ xpos -767
+ ypos -2823
+}
+Radial {
+ inputs 0
+ area {0 0 {format.width} {format.height}}
+ softness 0.75
+ name Radial4
+ xpos -801
+ ypos -3066
+}
+Transform {
+ scale {2 1.5}
+ center {{format.width/2} {format.height/2}}
+ name Transform4
+ xpos -801
+ ypos -3042
+}
+Crop {
+ box {{curve} {curve} {format.width} {format.height}}
+ name Crop10
+ xpos -801
+ ypos -3018
+}
+Dot {
+ name Dot39
+ xpos -767
+ ypos -2994
+}
+Dot {
+ inputs 0
+ name Dot42
+ label INPUT
+ note_font_size 30
+ xpos -547
+ ypos -3639
+}
+Crop {
+ box {-150 -150 3222 1457}
+ name CropToOverscan
+ xpos -581
+ ypos -3621
+}
+Reformat {
+ resize none
+ pbb true
+ name Reformat5
+ xpos -581
+ ypos -3585
+}
+Group {
+ name LensDistortion_toban
+ tile_color 0x9572a3ff
+ xpos -581
+ ypos -3513
+ addUserKnob {20 User}
+ addUserKnob {26 ""}
+ addUserKnob {26 Distortion}
+ addUserKnob {41 Squeeze T control.Squeeze}
+ addUserKnob {41 Y T control.Y}
+ addUserKnob {41 X T control.X}
+ addUserKnob {41 S T control.S}
+ addUserKnob {26 ""}
+ addUserKnob {26 Chroma_1 l Chroma}
+ addUserKnob {41 Offset T control.ChromAbb}
+ addUserKnob {41 Blur T control.Blur}
+ addUserKnob {26 ""}
+ addUserKnob {26 EdgeBlur}
+ addUserKnob {41 area T Radial1.area}
+ addUserKnob {41 scale T Blur_scale.scale}
+ addUserKnob {41 mix T Keymix1.mix}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 616
+  ypos -561
+ }
+ Dot {
+  name Dot20
+  xpos 650
+  ypos -422
+ }
+set N648b7400 [stack 0]
+ Dot {
+  name Dot19
+  xpos 1042
+  ypos -422
+ }
+ Radial {
+  replace true
+  invert true
+  area {-86 -226 3462 1894}
+  name Radial2
+  xpos 1008
+  ypos -9
+ }
+set N648b6c00 [stack 0]
+push $N648b7400
+ Shuffle {
+  red black
+  green black
+  alpha black
+  name Shuffle7
+  xpos 726
+  ypos -57
+ }
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.b}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionB
+  xpos 730
+  ypos -15
+ }
+ Transform {
+  center {1686 802.5}
+  name Transform3
+  xpos 730
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.b}}
+  name BlurB
+  xpos 730
+  ypos 81
+  disable true
+ }
+push 0
+push $N648b6c00
+push $N648b7400
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name Shuffle9
+  selected true
+  xpos 334
+  ypos -423
+ }
+set N648b5800 [stack 0]
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.r}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionR
+  xpos 334
+  ypos -183
+ }
+set N648b5400 [stack 0]
+ Transform {
+  center {1686 802.5}
+  name Transform1
+  xpos 334
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.r}}
+  name BlurR
+  xpos 334
+  ypos 81
+  disable true
+ }
+push $N648b6c00
+push $N648b7400
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name Shuffle11
+  xpos 616
+  ypos -57
+ }
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.g}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionG
+  xpos 616
+  ypos -15
+ }
+ Transform {
+  center {1686 802.5}
+  name Transform2
+  xpos 616
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.g}}
+  name BlurG
+  xpos 616
+  ypos 90
+  disable true
+ }
+ Merge2 {
+  inputs 3+1
+  operation plus
+  name Merge11
+  xpos 616
+  ypos 159
+ }
+ Dot {
+  name Dot1
+  xpos 654
+  ypos 498
+ }
+set N64803000 [stack 0]
+ Radial {
+  replace true
+  area {-664 -752 4060 2406}
+  name Radial1
+  xpos 840
+  ypos 495
+ }
+ Reformat {
+  inputs 0
+  format "255 255 0 0 255 255 1 square255"
+  resize none
+  center false
+  black_outside true
+  name Reformat14
+  xpos 180
+  ypos 297
+  hide_input true
+ }
+ RotoPaint {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x42ff0000 x42ff0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Rectangle1 512 bezier
+     {{cc
+       {f 8192}
+       {px x40000000
+        {0 xbf3bbc00}
+        {x42f5f247 x4305999a}
+        {x40b1a370 0}
+        {xc0b1a380 0}
+        {x430ba077 x4305999a}
+        {0 xbf3bbc00}
+        {0 x3f3bbc00}
+        {x430ba077 x43036666}
+        {xc0b1a380 0}
+        {x40b1a370 0}
+        {x42f5f247 x43036666}
+        {0 x3f3bbc00}}}
+      {cc
+       {f 8192}
+       {px x40000000
+        {0 xbf3bbc00}
+        {0 0}
+        {x40b1a370 0}
+        {xc0b1a380 0}
+        {0 0}
+        {0 xbf3bbc00}
+        {0 x3f3bbc00}
+        {0 0}
+        {xc0b1a380 0}
+        {x40b1a370 0}
+        {0 0}
+        {0 x3f3bbc00}}}}
+     {tx x40000000 x43034ccd x43048000}
+     {a osw x41200000 osf 0 str 1 spx x42ff0000 spy x42ff0000 sb 1 ltn x40000000 ltm x40000000 tt x41000000}}}}}}
+  toolbox {selectAll {
+  { selectAll bm 6 src 1 str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 21 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_blending_mode color-dodge
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type single
+  toolbar_paint_source fg
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1536 653}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 2
+  lifetime_end 2
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name RotoPaint18
+  xpos 180
+  ypos 351
+ }
+ Blur {
+  size {4 0}
+  name Blur12
+  xpos 180
+  ypos 393
+ }
+ Transform {
+  rotate 5
+  scale 0.5
+  center {131.6799927 132.1999969}
+  name Blur_scale
+  xpos 180
+  ypos 447
+ }
+ Dot {
+  name Dot68
+  xpos 214
+  ypos 498
+ }
+push $N64803000
+ Convolve2 {
+  inputs 2
+  channels rgba
+  name Convolve3
+  xpos 400
+  ypos 495
+ }
+push $N64803000
+ Keymix {
+  inputs 3
+  invertMask true
+  mix 0.07
+  name Keymix1
+  xpos 620
+  ypos 681
+ }
+ Output {
+  name Output1
+  xpos 620
+  ypos 831
+ }
+ Blur {
+  inputs 0
+  size 210
+  name Blur4
+  xpos 1147
+  ypos -71
+ }
+ NoOp {
+  inputs 0
+  name control
+  xpos 400
+  ypos 231
+  addUserKnob {20 User}
+  addUserKnob {26 ""}
+  addUserKnob {26 Distortion -STARTLINE T ""}
+  addUserKnob {6 sdf_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {7 Squeeze R 10 0.1}
+  Squeeze 1.75
+  addUserKnob {7 Y R -0.5 0.5}
+  Y -0.015
+  addUserKnob {7 X R -0.5 0.5}
+  addUserKnob {7 S R -0.5 0.5}
+  S -0.015
+  addUserKnob {26 ""}
+  addUserKnob {18 ChromAbb R 5 -5}
+  ChromAbb {1 1 1}
+  addUserKnob {6 ChromAbb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 Blur R 0 5}
+  Blur {0 0 0}
+  addUserKnob {6 Blur_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 channelBlur_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+push $N648b5400
+push $N648b5800
+ Viewer {
+  inputs 2
+  frame_range 1-5
+  overscan 4000
+  colour_sample_bbox {0.9995117188 0.4995117188 1 0.5}
+  viewerProcess rec709
+  name Viewer1
+  xpos 70
+  ypos 159
+ }
+end_group
+Dot {
+ name Dot36
+ xpos -547
+ ypos -3389
+}
+set N64967800 [stack 0]
+Dot {
+ name Dot20
+ label LINES
+ note_font_size 30
+ xpos -327
+ ypos -3389
+ hide_input true
+}
+add_layer {Lines Lines.a}
+Shuffle {
+ in Lines
+ red alpha
+ green alpha
+ blue alpha
+ name Shuffle1
+ xpos -361
+ ypos -3336
+}
+PostageStamp {
+ name PostageStamp1
+ xpos -361
+ ypos -3312
+ postage_stamp true
+}
+Dot {
+ name Dot11
+ xpos -327
+ ypos -3237
+}
+push $N64967800
+Dot {
+ name Dot17
+ xpos -547
+ ypos -3309
+}
+set N64966400 [stack 0]
+Dot {
+ name Dot18
+ xpos -657
+ ypos -3309
+}
+Dot {
+ name Dot19
+ xpos -657
+ ypos -3237
+}
+push $N64966400
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/LensHaze.gizmo {
+ name LensHaze1
+ xpos -581
+ ypos -3282
+ value 0.2
+ pop3 250
+ size_1 50
+ which 0.43
+}
+Keymix {
+ inputs 3
+ mix 0.7
+ name Keymix1
+ xpos -581
+ ypos -3246
+}
+set N64617800 [stack 0]
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 depth.Z
+ name Copy3
+ xpos -581
+ ypos -3003
+}
+Crop {
+ box {{curve} {curve} {format.width} {format.height}}
+ crop false
+ name Crop11
+ xpos -581
+ ypos -2913
+}
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/MagicDefocus.gizmo {
+ inputs 2
+ name MagicDefocus6
+ xpos -581
+ ypos -2832
+ disable true
+ output depth
+ center 1
+ size 3.5
+ gamma_correction true
+ preserve_bounding_box true
+ filter_type image
+ enable_non_uniform true
+ catseye_amount 0.25
+}
+Shuffle {
+ alpha white
+ name Shuffle2
+ xpos -581
+ ypos -2649
+}
+Crop {
+ box {{curve} {curve} {format.width} {format.height}}
+ crop false
+ name Crop2
+ xpos -581
+ ypos -2625
+}
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/Chromatik.gizmo {
+ name Chromatik
+ xpos -581
+ ypos -2529
+ center {{format.width/2} {format.height/2}}
+ Multiplier -10
+ protect 0.17
+ gamma 0.69
+ saturation 0.75
+}
+Group {
+ name channelTransform
+ tile_color 0xad406dff
+ xpos -581
+ ypos -2457
+ addUserKnob {20 User}
+ addUserKnob {41 translate_2 l R T Transform6.translate}
+ addUserKnob {41 translate_1 l G T Transform8.translate}
+ addUserKnob {41 translate l B T Transform9.translate}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 617
+  ypos -446
+ }
+ Dot {
+  name Dot18
+  xpos 651
+  ypos -406
+ }
+set N379c2400 [stack 0]
+push $N379c2400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle3
+  xpos 837
+  ypos -289
+ }
+ Transform {
+  translate {0.1 -0.1}
+  center {1686 803.5}
+  name Transform9
+  xpos 837
+  ypos -265
+ }
+push $N379c2400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 617
+  ypos -289
+ }
+ Transform {
+  translate {0 -0.2}
+  center {1686 803.5}
+  name Transform8
+  xpos 617
+  ypos -265
+ }
+push $N379c2400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 397
+  ypos -289
+ }
+ Transform {
+  translate {-0.1 0.4}
+  center {1686 803.5}
+  name Transform6
+  xpos 397
+  ypos -265
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos 617
+  ypos -169
+ }
+ Merge2 {
+  inputs 2
+  name Merge10
+  xpos 837
+  ypos -169
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 837
+  ypos -79
+ }
+ Output {
+  name Output1
+  xpos 837
+  ypos 21
+ }
+end_group
+Group {
+ name Halation
+ xpos -581
+ ypos -2370
+ addUserKnob {20 m_halation l M_Halation t "This Gizmo re-produces the red fringing you \nget on film around bright source. \nEspecially noticable on a contrasty edge.\n\n"}
+ addUserKnob {41 size l "Red wide glow size" T red_wide_glow.size}
+ addUserKnob {41 size_1 l "Green wide glow size" T green_wide_glow.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 size_2 l "Red core glow size" T red_core_glow.size}
+ addUserKnob {41 size_3 l "Green core glow size" T green_core_glow.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 size_5 l "Soften wide size" T Soften_wide.size}
+ addUserKnob {41 size_4 l "Soften core size" T Soften_core.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 value l "Wide glow gain" T Multiply_wide.value}
+ addUserKnob {41 value_1 l "Core glow gain" T Multiply_core.value}
+ addUserKnob {26 ""}
+ addUserKnob {41 which l "Wide glow percent" T add_wide_percent1.which}
+ addUserKnob {41 which_1 l "Core glow percent" T add_core_percent.which}
+ addUserKnob {26 ""}
+ addUserKnob {41 gamma l Sensitivity T Log2Lin1.gamma}
+ addUserKnob {41 selector l Operation T Switch1.selector}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -370
+  ypos -538
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white 665
+  name Log2Lin2
+  xpos -370
+  ypos -394
+ }
+set N4d18b000 [stack 0]
+push $N4d18b000
+ Log2Lin {
+  black 0
+  white 400
+  gamma 0.46
+  name Log2Lin1
+  xpos -370
+  ypos -250
+ }
+set N4d18ac00 [stack 0]
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  size 5
+  name red_wide_glow
+  xpos -590
+  ypos -160
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  size 0.9
+  name green_wide_glow
+  xpos -590
+  ypos -88
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white {{parent.Log2Lin1.white} {parent.Log2Lin1.white} {parent.Log2Lin1.white}}
+  gamma {{parent.Log2Lin1.gamma}}
+  name Log2Lin4
+  xpos -590
+  ypos -10
+ }
+ Clamp {
+  name Clamp1
+  xpos -590
+  ypos 32
+ }
+push $N4d18b000
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge1
+  xpos -590
+  ypos 110
+ }
+ Blur {
+  name Soften_wide
+  xpos -590
+  ypos 152
+ }
+ Multiply {
+  name Multiply_wide
+  xpos -590
+  ypos 200
+ }
+set N4d189000 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge3
+  xpos -590
+  ypos 254
+ }
+push $N4d18b000
+ Dissolve {
+  inputs 2
+  which 0.3
+  name add_wide_percent1
+  xpos -590
+  ypos 320
+ }
+ set C4d188800 [stack 0]
+set N4d188800 [stack 0]
+push $N4d18ac00
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  size 1
+  name red_core_glow
+  xpos -150
+  ypos -160
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  size 1
+  name green_core_glow
+  xpos -150
+  ypos -88
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white {{parent.Log2Lin1.white i}}
+  gamma {{parent.Log2Lin1.gamma i}}
+  name Log2Lin3
+  xpos -150
+  ypos -10
+ }
+ Clamp {
+  name Clamp2
+  xpos -150
+  ypos 32
+ }
+push $N4d18b000
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  xpos -150
+  ypos 110
+ }
+ Blur {
+  name Soften_core
+  xpos -150
+  ypos 152
+ }
+ Multiply {
+  name Multiply_core
+  xpos -150
+  ypos 200
+ }
+set N4d112800 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge4
+  xpos -590
+  ypos 398
+ }
+push $N4d188800
+ Dot {
+  name Dot3
+  xpos -666
+  ypos 330
+ }
+ Dot {
+  name Dot4
+  xpos -666
+  ypos 498
+ }
+ Dissolve {
+  inputs 2
+  which 1
+  name add_core_percent
+  xpos -590
+  ypos 488
+ }
+ set C4d111800 [stack 0]
+push $N4d112800
+push $N4d18b000
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  xpos -150
+  ypos 254
+ }
+push $N4d18b000
+clone $C4d111800 {
+  inputs 2
+  xpos -150
+  ypos 320
+  selected false
+ }
+set N4d111000 [stack 0]
+push $N4d189000
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge6
+  xpos -150
+  ypos 398
+ }
+push $N4d111000
+ Dot {
+  name Dot1
+  xpos -6
+  ypos 330
+ }
+ Dot {
+  name Dot2
+  xpos -6
+  ypos 498
+ }
+clone $C4d188800 {
+  inputs 2
+  xpos -150
+  ypos 488
+  selected false
+ }
+ Switch {
+  inputs 2
+  which {{selector i}}
+  name Switch1
+  xpos -370
+  ypos 614
+  addUserKnob {20 User}
+  addUserKnob {4 selector l Operation M {Apply Remove}}
+ }
+ Log2Lin {
+  black 0
+  white 665
+  name Log2Lin5
+  xpos -370
+  ypos 662
+ }
+ Output {
+  name Output1
+  xpos -370
+  ypos 734
+ }
+end_group
+Sharpen {
+ size 1
+ name Sharpen1
+ xpos -581
+ ypos -2271
+}
+Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/Vignette.gizmo {
+ name Vignette2
+ xpos -581
+ ypos -2145
+ size 1.1
+ squash 0.5
+ white {1.025 1 0.975 1}
+ lightness 0.85
+}
+Dot {
+ name Dot43
+ label OUTPUT
+ note_font_size 30
+ xpos -547
+ ypos -2055
+}
+push $N64617800
+Viewer {
+ inputs 2
+ frame_range 1-5
+ input_number 1
+ name Viewer1
+ xpos -260
+ ypos -1425
+}

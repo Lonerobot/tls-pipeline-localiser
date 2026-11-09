@@ -1,0 +1,101 @@
+set cut_paste_input [stack 0]
+version 11.3 v5
+Group {
+ inputs 0
+ name SmokeyNoise
+ tile_color 0x768289ff
+ note_font_size 10
+ selected true
+ xpos 291
+ ypos 74
+ lifetimeEnd 100
+ lock_connections true
+ addUserKnob {20 User l SmokeyNoise}
+ addUserKnob {41 output T Noise1.output}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_1 l " " T Format}
+ addUserKnob {41 format l " " -STARTLINE T Reformat1.format}
+ addUserKnob {26 text l "" +STARTLINE T "\t"}
+ addUserKnob {41 p1 T Ramp1.p1}
+ addUserKnob {26 text_2 l "" +STARTLINE T "\t"}
+ addUserKnob {20 group_1 l "Texture settings" n 1}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 strength l "wind strength" T Noise1.strength}
+ addUserKnob {26 _3 l " Noise" T " "}
+ addUserKnob {41 invert -STARTLINE T Noise1.invert}
+ addUserKnob {7 userSize l size t "Lowest global noise frequency" R 0 1000}
+ userSize 610
+ addUserKnob {41 stretch l "noise stretch" T Noise1.stretch}
+ addUserKnob {41 zoffset l z T Noise1.zoffset}
+ addUserKnob {41 scale T Noise1.scale}
+ addUserKnob {41 lacunarity t "Each octaves multiplies frequency by this amount" T Noise1.lacunarity}
+ addUserKnob {41 gain T Noise1.gain}
+ addUserKnob {41 gamma T Noise1.gamma}
+ addUserKnob {41 opacity T Noise1.opacity}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 group l Advanced n 1}
+ group 0
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {12 posControl l "Texture Pos" t "To move the fucker"}
+ posControl {808 564}
+ addUserKnob {41 refframe l "ref frame" T Noise1.refframe}
+ addUserKnob {41 skewX l "skew X" T Noise1.skewX}
+ addUserKnob {41 skewY l "skew Y" T Noise1.skewY}
+ addUserKnob {26 text_5 l " " T "\t"}
+ addUserKnob {41 ramp T Noise1.ramp}
+ addUserKnob {26 text_4 l "" -STARTLINE T "    Change ramp type to linear to enable viewer control if not accessible"}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+}
+ Reformat {
+  inputs 0
+  format "4096 2160 0 0 4096 2160 1 4K_DCP"
+  name Reformat1
+  xpos -119
+  ypos -432
+ }
+ Noise {
+  size {{parent.userSize} {size.0*stretch}}
+  zoffset 1
+  lacunarity 1.41
+  gain 0.355
+  gamma 0.18
+  translate {{"(frame*(p1.x-p0.x))*strength + posControl.x" x1 0 x124 -128 x137 1310} {"(frame*(p1.y-p0.y))*strength + posControl.y" x1 0 x124 18 x137 450}}
+  rotate {{1-(degrees(atan2((p1.x-p0.x),(p1.y-p0.y)))) x1 0 x124 0 x137 0}}
+  scale 0.4
+  center {{-translate.x(refframe)+(width/2) x1 0 x124 0 x137 0} {-translate.y(refframe)+(height/2) x1 0 x124 0 x137 0}}
+  ramp linear
+  p1 {{parent.Ramp1.p1} {parent.Ramp1.p1}}
+  color0 {{color}}
+  p0 {{width/2} {height/2}}
+  name Noise1
+  xpos -119
+  ypos -358
+  addUserKnob {20 User +INVISIBLE}
+  addUserKnob {7 strength l "wind strength" t "Percentage of wind speed over initial speed defined by the length of p1 from image center"}
+  strength 0.01
+  addUserKnob {30 uv +INVISIBLE}
+  uv {{p1.x-p0.x} {p1.y-p0.y}}
+  addUserKnob {7 uvtodegrees +INVISIBLE}
+  uvtodegrees {{int(degrees(atan2(uv.u,uv.v)))}}
+  addUserKnob {7 stretch l "noise stretch" t "Lowest noise frequency along wind direction" R 1 5}
+  stretch 4.66
+  addUserKnob {3 refframe l "reference frame"}
+  refframe 1
+ }
+ Output {
+  name Output1
+  xpos -119
+  ypos -275
+ }
+ Ramp {
+  inputs 0
+  p0 {{parent.Noise1.p0 x175 1158} {parent.Noise1.p0 x175 464}}
+  p1 {2620 1272}
+  name Ramp1
+  xpos -264
+  ypos -464
+  disable true
+ }
+end_group

@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Crop {
+ box {-150 -150 3222 1457}
+ name CropToOverscan
+ selected true
+ xpos 2086
+ ypos -297
+}

@@ -1,0 +1,34 @@
+{
+  "ayon": {
+    "creators": [],
+    "publish": {
+      "MP4":      {"products": ["review", "render"], "variants": ["Main", "Turnaround"]},
+      "SEQUENCE": {"products": ["review", "render"], "variants": ["Main", "Turnaround"]},
+      "IMAGE":    {"products": ["review", "image"],  "variants": ["Main", "Wire", "Chalk"]}
+    }
+  },
+  "apng_presets": [
+    {"name": "profile_effects",    "label": "Profile Effects",    "width": 450,  "height": 880, "framerate": 12},
+    {"name": "avatar_decorations", "label": "Avatar Decorations", "width": 288,  "height": 288, "framerate": 12},
+    {"name": "hd_24fps",           "label": "HD 720p 24fps",      "width": 1280, "height": 720, "framerate": 24}
+  ],
+  "ffmpeg": {
+    "search_paths": [
+      "C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe",
+      "C:\\ProgramData\\chocolatey\\bin\\ffmpeg.exe",
+      "C:\\ProgramData\\scoop\\apps\\ffmpeg\\current\\bin\\ffmpeg.exe",
+      "/usr/local/bin/ffmpeg",
+      "/opt/homebrew/bin/ffmpeg",
+      "/opt/homebrew/opt/ffmpeg/bin/ffmpeg"
+    ],
+    "download_urls": {
+      "win32":  "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip",
+      "linux":  "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz",
+      "darwin": "https://evermeet.cx/ffmpeg/getrelease/ffmpeg/zip"
+    }
+  },
+  "preferred_player": {
+    "media_review": "",
+    "image_review": ""
+  }
+}

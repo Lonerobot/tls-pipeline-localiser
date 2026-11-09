@@ -1,0 +1,20 @@
+flowchart TD
+    classDef you fill:#fff4d6,stroke:#d6a419,color:#1f2933
+    classDef build fill:#e3f2fd,stroke:#5b9bd5,color:#1f2933
+    classDef sync fill:#e6f4ea,stroke:#4caf73,color:#1f2933
+    classDef dcc fill:#f1e9fb,stroke:#9a73d1,color:#1f2933
+    classDef gate fill:#ffffff,stroke:#52606d,color:#1f2933
+
+    a["1. Create bundle_sources/host/new-version<br/>copy the previous version as a start"]:::you
+    b["2. Edit the contents<br/>startup, extensions, addons, splash"]:::you
+    c["3. Run build_test_workstation.py<br/>publishes every version in bundle_sources"]:::build
+    d{"Re-publishing a version<br/>that is already synced?"}:::gate
+    e["Delete its local copy<br/>bundles/hosts/host/version<br/>bundles/state/manifests/host/version.json"]:::sync
+    f["4. Set bundle_version in<br/>fake_remote_repository/config.json"]:::you
+    g["5. Run localiser sync host series"]:::sync
+    h["6. Restart the DCC"]:::dcc
+
+    a --> b --> c --> d
+    d -- "yes" --> e --> f
+    d -- "no" --> f
+    f --> g --> h

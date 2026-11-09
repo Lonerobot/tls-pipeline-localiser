@@ -1,0 +1,720 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+"""Scene objects for each model: the live paper layout and the fold rig."""
+
+import hashlib
+
+import bpy
+from mathutils import Matrix, Vector
+
+from . import targets as T
+from .core.geom import polygon_area
+
+PAGE_GAP_MM = 15.0
+
+
+# ----------------------------------------------------------------- helpers
+def _material(name, rgba):
+    mat = bpy.data.materials.get(name)
+    if mat is None:
+        mat = bpy.data.materials.new(name)
+        mat.diffuse_color = rgba
+        mat.use_nodes = True
+        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        if bsdf is not None:
+            bsdf.inputs["Base Color"].default_value = rgba
+            rough = bsdf.inputs.get("Roughness")
+            if rough is not None:
+                rough.default_value = 1.0
+    return mat
+
+
+def model_bounds(verts):
+    xs = [v[0] for v in verts] or [0.0]
+    ys = [v[1] for v in verts] or [0.0]
+    zs = [v[2] for v in verts] or [0.0]
+    size = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs), 1e-6)
+    return (min(xs), min(ys), min(zs)), (max(xs), max(ys), max(zs)), size
+
+
+class PageFrame:
+    """Page millimetres -> the layout object's space -> world.
+
+    The layout object can be moved/rotated freely; everything (highlights,
+    rig) follows it."""
+
+    def __init__(self, lay, layout_name):
+        self.unit = 1.0 / lay.scale if lay.scale > 0 else 1.0  # world units per mm
+        self.page_w = lay.page_w
+        self.page_h = lay.page_h
+        self.layout_name = layout_name
+
+    @property
+    def matrix(self):
+        obj = bpy.data.objects.get(self.layout_name)
+        return obj.matrix_world.copy() if obj is not None else Matrix.Identity(4)
+
+    def to_local(self, page, p, lift=0.0):
+        return Vector((
+            (page * (self.page_w + PAGE_GAP_MM) + p[0]) * self.unit,
+            p[1] * self.unit,
+            lift * self.unit,
+        ))
+
+    def to_world(self, page, p, lift=0.0):
+        return self.matrix @ self.to_local(page, p, lift)
+
+    def to_rig(self, page, p, matrix=None):
+        """The rig's sheet: the same layout turned over (printed side down,
+        so pieces fold up off the table like real paper), laid just in
+        front of the layout so the two don't overlap. Turning over is a
+        half turn about the page's X axis: a rigid motion, so fold angles
+        are unchanged."""
+        v = self.to_local(page, p)
+        h = self.page_h * self.unit
+        turned = Vector((v.x, -v.y - h * 0.1, -v.z))
+        return (matrix if matrix is not None else self.matrix) @ turned
+
+
+def default_layout_location(verts, lay):
+    lo, hi, size = model_bounds(verts)
+    unit = 1.0 / lay.scale if lay.scale > 0 else 1.0
+    return Vector((hi[0] + size * 0.25, (lo[1] + hi[1]) * 0.5 - lay.page_h * unit * 0.5, lo[2]))
+
+
+def _corner_values(item, per_poly, blank):
+    """Per-corner values for one new polygon (see write_corner_layers)."""
+    if isinstance(item, int):
+        return [blank] * item
+    if isinstance(item, tuple):  # ("interp", face, weights): an outside tab
+        _, face, weights = item
+        poly = per_poly[face.source]
+        vals = [poly[c] for c in face.corners]
+        size = len(blank)
+        return [
+            tuple(sum(vals[c][i] * w for c, w in ws) for i in range(size)) for ws in weights
+        ]
+    poly = per_poly[item.source]
+    return [poly[c] for c in item.corners]
+
+
+def tab_corner_source(tab, res):
+    """Corner source for a tab polygon: covered art if it's an outside tab."""
+    if getattr(tab, "outer", False) and tab.partner is not None and tab.weights:
+        return ("interp", res.faces[tab.partner[0]], tab.weights)
+    return len(tab.points)
+
+
+def write_corner_layers(mesh, src, corner_sources):
+    """Copy every UV map and colour attribute from the model.
+
+    corner_sources: per new polygon either a res Face (copy its corners), an
+    int n (n blank corners, e.g. tabs and page sheets) or ("interp", face,
+    weights) to blend a face's corners (outside tabs show the art they
+    cover)."""
+    for name, per_poly in src.uv_layers.items():
+        if len(mesh.uv_layers) >= 8:
+            break
+        flat = []
+        for item in corner_sources:
+            for uv in _corner_values(item, per_poly, (0.0, 0.0)):
+                flat.extend(uv[:2])
+        layer = mesh.uv_layers.new(name=name)
+        layer.data.foreach_set("uv", flat)
+    for uv in mesh.uv_layers:
+        uv.active_render = uv.name == src.render_uv
+    if src.render_uv and src.render_uv in mesh.uv_layers:
+        mesh.uv_layers.active = mesh.uv_layers[src.render_uv]
+    for name, per_poly in src.color_layers.items():
+        flat = []
+        for item in corner_sources:
+            for col in _corner_values(item, per_poly, (1.0, 1.0, 1.0, 1.0)):
+                col = tuple(col) + (1.0,) * (4 - len(col))
+                flat.extend(col[:4])
+        try:
+            attr = mesh.color_attributes.new(name, "FLOAT_COLOR", "CORNER")
+        except RuntimeError:
+            continue
+        attr.data.foreach_set("color", flat)
+    if src.active_color and src.active_color in mesh.color_attributes:
+        try:
+            mesh.color_attributes.active_color_name = src.active_color
+        except AttributeError:
+            mesh.color_attributes.active_color = mesh.color_attributes[src.active_color]
+        try:
+            mesh.color_attributes.render_color_index = list(
+                mesh.color_attributes.keys()
+            ).index(src.active_color)
+        except (AttributeError, ValueError):
+            pass
+
+
+# ----------------------------------------------------------------- layout
+def build_layout(scene, src_obj, src, res, lay):
+    """(Re)build the model's flat layout object: paper sheets, pieces, tabs."""
+    obj = T.output(src_obj, T.ROLE_LAYOUT)
+    created = obj is None or obj.type != "MESH"
+    if created:
+        mesh = bpy.data.meshes.new(f"{src_obj.name} Layout")
+        obj = bpy.data.objects.new(f"{src_obj.name} Layout", mesh)
+        T.tag(obj, T.ROLE_LAYOUT, src_obj)
+        obj.location = default_layout_location(src.verts, lay)
+    else:
+        mesh = obj.data
+        mesh.clear_geometry()
+        mesh.materials.clear()
+        for attr in list(mesh.color_attributes):
+            mesh.color_attributes.remove(attr)
+        while mesh.uv_layers:
+            mesh.uv_layers.remove(mesh.uv_layers[0])
+    coll = T.collection_for(scene, src_obj)
+    if obj.name not in coll.objects:
+        coll.objects.link(obj)
+    frame = PageFrame(lay, obj.name)
+
+    verts, faces, mat_idx, corners = [], [], [], []
+    paper = _material("Papercraft Paper", (1.0, 1.0, 1.0, 1.0))
+    tab_mat = _material("Papercraft Tab", (0.85, 0.80, 0.70, 1.0))
+    warn_mat = _material("Papercraft Tab Warning", (0.9, 0.15, 0.1, 1.0))
+    mats = [paper, tab_mat, warn_mat]
+    slot_of_src = {}
+    for i, m in enumerate(src.mat_list):
+        if m is not None:
+            if m not in mats:
+                mats.append(m)
+            slot_of_src[i] = mats.index(m)
+
+    def add_poly(points, page, lift, mat, corner_src):
+        base = len(verts)
+        for p in points:
+            verts.append(frame.to_local(page, p, lift))
+        faces.append(list(range(base, base + len(points))))
+        mat_idx.append(mat)
+        corners.append(corner_src)
+
+    poly_map = []  # layout polygon -> ("page", n) | ("tab", i) | ("face", f)
+    for page in range(max(lay.page_count, 1)):
+        add_poly(
+            [(0, 0), (lay.page_w, 0), (lay.page_w, lay.page_h), (0, lay.page_h)],
+            page, -0.6, 0, 4,  # sheet sits clearly under the pieces
+        )
+        poly_map.append(("page", page))
+    for n, tab in enumerate(lay.tabs):
+        place = lay.placements[tab.island]
+        pts = lay.tab_points(tab)
+        corner_src = tab_corner_source(tab, res)
+        mat = 2 if tab.squashed else 1
+        if not isinstance(corner_src, int):  # outside tab: covered art
+            mat = slot_of_src.get(res.faces[tab.partner[0]].material, 1)
+        if polygon_area(pts) < 0:  # face up like everything else
+            pts = pts[::-1]
+            if not isinstance(corner_src, int):
+                corner_src = (corner_src[0], corner_src[1], corner_src[2][::-1])
+        add_poly(pts, place.page, -0.2 if isinstance(corner_src, int) else 0.05, mat, corner_src)
+        poly_map.append(("tab", n))
+    for isl in res.islands:
+        place = lay.placements[isl.index]
+        for f in isl.order:
+            face = res.faces[f]
+            add_poly(
+                lay.face_points(res, isl, f), place.page, 0.0,
+                slot_of_src.get(face.material, 0), face,
+            )
+            poly_map.append(("face", f))
+
+    mesh.from_pydata([tuple(v) for v in verts], [], faces)
+    for m in mats:
+        mesh.materials.append(m)
+    mesh.polygons.foreach_set("material_index", mat_idx)
+    write_corner_layers(mesh, src, corners)
+    mesh.update()
+    obj.show_wire = True
+    obj.show_all_edges = True
+    return obj, poly_map, frame
+
+
+def reset_layout_position(src_obj, entry):
+    obj = T.output(src_obj, T.ROLE_LAYOUT)
+    if obj is not None:
+        obj.matrix_world = Matrix.Translation(default_layout_location(entry.src.verts, entry.lay))
+
+
+def remove_layout(src_obj):
+    for obj in T.outputs(src_obj, T.ROLE_LAYOUT):
+        data = obj.data
+        bpy.data.objects.remove(obj, do_unlink=True)
+        if data is not None and data.users == 0:
+            bpy.data.meshes.remove(data)
+
+
+# ----------------------------------------------------------------- rig
+def _best_corner(pts):
+    """Corner whose triple is best conditioned (largest cross product)."""
+    best_k, best_n = 0, -1.0
+    count = len(pts)
+    for k in range(count):
+        a, b, c = pts[k], pts[(k + 1) % count], pts[(k + 2) % count]
+        n = (b - a).cross(c - a).length
+        if n > best_n * (1.0 + 1e-6):
+            best_n, best_k = n, k
+    return best_k
+
+
+def _frame_from_points(pts, k):
+    """Orthonormal frame (as a 4x4) from corner triple k. Use the same k for
+    both point sets so the two frames correspond."""
+    count = len(pts)
+    a, b, c = pts[k], pts[(k + 1) % count], pts[(k + 2) % count]
+    n = (b - a).cross(c - a)
+    u = (b - a).normalized()
+    n = n.normalized()
+    w = n.cross(u)
+    m = Matrix.Identity(4)
+    for r in range(3):
+        m[r][0], m[r][1], m[r][2], m[r][3] = u[r], w[r], n[r], a[r]
+    return m
+
+
+RIG_VERSION = 3  # 2: face-down sheet, no flip, fold order; 3: paper thickness
+
+
+def _sequence_settings(props):
+    if props is None:
+        return (False, 0.0, 0.0)
+    return (bool(props.fold_one_by_one), round(float(props.fold_overlap), 4),
+            round(float(props.paper_thickness), 4))
+
+
+def rig_signature(entry, props=None):
+    h = hashlib.sha1()
+    h.update(entry.signature.encode())
+    h.update(repr(entry.settings).encode())
+    h.update(repr((RIG_VERSION, _sequence_settings(props))).encode())
+    return h.hexdigest()[:16]
+
+
+def rig_is_stale(src_obj, entry):
+    arm = T.output(src_obj, T.ROLE_RIG)
+    if arm is None or entry is None:
+        return False
+    return arm.get("papercraft_signature") != rig_signature(entry, src_obj.papercraft)
+
+
+def fold_schedule(res, lay, hinge_names, one_by_one, overlap, include_tabs=True):
+    """name -> (start, length) within the fold slider's 0..1.
+
+    One by one: the extremities go first. Every hinge waits until everything
+    hanging off it has folded (glue tabs, then the faces at the tips, then
+    their parents ... the root last); hinges at the same stage go deepest
+    first. `overlap` 0 = strictly one after another, 1 = all together."""
+    names = list(hinge_names)
+    if not one_by_one or len(names) < 2:
+        return {n: (0.0, 1.0) for n in names}
+    height, depth = {}, {}
+    for isl in res.islands:
+        children = {}
+        for f in isl.order:
+            if f != isl.root:
+                children.setdefault(isl.parent[f][0], []).append(f)
+        for f in isl.order:  # parents come before children in order
+            depth[f] = 0 if f == isl.root else depth[isl.parent[f][0]] + 1
+        tabbed = {t.face for t in lay.tabs} if include_tabs else set()
+        for f in reversed(isl.order):
+            kids = [height[c] for c in children.get(f, ())]
+            if f in tabbed:
+                kids.append(0)  # its glue tabs fold before it
+            height[f] = 1 + max(kids) if kids else 0
+    key = {}
+    for name in names:
+        if name.startswith("T"):
+            tab = lay.tabs[int(name[1:])]
+            key[name] = (0, -(depth.get(tab.face, 0) + 1), int(name[1:]))
+        else:
+            f = int(name[1:])
+            key[name] = (height[f] + (1 if include_tabs else 0), -depth[f], f)
+    ordered = sorted(names, key=lambda n: key[n])
+    n = len(ordered)
+    overlap = max(0.0, min(1.0, overlap))
+    slot = 1.0 / n
+    length = slot + overlap * (1.0 - slot)
+    step = (1.0 - length) / (n - 1)
+    return {name: (i * step, length) for i, name in enumerate(ordered)}
+
+
+def ensure_object_mode(context):
+    """Leave Edit/Pose/Paint modes safely. Returns (active name, mode) to
+    restore afterwards."""
+    view_layer = context.view_layer
+    active = view_layer.objects.active
+    mode = context.mode
+    if mode != "OBJECT" and active is not None:
+        try:
+            bpy.ops.object.mode_set(mode="OBJECT")
+        except RuntimeError:
+            pass
+    return (active.name if active is not None else None), mode
+
+
+def restore_mode(context, saved):
+    name, mode = saved
+    obj = bpy.data.objects.get(name) if name else None
+    if obj is None or obj.name not in context.view_layer.objects:
+        return
+    context.view_layer.objects.active = obj
+    if mode == "EDIT_MESH" and obj.type == "MESH":
+        try:
+            bpy.ops.object.mode_set(mode="EDIT")
+        except RuntimeError:
+            pass
+
+
+def remove_rig(src_obj):
+    """Delete the model's rig. Returns its animation so a rebuild can keep it."""
+    saved = None
+    arm = T.output(src_obj, T.ROLE_RIG)
+    if arm is not None:
+        ad = arm.animation_data
+        saved = {
+            "action": ad.action if ad else None,
+            "slot": getattr(ad, "action_slot", None) if ad else None,
+            "fold": float(arm.get("fold", 0.0)),
+            "assemble": float(arm.get("assemble", 0.0)),
+        }
+        if saved["action"] is not None:
+            saved["action"].use_fake_user = True  # survive while the rig is gone
+    folding = T.output(src_obj, T.ROLE_FOLDING)
+    if folding is not None:
+        if saved is None:
+            saved = {"action": None, "slot": None, "fold": 0.0, "assemble": 0.0}
+        saved["modifiers"] = [_modifier_state(m) for m in folding.modifiers
+                              if m.name not in (RIG_MODIFIER, THICKNESS_MODIFIER)]
+    for role in (T.ROLE_FOLDING, T.ROLE_RIG, T.ROLE_TARGET):
+        for obj in T.outputs(src_obj, role):
+            data = obj.data
+            bpy.data.objects.remove(obj, do_unlink=True)
+            if data is not None and data.users == 0:
+                if isinstance(data, bpy.types.Armature):
+                    bpy.data.armatures.remove(data)
+                elif isinstance(data, bpy.types.Mesh):
+                    bpy.data.meshes.remove(data)
+    return saved
+
+
+RIG_MODIFIER = "Fold Rig"
+THICKNESS_MODIFIER = "Paper Thickness"
+
+
+def _modifier_state(mod):
+    """Settings of a modifier the user added to the folding mesh, so a
+    rebuild can put it back."""
+    values = {}
+    for prop in mod.bl_rna.properties:
+        if prop.is_readonly or prop.identifier in ("rna_type", "name", "type"):
+            continue
+        try:
+            values[prop.identifier] = getattr(mod, prop.identifier)
+        except AttributeError:
+            pass
+    return (mod.name, mod.type, values)
+
+
+def _restore_modifier(obj, state):
+    name, kind, values = state
+    try:
+        mod = obj.modifiers.new(name, kind)
+    except (TypeError, RuntimeError):
+        return
+    for key, value in values.items():
+        try:
+            setattr(mod, key, value)
+        except (AttributeError, TypeError, ValueError, RuntimeError):
+            pass
+
+
+def _newell(pts):
+    n = Vector()
+    for k, a in enumerate(pts):
+        b = pts[(k + 1) % len(pts)]
+        n.x += (a.y - b.y) * (a.z + b.z)
+        n.y += (a.z - b.z) * (a.x + b.x)
+        n.z += (a.x - b.x) * (a.y + b.y)
+    return n.normalized() if n.length > 0 else Vector((0.0, 0.0, 1.0))
+
+
+def _ease(u):
+    return f"{u}*{u}*(3-2*{u})"
+
+
+def _window(start, length):
+    return f"min(max((t-{start:.6f})*{1.0 / length:.6f},0),1)"
+
+
+def _add_driver(target_id, data_path, index, owner, prop, factor, start=0.0, length=1.0):
+    fc = target_id.driver_add(data_path, index) if index >= 0 else target_id.driver_add(data_path)
+    drv = fc.driver
+    drv.type = "SCRIPTED"
+    var = drv.variables.new()
+    var.name = "t"
+    var.type = "SINGLE_PROP"
+    var.targets[0].id_type = "OBJECT"
+    var.targets[0].id = owner
+    var.targets[0].data_path = f'["{prop}"]'
+    # A "simple expression": evaluated without Python, so it works even
+    # when Auto Run Python Scripts is off.
+    if start <= 0.0 and length >= 1.0:
+        drv.expression = f"t*{factor:.9f}" if factor != 1.0 else "t"
+    else:
+        # This hinge's own stretch of the slider, eased in and out.
+        drv.expression = f"{factor:.9f}*{_ease(_window(start, length))}"
+    return fc
+
+
+def build_rig(context, src_obj, entry, include_tabs=True):
+    """Armature with one bone per face (and per tab). Bone Y axes lie on the
+    hinge edges, so each fold is a single driven Y rotation:
+        fold     0 = flat on the page, 1 = folded into shape
+        assemble 0 = pieces stay on the page, 1 = pieces fly to the model
+    Rebuilding keeps the previous rig's keyframes."""
+    src, res, lay = entry.src, entry.res, entry.lay
+    scene = context.scene
+    saved_mode = ensure_object_mode(context)
+    saved_anim = remove_rig(src_obj)
+    coll = T.collection_for(scene, src_obj)
+    layout_obj = T.output(src_obj, T.ROLE_LAYOUT)
+    frame = entry.frame or PageFrame(lay, layout_obj.name if layout_obj else "")
+    layout_matrix = frame.matrix
+
+    arm_data = bpy.data.armatures.new(f"{src_obj.name} Rig")
+    arm = bpy.data.objects.new(f"{src_obj.name} Rig", arm_data)
+    T.tag(arm, T.ROLE_RIG, src_obj)
+    coll.objects.link(arm)
+    arm_data.display_type = "STICK"
+    arm["fold"] = 0.0
+    arm["assemble"] = 0.0
+    for prop, desc in (
+        ("fold", "0 = flat sheet, 1 = folded into shape"),
+        ("assemble", "0 = pieces on the page, 1 = pieces moved onto the model"),
+    ):
+        ui = arm.id_properties_ui(prop)
+        ui.update(min=0.0, max=1.0, soft_min=0.0, soft_max=1.0, description=desc)
+
+    mesh = bpy.data.meshes.new(f"{src_obj.name} Folding")
+    folding = bpy.data.objects.new(f"{src_obj.name} Folding", mesh)
+    T.tag(folding, T.ROLE_FOLDING, src_obj)
+    coll.objects.link(folding)
+
+    world_pts = {}
+    for isl in res.islands:
+        page = lay.placements[isl.index].page
+        for f in isl.faces:
+            world_pts[f] = [
+                frame.to_rig(page, p, layout_matrix) for p in lay.face_points(res, isl, f)
+            ]
+
+    view_layer = context.view_layer
+    for o in context.selected_objects:
+        o.select_set(False)
+    view_layer.objects.active = arm
+    arm.select_set(True)
+    bone_of_face, hinges, roots, tab_bones, tab_axes = {}, [], [], [], {}
+    bpy.ops.object.mode_set(mode="EDIT")
+    try:
+        ebones = arm_data.edit_bones
+        min_len = 1e-4 * frame.unit
+        for isl in res.islands:
+            for f in isl.order:
+                name = f"F{f}"
+                eb = ebones.new(name)
+                if f == isl.root:
+                    c = sum(world_pts[f], Vector()) / len(world_pts[f])
+                    eb.head = c
+                    eb.tail = c + Vector((0.0, 0.0, 10.0 * frame.unit))
+                    roots.append((name, isl))
+                else:
+                    p, i, j, angle = isl.parent[f]
+                    P = res.faces[p]
+                    eb.head = world_pts[p][P.loop.index(i)]
+                    eb.tail = world_pts[p][P.loop.index(j)]
+                    if (eb.tail - eb.head).length < min_len:
+                        eb.tail = eb.head + (eb.tail - eb.head).normalized() * min_len
+                    eb.parent = ebones[bone_of_face[p]]
+                    hinges.append((name, angle))
+                eb.roll = 0.0
+                bone_of_face[f] = name
+        if include_tabs:
+            for n, tab in enumerate(lay.tabs):
+                face = res.faces[tab.face]
+                k = tab.corner
+                name = f"T{n}"
+                eb = ebones.new(name)
+                eb.head = world_pts[tab.face][k]
+                eb.tail = world_pts[tab.face][(k + 1) % len(face.loop)]
+                eb.parent = ebones[bone_of_face[tab.face]]
+                tab_bones.append((name, tab))
+                hinges.append((name, tab.angle))
+                # Sheet normal (printed side) in this bone's rest axes, for
+                # sliding the tab one paper thickness off the wall it glues to.
+                n = _newell(world_pts[tab.face])
+                tab_axes[name] = (n.dot(eb.x_axis), n.dot(eb.y_axis), n.dot(eb.z_axis))
+        rest = {eb.name: eb.matrix.copy() for eb in ebones}
+    finally:
+        bpy.ops.object.mode_set(mode="OBJECT")
+
+    props = src_obj.papercraft
+    schedule = fold_schedule(
+        res, lay, [name for name, _ in hinges],
+        props.fold_one_by_one, props.fold_overlap, include_tabs,
+    )
+    for name, angle in hinges:
+        pb = arm.pose.bones[name]
+        pb.rotation_mode = "XYZ"
+        start, length = schedule[name]
+        _add_driver(pb, "rotation_euler", 1, arm, "fold", angle, start, length)
+
+    # Paper thickness: glued tabs can't share the plane of the wall they glue
+    # to (they'd z-fight and show through). Each tab slides one paper
+    # thickness off it as it folds: behind the wall for inside tabs, in
+    # front of it for outside tabs. The slide is the tab's printed-side
+    # normal after its fold, in the bone's rest axes (pose location is
+    # applied before the bone's own rotation).
+    import math
+
+    gap = props.paper_thickness * frame.unit * 1.1
+    if gap > 0.0:
+        angle_of = dict(hinges)
+        for name, tab in tab_bones:
+            a, b, c = tab_axes[name]
+            th = angle_of[name]
+            nx = a * math.cos(th) + c * math.sin(th)
+            nz = -a * math.sin(th) + c * math.cos(th)
+            side = 1.0 if tab.outer else -1.0
+            start, length = schedule[name]
+            pb = arm.pose.bones[name]
+            for index, comp in ((0, nx), (1, b), (2, nz)):
+                if abs(comp) < 1e-9:
+                    continue
+                _add_driver(pb, "location", index, arm, "fold", side * gap * comp, start, length)
+
+    # Root bones: the sheet lies printed side down, so pieces fold up and
+    # rest on their root face like real paper. One Copy Transforms per piece:
+    #   "Assembled" (influence = assemble): move it into place on the model.
+    # Keep the many helper empties out of the way in one sub-collection.
+    target_coll = None
+    for child in coll.children:
+        if child.get("papercraft_targets"):
+            target_coll = child
+            break
+    if target_coll is None:
+        target_coll = bpy.data.collections.new(f"{src_obj.name} Rig Targets")
+        target_coll["papercraft_targets"] = True
+        coll.children.link(target_coll)
+    for name, isl in roots:
+        f = isl.root
+        face = res.faces[f]
+        model_pts = [Vector(src.verts[v]) for v in face.loop]
+        k = _best_corner(model_pts)
+        M = _frame_from_points(model_pts, k) @ _frame_from_points(world_pts[f], k).inverted()
+        for label, matrix, prop in (("Assembled", M, "assemble"),):
+            target = bpy.data.objects.new(f"{src_obj.name} {label} {isl.index}", None)
+            T.tag(target, T.ROLE_TARGET, src_obj)
+            target.empty_display_type = "PLAIN_AXES"
+            target.empty_display_size = 0.0
+            target.hide_select = True
+            target_coll.objects.link(target)
+            target.matrix_world = matrix @ rest[name]
+            con = arm.pose.bones[name].constraints.new("COPY_TRANSFORMS")
+            con.name = label
+            con.target = target
+            con.influence = 0.0
+            _add_driver(con, "influence", -1, arm, prop, 1.0)
+
+    verts, faces, groups, mat_idx, corners = [], [], [], [], []
+    for isl in res.islands:
+        for f in isl.order:
+            face = res.faces[f]
+            base = len(verts)
+            verts.extend(world_pts[f])
+            faces.append(list(range(base, base + len(face.loop))))
+            groups.append(bone_of_face[f])
+            mat_idx.append(face.material)
+            corners.append(face)
+    tab_slot = len(src.mat_list)
+    for name, tab in tab_bones:
+        page = lay.placements[tab.island].page
+        flat_pts = lay.tab_points(tab)
+        corner_src = tab_corner_source(tab, res)
+        if polygon_area(flat_pts) < 0:  # face the same way as the pieces
+            flat_pts = flat_pts[::-1]
+            if not isinstance(corner_src, int):
+                corner_src = (corner_src[0], corner_src[1], corner_src[2][::-1])
+        pts = [frame.to_rig(page, p, layout_matrix) for p in flat_pts]
+        base = len(verts)
+        verts.extend(pts)
+        faces.append(list(range(base, base + len(pts))))
+        groups.append(name)
+        if isinstance(corner_src, int):
+            mat_idx.append(tab_slot)
+        else:
+            mat_idx.append(res.faces[tab.partner[0]].material)
+        corners.append(corner_src)
+
+    mesh.from_pydata([tuple(v) for v in verts], [], faces)
+    for m in src.mat_list:
+        mesh.materials.append(m)
+    mesh.materials.append(_material("Papercraft Tab", (0.85, 0.80, 0.70, 1.0)))
+    mesh.polygons.foreach_set("material_index", mat_idx)
+    write_corner_layers(mesh, src, corners)
+    mesh.update()
+    vgroups = {}
+    for poly, gname in zip(mesh.polygons, groups):
+        vg = vgroups.get(gname)
+        if vg is None:
+            vg = vgroups[gname] = folding.vertex_groups.new(name=gname)
+        vg.add(list(poly.vertices), 1.0, "REPLACE")
+    mod = folding.modifiers.new(RIG_MODIFIER, "ARMATURE")
+    mod.object = arm
+    folding.parent = arm
+    if props.paper_thickness > 0.0:
+        # Thickness grows behind the printed side (into the model), so the
+        # printed surface stays exactly on the model's surface.
+        solid = folding.modifiers.new(THICKNESS_MODIFIER, "SOLIDIFY")
+        solid.thickness = props.paper_thickness * frame.unit
+        solid.offset = -1.0
+        solid.use_even_offset = True
+        # No rim faces: at a glued seam a piece's rim lies in the plane of
+        # the neighbouring wall and renders as a dark line.
+        solid.use_rim = False
+    for state in (saved_anim or {}).get("modifiers", ()):
+        if props.paper_thickness > 0.0 and state[1] == "SOLIDIFY":
+            continue  # Paper Thickness replaces a hand-added Solidify
+        _restore_modifier(folding, state)
+
+    arm["papercraft_signature"] = rig_signature(entry, src_obj.papercraft)
+    if saved_anim:
+        arm["fold"] = saved_anim["fold"]
+        arm["assemble"] = saved_anim["assemble"]
+        if saved_anim["action"] is not None:
+            ad = arm.animation_data_create()
+            ad.action = saved_anim["action"]
+            slot = saved_anim["slot"]
+            if slot is not None and hasattr(ad, "action_slot"):
+                try:
+                    ad.action_slot = slot
+                except (TypeError, RuntimeError, ReferenceError):
+                    pass
+            saved_anim["action"].use_fake_user = False
+
+    arm.select_set(False)
+    restore_mode(context, saved_mode)
+    return arm, folding
+
+
+def keyframe_animation(arm, start, fold_end, assemble_end):
+    for prop, frames in (
+        ("fold", ((start, 0.0), (fold_end, 1.0))),
+        ("assemble", ((start, 0.0), (fold_end, 0.0), (assemble_end, 1.0))),
+    ):
+        for frame, value in frames:
+            arm[prop] = value
+            arm.keyframe_insert(data_path=f'["{prop}"]', frame=frame)
+    arm["fold"] = 0.0
+    arm["assemble"] = 0.0

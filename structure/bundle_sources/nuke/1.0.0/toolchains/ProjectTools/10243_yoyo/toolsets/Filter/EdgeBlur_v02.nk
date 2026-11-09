@@ -1,0 +1,58 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name EdgeBlur
+ selected true
+ xpos -1544
+ ypos 6785
+ addUserKnob {20 User}
+ addUserKnob {41 size T EdgeBlur2.size}
+ addUserKnob {41 filter T EdgeBlur2.filter}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -260
+  ypos 549
+  number 2
+ }
+ Input {
+  inputs 0
+  name BlurMatte
+  xpos -370
+  ypos 398
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -499
+  ypos 398
+ }
+add_layer {EdgeBlur EdgeBlur.red}
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  out2 EdgeBlur
+  name ShuffleCopy1
+  xpos -435
+  ypos 543
+ }
+ EdgeBlur {
+  inputs 1+1
+  controlchannel EdgeBlur.red
+  size 9
+  name EdgeBlur2
+  xpos -435
+  ypos 585
+ }
+ Output {
+  name Output1
+  xpos -435
+  ypos 685
+ }
+end_group

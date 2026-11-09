@@ -1,0 +1,83 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name TransformMask
+ tile_color 0x9f7ca9ff
+ selected true
+ xpos 2270
+ ypos -5122
+ addUserKnob {20 User}
+ addUserKnob {41 matrix T Transform11.matrix}
+ addUserKnob {41 translate T Transform11.translate}
+ addUserKnob {41 rotate T Transform11.rotate}
+ addUserKnob {41 scale T Transform11.scale}
+ addUserKnob {41 skewX l "skew X" T Transform11.skewX}
+ addUserKnob {41 skewY l "skew Y" T Transform11.skewY}
+ addUserKnob {41 skew_order l "skew order" T Transform11.skew_order}
+ addUserKnob {41 center T Transform11.center}
+ addUserKnob {41 invert_matrix l invert T Transform11.invert_matrix}
+ addUserKnob {41 filter T Transform11.filter}
+ addUserKnob {41 clamp T Transform11.clamp}
+ addUserKnob {41 black_outside l "black outside" T Transform11.black_outside}
+ addUserKnob {41 motionblur T Transform11.motionblur}
+ addUserKnob {41 shutter T Transform11.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T Transform11.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T Transform11.shuttercustomoffset}
+}
+ Input {
+  inputs 0
+  name mask
+  label mask
+  xpos 620
+  ypos -424
+  number 1
+ }
+set N30917800 [stack 0]
+ Input {
+  inputs 0
+  name Input1
+  xpos 458
+  ypos -474
+ }
+set N30917400 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge20
+  xpos 458
+  ypos -330
+ }
+ Transform {
+  translate {80 -62}
+  center {1024 576}
+  name Transform11
+  xpos 458
+  ypos -258
+ }
+push $N30917800
+push $N30917400
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge21
+  xpos 567
+  ypos -306
+ }
+ Merge2 {
+  inputs 2
+  name Merge22
+  xpos 458
+  ypos -186
+ }
+ Output {
+  name Output1
+  xpos 458
+  ypos -78
+ }
+ Output {
+  name Output1
+  xpos 458
+  ypos 22
+ }
+end_group

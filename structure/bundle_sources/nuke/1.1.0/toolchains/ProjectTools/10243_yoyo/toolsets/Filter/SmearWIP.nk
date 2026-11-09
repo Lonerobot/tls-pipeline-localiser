@@ -1,0 +1,173 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh030/publish/bg-paint/2d-paint/image-sequence/default/SR_sc07-sh030_2d-paint_psd_default_v002.png"
+ format "10157 897 0 0 10157 897 1 "
+ origset true
+ name Read148
+ selected true
+ xpos 3700
+ ypos -5282
+}
+Grade {
+ blackpoint 0.21
+ whitepoint 0.47
+ name Grade1
+ selected true
+ xpos 3700
+ ypos -5196
+}
+Saturation {
+ saturation 0
+ name Saturation1
+ selected true
+ xpos 3700
+ ypos -5164
+}
+Shuffle {
+ green red
+ blue red
+ alpha red
+ name Shuffle1
+ selected true
+ xpos 3700
+ ypos -5100
+}
+Transform {
+ translate {{curve x1 -3685 x10 3840} {curve x1 -56 x10 -34}}
+ rotate -180
+ center {5078.5 448.5}
+ name Transform1
+ selected true
+ xpos 3700
+ ypos -5028
+}
+Transform {
+ scale {1 1.799999952}
+ center {5078.5 448.5}
+ name Transform2
+ selected true
+ xpos 3700
+ ypos -5004
+}
+Reformat {
+ resize none
+ name Reformat1
+ selected true
+ xpos 3700
+ ypos -4962
+}
+Invert {
+ name Invert1
+ selected true
+ xpos 3700
+ ypos -4936
+}
+Grade {
+ whitepoint 0.46
+ white_clamp true
+ name Grade2
+ selected true
+ xpos 3700
+ ypos -4898
+ disable true
+}
+set N3d63e800 [stack 0]
+Shuffle {
+ green red
+ blue red
+ alpha red
+ name Shuffle2
+ selected true
+ xpos 3700
+ ypos -4714
+}
+set N3d63e400 [stack 0]
+push $N3d63e400
+push $N3d63e800
+Read {
+ inputs 0
+ file_type psd
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh050/work/bg-paint/2d-paint/psd/default/SR_sc07-sh050_2d-paint_psd_forest_v006_COMP.psd"
+ format "3372 1607 0 0 3372 1607 1 "
+ origset true
+ name Read65
+ selected true
+ xpos 3920
+ ypos -5392
+}
+Reformat {
+ name Reformat9
+ selected true
+ xpos 3920
+ ypos -5306
+}
+ShuffleCopy {
+ inputs 2
+ alpha white
+ black alpha
+ white alpha
+ red2 alpha
+ green2 alpha
+ out2 motion
+ name ShuffleCopy1
+ selected true
+ xpos 3920
+ ypos -4810
+}
+set Nfdecc800 [stack 0]
+OCIOColorSpace {
+ in_colorspace "Output - sRGB"
+ out_colorspace "ACES - ACEScg"
+ name OCIOColorSpace15
+ selected true
+ xpos 3920
+ ypos -4580
+}
+IDistort {
+ uv motion
+ uv_offset 1
+ uv_scale {121 50}
+ blur rgba.red
+ blur_scale 41
+ invert_mask true
+ name IDistort1
+ selected true
+ xpos 3920
+ ypos -4528
+}
+OCIOColorSpace {
+ in_colorspace "ACES - ACEScg"
+ out_colorspace "Output - sRGB"
+ name OCIOColorSpace16
+ selected true
+ xpos 3920
+ ypos -4426
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge1
+ selected true
+ xpos 3919
+ ypos -4378
+}
+push $Nfdecc800
+Merge2 {
+ inputs 2
+ name Merge2
+ selected true
+ xpos 4140
+ ypos -4378
+}
+Blur {
+ inputs 1+1
+ size {4 0}
+ invert_mask true
+ name Blur1
+ selected true
+ xpos 4140
+ ypos -4216
+}

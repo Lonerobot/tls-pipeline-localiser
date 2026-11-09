@@ -1,0 +1,366 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read142
+ selected true
+ xpos -5163
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 827
+ origlast 827
+ origset true
+ name Read143
+ selected true
+ xpos -5053
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 592
+ origlast 592
+ origset true
+ name Read144
+ selected true
+ xpos -4943
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 871
+ origlast 871
+ origset true
+ name Read146
+ selected true
+ xpos -4723
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read147
+ selected true
+ xpos -4613
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 897
+ origlast 897
+ origset true
+ name Read148
+ selected true
+ xpos -4503
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/200T_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1021
+ origlast 1021
+ origset true
+ name Read149
+ selected true
+ xpos -4503
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 459
+ origlast 459
+ origset true
+ name Read150
+ selected true
+ xpos -4393
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read151
+ selected true
+ xpos -4283
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 734
+ origlast 734
+ origset true
+ name Read152
+ selected true
+ xpos -4173
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/250D_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 702
+ origlast 702
+ origset true
+ name Read153
+ selected true
+ xpos -4063
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1008
+ origlast 1008
+ origset true
+ name Read154
+ selected true
+ xpos -3953
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_12fps.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read155
+ selected true
+ xpos -3843
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 905
+ origlast 905
+ origset true
+ name Read156
+ selected true
+ xpos -3733
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/500T_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 783
+ origlast 783
+ origset true
+ name Read157
+ selected true
+ xpos -3623
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_250D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read158
+ selected true
+ xpos -3513
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_500T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read159
+ selected true
+ xpos -3403
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_50D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read160
+ selected true
+ xpos -3403
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Auto.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read161
+ selected true
+ xpos -3293
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_AutoWind.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read162
+ selected true
+ xpos -3183
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read163
+ selected true
+ xpos -3073
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Vignette_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read164
+ selected true
+ xpos -2963
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/8mm_Vignette_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read165
+ selected true
+ xpos -2853
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 586
+ origlast 586
+ origset true
+ name Read166
+ selected true
+ xpos -2743
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1022
+ origlast 1022
+ origset true
+ name Read167
+ selected true
+ xpos -2633
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/Full_Gate_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 454
+ origlast 454
+ origset true
+ name Read168
+ selected true
+ xpos -2523
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 936
+ origlast 936
+ origset true
+ name Read145
+ selected true
+ xpos -4833
+ ypos -1416
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/8mm/100D_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 953
+ origlast 953
+ origset true
+ name Read141
+ selected true
+ xpos -5273
+ ypos -1416
+}

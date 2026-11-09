@@ -1,0 +1,18 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Expression {
+ expr0 "\n\n isnan(r)?r(x+xo,y+yo):r\n "
+ expr1 "\n\n isnan(g)?g(x+xo,y+yo):g\n "
+ expr2 "\n\n isnan(b)?b(x+xo,y+yo):b\n "
+ expr3 "\n\n isnan(a)?a(x+xo,y+yo):a\n "
+ name NanClone
+ selected true
+ xpos 256
+ ypos 314
+ addUserKnob {20 User}
+ addUserKnob {7 xo}
+ xo 3
+ addUserKnob {7 yo}
+ yo 3
+}

@@ -1,0 +1,24 @@
+set cut_paste_input [stack 0]
+version 9.0 v6
+push $cut_paste_input
+NoOp {
+ name SinWave_Control
+ selected true
+ xpos 281
+ ypos -370
+ addUserKnob {20 Expression}
+ addUserKnob {7 MinVal R 0 100}
+ addUserKnob {7 MaxVal R 0 100}
+ MaxVal 0.2
+ addUserKnob {7 ValOffset R -100 100}
+ addUserKnob {7 WaveLength R 0 100}
+ WaveLength 11
+ addUserKnob {7 FrameOffset R 0 100}
+ FrameOffset 50
+ addUserKnob {7 Noise_1 l Noise R 0 100}
+ Noise_1 {{"(noise((frame+SinWave_Control.FrameOffset)/SinWave_Control.WaveLength)+1)/2 * (SinWave_Control.MaxVal-SinWave_Control.MinVal) + SinWave_Control.MinVal+SinWave_Control.ValOffset"}}
+ addUserKnob {7 Sin_1 l Sin R 0 100}
+ Sin_1 {{"(sin(2*pi*(frame+SinWave_Control.FrameOffset)/SinWave_Control.WaveLength)+1)/2 * (SinWave_Control.MaxVal-SinWave_Control.MinVal) + SinWave_Control.MinVal+SinWave_Control.ValOffset"}}
+ addUserKnob {7 Random_1 l Random R 0 100}
+ Random_1 {{"random((frame+SinWave_Control.FrameOffset)/SinWave_Control.WaveLength) * (SinWave_Control.MaxVal-SinWave_Control.MinVal) + SinWave_Control.MinVal+SinWave_Control.ValOffset"}}
+}

@@ -1,0 +1,373 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x222222ff
+ label "Toban Cinematography Ref"
+ note_font_size 42
+ selected true
+ xpos 7050
+ ypos 3311
+ bdwidth 2109
+ bdheight 540
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10145_toban/compAssets/GradeReference/image.png
+ format "738 788 0 0 738 788 1 "
+ origset true
+ name Read7
+ selected true
+ xpos 9010
+ ypos 3441
+}
+Reformat {
+ name Reformat11
+ selected true
+ xpos 9010
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (9).png"
+ format "840 447 0 0 840 447 1 "
+ origset true
+ name Read8
+ selected true
+ xpos 8910
+ ypos 3441
+}
+Reformat {
+ name Reformat12
+ selected true
+ xpos 8910
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (8).png"
+ format "836 449 0 0 836 449 1 "
+ origset true
+ name Read9
+ selected true
+ xpos 8810
+ ypos 3441
+}
+Reformat {
+ name Reformat13
+ selected true
+ xpos 8810
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (7).png"
+ format "833 450 0 0 833 450 1 "
+ origset true
+ name Read10
+ selected true
+ xpos 8710
+ ypos 3441
+}
+Reformat {
+ name Reformat14
+ selected true
+ xpos 8710
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (6).png"
+ format "947 407 0 0 947 407 1 "
+ origset true
+ name Read11
+ selected true
+ xpos 8610
+ ypos 3441
+}
+Reformat {
+ name Reformat15
+ selected true
+ xpos 8610
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (5).png"
+ format "930 402 0 0 930 402 1 "
+ origset true
+ name Read12
+ selected true
+ xpos 8510
+ ypos 3441
+}
+Reformat {
+ name Reformat16
+ selected true
+ xpos 8510
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (4).png"
+ format "1456 602 0 0 1456 602 1 "
+ origset true
+ name Read13
+ selected true
+ xpos 8410
+ ypos 3441
+}
+Reformat {
+ name Reformat17
+ selected true
+ xpos 8410
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (3).png"
+ format "837 452 0 0 837 452 1 "
+ origset true
+ name Read14
+ selected true
+ xpos 8310
+ ypos 3441
+}
+Reformat {
+ name Reformat18
+ selected true
+ xpos 8310
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (2).png"
+ format "970 410 0 0 970 410 1 "
+ origset true
+ name Read15
+ selected true
+ xpos 8210
+ ypos 3441
+}
+Reformat {
+ name Reformat19
+ selected true
+ xpos 8210
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (14).png"
+ format "1656 886 0 0 1656 886 1 "
+ origset true
+ name Read16
+ selected true
+ xpos 8110
+ ypos 3441
+}
+Reformat {
+ name Reformat20
+ selected true
+ xpos 8110
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (13).png"
+ format "1655 881 0 0 1655 881 1 "
+ origset true
+ name Read17
+ selected true
+ xpos 8010
+ ypos 3441
+}
+Reformat {
+ name Reformat21
+ selected true
+ xpos 8010
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (12).png"
+ format "1894 943 0 0 1894 943 1 "
+ origset true
+ name Read18
+ selected true
+ xpos 7910
+ ypos 3441
+}
+Reformat {
+ name Reformat22
+ selected true
+ xpos 7910
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (11).png"
+ format "631 362 0 0 631 362 1 "
+ origset true
+ name Read19
+ selected true
+ xpos 7810
+ ypos 3441
+}
+Reformat {
+ name Reformat23
+ selected true
+ xpos 7810
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (10).png"
+ format "958 393 0 0 958 393 1 "
+ origset true
+ name Read20
+ selected true
+ xpos 7710
+ ypos 3441
+}
+Reformat {
+ name Reformat10
+ selected true
+ xpos 7710
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/image (1).png"
+ format "905 383 0 0 905 383 1 "
+ origset true
+ name Read21
+ selected true
+ xpos 7610
+ ypos 3441
+}
+Reformat {
+ name Reformat9
+ selected true
+ xpos 7610
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/Screenshot 2022-02-16 at 18.21.13.png"
+ format "2520 1040 0 0 2520 1040 1 "
+ origset true
+ name Read1
+ selected true
+ xpos 7510
+ ypos 3441
+}
+Reformat {
+ name Reformat8
+ selected true
+ xpos 7510
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/Screenshot 2022-02-16 at 18.20.44.png"
+ format "2514 1054 0 0 2514 1054 1 "
+ origset true
+ name Read3
+ selected true
+ xpos 7410
+ ypos 3441
+}
+Reformat {
+ name Reformat7
+ selected true
+ xpos 7410
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/Screenshot 2022-02-14 at 17.49.56.png"
+ format "2368 1332 0 0 2368 1332 1 "
+ origset true
+ name Read4
+ selected true
+ xpos 7310
+ ypos 3441
+}
+Reformat {
+ name Reformat6
+ selected true
+ xpos 7310
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/Screenshot 2022-02-14 at 17.49.00.png"
+ format "2340 1320 0 0 2340 1320 1 "
+ origset true
+ name Read5
+ selected true
+ xpos 7210
+ ypos 3441
+}
+Reformat {
+ name Reformat4
+ selected true
+ xpos 7210
+ ypos 3525
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10145_toban/compAssets/GradeReference/Screenshot 2022-02-14 at 09.05.41.png"
+ format "2546 1420 0 0 2546 1420 1 "
+ origset true
+ name Read6
+ selected true
+ xpos 7110
+ ypos 3441
+}
+Reformat {
+ name Reformat2
+ selected true
+ xpos 7110
+ ypos 3525
+}
+ContactSheet {
+ inputs 20
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet
+ tile_color 0xe955ffff
+ selected true
+ xpos 7110
+ ypos 3737
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

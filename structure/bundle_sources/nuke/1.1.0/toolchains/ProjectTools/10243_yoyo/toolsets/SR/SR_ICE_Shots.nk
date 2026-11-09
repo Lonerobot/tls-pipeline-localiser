@@ -1,0 +1,391 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+BackdropNode {
+ inputs 0
+ name BackdropNode12
+ tile_color 0x388e8e00
+ label ICE
+ note_font_size 42
+ selected true
+ xpos -1008
+ ypos -1606
+ bdwidth 3813
+ bdheight 294
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc06-sh050/publish/comp/comp/movie/default/SR_sc06-sh050_comp_default_v032.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 49
+ origlast 49
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read180
+ tile_color 0xff00ff
+ selected true
+ xpos 2380
+ ypos -1552
+}
+set N18f76000 [stack 0]
+FrameHold {
+ first_frame 30
+ name FrameHold105
+ selected true
+ xpos 2490
+ ypos -1432
+}
+push $N18f76000
+FrameHold {
+ first_frame 1
+ name FrameHold104
+ selected true
+ xpos 2380
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc06-sh040/publish/comp/comp/movie/default/SR_sc06-sh040_comp_default_v007.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 40
+ origlast 40
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read181
+ selected true
+ xpos 2270
+ ypos -1552
+}
+FrameHold {
+ first_frame 55
+ name FrameHold103
+ selected true
+ xpos 2270
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc06-sh030/publish/comp/comp/movie/default/SR_sc06-sh030_comp_default_v26.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 104
+ origlast 104
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read182
+ tile_color 0xddddddff
+ selected true
+ xpos 1720
+ ypos -1552
+}
+set N18239800 [stack 0]
+FrameHold {
+ first_frame 101
+ name FrameHold102
+ selected true
+ xpos 2050
+ ypos -1432
+}
+push $N18239800
+FrameHold {
+ first_frame 55
+ name FrameHold101
+ selected true
+ xpos 1940
+ ypos -1432
+}
+push $N18239800
+FrameHold {
+ first_frame 25
+ name FrameHold100
+ selected true
+ xpos 1830
+ ypos -1432
+}
+push $N18239800
+FrameHold {
+ name FrameHold99
+ selected true
+ xpos 1720
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc06-sh020/publish/comp/comp/movie/default/SR_sc06-sh020_comp_default_v012.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 30
+ origlast 30
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read183
+ selected true
+ xpos 1500
+ ypos -1552
+}
+FrameHold {
+ first_frame 40
+ name FrameHold98
+ selected true
+ xpos 1500
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc05-sh080/publish/comp/comp/movie/default/SR_sc05-sh080_comp_default_v012.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 99
+ origlast 99
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read184
+ selected true
+ xpos 950
+ ypos -1552
+}
+set N18239000 [stack 0]
+FrameHold {
+ first_frame 200
+ name FrameHold97
+ selected true
+ xpos 1280
+ ypos -1432
+}
+push $N18239000
+FrameHold {
+ first_frame 40
+ name FrameHold96
+ selected true
+ xpos 1170
+ ypos -1432
+}
+push $N18239000
+FrameHold {
+ first_frame 20
+ name FrameHold95
+ selected true
+ xpos 1060
+ ypos -1432
+}
+push $N18239000
+FrameHold {
+ first_frame 1
+ name FrameHold94
+ selected true
+ xpos 950
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh060/publish/comp/comp/movie/default/SR_sc04-sh060_comp_default_v022.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 35
+ origlast 35
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read185
+ selected true
+ xpos 730
+ ypos -1552
+}
+FrameHold {
+ first_frame 10
+ name FrameHold93
+ selected true
+ xpos 730
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh050/publish/comp/comp/movie/default/SR_sc04-sh050_comp_default_v015.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 16
+ origlast 16
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read186
+ selected true
+ xpos 400
+ ypos -1552
+}
+FrameHold {
+ first_frame 25
+ name FrameHold92
+ selected true
+ xpos 400
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh040/publish/comp/comp/movie/default/SR_sc04-sh040_comp_default_v016.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 12
+ origlast 12
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read187
+ selected true
+ xpos 180
+ ypos -1552
+}
+FrameHold {
+ first_frame 25
+ name FrameHold91
+ selected true
+ xpos 180
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh030/publish/comp/comp/movie/default/SR_sc04-sh030_comp_default_v017.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 65
+ origlast 65
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read5
+ selected true
+ xpos -150
+ ypos -1552
+}
+set N26968400 [stack 0]
+FrameHold {
+ first_frame 50
+ name FrameHold89
+ selected true
+ xpos -40
+ ypos -1432
+}
+push $N26968400
+FrameHold {
+ first_frame 25
+ name FrameHold90
+ selected true
+ xpos -150
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh020/publish/comp/comp/movie/default/SR_sc04-sh020_comp_default_v008.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 51
+ origlast 51
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read189
+ selected true
+ xpos -260
+ ypos -1552
+}
+FrameHold {
+ name FrameHold88
+ selected true
+ xpos -260
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc04-sh010/publish/comp/comp/movie/default/SR_sc04-sh010_comp_default_v017.mov"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ last 29
+ origlast 29
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read190
+ tile_color 0xccccccff
+ selected true
+ xpos -370
+ ypos -1552
+}
+FrameHold {
+ name FrameHold87
+ selected true
+ xpos -370
+ ypos -1432
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc03-sh060/publish/comp/comp/movie/default/SR_sc03-sh060_comp_default_v045.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 127
+ origlast 127
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read191
+ tile_color 0xbbbbbbff
+ selected true
+ xpos -920
+ ypos -1552
+}
+set N18293400 [stack 0]
+FrameHold {
+ first_frame 200
+ name FrameHold86
+ selected true
+ xpos -590
+ ypos -1432
+}
+push $N18293400
+FrameHold {
+ first_frame 65
+ name FrameHold85
+ selected true
+ xpos -700
+ ypos -1432
+}
+push $N18293400
+FrameHold {
+ first_frame 50
+ name FrameHold84
+ selected true
+ xpos -810
+ ypos -1432
+}
+push $N18293400
+FrameHold {
+ name FrameHold83
+ selected true
+ xpos -920
+ ypos -1432
+}
+ContactSheet {
+ inputs 23
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet7
+ tile_color 0xe955ffff
+ selected true
+ xpos 2710
+ ypos -1498
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

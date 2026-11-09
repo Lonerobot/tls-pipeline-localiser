@@ -1,0 +1,70 @@
+#! C:/Program Files/Nuke9.0v6/nuke-9.0.6.dll -nx
+version 9.0 v6
+Gizmo {
+ inputs 2
+ addUserKnob {20 User}
+ addUserKnob {7 BgBlur R 0 100}
+ BgBlur 69
+ addUserKnob {7 WrapBlur R 0 100}
+ WrapBlur 63.5
+}
+ Input {
+  inputs 0
+  name Chars
+  xpos -44
+  ypos 518
+  number 1
+ }
+ Dot {
+  name Dot6
+  xpos -10
+  ypos 754
+ }
+set N114ef400 [stack 0]
+ Blur {
+  size {{parent.WrapBlur}}
+  name WrapBlur
+  xpos -44
+  ypos 858
+ }
+push $N114ef400
+ Input {
+  inputs 0
+  name Env
+  xpos 124
+  ypos 518
+ }
+ Shuffle {
+  alpha white
+  name Shuffle1
+  xpos 124
+  ypos 559
+ }
+ Blur {
+  size {{parent.BgBlur}}
+  name BGBlur
+  selected true
+  xpos 124
+  ypos 648
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos 124
+  ypos 750
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  invert_mask true
+  name Merge3
+  xpos 124
+  ypos 864
+ }
+ Output {
+  name Output1
+  xpos 124
+  ypos 958
+ }
+end_group

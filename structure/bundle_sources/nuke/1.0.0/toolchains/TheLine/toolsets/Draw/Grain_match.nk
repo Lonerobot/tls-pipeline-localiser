@@ -1,0 +1,128 @@
+set cut_paste_input [stack 0]
+version 10.5 v3
+Crop {
+inputs 0
+box {916.9000244 348.7999878 1130.599976 477.5}
+name Crop5
+selected true
+xpos 1567
+ypos 689
+}
+set Nf7b17c00 [stack 0]
+push $cut_paste_input
+Dot {
+name Dot7
+selected true
+xpos 1071
+ypos 474
+}
+set N9c6c9800 [stack 0]
+Dot {
+name Dot24
+selected true
+xpos 1232
+ypos 474
+}
+Denoise2 {
+output Noise
+analysisRegion {1026 298.5 1126 398.5}
+analysisFrame 70
+needsAnalyzing false
+profileCurve {profile {curve x0.1000000015 0 x0.1333521456 0 x0.1778279394 0 x0.2371373773 0 x0.3162277639 0 x0.4216965139 0 x0.5623413324 0 x0.7498942018 0 x1 0}}
+serializeKnob "1.59587 0.463544 0.500022
+0.00512596 0.000701873 0.000245394
+0.00512596 0.000701873 0.000245394
+0.00239525 0.000248309 6.53414e-005
+0 0 0
+0.00258584 0.000832433 0.00024605
+0.00258584 0.000832433 0.00024605
+0.00130686 0.000287959 9.68348e-005
+0 0 0
+0.000972762 0.000510417 0.000114835
+0.000972762 0.000510417 0.000114835
+0.00050924 0.000221335 6.79005e-005
+0 0 0
+4.84682e-005 0.00011969 4.90975e-005
+4.84682e-005 0.00011969 4.90975e-005
+5.30722e-005 0.000120599 5.38073e-005
+0 0 0 0 0 0 0 0 0 
+13715274925095561570"
+name Denoise2
+selected true
+xpos 1198
+ypos 635
+}
+set Nc881cc00 [stack 0]
+push $N9c6c9800
+Merge2 {
+inputs 2
+operation difference
+name Merge13
+selected true
+xpos 1037
+ypos 641
+}
+set Nc881d000 [stack 0]
+Dot {
+name Dot10
+selected true
+xpos 1130
+ypos 567
+}
+Shuffle {
+alpha white
+name Shuffle9
+selected true
+xpos 1351
+ypos 564
+}
+Grain2 {
+name Grain2_2
+label "Kodak 5248"
+selected true
+xpos 1351
+ypos 641
+red_size 2.1
+green_size 2.5
+blue_size 5.8
+red_i 0.52
+green_i 0.175
+red_m 0.055
+green_m 0.055
+blue_m 0.065
+black {0 0 0}
+minimum {0 0 0}
+}
+push 0
+Merge2 {
+inputs 2+1
+invert_mask true
+name Merge11
+selected true
+xpos 1351
+ypos 808
+}
+push $Nf7b17c00
+push $Nc881cc00
+push $Nc881d000
+Dot {
+name Dot9
+selected true
+xpos 1071
+ypos 806
+}
+Merge2 {
+inputs 2+1
+operation plus
+name Merge14
+selected true
+xpos 1198
+ypos 803
+}
+Merge2 {
+inputs 2
+name Merge15
+selected true
+xpos 1351
+ypos 985
+}

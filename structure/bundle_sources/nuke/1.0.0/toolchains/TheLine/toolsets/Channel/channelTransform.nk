@@ -1,0 +1,99 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name channelTransform
+ tile_color 0xad406dff
+ selected true
+ xpos 1390
+ ypos -6081
+ addUserKnob {20 User}
+ addUserKnob {41 translate_2 l R T Transform6.translate}
+ addUserKnob {41 translate_1 l G T Transform8.translate}
+ addUserKnob {41 translate l B T Transform9.translate}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 617
+  ypos -446
+ }
+ Dot {
+  name Dot18
+  xpos 651
+  ypos -406
+ }
+set Ncc8d9400 [stack 0]
+push $Ncc8d9400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle3
+  xpos 837
+  ypos -289
+ }
+ Transform {
+  translate {0.8 0}
+  center {1686 803.5}
+  name Transform9
+  xpos 837
+  ypos -265
+ }
+push $Ncc8d9400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 617
+  ypos -289
+ }
+ Transform {
+  center {1686 803.5}
+  name Transform8
+  xpos 617
+  ypos -265
+ }
+push $Ncc8d9400
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 397
+  ypos -289
+ }
+ Transform {
+  translate {0 1}
+  center {1686 803.5}
+  name Transform6
+  xpos 397
+  ypos -265
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos 617
+  ypos -169
+ }
+ Merge2 {
+  inputs 2
+  name Merge10
+  xpos 837
+  ypos -169
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 837
+  ypos -79
+ }
+ Output {
+  name Output1
+  xpos 837
+  ypos 21
+ }
+end_group

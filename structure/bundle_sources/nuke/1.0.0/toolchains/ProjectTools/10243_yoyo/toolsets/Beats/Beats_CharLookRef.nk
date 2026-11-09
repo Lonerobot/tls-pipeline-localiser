@@ -1,0 +1,237 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x7171c600
+ label "BEATS CHAR LOOK REF "
+ note_font_size 42
+ selected true
+ xpos 1270
+ ypos 193
+ bdwidth 2125
+ bdheight 558
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stratos.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read18
+ selected true
+ xpos 3260
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stationary2.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read17
+ selected true
+ xpos 3150
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stationary_cb.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read16
+ selected true
+ xpos 3040
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stationary_abs.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read15
+ selected true
+ xpos 2930
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stationary_abs#.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ first 2
+ last 4
+ origfirst 2
+ origlast 4
+ origset true
+ name Read14
+ selected true
+ xpos 2820
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_stationary.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read13
+ selected true
+ xpos 2710
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_starrybg.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read12
+ selected true
+ xpos 2600
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_mall.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read11
+ selected true
+ xpos 2490
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_cloud_walk.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read10
+ selected true
+ xpos 2380
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_candy.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read9
+ selected true
+ xpos 2270
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_boba_abs.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read8
+ selected true
+ xpos 2160
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_boba_2.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read7
+ selected true
+ xpos 2050
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_boba.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read6
+ selected true
+ xpos 1940
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_arcade_cb.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read5
+ selected true
+ xpos 1830
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_arcade_abs.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read4
+ selected true
+ xpos 1720
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_arcade.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read3
+ selected true
+ xpos 1610
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test.mp4"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 1582
+ origlast 1582
+ origset true
+ name Read2
+ selected true
+ xpos 1500
+ ypos 345
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/Linework_degredation.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read1
+ selected true
+ xpos 1390
+ ypos 345
+}
+ContactSheet {
+ inputs 18
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet
+ tile_color 0xe955ffff
+ selected true
+ xpos 1390
+ ypos 687
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 1
+}

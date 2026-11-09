@@ -1,0 +1,19 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Expression {
+ expr0 "sin((hypot(x-center.x, y-center.y ) +(frame*speed))/thick)"
+ expr1 "sin((hypot(x-center.x, y-center.y ) +(frame*speed))/thick)"
+ expr2 "sin((hypot(x-center.x, y-center.y ) +(frame*speed))/thick)"
+ name Radio_Waves
+ selected true
+ xpos 180
+ ypos -1809
+ addUserKnob {20 User}
+ addUserKnob {7 speed R -100 100}
+ speed -11.5
+ addUserKnob {7 thick l thickness R 1 100}
+ thick 24
+ addUserKnob {12 center l centre}
+ center {1686 1014}
+}

@@ -18,5 +18,27 @@ from .errors import (
     UnsafeArchiveError,
     VerificationError,
 )
-from .publisher import publish_release
-from .sync import load_prepared_release, prepared_release, sync_release
+from .publisher import BundlePlan, materialize_plan, plan_bundle, publish_bundle, publish_plan, publish_release
+from .provision import Action, provision, unprovision
+from .settings import apply_hosts, save_local_config
+from .status import (
+    EntryStatus,
+    check_enabled,
+    check_entry,
+    read_status,
+    selection_changed,
+    sync_enabled,
+    sync_entry,
+)
+from .sync import (
+    dev_release,
+    host_enabled,
+    load_prepared_release,
+    pinned_release,
+    pipeline_config,
+    pipeline_root,
+    prepared_release,
+    pull_release,
+    startup_release,
+    sync_release,
+)

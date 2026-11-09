@@ -1,0 +1,112 @@
+set cut_paste_input [stack 0]
+version 10.5 v3
+Camera2 {
+inputs 0
+translate {{parent.Transform_MatchMove1.translate.x*-1} {parent.Transform_MatchMove1.translate.y*-1} 0.3880000114}
+focal 48.8
+name Camera1
+selected true
+xpos -1254
+ypos -895
+}
+set N26013400 [stack 0]
+push $N26013400
+push $cut_paste_input
+Dot {
+name Dot17
+selected true
+xpos -1413
+ypos -1122
+}
+set N65175400 [stack 0]
+Shuffle {
+red alpha
+green alpha
+blue alpha
+name Shuffle8
+selected true
+xpos -1447
+ypos -1090
+}
+Dilate {
+size -26.5
+name Dilate1
+selected true
+xpos -1447
+ypos -1046
+}
+Blur {
+size 172
+name Blur1
+selected true
+xpos -1447
+ypos -986
+}
+push $N65175400
+Dot {
+name Dot16
+selected true
+xpos -1636
+ypos -1122
+}
+Card2 {
+rows 25
+columns 25
+z 3500
+lens_in_haperture 0.49
+translate {0 0 0}
+control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+name Card1
+selected true
+xpos -1670
+ypos -1038
+}
+DisplaceGeo {
+inputs 2
+channels rgba
+source alpha
+scale 136.41
+name DisplaceGeo1
+selected true
+xpos -1670
+ypos -980
+}
+TransformGeo {
+name TransformGeo1
+selected true
+xpos -1670
+ypos -874
+}
+Scene {
+inputs 2
+name Scene1
+selected true
+xpos -1393
+ypos -895
+}
+Reformat {
+inputs 0
+name Reformat3
+selected true
+xpos -1143
+ypos -842
+}
+ScanlineRender {
+inputs 3
+conservative_shader_sampling false
+motion_vectors_type distance
+name ScanlineRender1
+selected true
+xpos -1264
+ypos -724
+}

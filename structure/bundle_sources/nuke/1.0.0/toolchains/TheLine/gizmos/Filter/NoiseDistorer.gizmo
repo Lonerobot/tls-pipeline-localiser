@@ -1,0 +1,131 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {7 speed l Speed}
+ addUserKnob {41 size l x/ysize T Noise_Master.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 octaves T Noise_Master.octaves}
+ addUserKnob {41 gain T Noise_Master.gain}
+ addUserKnob {41 gamma T Noise_Master.gamma}
+ addUserKnob {41 lacunarity T Noise_Master.lacunarity}
+ addUserKnob {26 ""}
+ addUserKnob {41 uv_offset l "UV offset" T IDistort1.uv_offset}
+ addUserKnob {41 uv_scale l "UV scale" T IDistort1.uv_scale}
+}
+ Noise {
+  inputs 0
+  size {{parent.Noise_Master.size}}
+  zoffset {{parent.Noise_Master.zoffset}}
+  octaves {{parent.Noise_Master.octaves}}
+  lacunarity {{parent.Noise_Master.lacunarity}}
+  gain {{parent.Noise_Master.gain}}
+  gamma {{parent.Noise_Master.gamma}}
+  translate {{Noise_V.translate.y*-1} 0}
+  center {1920 1080}
+  name Noise_U
+  xpos 553
+  ypos 348
+ }
+ Noise {
+  inputs 0
+  size 32
+  zoffset {{(frame*speed)/10}}
+  lacunarity 4.7
+  gamma 0.6
+  center {1920 1080}
+  name Noise_Master
+  xpos 611
+  ypos 237
+ }
+set N83d29800 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge29
+  xpos 553
+  ypos 441
+ }
+ Dot {
+  name Dot2
+  xpos 587
+  ypos 516
+ }
+ Noise {
+  inputs 0
+  size {{parent.Noise_Master.size}}
+  zoffset {{parent.Noise_Master.zoffset}}
+  octaves {{parent.Noise_Master.octaves}}
+  lacunarity {{parent.Noise_Master.lacunarity}}
+  gain {{parent.Noise_Master.gain}}
+  gamma {{parent.Noise_Master.gamma}}
+  translate {0 20}
+  center {1920 1080}
+  name Noise_V
+  xpos 676
+  ypos 346
+ }
+set N83d28c00 [stack 0]
+push $N83d29800
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge30
+  xpos 676
+  ypos 440
+ }
+ Dot {
+  name Dot1
+  xpos 710
+  ypos 516
+ }
+ ShuffleCopy {
+  inputs 2
+  red red
+  blue black
+  alpha black
+  name ShuffleCopy1
+  xpos 613
+  ypos 512
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 469
+  ypos 631
+ }
+add_layer {Distort Distort.u Distort.v}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 Distort.u
+  from1 rgba.green
+  to1 Distort.v
+  name Copy1
+  xpos 613
+  ypos 618
+ }
+ IDistort {
+  uv Distort
+  uv_scale 8.8
+  name IDistort1
+  xpos 613
+  ypos 712
+ }
+ Output {
+  name Output1
+  xpos 613
+  ypos 812
+ }
+push $N83d28c00
+push 0
+push 0
+ Viewer {
+  inputs 3
+  frame_range 1001-1260
+  input_number 2
+  name Viewer1
+  xpos 857
+  ypos 352
+ }
+end_group

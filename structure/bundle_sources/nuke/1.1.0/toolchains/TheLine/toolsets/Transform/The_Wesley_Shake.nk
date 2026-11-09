@@ -1,0 +1,77 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name TheWesleyShake
+ tile_color 0x9970a8ff
+ gl_color 0xffffffff
+ selected true
+ xpos 113
+ ypos 289
+ addUserKnob {20 Shake}
+ addUserKnob {12 Shake_1 l Shake}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 854
+  ypos 506
+ }
+ Transform {
+  translate {{parent.SinWave_Control_x.Sin_1} {parent.SinWave_Control_y.Sin_1}}
+  center {1124 535.5}
+  name Transform2
+  xpos 854
+  ypos 687
+ }
+ Output {
+  name Output1
+  xpos 854
+  ypos 893
+ }
+ NoOp {
+  inputs 0
+  name SinWave_Control_x
+  xpos 691
+  ypos 650
+  addUserKnob {20 Expression}
+  addUserKnob {7 MinVal R 0 100}
+  MinVal {{MaxVal*-1}}
+  addUserKnob {7 MaxVal R 0 100}
+  MaxVal {{parent.Shake_1.x}}
+  addUserKnob {7 ValOffset R -100 100}
+  addUserKnob {7 WaveLength R 0 100}
+  WaveLength 2
+  addUserKnob {7 FrameOffset R 0 100}
+  FrameOffset -0.5
+  addUserKnob {7 Noise_1 l Noise R 0 100}
+  Noise_1 -3.28125
+  addUserKnob {7 Sin_1 l Sin R 0 100}
+  Sin_1 {{"(sin(2*pi*(frame+SinWave_Control_x.FrameOffset)/SinWave_Control_x.WaveLength)+1)/2 * (SinWave_Control_x.MaxVal-SinWave_Control_x.MinVal) + SinWave_Control_x.MinVal+SinWave_Control_x.ValOffset"}}
+  addUserKnob {7 Random_1 l Random R 0 100}
+  Random_1 2.946028856
+ }
+ NoOp {
+  inputs 0
+  name SinWave_Control_y
+  selected true
+  xpos 697
+  ypos 732
+  addUserKnob {20 Expression}
+  addUserKnob {7 MinVal R 0 100}
+  MinVal {{MaxVal*-1}}
+  addUserKnob {7 MaxVal R 0 100}
+  MaxVal {{parent.Shake_1.y}}
+  addUserKnob {7 ValOffset R -100 100}
+  addUserKnob {7 WaveLength R 0 100}
+  WaveLength 2
+  addUserKnob {7 FrameOffset R 0 100}
+  FrameOffset -0.5
+  addUserKnob {7 Noise_1 l Noise R 0 100}
+  Noise_1 -3.28125
+  addUserKnob {7 Sin_1 l Sin R 0 100}
+  Sin_1 {{"(sin(2*pi*(frame+SinWave_Control_y.FrameOffset)/SinWave_Control_y.WaveLength)+1)/2 * (SinWave_Control_y.MaxVal-SinWave_Control_y.MinVal) + SinWave_Control_y.MinVal+SinWave_Control_y.ValOffset"}}
+  addUserKnob {7 Random_1 l Random R 0 100}
+  Random_1 2.946028856
+ }
+end_group

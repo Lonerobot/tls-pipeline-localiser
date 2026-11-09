@@ -1,0 +1,516 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0xaaaaaa00
+ label "Candy bgs"
+ note_font_size 42
+ selected true
+ xpos 8696
+ ypos -6484
+ bdwidth 1202
+ bdheight 1704
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x444444ff
+ label "75 frames"
+ note_font_size 42
+ selected true
+ xpos 8706
+ ypos -6404
+ bdwidth 628
+ bdheight 1491
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x444444ff
+ label "500 frames "
+ note_font_size 42
+ selected true
+ xpos 9366
+ ypos -6089
+ bdwidth 373
+ bdheight 244
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x444444ff
+ label "300 frames "
+ note_font_size 42
+ selected true
+ xpos 9366
+ ypos -6401
+ bdwidth 366
+ bdheight 287
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x444444ff
+ label "400 frames "
+ note_font_size 42
+ selected true
+ xpos 9366
+ ypos -5831
+ bdwidth 374
+ bdheight 264
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x444444ff
+ label "150 frames"
+ note_font_size 42
+ selected true
+ xpos 9366
+ ypos -5561
+ bdwidth 373
+ bdheight 301
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x444444ff
+ label "bg 800 frames"
+ note_font_size 42
+ selected true
+ xpos 9416
+ ypos -5240
+ bdwidth 304
+ bdheight 240
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam02_Checkers/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 20100
+ last 20175
+ frame_mode "start at"
+ frame 1
+ origfirst 20100
+ origlast 20175
+ origset true
+ name Read21
+ selected true
+ xpos 9046
+ ypos -6132
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam01/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 10100
+ last 10175
+ frame_mode "start at"
+ frame 1
+ origfirst 10100
+ origlast 10175
+ origset true
+ name Read16
+ selected true
+ xpos 8826
+ ypos -6300
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam02/Candy_Cam02_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read20
+ selected true
+ xpos 8826
+ ypos -6132
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam03/Candy_Cam03_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read22
+ selected true
+ xpos 8826
+ ypos -5964
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam03_Checkers/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 30100
+ last 30175
+ frame_mode "start at"
+ frame 1
+ origfirst 30100
+ origlast 30175
+ origset true
+ name Read23
+ selected true
+ xpos 9046
+ ypos -5964
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam04_Checkers/Candy_Cam04_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 174
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 174
+ origset true
+ name Read25
+ selected true
+ xpos 9046
+ ypos -5820
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam07_Checkers/Candy_Cam07_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read31
+ selected true
+ xpos 9046
+ ypos -5364
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam07/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 70100
+ last 70175
+ frame_mode "start at"
+ frame 1
+ origfirst 70100
+ origlast 70175
+ origset true
+ name Read30
+ selected true
+ xpos 8826
+ ypos -5364
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam06/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 60100
+ last 60175
+ frame_mode "start at"
+ frame 1
+ origfirst 60100
+ origlast 60175
+ origset true
+ name Read28
+ selected true
+ xpos 8826
+ ypos -5532
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam06_Checkers/Candy_Cam06_CHeckers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read29
+ selected true
+ xpos 9046
+ ypos -5532
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam05_Checkers/Candy_Cam05_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read27
+ selected true
+ xpos 9046
+ ypos -5676
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam05/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 50100
+ last 50175
+ frame_mode "start at"
+ frame 1
+ origfirst 50100
+ origlast 50175
+ origset true
+ name Read26
+ selected true
+ xpos 8826
+ ypos -5676
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam04/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 40100
+ last 40175
+ frame_mode "start at"
+ frame 1
+ origfirst 40100
+ origlast 40175
+ origset true
+ name Read24
+ selected true
+ xpos 8826
+ ypos -5820
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Photoshoot_Candy/Candy_Cam01/Candy_Cam01_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read18
+ selected true
+ xpos 9046
+ ypos -6300
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_Gives_In01/GIVEin_#.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 693
+ last 1000
+ frame_mode "start at"
+ frame 1
+ origfirst 693
+ origlast 1000
+ origset true
+ name Read10
+ selected true
+ xpos 9376
+ ypos -6321
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_Gives_In02/GIVEIN_CANDYv2_#.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 500
+ last 1000
+ frame_mode "start at"
+ frame 1
+ origfirst 500
+ origlast 1000
+ origset true
+ name Read11
+ selected true
+ xpos 9376
+ ypos -6009
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/CANDY_Hypnosis/Hypnosis_CANDY_#.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 600
+ last 1100
+ frame_mode "start at"
+ frame 1
+ origfirst 600
+ origlast 1100
+ origset true
+ name Read13
+ selected true
+ xpos 9486
+ ypos -6009
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_Walks_In_Front/CANDY_###.png
+ last 500
+ frame_mode "start at"
+ frame 1
+ origlast 500
+ origset true
+ name Read15
+ selected true
+ xpos 9376
+ ypos -5751
+}
+TimeClip {
+ time ""
+ first 100
+ last 500
+ frame_mode "start at"
+ frame 1
+ origlast 500
+ origset true
+ mask_metadata true
+ name TimeClip14
+ selected true
+ xpos 9376
+ ypos -5667
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/Candy_Cam07_Checkers.mov
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 76
+ frame_mode "start at"
+ frame 1
+ origlast 76
+ origset true
+ name Read8
+ selected true
+ xpos 9156
+ ypos -5169
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/Candy_Cam07_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read7
+ selected true
+ xpos 9046
+ ypos -5169
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/Candy_Cam05_Checkers####.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 100
+ last 175
+ frame_mode "start at"
+ frame 1
+ origfirst 100
+ origlast 175
+ origset true
+ name Read6
+ selected true
+ xpos 8936
+ ypos -5169
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 70100
+ last 70175
+ frame_mode "start at"
+ frame 1
+ origfirst 70100
+ origlast 70175
+ origset true
+ name Read5
+ selected true
+ xpos 8826
+ ypos -5169
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/Candy_Cam######.png
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ first 50100
+ last 50175
+ after loop
+ frame_mode "start at"
+ frame 1
+ origfirst 50100
+ origlast 50175
+ origset true
+ name Read3
+ selected true
+ xpos 8716
+ ypos -5169
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Candy/Candy_CheckerGum/CandyChecker_Gum.mov
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 152
+ frame_mode "start at"
+ frame 1
+ origlast 152
+ origset true
+ name Read9
+ selected true
+ xpos 9376
+ ypos -5433
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/PROJECTS/10146_beats3/shots/abstract_renders/Boba/8_plainbg/8_plainbg_boba.mov
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 840
+ origlast 840
+ origset true
+ name Read17
+ selected true
+ xpos 9530
+ ypos -5151
+}

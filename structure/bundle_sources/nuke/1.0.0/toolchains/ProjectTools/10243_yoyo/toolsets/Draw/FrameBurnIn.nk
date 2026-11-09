@@ -1,0 +1,31 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Text2 {
+ font_size_toolbar 38
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[frame]"
+ old_message {{52 48}
+   }
+ old_expression_markers {{0 1}
+   }
+ box {0 1032 43 1071}
+ transforms {{0 2}
+   }
+ font_size_values {{0 38 1 38 0 95}
+   }
+ font {{ Utopia : Bold : UtopiaBold.pfa : 0 }}
+ font_size 38
+ center {1124 535.5}
+ cursor_initialised true
+ initial_cursor_position {{0 1071}
+   }
+ group_animations {{0} imported: 0 selected: items: "root transform/"}
+ animation_layers {{1 11 1124 535.5 0 0 1 1 0 0 0 0}
+   }
+ name Frame
+ selected true
+ xpos -2240
+ ypos 2078
+}

@@ -1,0 +1,136 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read51
+ selected true
+ xpos 5350
+ ypos -9639
+}
+Constant {
+ inputs 0
+ color {0.637597 0.304987 0.361307 1}
+ name Constant9
+ selected true
+ xpos 5350
+ ypos -9753
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read54
+ selected true
+ xpos 5900
+ ypos -10263
+}
+ColorCorrect {
+ shadows.offset {-0.017333 -0.032333 -0.040333 0.02}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.02981858328 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ unpremult rgba.alpha
+ name ColorCorrect25
+ selected true
+ xpos 5900
+ ypos -10023
+}
+Dot {
+ name Dot45
+ selected true
+ xpos 5934
+ ypos -9798
+}
+set N95a65c00 [stack 0]
+Dot {
+ name Dot46
+ selected true
+ xpos 5714
+ ypos -9798
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge35
+ selected true
+ xpos 5680
+ ypos -9729
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy13
+ selected true
+ xpos 5680
+ ypos -9615
+}
+Premult {
+ name Premult21
+ selected true
+ xpos 5680
+ ypos -9585
+}
+push $N95a65c00
+Merge2 {
+ inputs 2
+ name Merge36
+ selected true
+ xpos 5900
+ ypos -9585
+}
+Clamp {
+ minimum 0.01
+ unpremult rgba.alpha
+ name Clamp2
+ selected true
+ xpos 5900
+ ypos -9471
+}
+Grade {
+ black {0.09000000358 -0.00800000038 0.01799999923 0.25}
+ gamma {1.22 0.94 1.16 1}
+ gamma_panelDropped true
+ unpremult rgba.alpha
+ name Grade5
+ selected true
+ xpos 5900
+ ypos -9399
+}
+Transform {
+ translate {-248 -22}
+ center {1024 576}
+ name Transform10
+ selected true
+ xpos 5900
+ ypos -9225
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/BobaGirl.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read53
+ selected true
+ xpos 6230
+ ypos -9615
+}
+Merge2 {
+ inputs 2
+ name Merge37
+ selected true
+ xpos 6230
+ ypos -9105
+}

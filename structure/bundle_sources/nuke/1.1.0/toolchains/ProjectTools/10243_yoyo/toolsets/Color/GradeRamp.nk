@@ -1,0 +1,27 @@
+set cut_paste_input [stack 0]
+version 10.5 v3
+push $cut_paste_input
+Dot {
+ name Dot10
+ selected true
+ xpos -5334
+ ypos -1590
+}
+set Nf0c2ec00 [stack 0]
+Ramp {
+ replace true
+ p0 {1122 1228}
+ p1 {2366 1762}
+ name Ramp4
+ selected true
+ xpos -5224
+ ypos -1593
+}
+push $Nf0c2ec00
+Grade {
+ inputs 1+1
+ name Grade6
+ selected true
+ xpos -5368
+ ypos -1518
+}

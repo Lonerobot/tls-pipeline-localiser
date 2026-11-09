@@ -1,0 +1,131 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read35
+ selected true
+ xpos -150
+ ypos -9651
+}
+Constant {
+ inputs 0
+ color {0.3467040062 0.2422810793 0.2122307271 1}
+ name Constant6
+ selected true
+ xpos -150
+ ypos -9765
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read36
+ selected true
+ xpos 400
+ ypos -10107
+}
+ColorCorrect {
+ shadows.offset {0.035 0.02 0.012 0.02}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.109637171 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ unpremult rgba.alpha
+ name ColorCorrect20
+ selected true
+ xpos 400
+ ypos -10023
+}
+Dot {
+ name Dot20
+ selected true
+ xpos 434
+ ypos -9810
+}
+set Ne4776400 [stack 0]
+Dot {
+ name Dot21
+ selected true
+ xpos 214
+ ypos -9810
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge16
+ selected true
+ xpos 180
+ ypos -9741
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy4
+ selected true
+ xpos 180
+ ypos -9627
+}
+Premult {
+ name Premult12
+ selected true
+ xpos 180
+ ypos -9591
+}
+push $Ne4776400
+Merge2 {
+ inputs 2
+ mix 0.95
+ name Merge17
+ selected true
+ xpos 400
+ ypos -9591
+}
+ColorLookup {
+ lut {master {curve C 0 x0.4688208103 0.6121890545 x0.6633785963 0.8228855133 x0.8155328035 0.9348199837 x0.8978457451 0.9751351901 x1 1 s0.07999999821}
+   red {curve C 0 x0.6010203362 0.6504974961 x1 1}
+   green {curve C 0 x0.658389926 0.6450248957 x1 1}
+   blue {curve C 0 x0.7057821751 0.6587064266 x1 1}
+   alpha {}}
+ name ColorLookup1
+ selected true
+ xpos 400
+ ypos -9477
+}
+Transform {
+ translate {-258 250}
+ scale 0.6200000048
+ center {1024 576}
+ name Transform2
+ selected true
+ xpos 400
+ ypos -9309
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10146_beats3/assets/complook/Look and Grade test_Moment_cloud_walk.jpg"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read21
+ selected true
+ xpos 840
+ ypos -9675
+}
+Merge2 {
+ inputs 2
+ name Merge18
+ selected true
+ xpos 840
+ ypos -9177
+}

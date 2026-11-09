@@ -1,0 +1,254 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read49
+ selected true
+ xpos 22005
+ ypos 7329
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.723055 0.630757 0.584078 0}
+ name Constant2
+ selected true
+ xpos 22070
+ ypos 7215
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read50
+ selected true
+ xpos 22555
+ ypos 6873
+}
+Dot {
+ name Dot38
+ selected true
+ xpos 22589
+ ypos 7170
+}
+set N81113400 [stack 0]
+Dot {
+ name Dot39
+ selected true
+ xpos 22369
+ ypos 7170
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge32
+ selected true
+ xpos 22335
+ ypos 7239
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy11
+ selected true
+ xpos 22335
+ ypos 7353
+}
+Premult {
+ name Premult19
+ selected true
+ xpos 22335
+ ypos 7383
+}
+push $N81113400
+Merge2 {
+ inputs 2
+ name Merge33
+ selected true
+ xpos 22555
+ ypos 7383
+}
+set N81112000 [stack 0]
+Dot {
+ name Dot40
+ selected true
+ xpos 22479
+ ypos 7482
+}
+Dot {
+ name Dot43
+ selected true
+ xpos 22479
+ ypos 7914
+}
+push $N81112000
+HSVTool {
+ srccolor {0.1301259398 0.2232279032 0.4072196484}
+ huesrcs {219.840332 219.840332}
+ huerolloffrange 2
+ satsrcs {0.6804527044 0.6804527044}
+ satrolloffrange 0.3
+ brtsrcs {0.4072196484 0.4072196484}
+ brightness 1.18
+ brtrolloffrange 0.3
+ output none
+ name HSVTool10
+ selected true
+ xpos 22555
+ ypos 7449
+}
+HSVTool {
+ srccolor {0.3519607782 0.00647150958 0.007666549645}
+ huesrcs {359.79245 359.79245}
+ huerolloffrange 1
+ satsrcs {0.9816129804 0.9816129804}
+ satrolloffrange 0.3
+ brtsrcs {0.3519607782 0.3519607782}
+ brightness -0.13
+ brtrolloffrange 0.3
+ output none
+ name HSVTool11
+ selected true
+ xpos 22555
+ ypos 7521
+}
+HSVTool {
+ srccolor {0.5647113919 0.5332523584 0.5332523584}
+ huesrcs {0 0}
+ huerolloffrange 50
+ satsrcs {0.05570816249 0.05570816249}
+ satrolloffrange 0.3
+ brtsrcs {0.5647113919 0.5647113919}
+ brightness 0.15
+ brtrolloffrange 0.3
+ output none
+ name HSVTool12
+ selected true
+ xpos 22555
+ ypos 7593
+}
+Dot {
+ name Dot44
+ selected true
+ xpos 22589
+ ypos 7674
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/arcadeTint.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read8
+ selected true
+ xpos 22225
+ ypos 7737
+}
+STMap {
+ inputs 2
+ uv rgba
+ name STMap4
+ selected true
+ xpos 22555
+ ypos 7761
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy12
+ selected true
+ xpos 22555
+ ypos 7905
+}
+OCIOColorSpace {
+ in_colorspace scene_linear
+ out_colorspace rec709
+ name OCIOColorSpace1
+ selected true
+ xpos 22555
+ ypos 8031
+}
+ColorLookup {
+ use_precomputed false
+ lut {master {curve C 0 x0.3019607961 0.02745098039 x0.4274509847 0.1529411765 x0.6039215922 0.7568627451 x0.7725490332 0.9647058824 x1 1}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ name ColorLookup5
+ selected true
+ xpos 22555
+ ypos 8055
+}
+ColorLookup {
+ lut {master {curve C 0 x0.03730158135 0.01361954212 x1 1}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ name ColorLookup4
+ selected true
+ xpos 22555
+ ypos 8079
+}
+Clamp {
+ name Clamp1
+ selected true
+ xpos 22555
+ ypos 8103
+}
+ColorCorrect {
+ shadows.offset {-0.003 0.14 -0.13 0.008}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.1295918375 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ name ColorCorrect24
+ selected true
+ xpos 22555
+ ypos 8139
+}
+Premult {
+ name Premult20
+ selected true
+ xpos 22555
+ ypos 8163
+}
+Transform {
+ translate {-255 -35}
+ center {1024 576}
+ name Transform9
+ selected true
+ xpos 22555
+ ypos 8199
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/AracdeGirl.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read52
+ selected true
+ xpos 22885
+ ypos 8073
+}
+Merge2 {
+ inputs 2
+ name Merge34
+ selected true
+ xpos 22555
+ ypos 8367
+}

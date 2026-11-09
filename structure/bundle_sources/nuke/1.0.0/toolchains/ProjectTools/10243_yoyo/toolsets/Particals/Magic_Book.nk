@@ -1,0 +1,359 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name BookMagic_Norm
+ selected true
+ xpos 556
+ ypos 4454
+ addUserKnob {20 BookMagic}
+ addUserKnob {20 Group1 l ReadElements n 1}
+ Group1 0
+ addUserKnob {26 Line1 l "" +STARTLINE}
+ addUserKnob {26 shotCamera -STARTLINE T ""}
+ addUserKnob {41 read_from_file_link l "read from file" T ShotCam.read_from_file_link}
+ addUserKnob {41 file T ShotCam.file}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 BookGeo}
+ addUserKnob {41 file_1 l file T ReadGeo1.file}
+ addUserKnob {41 frame_rate l "frame rate" T ReadGeo1.frame_rate}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Particles n 1}
+ addUserKnob {41 start_frame l "start at" T ParticleEmitter1.start_frame}
+ addUserKnob {41 rate l "emission rate" T ParticleEmitter1.rate}
+ addUserKnob {41 lifetime l "max lifetime" T ParticleEmitter1.lifetime}
+ addUserKnob {41 velocity T ParticleEmitter1.velocity}
+ addUserKnob {41 size l MaskBlur T Blur14.size}
+ addUserKnob {6 BackPlate +STARTLINE}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 GloEffects n 1}
+ GloEffects 0
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 Eco}
+ addUserKnob {41 framesbehind l TimeEco T TimeEcho1.framesbehind}
+ addUserKnob {41 Blur T Blur15.size}
+ addUserKnob {41 whitepoint T EcoGrade.whitepoint}
+ addUserKnob {41 mix_2 l mix T Merge19.mix}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 Aura}
+ addUserKnob {26 Outside}
+ addUserKnob {41 size_1 l size T Aura1.size_1}
+ addUserKnob {41 white l gain T Aura1.white}
+ addUserKnob {41 mix T Aura1.mix}
+ addUserKnob {26 Inside}
+ addUserKnob {41 size_2 l size T Aura1.size}
+ addUserKnob {41 white_1 l gain T Aura1.white_1}
+ addUserKnob {41 mix_1 l mix T Aura1.mix_1}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 Geo}
+ addUserKnob {41 scene_view l "" -STARTLINE T ReadGeo1.scene_view}
+}
+ Input {
+  inputs 0
+  name Book_Beu
+  xpos -435
+  ypos 254
+  number 1
+ }
+set N22e62c00 [stack 0]
+ Crop {
+  box {0 0 1920 1080}
+  reformat true
+  name Crop5
+  xpos -435
+  ypos 543
+ }
+set N56316800 [stack 0]
+ Blur {
+  size 55.5
+  name Blur14
+  xpos -177
+  ypos 1208
+ }
+ Camera2 {
+  inputs 0
+  translate {{curve x100 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428 -817.930428} {curve x100 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396 39.89806396} {curve x100 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542 774.5299542}}
+  rotate {{curve x100 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868 4.267964868} {curve x100 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8 116.8} {curve x100 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015 -3.172474222e-015}}
+  scaling {{curve x100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+  uniform_scale {{curve x100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+  skew {{curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+  pivot {{curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+  focal {{curve x100 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35 35}}
+  haperture {{curve x100 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752 35.99992752}}
+  vaperture {{curve x100 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921 20.24379921}}
+  near {{curve x100 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5}}
+  far {{curve x100 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000}}
+  win_translate {{curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+  focal_point {{curve x100 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+  fstop {{curve x100 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+  file O:/BBC/0975s_TreeFuTom5/TFT_319_RLB_RaidersOfTheLostBark/05_Animation/TFT_319_RLB_001/Alembic_Exports_DO_NOT_TOUCH/TFT_319_RLB_001_130_A_PublishedFiles/Shot_Camera/TFT_319_RLB_001_130_A_export_camera1.abc
+  frame_rate 25
+  name ShotCam
+  xpos -1062
+  ypos 964
+ }
+set N56316400 [stack 0]
+push $N56316400
+ Input {
+  inputs 0
+  name Shot
+  xpos 16
+  ypos 182
+ }
+set Nc8409000 [stack 0]
+ Dot {
+  name Dot12
+  label Shot_Proxy
+  xpos -1316
+  ypos 910
+ }
+ Card2 {
+  rows 1
+  columns 1
+  z 3771.5
+  lens_in_focal {{parent.ShotCam.focal}}
+  lens_in_haperture {{parent.ShotCam.haperture}}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card2
+  selected true
+  xpos -1350
+  ypos 983
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo1
+  xpos -1350
+  ypos 1039
+ }
+push 0
+ Switch {
+  inputs 2
+  which {{parent.BackPlate}}
+  name Switch_BackPlate
+  xpos -1163
+  ypos 1039
+ }
+push $N56316400
+push 0
+ Radial {
+  inputs 0
+  area {799.7868539 406 1055.786854 662}
+  softness 0
+  name Radial1
+  xpos -1113
+  ypos 727
+ }
+ ReadGeo2 {
+  inputs 0
+  file O:/BBC/0975s_TreeFuTom5/TFT_319_RLB_RaidersOfTheLostBark/05_Animation/TFT_319_RLB_001/Alembic_Exports_DO_NOT_TOUCH/TFT_319_RLB_001_130_A_PublishedFiles/bumper_book/TFT_319_RLB_001_130_A_export_bumper_book.abc
+  read_on_each_frame true
+  frame_rate 25
+  use_geometry_colors false
+  range_first 100
+  range_last 148
+  scene_view {{0} imported: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 selected: 7 15 items: /root/geometry_GRP/C_backPages_GRP/C_backPages01_PLY/C_backPages01_PLYShape /root/geometry_GRP/C_backPages_GRP/C_backPages02_PLY/C_backPages02_PLYShape /root/geometry_GRP/C_backPages_GRP/C_backPages03_PLY/C_backPages03_PLYShape /root/geometry_GRP/C_backPages_GRP/C_backPages04_PLY/C_backPages04_PLYShape /root/geometry_GRP/C_backPages_GRP/C_backPages05_PLY/C_backPages05_PLYShape /root/geometry_GRP/C_backPages_GRP/C_backPages06_PLY/C_backPages06_PLYShape /root/geometry_GRP/C_backPages_GRP/C_midPage02_PLY/C_midPage02_PLYShape /root/geometry_GRP/C_backPages_GRP/C_midPage01_PLY/C_midPage01_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages01_PLY/C_frontPages01_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages02_PLY/C_frontPages02_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages03_PLY/C_frontPages03_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages04_PLY/C_frontPages04_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages05_PLY/C_frontPages05_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages06_PLY/C_frontPages06_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_frontPages07_PLY/C_frontPages07_PLYShape /root/geometry_GRP/C_frontPages_GRP/C_midPage03_PLY/C_midPage03_PLYShape /root/geometry_GRP/C_Binder_PLY/C_Binder_PLYShape /root/geometry_GRP/C_spine_PLY/C_spine_PLYShape /root/geometry_GRP/C_glueLines01_PLY/C_glueLines01_PLYShape /root/geometry_GRP/C_glueLines02_PLY/C_glueLines02_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail01_PLY/C_coverDetail01_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail17_PLY/C_coverDetail17_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail18_PLY/C_coverDetail18_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail19_PLY/C_coverDetail19_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail20_PLY/C_coverDetail20_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail03_PLY/C_coverDetail03_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail05_PLY/C_coverDetail05_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail06_PLY/C_coverDetail06_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail02_PLY/C_coverDetail02_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail04_PLY/C_coverDetail04_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail07_PLY/C_coverDetail07_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_woodCover01_PLY/C_woodCover01_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverDetail08_PLY/C_coverDetail08_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverPaper01_PLY/C_coverPaper01_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_frontCoverStitching_PLY/C_frontCoverStitching_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_frontCoverPROXY_PLY/C_frontCoverPROXY_PLYShape /root/geometry_GRP/C_frontCover_GRP/C_coverPaper02_PLY/C_coverPaper02_PLY10Shape /root/geometry_GRP/C_backCover_GRP/C_backCoverStitching_PLY/C_backCoverStitching_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail16_PLY/C_coverDetail16_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail15_PLY/C_coverDetail15_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail14_PLY/C_coverDetail14_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail13_PLY/C_coverDetail13_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail11_PLY/C_coverDetail11_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail12_PLY/C_coverDetail12_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail10_PLY/C_coverDetail10_PLYShape /root/geometry_GRP/C_backCover_GRP/C_coverDetail09_PLY/C_coverDetail09_PLYShape /root/geometry_GRP/C_backCover_GRP/C_woodCover02_PLY/C_woodCover02_PLY1Shape /root/geometry_GRP/C_backCover_GRP/C_backCoverPROXY_PLY/C_backCoverPROXY_PLYShape /root/geometry_GRP/C_midPages_GRP/C_turnablePage01_PLY/C_turnablePage01_PLYShape /root/geometry_GRP/C_midPages_GRP/C_turnablePage02_PLY/C_turnablePage02_PLYShape /root/geometry_GRP/C_midPages_GRP/C_turnablePage03_PLY/C_turnablePage03_PLYShape /root/geometry_GRP/C_midPages_GRP/C_turnablePage04_PLY/C_turnablePage04_PLYShape}
+  name ReadGeo1
+  xpos -939
+  ypos 615
+ }
+push 0
+ ParticleEmitter {
+  inputs 3
+  emit_from faces
+  randomize_type "randomize outwards"
+  selection_threshhold 0
+  lifetime 20
+  velocity 0.4
+  velocity_variation 1
+  size 2
+  size_variation 1
+  name ParticleEmitter1
+  xpos -939
+  ypos 727
+ }
+ ParticleCurve {
+  curves {r {}
+    g {}
+    b {}
+    a {curve l 1 k x0.2303397804 -0.001470565796 s0}
+    size {curve 1.28322196 s0 -0.001470565796 s0}
+    mass {}}
+  affect_alpha false
+  affect_size true
+  name ParticleCurve1
+  xpos -939
+  ypos 769
+ }
+ ParticleTurbulence {
+  strength {0.5 {strength.x} {strength.x}}
+  scale {0.09 {scale.x} {scale.x}}
+  offset {0 {offset.x} {offset.x}}
+  name ParticleTurbulence1
+  xpos -939
+  ypos 807
+ }
+ ParticleDrag {
+  drag 1
+  name ParticleDrag1
+  xpos -939
+  ypos 845
+ }
+ Scene {
+  inputs 4
+  name Scene1
+  xpos -929
+  ypos 1019
+ }
+push 0
+ ScanlineRender {
+  inputs 3
+  conservative_shader_sampling false
+  ztest_enabled false
+  filter Nearest
+  spatial_jitter 0.31
+  motion_vectors_type off
+  MB_channel motion
+  P_channel motion
+  N_channel backward
+  drop_zero_alpha_samples false
+  name ScanlineRender1
+  xpos -1072
+  ypos 1111
+ }
+set Nc3a41000 [stack 0]
+ Blur {
+  size 1.5
+  name Blur13
+  xpos -1072
+  ypos 1201
+ }
+ Grade {
+  white {4 1.24 0 1}
+  white_panelDropped true
+  name Grade12
+  xpos -1072
+  ypos 1255
+ }
+ T:/BBC/0975s_TreeFuTom5/TFT_300_Shared/05_CompAssets/03_Nuke_Resources/01_Gizmos/Filter/Glo_NonAdd.gizmo {
+  name Glo_NonAdd2
+  xpos -1072
+  ypos 1303
+  Grade1blackpoint 0.63
+  Gain 18.6
+  mix 0.45
+ }
+push $N56316800
+ T:/BBC/0975s_TreeFuTom5/TFT_300_Shared/05_CompAssets/03_Nuke_Resources/01_Gizmos/TFT_Specific/Aura.gizmo {
+  name Aura1
+  xpos -166
+  ypos 847
+  size_1 93
+  white 1.42
+  mix 0.185
+  size 55.5
+  white_1 1.28
+ }
+ Crop {
+  box {0 0 1920 1080}
+  reformat true
+  crop false
+  name Crop1
+  xpos -166
+  ypos 873
+ }
+push $N22e62c00
+push $N56316800
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle2
+  xpos -435
+  ypos 569
+ }
+ Grade {
+  white {3.5 1.22 0 1}
+  white_panelDropped true
+  name Grade17
+  xpos -435
+  ypos 595
+ }
+ TimeEcho {
+  framesbehind 5
+  frmaesfade {{framesbehind}}
+  name TimeEcho1
+  xpos -435
+  ypos 621
+ }
+ Blur {
+  size 30
+  name Blur15
+  xpos -435
+  ypos 647
+ }
+ Grade {
+  whitepoint 0.23
+  name EcoGrade
+  xpos -435
+  ypos 685
+ }
+ Crop {
+  box {0 0 1920 1080}
+  reformat true
+  crop false
+  name Crop2
+  xpos -150
+  ypos 685
+ }
+push $Nc8409000
+ Merge2 {
+  inputs 2+1
+  invert_mask true
+  mix 0.435
+  name Merge19
+  xpos 16
+  ypos 685
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  mix 0.6
+  name Merge20
+  xpos 16
+  ypos 873
+ }
+ Merge2 {
+  inputs 2+1
+  invert_mask true
+  mix 0.445
+  name Merge18
+  xpos 16
+  ypos 1303
+ }
+ Output {
+  name Output1
+  xpos 16
+  ypos 1454
+ }
+push $Nc3a41000
+ Viewer {
+  frame 142
+  frame_range 100-148
+  fps 25
+  name Viewer1
+  xpos 180
+  ypos -10
+ }
+end_group

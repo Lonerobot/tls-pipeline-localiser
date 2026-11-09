@@ -1,0 +1,91 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name Rough_Fill
+ selected true
+ xpos 5477
+ ypos -209
+ addUserKnob {20 Fill}
+ addUserKnob {41 Expand T Blur1.size}
+ addUserKnob {41 Contract T Dilate1.size}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 568
+  ypos 334
+ }
+set N1d619800 [stack 0]
+ Input {
+  inputs 0
+  name Mask
+  xpos 359
+  ypos 680
+  number 1
+ }
+push $N1d619800
+ Grade {
+  channels alpha
+  whitepoint 0
+  gamma 0.2
+  name Grade1
+  xpos 159
+  ypos 489
+ }
+ Blur {
+  size 48.5
+  name Blur1
+  xpos 159
+  ypos 527
+ }
+ Dilate {
+  size -27
+  name Dilate1
+  xpos 159
+  ypos 565
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  xpos 159
+  ypos 737
+ }
+ Clamp {
+  name Clamp1
+  xpos 159
+  ypos 763
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge1
+  xpos 359
+  ypos 769
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  screen_alpha true
+  name Merge2
+  xpos 568
+  ypos 769
+ }
+set N1d618000 [stack 0]
+ Output {
+  name Output1
+  xpos 568
+  ypos 903
+ }
+push $N1d618000
+ Viewer {
+  frame_range 1-15
+  name Viewer1
+  xpos 568
+  ypos 492
+ }
+end_group

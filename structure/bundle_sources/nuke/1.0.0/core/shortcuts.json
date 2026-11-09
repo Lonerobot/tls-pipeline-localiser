@@ -1,0 +1,28 @@
+{
+  "_description": "Simple shortcuts configuration for Nuke pipeline",
+  "_organization": "Functions organized into modules: basic_utilities, node_creation, workflow_setups, viewer_utilities",
+  
+  "settings": {
+    "enabled": true,
+    "overwrite_existing": true
+  },
+  
+  "shortcuts": {
+    "_comment_basic_nodes": "=== BASIC NODE CREATION ===",
+   
+
+
+    "_comment_basic_utilities": "=== BASIC UTILITIES ===",
+
+
+
+    "_comment_node_creation": "=== COMPLEX NODE CREATION ===",
+
+
+    "_comment_viewer_utilities": "=== VIEWER UTILITIES ==="
+
+
+
+
+  }
+}

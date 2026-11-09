@@ -1,0 +1,27 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+OCIOColorSpace {
+ in_colorspace "Output - sRGB"
+ out_colorspace "ACES - ACEScg"
+ name OCIOColorSpace15
+ selected true
+ xpos 1500
+ ypos -11890
+}
+Defocus {
+ defocus 2
+ ratio 0.4
+ name Defocus4
+ selected true
+ xpos 1500
+ ypos -11848
+}
+OCIOColorSpace {
+ in_colorspace "ACES - ACEScg"
+ out_colorspace "Output - sRGB"
+ name OCIOColorSpace16
+ selected true
+ xpos 1500
+ ypos -11794
+}

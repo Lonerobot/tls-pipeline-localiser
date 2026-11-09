@@ -1,0 +1,301 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_03.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 100
+ origlast 100
+ origset true
+ name Read29
+ selected true
+ xpos -5163
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_04.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 75
+ origlast 75
+ origset true
+ name Read30
+ selected true
+ xpos -5053
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_06.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 70
+ origlast 70
+ origset true
+ name Read32
+ selected true
+ xpos -4943
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_07.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 73
+ origlast 73
+ origset true
+ name Read33
+ selected true
+ xpos -4833
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_08.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 93
+ origlast 93
+ origset true
+ name Read34
+ selected true
+ xpos -4723
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_09.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 117
+ origlast 117
+ origset true
+ name Read35
+ selected true
+ xpos -4613
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_10.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 61
+ origlast 61
+ origset true
+ name Read36
+ selected true
+ xpos -4503
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_11.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 40
+ origlast 40
+ origset true
+ name Read37
+ selected true
+ xpos -4393
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_12.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 124
+ origlast 124
+ origset true
+ name Read38
+ selected true
+ xpos -4283
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_13.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 138
+ origlast 138
+ origset true
+ name Read39
+ selected true
+ xpos -4173
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_14.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 140
+ origlast 140
+ origset true
+ name Read40
+ selected true
+ xpos -4063
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_15.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 207
+ origlast 207
+ origset true
+ name Read41
+ selected true
+ xpos -3953
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_16.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 283
+ origlast 283
+ origset true
+ name Read42
+ selected true
+ xpos -3953
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_17.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 110
+ origlast 110
+ origset true
+ name Read43
+ selected true
+ xpos -3843
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_18.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 126
+ origlast 126
+ origset true
+ name Read44
+ selected true
+ xpos -3733
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_19.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 130
+ origlast 130
+ origset true
+ name Read45
+ selected true
+ xpos -3623
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_20.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 236
+ origlast 236
+ origset true
+ name Read46
+ selected true
+ xpos -3513
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_21.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 255
+ origlast 255
+ origset true
+ name Read47
+ selected true
+ xpos -3403
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_22.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 205
+ origlast 205
+ origset true
+ name Read48
+ selected true
+ xpos -3293
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_23.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 150
+ origlast 150
+ origset true
+ name Read49
+ selected true
+ xpos -3183
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_02.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 79
+ origlast 79
+ origset true
+ name Read28
+ selected true
+ xpos -5273
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_01.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 92
+ origlast 92
+ origset true
+ name Read27
+ selected true
+ xpos -5383
+ ypos -3648
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/Action_essentials/06_Dirt_Charges/Dirt_Charge_05.mov
+ format "2048 1152 0 0 2048 1152 1 "
+ last 84
+ origlast 84
+ origset true
+ name Read31
+ selected true
+ xpos -5053
+ ypos -3648
+}

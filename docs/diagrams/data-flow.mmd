@@ -1,0 +1,27 @@
+flowchart TB
+    classDef you fill:#fff4d6,stroke:#d6a419,color:#1f2933
+    classDef build fill:#e3f2fd,stroke:#5b9bd5,color:#1f2933
+    classDef sync fill:#e6f4ea,stroke:#4caf73,color:#1f2933
+    classDef dcc fill:#f1e9fb,stroke:#9a73d1,color:#1f2933
+
+    src["<b>bundle_sources/</b> host / version<br/><i>edited by you, in git</i>"]:::you
+    shared["<b>shared_sources/</b> tls_common<br/><i>copied into every bundle</i>"]:::you
+    build(["build_test_workstation.py<br/>stage, zip + sha256"]):::build
+    remote["<b>fake_remote_repository/hosts/</b> host / version<br/>pipeline.zip + manifest.json<br/><i>generated, immutable</i>"]:::build
+    cfg["<b>fake_remote_repository/config.json</b><br/>version each host and series uses<br/><i>edited by you</i>"]:::you
+    sync(["localiser sync"]):::sync
+    bundles["<b>bundles/hosts/</b> host / version<br/><i>extracted local copy</i>"]:::sync
+    prepared["<b>bundles/state/prepared/</b><br/>version chosen per host and series"]:::sync
+    stub(["bootstrap stub<br/>load_prepared_release"]):::dcc
+    dcc["running DCC<br/>Blender, Maya or Nuke"]:::dcc
+
+    src --> build
+    shared --> build
+    build --> remote
+    remote -- "copy, verify, extract" --> sync
+    cfg -. "picks the version" .-> sync
+    sync --> bundles
+    sync -- "select, atomically" --> prepared
+    bundles --> stub
+    prepared --> stub
+    stub -- "local only, no network" --> dcc

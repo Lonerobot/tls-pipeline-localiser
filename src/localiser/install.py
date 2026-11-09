@@ -12,10 +12,11 @@ from pathlib import Path
 from .archive import safe_extract
 from .config import Manifest, parse_manifest, validate_python_root
 from .errors import LocaliserError, ReleaseUnavailableError, VerificationError
-from .fsutil import atomic_write_text, sha256_file
+from .fsutil import atomic_write_text, rename_with_retry, sha256_file
 from .layout import COMPLETE_MARKER, HOSTS_DIR, DataLayout
 from .lock import FileLock
 from .logs import log_event
+from .repository import Repository, as_repository
 
 PAYLOAD_DIR = "payload"
 
@@ -63,13 +64,14 @@ def _quarantine(layout: DataLayout, release_dir: Path) -> None:
 
 def ensure_release(
     layout: DataLayout,
-    repository_root: Path,
+    repository_root,
     package_id: str,
     release_id: str,
     *,
     host: str | None = None,
     lock_timeout: float = 60.0,
 ) -> LocalRelease:
+    """`repository_root` is the remote: a folder path or a repository from localiser.repository."""
     release_dir = layout.release_dir(package_id, release_id)
 
     existing = _read_marker(release_dir, package_id, release_id)
@@ -83,16 +85,15 @@ def ensure_release(
         if existing is not None:
             return existing
         _quarantine(layout, release_dir)
-        return _install(layout, repository_root, package_id, release_id, host)
+        return _install(layout, as_repository(repository_root), package_id, release_id, host)
 
 
 def _install(
-    layout: DataLayout, repository_root: Path, package_id: str, release_id: str, host: str | None
+    layout: DataLayout, repository: Repository, package_id: str, release_id: str, host: str | None
 ) -> LocalRelease:
-    source_dir = Path(repository_root) / HOSTS_DIR / package_id / release_id
     staging = Path(tempfile.mkdtemp(dir=layout.staging, prefix=f"{package_id}__{release_id}__"))
     try:
-        manifest = _fetch(source_dir, staging, package_id, release_id, host)
+        manifest = _fetch(repository, staging, package_id, release_id, host)
         payload = staging / PAYLOAD_DIR
         safe_extract(staging / manifest.artifact, payload)
         if not (payload / manifest.python_root).is_dir():
@@ -111,7 +112,7 @@ def _install(
 
         final = layout.release_dir(package_id, release_id)
         final.parent.mkdir(parents=True, exist_ok=True)
-        os.rename(payload, final)
+        rename_with_retry(payload, final)
         atomic_write_text(layout.manifest_cache(package_id, release_id), manifest.to_json())
         log_event(logging.INFO, "release_installed", host=host, package=package_id, release=release_id, root=final)
         return LocalRelease(package_id, release_id, final, final / manifest.python_root)
@@ -119,11 +120,12 @@ def _install(
         shutil.rmtree(staging, ignore_errors=True)
 
 
-def _fetch(source_dir: Path, staging: Path, package_id: str, release_id: str, host: str | None) -> Manifest:
-    """Copy the artifact from the share into staging and check it against the manifest."""
+def _fetch(repository: Repository, staging: Path, package_id: str, release_id: str, host: str | None) -> Manifest:
+    """Copy the artifact from the repository into staging and check it against the manifest."""
     name = f"{package_id}/{release_id}"
+    folder = f"{HOSTS_DIR}/{package_id}/{release_id}"
     try:
-        manifest_text = (source_dir / "manifest.json").read_text(encoding="utf-8-sig")
+        manifest_text = repository.read_text(f"{folder}/manifest.json")
     except OSError as exc:
         raise ReleaseUnavailableError(
             f"release {name} is not cached and cannot be fetched ({exc})", host=host, release_id=release_id
@@ -135,7 +137,7 @@ def _fetch(source_dir: Path, staging: Path, package_id: str, release_id: str, ho
         )
     local_artifact = staging / manifest.artifact
     try:
-        shutil.copyfile(source_dir / manifest.artifact, local_artifact)
+        repository.fetch(f"{folder}/{manifest.artifact}", local_artifact)
     except OSError as exc:
         raise ReleaseUnavailableError(
             f"artifact for {name} cannot be fetched ({exc})", host=host, release_id=release_id

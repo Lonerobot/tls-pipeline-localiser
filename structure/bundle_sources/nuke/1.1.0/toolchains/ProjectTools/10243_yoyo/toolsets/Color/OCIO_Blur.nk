@@ -1,0 +1,28 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+OCIOColorSpace {
+ in_colorspace "Output - sRGB"
+ out_colorspace "ACES - ACEScg"
+ name OCIOColorSpace5
+ selected true
+ xpos 3194
+ ypos -4647
+}
+Dot {
+ name Dot24
+ label "Blur Here"
+ note_font "Verdana Bold"
+ note_font_color 0xffffffff
+ selected true
+ xpos 3228
+ ypos -4572
+}
+OCIOColorSpace {
+ in_colorspace "ACES - ACEScg"
+ out_colorspace "Output - sRGB"
+ name OCIOColorSpace4
+ selected true
+ xpos 3194
+ ypos -4487
+}

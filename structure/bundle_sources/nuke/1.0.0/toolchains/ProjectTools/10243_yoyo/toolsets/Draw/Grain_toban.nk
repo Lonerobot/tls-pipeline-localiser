@@ -1,0 +1,100 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name Grain_toban
+ selected true
+ xpos 2160
+ ypos -4497
+}
+ Read {
+  inputs 0
+  file_type jpeg
+  file Y:/TOOLS/Resources/StockFootage/CineGrain/35mm/35mm_Print/CineGrain_35mm_Print_####.jpg
+  format "4096 2304 0 0 4096 2304 1 "
+  first 2
+  last 720
+  origfirst 2
+  origlast 720
+  origset true
+  raw true
+  name Read9
+  xpos 592
+  ypos -433
+ }
+ Grade {
+  gamma 0.88
+  name Grade19
+  xpos 592
+  ypos -325
+ }
+ Reformat {
+  format "3372 1605 0 0 3372 1605 1 "
+  name Reformat4
+  xpos 592
+  ypos -283
+ }
+ Transform {
+  translate {-490 258}
+  scale 0.7
+  center {1536 653}
+  name Transform8
+  xpos 592
+  ypos -205
+ }
+set N76dd5400 [stack 0]
+ Transform {
+  translate {1309 -2}
+  center {1536 653}
+  name Transform12
+  xpos 812
+  ypos -205
+ }
+push $N76dd5400
+ Dot {
+  name Dot23
+  xpos 736
+  ypos -130
+ }
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 812
+  ypos -133
+ }
+set N76dd4800 [stack 0]
+ Transform {
+  translate {2 -360}
+  center {1536 653}
+  name Transform13
+  xpos 1142
+  ypos -229
+ }
+push $N76dd4800
+ Merge2 {
+  inputs 2
+  name Merge16
+  xpos 1142
+  ypos -133
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 1362
+  ypos -489
+ }
+ Merge2 {
+  inputs 2
+  operation overlay
+  mix 0.775
+  name Merge17
+  selected true
+  xpos 1362
+  ypos -133
+ }
+ Output {
+  name Output1
+  xpos 1362
+  ypos 111
+ }
+end_group

@@ -1,0 +1,466 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name CHAR_TEMPLATE
+ onCreate "\nknob = nuke.thisNode()\['rimlight_intensity']\nvalue = knob.value()\nnot_default = knob.notDefault()\nknob.setDefaultValue(\[10.0])\nif not_default:\n    knob.setValue(value)\n"
+ knobChanged "\nif nuke.thisKnob().name() == \"ramp\": \n#ramp\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('rampdisplay').setVisible(False)\n        nuke.thisNode().knob('ramp_space').setVisible(False)\n        nuke.thisNode().knob('ramp_type').setVisible(False)\n        nuke.thisNode().knob('ramp_gamma').setVisible(False)\n        nuke.thisNode().knob('ColorRamp_p0').setVisible(False)\n        nuke.thisNode().knob('ColorRamp_p1').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('ramp_space').setVisible(True)\n        nuke.thisNode().knob('rampdisplay').setVisible(True)\n        nuke.thisNode().knob('ramp_type').setVisible(True)\n        nuke.thisNode().knob('ramp_gamma').setVisible(True)\n        nuke.thisNode().knob('ColorRamp_p0').setVisible(True)\n        nuke.thisNode().knob('ColorRamp_p1').setVisible(True)\n\n#rimlight\nif nuke.thisKnob().name() == \"rimlight\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('rimlight_pos').setVisible(False)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n        nuke.thisNode().knob('rimlight_blursize').setVisible(False)\n        nuke.thisNode().knob('rimlight_color').setVisible(False)\n        nuke.thisNode().knob('rimlight_intensity').setVisible(False)\n        nuke.thisNode().knob('rimlight_space').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask').setVisible(False)\n        nuke.thisNode().knob('inverse_rimlight_mask').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask_space').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('rimlight_pos').setVisible(True)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(True)\n        nuke.thisNode().knob('rimlight_blursize').setVisible(True)\n        nuke.thisNode().knob('rimlight_color').setVisible(True)\n        nuke.thisNode().knob('rimlight_intensity').setVisible(True)\n        nuke.thisNode().knob('rimlight_space').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask').setVisible(True)\n        nuke.thisNode().knob('inverse_rimlight_mask').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask_space').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(True)\n\n#cc_shad\nif nuke.thisKnob().name() == \"cc_shad\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('cc_shad_space').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_white').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_black').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_multiply').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_gamma').setVisible(False)\n        nuke.thisNode().knob('cc_shad_line').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('cc_shad_space').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_white').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_black').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_multiply').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_gamma').setVisible(True)\n        nuke.thisNode().knob('cc_shad_line').setVisible(True)\n\n#cc_shad\nif nuke.thisKnob().name() == \"cc_light\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('cc_light_space').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_white').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_black').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_multiply').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_gamma').setVisible(False)\n        nuke.thisNode().knob('cc_light_line').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('cc_light_space').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_white').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_black').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_multiply').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_gamma').setVisible(True)\n        nuke.thisNode().knob('cc_light_line').setVisible(True)\n\n\n#edge blur\nif nuke.thisKnob().name() == \"edgeblur\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('edgeblur_size').setVisible(False)\n        nuke.thisNode().knob('edgeblur_line').setVisible(False)\n        nuke.thisNode().knob('edgeblur_space').setVisible(True)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('edgeblur_size').setVisible(True)\n        nuke.thisNode().knob('edgeblur_line').setVisible(True)\n        nuke.thisNode().knob('edgeblur_space').setVisible(False)\n\n#solid\nif nuke.thisKnob().name() == \"solid\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('solid_col').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('solid_col').setVisible(True)\n\n#grey out rimlight options\n\nif nuke.thisNode().knob('rimlight').getValue() == 1:\n\n    if nuke.thisNode().input(2):\n        nuke.thisNode().knob('rimlight_pos').setEnabled(False)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(True)\n    else:\n        nuke.thisNode().knob('rimlight_pos').setEnabled(True)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n\n    if nuke.thisNode().input(3):\n        nuke.thisNode().knob('rimlight_mask').setEnabled(True)\n        nuke.thisNode().knob('inverse_rimlight_mask').setEnabled(True)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n    else:\n        nuke.thisNode().knob('rimlight_mask').setEnabled(False)\n        nuke.thisNode().knob('inverse_rimlight_mask').setEnabled(False)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(True)\n\nelse:\n    nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n    nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n  \n"
+ tile_color 0xff0000ff
+ note_font "Verdana Bold"
+ note_font_size 40
+ selected true
+ xpos 580
+ ypos -1993
+ addUserKnob {20 character_template l "Character Template V1.4"}
+ addUserKnob {26 controls l <b>Controls</b> T "\n\n"}
+ addUserKnob {20 color_ctrls l "Color Controls" n 1}
+ addUserKnob {26 cc_group_space l "" +STARTLINE T "\n"}
+ addUserKnob {26 ambient_text l "<font  color='#2279c3'>Ambient Color"}
+ addUserKnob {41 multiply_1 l "" +STARTLINE T CHAR_AMBIENT.multiply}
+ addUserKnob {26 ""}
+ addUserKnob {6 rimlight l "&nbsp;<font  color='#f0b000'>Use Rimlight?</font>" +STARTLINE}
+ rimlight true
+ addUserKnob {6 rimlight_mask l "Use Rimlight mask?" +DISABLED +STARTLINE}
+ rimlight_mask true
+ addUserKnob {6 inverse_rimlight_mask l "inverse mask?" -STARTLINE +DISABLED}
+ addUserKnob {26 rimlight_mask_help l "" +STARTLINE T "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><font color = '#b42100'>only available when mask plugged in</font></i>"}
+ addUserKnob {26 rimlight_mask_space l "" +STARTLINE T "\n"}
+ addUserKnob {12 rimlight_pos l offset}
+ rimlight_pos {10 10}
+ addUserKnob {26 rimlight_pos_help l "" +STARTLINE +DISABLED +HIDDEN T "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><font color = '#b42100'>unplug shadow first!<br></font></i>"}
+ addUserKnob {14 rimlight_blursize l "blur size" R 0 100}
+ rimlight_blursize {2 0}
+ addUserKnob {26 rimlight_space l "" +STARTLINE T "\n"}
+ addUserKnob {18 rimlight_color l "Rimlight Color"}
+ rimlight_color {1 0.870051384 0.8400000334}
+ addUserKnob {6 rimlight_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 rimlight_intensity l intensity R 0 20}
+ rimlight_intensity 6.45
+ addUserKnob {26 ""}
+ addUserKnob {6 ramp l "<font color='#7ebd64'>Enable Ramp?</font>" +STARTLINE}
+ addUserKnob {26 ramp_space l "" +STARTLINE +HIDDEN T "\n"}
+ addUserKnob {6 rampdisplay l "Display Ramp ?" +HIDDEN +STARTLINE}
+ addUserKnob {12 ColorRamp_p0 l "point 0" +HIDDEN R 0 100}
+ ColorRamp_p0 {2108 908}
+ addUserKnob {12 ColorRamp_p1 l "point 1" +HIDDEN}
+ ColorRamp_p1 {2086 2100}
+ addUserKnob {7 ramp_gamma l gamma +HIDDEN}
+ ramp_gamma 0.5
+ addUserKnob {4 ramp_type l "ramp type" +HIDDEN M {linear "inverse square" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Postgrade l "Post Grade" n 1}
+ addUserKnob {6 cc_shad l "Post Grade Shadow?" +STARTLINE}
+ addUserKnob {26 cc_shad_space l "" +STARTLINE +HIDDEN T "\n"}
+ addUserKnob {19 Grade_Shadow_black l lift +HIDDEN R -1 1}
+ Grade_Shadow_black {0 0 0 0}
+ addUserKnob {6 Grade_Shadow_black_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Shadow_white l gain +HIDDEN R 0 4}
+ Grade_Shadow_white 1
+ addUserKnob {6 Grade_Shadow_white_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Shadow_multiply l multiply +HIDDEN R 0 4}
+ Grade_Shadow_multiply 1
+ addUserKnob {6 Grade_Shadow_multiply_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Shadow_gamma l gamma +HIDDEN R 0.2 5}
+ Grade_Shadow_gamma 1
+ addUserKnob {6 Grade_Shadow_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 cc_shad_line l "" +STARTLINE +HIDDEN}
+ addUserKnob {6 cc_light l "Post Grade Light?" -STARTLINE}
+ addUserKnob {26 cc_light_space l "" +STARTLINE +HIDDEN T "\n"}
+ addUserKnob {19 Grade_Light_black l lift +HIDDEN R -1 1}
+ Grade_Light_black {0 0 0 0}
+ addUserKnob {6 Grade_Light_black_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Light_white l gain +HIDDEN R 0 4}
+ Grade_Light_white 1
+ addUserKnob {6 Grade_Light_white_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Light_multiply l multiply +HIDDEN R 0 4}
+ Grade_Light_multiply 1
+ addUserKnob {6 Grade_Light_multiply_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade_Light_gamma l gamma +HIDDEN R 0.2 5}
+ Grade_Light_gamma 1
+ addUserKnob {6 Grade_Light_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 cc_light_line l "" +STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 extra_options l "Extra Options" n 1}
+ addUserKnob {6 correct_alpha l "Correct Alpha?" +STARTLINE}
+ correct_alpha true
+ addUserKnob {26 correct_alpha_line l "" +STARTLINE T "\n"}
+ addUserKnob {6 edgeblur l "Enable EdgeBlur?" +STARTLINE}
+ edgeblur true
+ addUserKnob {14 edgeblur_size l size R 0 100}
+ edgeblur_size 2
+ addUserKnob {26 edgeblur_line l "" +STARTLINE}
+ addUserKnob {26 edgeblur_space l "" +STARTLINE +HIDDEN T "\n"}
+ addUserKnob {6 solid l "Check against solid?" +STARTLINE}
+ addUserKnob {18 solid_col l color +HIDDEN}
+ solid_col {0.2649999857 0.080825001 0.080825001}
+ addUserKnob {6 solid_col_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 _1 l "" +STARTLINE T "\n\n\n\n"}
+ addUserKnob {22 website_link l "<font color='#888888' align=\"center\">// 2d_character_template v1.4 © Guillaume Cassuto</font>" -STARTLINE T "import webbrowser\n\ndef openWebpage():\n  webbrowser.open(\"http://www.guillaumecassuto.work\")\n\nopenWebpage()"}
+ addUserKnob {20 knobChanged_save +INVISIBLE}
+ addUserKnob {26 knobChanged_data l "" +STARTLINE T "nuke.selectedNode().knob('knobChanged').setValue('''\nif nuke.thisKnob().name() == \"ramp\": \n#ramp\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('ramp_space').setVisible(False)\n        nuke.thisNode().knob('ramp_type').setVisible(False)\n        nuke.thisNode().knob('ramp_gamma').setVisible(False)\n        nuke.thisNode().knob('ColorRamp_p0').setVisible(False)\n        nuke.thisNode().knob('ColorRamp_p1').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('ramp_space').setVisible(True)\n        nuke.thisNode().knob('ramp_type').setVisible(True)\n        nuke.thisNode().knob('ramp_gamma').setVisible(True)\n        nuke.thisNode().knob('ColorRamp_p0').setVisible(True)\n        nuke.thisNode().knob('ColorRamp_p1').setVisible(True)\n\n#rimlight\nif nuke.thisKnob().name() == \"rimlight\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('rimlight_pos').setVisible(False)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n        nuke.thisNode().knob('rimlight_blursize').setVisible(False)\n        nuke.thisNode().knob('rimlight_color').setVisible(False)\n        nuke.thisNode().knob('rimlight_intensity').setVisible(False)\n        nuke.thisNode().knob('rimlight_space').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask').setVisible(False)\n        nuke.thisNode().knob('inverse_rimlight_mask').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask_space').setVisible(False)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('rimlight_pos').setVisible(True)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(True)\n        nuke.thisNode().knob('rimlight_blursize').setVisible(True)\n        nuke.thisNode().knob('rimlight_color').setVisible(True)\n        nuke.thisNode().knob('rimlight_intensity').setVisible(True)\n        nuke.thisNode().knob('rimlight_space').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask').setVisible(True)\n        nuke.thisNode().knob('inverse_rimlight_mask').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask_space').setVisible(True)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(True)\n\n#cc_shad\nif nuke.thisKnob().name() == \"cc_shad\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('cc_shad_space').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_white').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_black').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_multiply').setVisible(False)\n        nuke.thisNode().knob('Grade_Shadow_gamma').setVisible(False)\n        nuke.thisNode().knob('cc_shad_line').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('cc_shad_space').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_white').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_black').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_multiply').setVisible(True)\n        nuke.thisNode().knob('Grade_Shadow_gamma').setVisible(True)\n        nuke.thisNode().knob('cc_shad_line').setVisible(True)\n\n#cc_shad\nif nuke.thisKnob().name() == \"cc_light\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('cc_light_space').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_white').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_black').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_multiply').setVisible(False)\n        nuke.thisNode().knob('Grade_Light_gamma').setVisible(False)\n        nuke.thisNode().knob('cc_light_line').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('cc_light_space').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_white').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_black').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_multiply').setVisible(True)\n        nuke.thisNode().knob('Grade_Light_gamma').setVisible(True)\n        nuke.thisNode().knob('cc_light_line').setVisible(True)\n\n\n#edge blur\nif nuke.thisKnob().name() == \"edgeblur\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('edgeblur_size').setVisible(False)\n        nuke.thisNode().knob('edgeblur_line').setVisible(False)\n        nuke.thisNode().knob('edgeblur_space').setVisible(True)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('edgeblur_size').setVisible(True)\n        nuke.thisNode().knob('edgeblur_line').setVisible(True)\n        nuke.thisNode().knob('edgeblur_space').setVisible(False)\n\n#solid\nif nuke.thisKnob().name() == \"solid\": \n\n    if nuke.thisKnob().getValue() == 0:\n        nuke.thisNode().knob('solid_col').setVisible(False)\n\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('solid_col').setVisible(True)\n\n#grey out rimlight options\n\nif nuke.thisNode().knob('rimlight').getValue() == 1:\n\n    if nuke.thisNode().input(2):\n        nuke.thisNode().knob('rimlight_pos').setEnabled(False)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(True)\n    else:\n        nuke.thisNode().knob('rimlight_pos').setEnabled(True)\n        nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n\n    if nuke.thisNode().input(3):\n        nuke.thisNode().knob('rimlight_mask').setEnabled(True)\n        nuke.thisNode().knob('inverse_rimlight_mask').setEnabled(True)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n    else:\n        nuke.thisNode().knob('rimlight_mask').setEnabled(False)\n        nuke.thisNode().knob('inverse_rimlight_mask').setEnabled(False)\n        nuke.thisNode().knob('rimlight_mask_help').setVisible(True)\n\nelse:\n    nuke.thisNode().knob('rimlight_pos_help').setVisible(False)\n    nuke.thisNode().knob('rimlight_mask_help').setVisible(False)\n  \n''')"}
+}
+ Input {
+  inputs 0
+  name LINE
+  xpos -805
+  ypos -564
+ }
+ Clamp {
+  channels alpha
+  maximum 0.5
+  MinClampTo_enable true
+  MaxClampTo_enable true
+  name Clamp2
+  xpos -805
+  ypos -503
+  disable {{!this.parent.correct_alpha x2 0}}
+ }
+ set C9119b000 [stack 0]
+ Grade {
+  multiply 0.4
+  name CHAR_AMBIENT
+  xpos -805
+  ypos -420
+ }
+ set C9119ac00 [stack 0]
+ Dot {
+  name Dot3
+  xpos -771
+  ypos 395
+ }
+set N9119a800 [stack 0]
+ Dot {
+  name Dot5
+  xpos -771
+  ypos 581
+ }
+ Dot {
+  name Dot1
+  xpos -136
+  ypos 581
+ }
+set N9119a000 [stack 0]
+ Input {
+  inputs 0
+  name mask
+  xpos 144
+  ypos -168
+  number 3
+ }
+ Invert {
+  name Invert3
+  xpos -170
+  ypos 163
+  disable {{this.parent.inverse_rimlight_mask}}
+ }
+ Input {
+  inputs 0
+  name COLO
+  xpos -351
+  ypos -561
+  number 1
+ }
+clone $C9119b000 {
+  xpos -351
+  ypos -498
+  selected false
+ }
+clone $C9119ac00 {
+  xpos -351
+  ypos -415
+  selected false
+ }
+ Dot {
+  name Dot2
+  xpos -317
+  ypos -231
+ }
+set N91198800 [stack 0]
+ Ramp {
+  replace true
+  p0 {{parent.ColorRamp_p0.x x1001 2} {parent.ColorRamp_p0.y x1001 910}}
+  p1 {{parent.ColorRamp_p1.x} {parent.ColorRamp_p1.y}}
+  type plinear
+  name ColorRamp
+  xpos -464
+  ypos -235
+ }
+set N91198400 [stack 0]
+ Grade {
+  channels rgba
+  gamma 0.28
+  name RampType
+  xpos -645
+  ypos -235
+  disable {{!this.parent.ramp_type}}
+ }
+ Dot {
+  name Dot6
+  xpos -611
+  ypos -122
+ }
+set N9148b800 [stack 0]
+ Grade {
+  multiply {1 0 0 1}
+  name Grade2
+  xpos -545
+  ypos -59
+ }
+push $N9148b800
+push $N91198400
+ Switch {
+  inputs 2
+  which {{this.parent.ramp_type}}
+  name Switch2
+  xpos -464
+  ypos -125
+ }
+push $N91198800
+ Grade {
+  inputs 1+1
+  gamma {{parent.ramp_gamma}}
+  name Grade26
+  xpos -351
+  ypos -125
+  disable {{!parent.ramp x1 1}}
+ }
+ Merge2 {
+  inputs 2
+  mix 0.082
+  name Merge5
+  xpos -351
+  ypos -59
+  disable {{!this.parent.rampdisplay}}
+ }
+set N9148a800 [stack 0]
+ Dot {
+  name Dot34
+  xpos -317
+  ypos -16
+ }
+set N9148a400 [stack 0]
+ Clamp {
+  channels alpha
+  name Clamp9
+  xpos -250
+  ypos -25
+ }
+set N9148a000 [stack 0]
+ Transform {
+  translate {{parent.rimlight_pos.x} {parent.rimlight_pos.y}}
+  center {2120.5 956.5}
+  name rimlight_offset
+  xpos -250
+  ypos 17
+ }
+ Blur {
+  size {{parent.rimlight_blursize.w} {parent.rimlight_blursize.h}}
+  filter quadratic
+  quality 5
+  name Blur8
+  xpos -250
+  ypos 41
+ }
+ Grade {
+  channels alpha
+  white 1.2
+  gamma 0.85
+  name Grade22
+  xpos -250
+  ypos 77
+ }
+push $N9148a000
+ Dot {
+  name Dot44
+  xpos -106
+  ypos 16
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge30
+  xpos -140
+  ypos 83
+ }
+ Input {
+  inputs 0
+  name SHADOW
+  xpos -61
+  ypos -583
+  number 2
+ }
+clone $C9119b000 {
+  xpos -61
+  ypos -502
+  selected false
+ }
+ Invert {
+  name Invert2
+  xpos -61
+  ypos -420
+ }
+ Blur {
+  size {{parent.rimlight_blursize.w} {parent.rimlight_blursize.h}}
+  filter quadratic
+  quality 5
+  name Blur2
+  xpos -61
+  ypos -371
+ }
+ Grade {
+  channels alpha
+  gamma 0.34
+  name Grade12
+  xpos -61
+  ypos -316
+ }
+push $N91198800
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge12
+  xpos -61
+  ypos -234
+ }
+ Switch {
+  inputs 2
+  which {{"!\[exists parent.input2]"}}
+  name Switch1
+  xpos -61
+  ypos 163
+ }
+ Dot {
+  name Dot4
+  xpos -27
+  ypos 222
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge1
+  xpos -170
+  ypos 219
+  disable {{!parent.rimlight_mask}}
+ }
+set N9127e400 [stack 0]
+ Invert {
+  name Invert1
+  xpos -170
+  ypos 343
+ }
+push $N9127e400
+push $N9148a400
+ Grade {
+  inputs 1+1
+  white {{parent.rimlight_color.r*parent.rimlight_intensity+1} {parent.rimlight_color.g*parent.rimlight_intensity+1} {parent.rimlight_color.b*parent.rimlight_intensity+1} 1}
+  name Grade27
+  xpos -351
+  ypos 219
+  disable {{!parent.rimlight}}
+ }
+set N9127dc00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge2
+  xpos -170
+  ypos 379
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge3
+  xpos -170
+  ypos 521
+ }
+push $N9119a000
+push $N9127e400
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge4
+  xpos -245
+  ypos 460
+ }
+push $N9119a800
+push $N9127dc00
+ Merge2 {
+  inputs 2
+  name Merge31
+  xpos -351
+  ypos 392
+ }
+ Grade {
+  inputs 1+1
+  black {{parent.Grade_Light_black.r} {parent.Grade_Light_black.g} {parent.Grade_Light_black.b} {parent.Grade_Light_black.a}}
+  white {{parent.Grade_Light_white.r} {parent.Grade_Light_white.g} {parent.Grade_Light_white.b} {parent.Grade_Light_white.a}}
+  multiply {{parent.Grade_Light_multiply.r} {parent.Grade_Light_multiply.g} {parent.Grade_Light_multiply.b} {parent.Grade_Light_multiply.a}}
+  gamma {{parent.Grade_Light_gamma.r} {parent.Grade_Light_gamma.g} {parent.Grade_Light_gamma.b} {parent.Grade_Light_gamma.a}}
+  name Grade_Light
+  xpos -351
+  ypos 460
+  disable {{!parent.cc_light x2 1}}
+ }
+ Grade {
+  inputs 1+1
+  black {{parent.Grade_Shadow_black.r} {parent.Grade_Shadow_black.g} {parent.Grade_Shadow_black.b} {parent.Grade_Shadow_black.a}}
+  white {{parent.Grade_Shadow_white.r} {parent.Grade_Shadow_white.g} {parent.Grade_Shadow_white.b} {parent.Grade_Shadow_white.a}}
+  multiply {{parent.Grade_Shadow_multiply.r} {parent.Grade_Shadow_multiply.g} {parent.Grade_Shadow_multiply.b} {parent.Grade_Shadow_multiply.a}}
+  gamma {{parent.Grade_Shadow_gamma.r} {parent.Grade_Shadow_gamma.g} {parent.Grade_Shadow_gamma.b} {parent.Grade_Shadow_gamma.a}}
+  name Grade_Shadow
+  xpos -351
+  ypos 521
+  disable {{!parent.cc_shad x2 1}}
+ }
+ EdgeBlur {
+  size {{parent.edgeblur_size.w} {parent.edgeblur_size.h}}
+  name EdgeBlur1
+  xpos -351
+  ypos 661
+  disable {{!parent.edgeblur x1 1}}
+ }
+ Dot {
+  name Dot45
+  xpos -317
+  ypos 758
+ }
+set N9120b800 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 white -1 -1 rgba.red 0 0 white -1 -1 rgba.green 0 1 white -1 -1 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle32
+  xpos -477
+  ypos 755
+ }
+ Grade {
+  multiply {{parent.solid_col.r} {parent.solid_col.g} {parent.solid_col.b} 1}
+  name Grade28
+  xpos -477
+  ypos 780
+ }
+push $N9120b800
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge32
+  xpos -351
+  ypos 780
+  disable {{!parent.solid x1 0}}
+ }
+ Output {
+  name OUTPUT
+  xpos -351
+  ypos 878
+ }
+push $N9148a800
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  selected true
+  xpos -1190
+  ypos 451
+ }
+end_group

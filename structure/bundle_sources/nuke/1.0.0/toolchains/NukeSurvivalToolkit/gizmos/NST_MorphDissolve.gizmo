@@ -1,0 +1,452 @@
+Group {
+ name MorphDissolve
+ help "Allows to morph between two moving plates automatically, or can be used to improve manual Morphs."
+ tile_color 0x890074ff
+ label "(Plate \[value morph])"
+ selected true
+ addUserKnob {20 MorphDissolve}
+ addUserKnob {7 morph l Morph t "Morphs between input 0 and input 1"}
+ addUserKnob {26 ""}
+ addUserKnob {4 method l "Morph Method" t "Pick which method to use. They may both display artifacts in different areas, try both to see which one produces the best results for your specific morph." M {iDistort Kronos ""}}
+ addUserKnob {4 direction l Direction -STARTLINE M {In-Between "0 --> 1" "1 --> 0" ""}}
+ addUserKnob {4 result l Result -STARTLINE M {Morph STmap "" "" "" ""}}
+ addUserKnob {7 vectorDetail l "Vector Detail" t "Use this to adjust the density of the calculated motion vector field. Higher details capture finer movements, but take will longer to calculate." R 0.01 1}
+ vectorDetail 0.75
+ addUserKnob {7 strength l Strength t "Match Strength : Stonger values will match larger differences between the two plates." R 0 1.5}
+ strength 1.5
+ addUserKnob {41 scale l "STmap Overscan" T UV_Map.scale}
+ addUserKnob {26 ""}
+ addUserKnob {26 copyright l "" +STARTLINE T "v1.0 - by Erwan Leroy - 2017"}
+}
+ BackdropNode {
+  inputs 0
+  name Backdrop1
+  tile_color 0x5b4e5658
+  label Zipping
+  note_font_size 40
+  xpos 600
+  ypos -55
+  bdwidth 180
+  bdheight 241
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 1355
+  ypos -123
+  number 1
+ }
+ Dot {
+  name Dot3
+  tile_color 0xcccccc00
+  xpos 1389
+  ypos -72
+ }
+set Nffa41ee0 [stack 0]
+ Dot {
+  name Dot8
+  tile_color 0xcccccc00
+  xpos 1389
+  ypos 1115
+ }
+push $Nffa41ee0
+ Dot {
+  name Dot13
+  tile_color 0xcccccc00
+  xpos 1247
+  ypos -72
+ }
+ NoTimeBlur {
+  rounding floor
+  single false
+  name NoTimeBlur2
+  xpos 1213
+  ypos -15
+ }
+ Retime {
+  input.first 1001
+  input.first_lock true
+  output.first 1001
+  output.last 1002
+  speed 0.5
+  before continue
+  after continue
+  filter none
+  time ""
+  name Retime2
+  label "x\[value input.first]-->x\[value output.first]\n\[if \{\[value speed] == 1\} then \{return \"\"\} else \{return \"spd \[value speed]\"\}]"
+  xpos 1213
+  ypos 23
+ }
+ Input {
+  inputs 0
+  name Input0
+  xpos -24
+  ypos -121
+ }
+ Dot {
+  name Dot4
+  tile_color 0xcccccc00
+  xpos 10
+  ypos -75
+ }
+set N3db7b800 [stack 0]
+ Dot {
+  name Dot14
+  tile_color 0xcccccc00
+  xpos 155
+  ypos -75
+ }
+ NoTimeBlur {
+  rounding floor
+  single false
+  name NoTimeBlur1
+  xpos 121
+  ypos -13
+ }
+ Retime {
+  input.first 1001
+  input.first_lock true
+  input.last 1218
+  output.first 1001
+  output.last 1436
+  speed 0.5
+  before continue
+  after continue
+  filter none
+  time ""
+  name Retime1
+  label "x\[value input.first]-->x\[value output.first]\n\[if \{\[value speed] == 1\} then \{return \"\"\} else \{return \"spd \[value speed]\"\}]"
+  xpos 121
+  ypos 23
+ }
+ Switch {
+  inputs 2
+  which {{(frame-1001)%2}}
+  name Switch1
+  xpos 650
+  ypos 35
+ }
+ Dot {
+  name Dot9
+  tile_color 0xcccccc00
+  xpos 684
+  ypos 124
+ }
+set Nf88d8d0 [stack 0]
+ Dot {
+  name Dot2
+  tile_color 0xcccccc00
+  xpos 985
+  ypos 124
+ }
+ Kronos {
+  retimedChannels all
+  timing2 Frame
+  timingFrame2 {{(frame-1001)*2+1001+parent.morph}}
+  motionEstimation Regularized
+  vectorDetailReg {{parent.vectorDetail}}
+  strengthReg {{parent.strength}}
+  name Kronos1
+  xpos 951
+  ypos 273
+ }
+ Dot {
+  name Dot12
+  tile_color 0xcccccc00
+  xpos 985
+  ypos 903
+ }
+push $Nf88d8d0
+ Dot {
+  name Dot10
+  tile_color 0xcccccc00
+  xpos 415
+  ypos 124
+ }
+ VectorGenerator {
+  motionEstimation Regularized
+  vectorDetailReg {{parent.vectorDetail}}
+  strengthReg {{parent.strength}}
+  name VectorGenerator1
+  xpos 381
+  ypos 277
+ }
+ Dot {
+  name Dot1
+  tile_color 0xcccccc00
+  xpos 415
+  ypos 350
+ }
+set Na0df1320 [stack 0]
+ Shuffle {
+  in backward
+  blue black
+  alpha black
+  name Shuffle2
+  label "in \[value in]-->out \[value out]"
+  xpos 217
+  ypos 340
+ }
+ TimeOffset {
+  time_offset -1
+  time ""
+  name TimeOffset2
+  label "\[value time_offset]"
+  xpos 217
+  ypos 484
+ }
+push $Na0df1320
+ Shuffle {
+  in forward
+  blue black
+  alpha black
+  name Shuffle1
+  label "in \[value in]-->out \[value out]"
+  xpos 560
+  ypos 340
+ }
+ TimeOffset {
+  time_offset 1
+  time ""
+  name TimeOffset1
+  label "\[value time_offset]"
+  xpos 560
+  ypos 414
+ }
+push $Na0df1320
+ Copy {
+  inputs 2
+  from0 forward.u
+  to0 forward.u
+  from1 forward.v
+  to1 forward.v
+  bbox B
+  name Copy1
+  xpos 381
+  ypos 408
+ }
+ Copy {
+  inputs 2
+  from0 backward.u
+  to0 backward.u
+  from1 backward.v
+  to1 backward.v
+  bbox B
+  name Copy2
+  xpos 381
+  ypos 484
+ }
+ Group {
+  name UV_Map
+  help "Create an uvmap from the input format or the selected format that can be used for example for baking transformations and applying them through a STmap node.\nUse the overscan to create values outside of the viewing window and the 0-1 range."
+  tile_color 0x578100ff
+  note_font "Bitstream Vera Sans"
+  note_font_color 0xffffffff
+  selected true
+  xpos 381
+  ypos 549
+  disable {{!result}}
+  mapsize {0.15 0.15}
+  addUserKnob {20 tab l "UV Map"}
+  addUserKnob {41 format T Constant1.format}
+  addUserKnob {41 scale l overscan T Reformat1.scale}
+  addUserKnob {6 alpha l "alpha 1" +STARTLINE}
+  addUserKnob {41 black_outside l "black outside" -STARTLINE T Reformat2.black_outside}
+ }
+  Input {
+   inputs 0
+   name Input
+   xpos 620
+   ypos -370
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle1
+   xpos 620
+   ypos -309
+  }
+  Constant {
+   inputs 0
+   name Constant1
+   xpos 479
+   ypos -214
+  }
+  Switch {
+   inputs 2
+   which {{"\[exists parent.input0]"}}
+   name Switch1
+   xpos 620
+   ypos -190
+  }
+  Reformat {
+   type scale
+   resize none
+   pbb true
+   name Reformat1
+   selected true
+   xpos 620
+   ypos -71
+  }
+  Reformat {
+   type scale
+   scale {{1/Reformat1.scale} {1/Reformat1.scale}}
+   resize none
+   black_outside true
+   pbb true
+   name Reformat2
+   xpos 620
+   ypos -37
+  }
+  Shuffle {
+   alpha white
+   name Shuffle13
+   tile_color 0xffffff00
+   label "\[value in]"
+   xpos 620
+   ypos 12
+   disable {{!parent.alpha}}
+  }
+  Expression {
+   expr0 (x+0.5)/width
+   expr1 (y+0.5)/height
+   name Expression2
+   xpos 620
+   ypos 75
+  }
+  Output {
+   name Output1
+   xpos 620
+   ypos 127
+  }
+ end_group
+ Dot {
+  name Dot5
+  note_font_size 41
+  xpos 415
+  ypos 601
+ }
+set N704f3310 [stack 0]
+ Retime {
+  input.first 1000
+  input.first_lock true
+  input.last 1002
+  output.first 1000
+  output.last 1001
+  speed 2
+  before continue
+  after continue
+  filter none
+  time ""
+  name Retime4
+  label "x\[value input.first]-->x\[value output.first]\n\[if \{\[value speed] == 1\} then \{return \"\"\} else \{return \"spd \[value speed]\"\}]"
+  xpos 459
+  ypos 672
+ }
+ IDistort {
+  uv forward
+  uv_scale {{1-parent.morph}}
+  name IDistort2
+  xpos 459
+  ypos 741
+ }
+set N4c486100 [stack 0]
+push $N704f3310
+ Retime {
+  input.first 1001
+  input.first_lock true
+  input.last 1436
+  output.first 1001
+  output.last 1218
+  speed 2
+  before continue
+  after continue
+  filter none
+  time ""
+  name Retime3
+  label "x\[value input.first]-->x\[value output.first]\n\[if \{\[value speed] == 1\} then \{return \"\"\} else \{return \"spd \[value speed]\"\}]"
+  xpos 308
+  ypos 673
+ }
+ IDistort {
+  uv backward
+  uv_scale {{parent.morph}}
+  name IDistort1
+  xpos 308
+  ypos 738
+ }
+set N40def0f0 [stack 0]
+push $N4c486100
+push $N40def0f0
+ Dissolve {
+  inputs 2
+  which {{parent.morph}}
+  name Dissolve1
+  xpos 379
+  ypos 823
+ }
+ Dot {
+  name Dot11
+  tile_color 0xcccccc00
+  xpos 413
+  ypos 903
+ }
+ Switch {
+  inputs 3
+  which {{direction}}
+  name Switch4
+  label "\[value which]"
+  xpos 491
+  ypos 893
+ }
+ Switch {
+  inputs 2
+  which {{parent.method}}
+  name Switch3
+  xpos 627
+  ypos 899
+ }
+set N40770720 [stack 0]
+push $N3db7b800
+ Dot {
+  name Dot7
+  tile_color 0xcccccc00
+  xpos 10
+  ypos 1115
+ }
+ Switch {
+  inputs 3
+  which {{"parent.morph<=0?0:parent.morph>=1  ?2:1"}}
+  name Switch2
+  xpos 547
+  ypos 1111
+ }
+set N4077d620 [stack 0]
+push $N40770720
+push $N40770720
+push $N4077d620
+ Switch {
+  inputs 3
+  which {{"result + direction"}}
+  name Switch5
+  label "\[value which]"
+  xpos 627
+  ypos 1181
+ }
+ Switch {
+  inputs 2
+  which {{method}}
+  name Switch6
+  label "\[value which]"
+  xpos 627
+  ypos 1257
+ }
+ Output {
+  name Output1
+  xpos 627
+  ypos 1333
+ }
+end_group

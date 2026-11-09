@@ -1,0 +1,295 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Zapruder_Film.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read337
+ selected true
+ xpos -3183
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Xmas55.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read336
+ selected true
+ xpos -3183
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Worlds_Fair.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read335
+ selected true
+ xpos -3293
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Woodstock_1969.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read334
+ selected true
+ xpos -3403
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/War_Correspondent.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read333
+ selected true
+ xpos -3513
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Vignette.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 840
+ origlast 840
+ origset true
+ name Read332
+ selected true
+ xpos -3623
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Silent_Movie.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read331
+ selected true
+ xpos -3733
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Saloon_Fight.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read330
+ selected true
+ xpos -3843
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Roswell.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read329
+ selected true
+ xpos -3953
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Jaques_Custeau.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read328
+ selected true
+ xpos -4063
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Hindenburg.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read327
+ selected true
+ xpos -4173
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/HandCrank_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1320
+ origlast 1320
+ origset true
+ name Read326
+ selected true
+ xpos -4283
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/HandCrank.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read325
+ selected true
+ xpos -4283
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Grandmas_Attic.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read324
+ selected true
+ xpos -4393
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 568
+ origlast 568
+ origset true
+ name Read323
+ selected true
+ xpos -4503
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 191
+ origlast 191
+ origset true
+ name Read322
+ selected true
+ xpos -4613
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 702
+ origlast 702
+ origset true
+ name Read321
+ selected true
+ xpos -4723
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Full_Gate_With_Keycode_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 544
+ origlast 544
+ origset true
+ name Read320
+ selected true
+ xpos -4833
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Fifties_Educational_Film.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read319
+ selected true
+ xpos -4943
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/Endless_Summer.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read318
+ selected true
+ xpos -5053
+ ypos 792
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Looks/60s_Summer_Fun.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read317
+ selected true
+ xpos -5163
+ ypos 792
+}
+ContactSheet {
+ inputs 21
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet29
+ tile_color 0xe955ffff
+ selected true
+ xpos -2963
+ ypos 918
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

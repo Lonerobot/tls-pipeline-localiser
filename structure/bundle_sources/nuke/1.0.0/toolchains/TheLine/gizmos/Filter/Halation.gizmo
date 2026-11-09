@@ -1,0 +1,248 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+Gizmo {
+ addUserKnob {20 m_halation l M_Halation t "This Gizmo re-produces the red fringing you \nget on film around bright source. \nEspecially noticable on a contrasty edge.\n\n"}
+ addUserKnob {41 size l "Red wide glow size" T red_wide_glow.size}
+ addUserKnob {41 size_1 l "Green wide glow size" T green_wide_glow.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 size_2 l "Red core glow size" T red_core_glow.size}
+ addUserKnob {41 size_3 l "Green core glow size" T green_core_glow.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 size_5 l "Soften wide size" T Soften_wide.size}
+ addUserKnob {41 size_4 l "Soften core size" T Soften_core.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 value l "Wide glow gain" T Multiply_wide.value}
+ addUserKnob {41 value_1 l "Core glow gain" T Multiply_core.value}
+ addUserKnob {26 ""}
+ addUserKnob {41 which l "Wide glow percent" T add_wide_percent1.which}
+ addUserKnob {41 which_1 l "Core glow percent" T add_core_percent.which}
+ addUserKnob {26 ""}
+ addUserKnob {41 gamma l Sensitivity T Log2Lin1.gamma}
+ addUserKnob {41 selector l Operation T Switch1.selector}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -370
+  ypos -538
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white 665
+  name Log2Lin2
+  xpos -370
+  ypos -394
+ }
+set Nefdf6c00 [stack 0]
+push $Nefdf6c00
+ Log2Lin {
+  black 0
+  white 400
+  gamma 0.2
+  name Log2Lin1
+  xpos -370
+  ypos -250
+ }
+set Nefdf6800 [stack 0]
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  size 10
+  name red_wide_glow
+  xpos -590
+  ypos -160
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  name green_wide_glow
+  xpos -590
+  ypos -88
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white {{parent.Log2Lin1.white} {parent.Log2Lin1.white} {parent.Log2Lin1.white}}
+  gamma {{parent.Log2Lin1.gamma}}
+  name Log2Lin4
+  xpos -590
+  ypos -10
+ }
+ Clamp {
+  name Clamp1
+  xpos -590
+  ypos 32
+ }
+push $Nefdf6c00
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge1
+  xpos -590
+  ypos 110
+ }
+ Blur {
+  name Soften_wide
+  xpos -590
+  ypos 152
+ }
+ Multiply {
+  name Multiply_wide
+  xpos -590
+  ypos 200
+ }
+set Nefdf4c00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge3
+  xpos -590
+  ypos 254
+ }
+push $Nefdf6c00
+ Dissolve {
+  inputs 2
+  which 0.3
+  name add_wide_percent1
+  xpos -590
+  ypos 320
+ }
+ set Cefdf4400 [stack 0]
+set Nefdf4400 [stack 0]
+push $Nefdf6800
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  size 1
+  name red_core_glow
+  xpos -150
+  ypos -160
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  name green_core_glow
+  xpos -150
+  ypos -88
+ }
+ Log2Lin {
+  operation lin2log
+  black 0
+  white {{parent.Log2Lin1.white i}}
+  gamma {{parent.Log2Lin1.gamma i}}
+  name Log2Lin3
+  xpos -150
+  ypos -10
+ }
+ Clamp {
+  name Clamp2
+  xpos -150
+  ypos 32
+ }
+push $Nefdf6c00
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  xpos -150
+  ypos 110
+ }
+ Blur {
+  name Soften_core
+  xpos -150
+  ypos 152
+ }
+ Multiply {
+  value 2
+  name Multiply_core
+  xpos -150
+  ypos 200
+ }
+set N66d4a400 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge4
+  xpos -590
+  ypos 398
+ }
+push $Nefdf4400
+ Dot {
+  name Dot3
+  xpos -666
+  ypos 330
+ }
+ Dot {
+  name Dot4
+  xpos -666
+  ypos 498
+ }
+ Dissolve {
+  inputs 2
+  which 1
+  name add_core_percent
+  xpos -590
+  ypos 488
+ }
+ set C66d49400 [stack 0]
+push $N66d4a400
+push $Nefdf6c00
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  xpos -150
+  ypos 254
+ }
+push $Nefdf6c00
+clone $C66d49400 {
+  inputs 2
+  xpos -150
+  ypos 320
+  selected false
+ }
+set N66d48c00 [stack 0]
+push $Nefdf4c00
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge6
+  xpos -150
+  ypos 398
+ }
+push $N66d48c00
+ Dot {
+  name Dot1
+  xpos -6
+  ypos 330
+ }
+ Dot {
+  name Dot2
+  xpos -6
+  ypos 498
+ }
+clone $Cefdf4400 {
+  inputs 2
+  xpos -150
+  ypos 488
+  selected false
+ }
+ Switch {
+  inputs 2
+  which {{selector i}}
+  name Switch1
+  xpos -370
+  ypos 614
+  addUserKnob {20 User}
+  addUserKnob {4 selector l Operation M {Apply Remove}}
+ }
+ Log2Lin {
+  black 0
+  white 665
+  name Log2Lin5
+  xpos -370
+  ypos 662
+ }
+ Output {
+  name Output1
+  xpos -370
+  ypos 734
+ }
+end_group

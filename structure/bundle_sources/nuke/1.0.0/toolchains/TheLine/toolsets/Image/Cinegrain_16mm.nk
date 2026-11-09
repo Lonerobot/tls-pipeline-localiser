@@ -1,0 +1,431 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 617
+ origlast 617
+ origset true
+ name Read169
+ selected true
+ xpos -5273
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_FilterTrayLightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 667
+ origlast 667
+ origset true
+ name Read170
+ selected true
+ xpos -5163
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 790
+ origlast 790
+ origset true
+ name Read171
+ selected true
+ xpos -5053
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 436
+ origlast 436
+ origset true
+ name Read172
+ selected true
+ xpos -4943
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100D_VintageCamera_XProcess_UnlockedPressurePlate_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 858
+ origlast 858
+ origset true
+ name Read173
+ selected true
+ xpos -4943
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 711
+ origlast 711
+ origset true
+ name Read174
+ selected true
+ xpos -4833
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/100T_EXP_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 719
+ origlast 719
+ origset true
+ name Read175
+ selected true
+ xpos -4723
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_250D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read176
+ selected true
+ xpos -4613
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_500T.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read177
+ selected true
+ xpos -4503
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_50D.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read178
+ selected true
+ xpos -4393
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Archival.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read179
+ selected true
+ xpos -4283
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Archival_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read180
+ selected true
+ xpos -4173
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Handcrank.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read181
+ selected true
+ xpos -4063
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Print.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read182
+ selected true
+ xpos -3953
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/16mm_Reversal.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 720
+ origlast 720
+ origset true
+ name Read183
+ selected true
+ xpos -3843
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_EXP.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read184
+ selected true
+ xpos -3843
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_Over.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read185
+ selected true
+ xpos -3733
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_Under.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read186
+ selected true
+ xpos -3623
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ name Read187
+ selected true
+ xpos -3513
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ name Read188
+ selected true
+ xpos -3403
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_FilterTrayLightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 670
+ origlast 670
+ origset true
+ name Read189
+ selected true
+ xpos -3293
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_Rough_Edge.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 645
+ origlast 645
+ origset true
+ name Read190
+ selected true
+ xpos -3183
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_Rougher_Edges.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 640
+ origlast 640
+ origset true
+ name Read191
+ selected true
+ xpos -3073
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/200T_VintageCamera_UnlockedPressurePlate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 618
+ origlast 618
+ origset true
+ name Read192
+ selected true
+ xpos -2963
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_EXP_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ name Read193
+ selected true
+ xpos -2853
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_EXP_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ name Read194
+ selected true
+ xpos -2743
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Over_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ name Read195
+ selected true
+ xpos -2743
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Over_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ name Read196
+ selected true
+ xpos -2633
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Under_16mm.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 541
+ origlast 541
+ origset true
+ name Read197
+ selected true
+ xpos -2523
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_Under_16mm_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 539
+ origlast 539
+ origset true
+ name Read198
+ selected true
+ xpos -2413
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 655
+ origlast 655
+ origset true
+ name Read199
+ selected true
+ xpos -2303
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera_FullGate.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 611
+ origlast 611
+ origset true
+ name Read200
+ selected true
+ xpos -2193
+ ypos -1080
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/16mm/500T_VintageCamera_LightLeak.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 321
+ origlast 321
+ origset true
+ name Read201
+ selected true
+ xpos -2083
+ ypos -1080
+}

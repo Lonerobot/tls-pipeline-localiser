@@ -1,0 +1,55 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push $cut_paste_input
+Group {
+ name FrameCopy
+ selected true
+ xpos -673
+ ypos 2078
+ addUserKnob {20 User}
+ addUserKnob {41 first_frame l CopyFrame T FrameHold15.first_frame}
+ addUserKnob {3 ReplaceFrame}
+ ReplaceFrame 519
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -435
+  ypos 507
+ }
+ Dot {
+  name Dot35
+  xpos -401
+  ypos 547
+ }
+set N5770a800 [stack 0]
+ FrameHold {
+  first_frame 518
+  name FrameHold15
+  xpos -562
+  ypos 585
+ }
+push $N5770a800
+ Switch {
+  inputs 2
+  which {{curve(frame+(FrameCopy.ReplaceFrame*-1)+1) 0.01153230667 1.011532307 0.01153230667}}
+  name Switch1
+  selected true
+  xpos -435
+  ypos 687
+  addUserKnob {20 User}
+ }
+ Output {
+  name Output1
+  xpos -435
+  ypos 787
+ }
+ NoOp {
+  inputs 0
+  name NoOp1
+  xpos -292
+  ypos 601
+  addUserKnob {20 User}
+  addUserKnob {3 offset}
+ }
+end_group

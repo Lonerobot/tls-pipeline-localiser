@@ -1,0 +1,99 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name FlatColourKey
+ selected true
+ xpos 393
+ ypos 47
+ addUserKnob {20 User}
+ addUserKnob {26 colourKey -STARTLINE}
+ addUserKnob {41 color T Key_Colour_001.color}
+ addUserKnob {26 Mask}
+ addUserKnob {6 Maskstencil l Mask/Stencil +STARTLINE}
+ addUserKnob {41 whitepoint T Grade1.whitepoint}
+ addUserKnob {41 Erode T Erode1.size}
+}
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.7699999809 0.3199999928 0.5649999976 0}
+  name Key_Colour_001
+  xpos -1845
+  ypos 731
+ }
+ Input {
+  inputs 0
+  name Colour
+  xpos -1421
+  ypos 446
+ }
+set N5e208800 [stack 0]
+ NoOp {
+  name colourPicker
+  xpos -1421
+  ypos 653
+  addUserKnob {20 User}
+  addUserKnob {12 pickerPosition}
+  pickerPosition {2986 1184}
+  addUserKnob {22 picker T "m = nuke.thisNode()\n\nPosx = m.knob('pickerPosition').value(0)\nPosy = m.knob('pickerPosition').value(1)\n\n\nr = nuke.sample(nuke.thisNode(),\"r\",Posx,Posy)\ng = nuke.sample(nuke.thisNode(),\"g\",Posx,Posy)\nb = nuke.sample(nuke.thisNode(),\"b\",Posx,Posy)\n\nc = nuke.toNode(\"Key_Colour_001\")\n\nc\['color'].setValue(\[r, g, b,1])\n" +STARTLINE}
+ }
+ Difference {
+  inputs 2
+  name Difference1
+  xpos -1421
+  ypos 748
+ }
+ Grade {
+  channels alpha
+  whitepoint 0.22
+  white_clamp true
+  name Grade1
+  xpos -1421
+  ypos 913
+ }
+ Erode {
+  size 1.4
+  name Erode1
+  xpos -1421
+  ypos 1097
+ }
+set N19bf6800 [stack 0]
+push $N5e208800
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge2
+  xpos -1021
+  ypos 1195
+ }
+push $N19bf6800
+push $N5e208800
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge1
+  xpos -1196
+  ypos 1103
+ }
+set N36a1fc00 [stack 0]
+ Switch {
+  inputs 2
+  which {{parent.Maskstencil}}
+  name Switch1
+  xpos -1196
+  ypos 1300
+ }
+ Output {
+  name Output1
+  xpos -1196
+  ypos 1394
+ }
+push $N36a1fc00
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos -1618
+  ypos 1129
+ }
+end_group

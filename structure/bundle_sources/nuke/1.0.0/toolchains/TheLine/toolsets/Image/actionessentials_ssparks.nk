@@ -1,0 +1,613 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 10
+ origlast 10
+ origset true
+ name Read95
+ selected true
+ xpos -5273
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ name Read96
+ selected true
+ xpos -5163
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 9
+ origlast 9
+ origset true
+ name Read97
+ selected true
+ xpos -5053
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 14
+ origlast 14
+ origset true
+ name Read98
+ selected true
+ xpos -5053
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 30
+ origlast 30
+ origset true
+ name Read99
+ selected true
+ xpos -4943
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 38
+ origlast 38
+ origset true
+ name Read100
+ selected true
+ xpos -4833
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 20
+ origlast 20
+ origset true
+ name Read102
+ selected true
+ xpos -4613
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_10.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 27
+ origlast 27
+ origset true
+ name Read103
+ selected true
+ xpos -4503
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_11.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 21
+ origlast 21
+ origset true
+ name Read104
+ selected true
+ xpos -4393
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_12.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 23
+ origlast 23
+ origset true
+ name Read105
+ selected true
+ xpos -4283
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_13.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 10
+ origlast 10
+ origset true
+ name Read106
+ selected true
+ xpos -4173
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_14.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 15
+ origlast 15
+ origset true
+ name Read107
+ selected true
+ xpos -4063
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_15.mov"
+ format "2048 1024 0 0 2048 1024 1 2K_LatLong"
+ last 22
+ origlast 22
+ origset true
+ name Read108
+ selected true
+ xpos -3953
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 164
+ origlast 164
+ origset true
+ name Read109
+ selected true
+ xpos -3953
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 118
+ origlast 118
+ origset true
+ name Read111
+ selected true
+ xpos -3733
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 202
+ origlast 202
+ origset true
+ name Read112
+ selected true
+ xpos -3623
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 302
+ origlast 302
+ origset true
+ name Read113
+ selected true
+ xpos -3513
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 252
+ origlast 252
+ origset true
+ name Read115
+ selected true
+ xpos -3293
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 142
+ origlast 142
+ origset true
+ name Read119
+ selected true
+ xpos -5053
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 38
+ origlast 38
+ origset true
+ name Read126
+ selected true
+ xpos -4393
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 91
+ origlast 91
+ origset true
+ name Read127
+ selected true
+ xpos -4283
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 41
+ origlast 41
+ origset true
+ name Read128
+ selected true
+ xpos -4173
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 40
+ origlast 40
+ origset true
+ name Read129
+ selected true
+ xpos -4063
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Drops_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 213
+ origlast 213
+ origset true
+ name Read130
+ selected true
+ xpos -3953
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Drops_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 401
+ origlast 401
+ origset true
+ name Read131
+ selected true
+ xpos -3953
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Out-of-Focus_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 383
+ origlast 383
+ origset true
+ name Read132
+ selected true
+ xpos -3843
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 271
+ origlast 271
+ origset true
+ name Read134
+ selected true
+ xpos -3623
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 36
+ origlast 36
+ origset true
+ name Read135
+ selected true
+ xpos -3513
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 33
+ origlast 33
+ origset true
+ name Read137
+ selected true
+ xpos -3293
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 271
+ origlast 271
+ origset true
+ name Read138
+ selected true
+ xpos -3183
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 61
+ origlast 61
+ origset true
+ name Read139
+ selected true
+ xpos -3073
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ name Read140
+ selected true
+ xpos -2963
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 12
+ origlast 12
+ origset true
+ name Read94
+ selected true
+ xpos -5383
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Slow_Sparks_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 87
+ origlast 87
+ origset true
+ name Read110
+ selected true
+ xpos -3843
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 275
+ origlast 275
+ origset true
+ name Read116
+ selected true
+ xpos -5383
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_06.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 241
+ origlast 241
+ origset true
+ name Read117
+ selected true
+ xpos -5273
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_07.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 267
+ origlast 267
+ origset true
+ name Read118
+ selected true
+ xpos -5163
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_09.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 217
+ origlast 217
+ origset true
+ name Read120
+ selected true
+ xpos -5053
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_01.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 303
+ origlast 303
+ origset true
+ name Read121
+ selected true
+ xpos -4943
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 72
+ origlast 72
+ origset true
+ name Read122
+ selected true
+ xpos -4833
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 52
+ origlast 52
+ origset true
+ name Read123
+ selected true
+ xpos -4723
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_04.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 42
+ origlast 42
+ origset true
+ name Read124
+ selected true
+ xpos -4613
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Out-of-Focus_02.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 279
+ origlast 279
+ origset true
+ name Read133
+ selected true
+ xpos -3733
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 43
+ origlast 43
+ origset true
+ name Read136
+ selected true
+ xpos -3403
+ ypos -2688
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Sparks_03.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 188
+ origlast 188
+ origset true
+ name Read114
+ selected true
+ xpos -3403
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/FireCracker_08.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 27
+ origlast 27
+ origset true
+ name Read101
+ selected true
+ xpos -4723
+ ypos -2808
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/TOOLS/Resources/StockFootage/Action_essentials/15.-16._SmokeCharges_Sparks/16. Sparks/Welding_Ceiling_05.mov"
+ format "2048 1152 0 0 2048 1152 1 "
+ last 32
+ origlast 32
+ origset true
+ name Read125
+ selected true
+ xpos -4503
+ ypos -2688
+}

@@ -1,0 +1,67 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Group {
+ name Overscan_Guide
+ selected true
+ xpos -845
+ ypos 864
+}
+ Constant {
+  inputs 0
+  color {0 0 0 1}
+  color_panelDropped true
+  format "2048 871 0 0 2048 871 1 SR_P871"
+  name Constant1
+  xpos -1173
+  ypos 490
+ }
+ Reformat {
+  format "2248 1071 0 0 2248 1071 1 SR_P1071"
+  resize none
+  black_outside true
+  name Reformat1
+  xpos -1173
+  ypos 562
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -1173
+  ypos 600
+ }
+ Grade {
+  black 0.008
+  unpremult rgba.alpha
+  name Grade1
+  selected true
+  xpos -1173
+  ypos 638
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -917
+  ypos 489
+ }
+ Merge2 {
+  inputs 2
+  name Merge8
+  xpos -917
+  ypos 638
+ }
+set Na4964c00 [stack 0]
+ Viewer {
+  frame 26
+  frame_range 1-39
+  name Viewer1
+  xpos -753
+  ypos 724
+ }
+push $Na4964c00
+ Output {
+  name Output1
+  xpos -917
+  ypos 788
+ }
+end_group

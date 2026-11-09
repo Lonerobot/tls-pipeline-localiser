@@ -11,12 +11,12 @@
         },
         "blender": {
             "5.2": {
-                "bundle_version": "1.0.0"
+                "bundle_version": "1.0.2"
             }
         },
         "nuke": {
             "17.0": {
-                "bundle_version": "1.0.0"
+                "bundle_version": "1.1.0"
             }
         }
     }

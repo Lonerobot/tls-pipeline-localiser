@@ -1,0 +1,51 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+AppendClip {
+ meta_from_first false
+ time ""
+ name AppendClips
+ selected true
+ xpos -540
+ ypos -31
+}
+Dot {
+ name Dot52
+ tile_color 0xffffffff
+ gl_color 0xffffffff
+ label "YOUR COMP HERE"
+ note_font "Verdana Bold Bold Bold"
+ note_font_color 0xffffffff
+ selected true
+ xpos -506
+ ypos 69
+}
+TimeClip {
+ time ""
+ last 326
+ frame_mode "start at"
+ frame 1001
+ origlast 326
+ origset true
+ mask_metadata true
+ name ExtractClipfromAppend
+ note_font Verdana
+ selected true
+ xpos -540
+ ypos 141
+ addUserKnob {20 custom l Custom}
+ addUserKnob {26 check_info l "check input Reads"}
+ addUserKnob {22 check_inputs l "Check Inputs" T "n = nuke.thisNode()\n\nif nuke.toNode(\"AppendClips\") is not None:\n    a=nuke.toNode(\"AppendClips\")\n    i=a.inputs()\n    \n    my_list=\[];\n    for x in range(i): \n        my_list.append(a.input(x).name())\n\n    print my_list\n    n.knobs()\[\"inputClipsList\"].setValues(my_list)\n     \nelse:nuke.message('Oops! AppendClips Node is missing!')" +STARTLINE}
+ addUserKnob {26 space1 l "" +STARTLINE T "\n"}
+ addUserKnob {26 list_info l "Select Read node"}
+ addUserKnob {26 space2 l "" +STARTLINE T "\t\t"}
+ addUserKnob {4 inputClipsList l "" -STARTLINE M {Constant1 Constant2}}
+ inputClipsList Constant2
+ addUserKnob {26 retime_info l "Adjust TimeClip"}
+ addUserKnob {3 offset l "Start at frame"}
+ offset 1001
+ addUserKnob {22 adjust l Go! T "if nuke.toNode(\"AppendClips\") is not None:\n    try:\n        n = nuke.thisNode();\n        selectedInput=n\[\"inputClipsList\"].value();\n        selectedInputIndex=int(n\[\"inputClipsList\"].getValue());\n        print \"selected input: \", selectedInput, \"\\n\", \"input index: \", selectedInputIndex, \"(\", str(selectedInputIndex+1), \"in nodegraph)\\n\";\n              \n        appendNode=nuke.toNode(\"AppendClips\");\n        appendFirst = appendNode.firstFrame();\n        appendLast = appendNode.lastFrame();\n                 \n        myList=\[];\n        for i in range(0,selectedInputIndex):\n            myList.append(appendNode.input(i).lastFrame()-appendNode.input(i).firstFrame()+1);\n        print myList;\n        \n        firstFrameinRange=sum(myList)+appendFirst;\n        clipLength=appendNode.input(selectedInputIndex).lastFrame()-appendNode.input(selectedInputIndex).firstFrame()+1;\n        lastFrameinRange=firstFrameinRange+clipLength-1;\n        offset=int(n\[\"offset\"].value());\n        \n        print \"in frame: \", firstFrameinRange, \"\\n\", \"out frame: \", lastFrameinRange, \"\\nclip length: \", clipLength, \"\\n\", \"offset: \", offset, \"\\n--------\";\n                            \n        n\['first'].setValue(firstFrameinRange);\n        n\['last'].setValue(lastFrameinRange);\n        n\['origfirst'].setValue(appendFirst);\n        n\['origlast'].setValue(appendLast);\n        n\[\"frame\"].setValue(str(offset));\n        n\['label'].setValue(\"\\n Get Range From \"+selectedInput+\"\\n\"+\"\[value this.first]\"+\" - \"+\"\[value this.last]\");\n\n    except:nuke.message(\"Something's not right... Check AppendClips inputs?\")\n\nelse:nuke.message(\"Something's not right... AppendClips is missing!\")" +STARTLINE}
+ addUserKnob {26 space4 l "" +STARTLINE T "\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 reset l (reset) T "n = nuke.thisNode();\nn\[\"inputClipsList\"].setValue(\"\");\nn\[\"label\"].setValue(\"\");" +STARTLINE}
+}

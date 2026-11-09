@@ -13,9 +13,7 @@ from .fsutil import atomic_write_text
 from .install import ensure_release
 from .layout import DataLayout
 from .logs import log_event
-from .resolve import resolve_release
-
-ROOT_VARIABLE = "TLS_PIPELINE"  # the local pipeline root, which holds config.json
+from .resolve import ROOT_VARIABLE, resolve_release
 
 
 def host_variable(host: str) -> str:
@@ -92,10 +90,27 @@ def ensure_local_release(
     return localise(host, series, config, environ, lock_timeout=lock_timeout)
 
 
+def release_variable(host: str) -> str:
+    """TLS_PIPELINE_<HOST>_RELEASE: set to the release id this session is running (an identity, never read back)."""
+    return f"{host_variable(host)}_RELEASE"
+
+
+def mode_variable(host: str) -> str:
+    """TLS_PIPELINE_<HOST>_MODE: studio (following the studio config), pinned, or dev (unpublished source)."""
+    return f"{host_variable(host)}_MODE"
+
+
+def release_mode(release: "LocalisedRelease") -> str:
+    return release.source if release.source in ("pinned", "dev") else "studio"
+
+
 def expose_environment(release: LocalisedRelease, environ: MutableMapping[str, str] | None = None) -> None:
-    """Set TLS_PIPELINE_<HOST> to the resolved bundle path, for the pipeline inside the bundle to read."""
+    """Set TLS_PIPELINE_<HOST> to the resolved bundle path for the pipeline inside the bundle to read, and
+    TLS_PIPELINE_<HOST>_RELEASE and _MODE so anything running in the DCC can tell what it is on."""
     environ = os.environ if environ is None else environ
     environ[host_variable(release.host)] = str(release.release_root)
+    environ[release_variable(release.host)] = release.release_id
+    environ[mode_variable(release.host)] = release_mode(release)
 
 
 def _remember(layout: DataLayout, release: LocalisedRelease) -> None:

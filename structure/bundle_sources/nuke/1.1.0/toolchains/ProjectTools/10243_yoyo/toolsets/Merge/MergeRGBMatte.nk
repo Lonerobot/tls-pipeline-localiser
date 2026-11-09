@@ -1,0 +1,59 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push $cut_paste_input
+push $cut_paste_input
+push $cut_paste_input
+Group {
+ inputs 3
+ name MergeRGBMatte
+ selected true
+ xpos 2104
+ ypos 254
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 378
+  ypos 422
+ }
+set N3f69a400 [stack 0]
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name Shuffle9
+  xpos 464
+  ypos 501
+ }
+push 0
+push $N3f69a400
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle3
+  xpos 288
+  ypos 501
+ }
+push $N3f69a400
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name Shuffle8
+  xpos 378
+  ypos 501
+ }
+ Merge2 {
+  inputs 3+1
+  operation disjoint-over
+  name Merge11
+  xpos 378
+  ypos 562
+ }
+ Output {
+  name Output1
+  xpos 378
+  ypos 638
+ }
+end_group

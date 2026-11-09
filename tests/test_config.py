@@ -4,6 +4,7 @@ from pathlib import Path
 
 from localiser import ConfigError, parse_local_config, parse_manifest, parse_studio_config
 from localiser.config import validate_id, validate_python_root, validate_series
+from localiser.repository import WebRepository
 
 SHA = "a" * 64
 
@@ -144,11 +145,26 @@ class LocalConfigTests(unittest.TestCase):
         remote = Path(self.base) / "share"
         self.assertEqual(self.parse(remote_repository=remote.as_uri()).remote_repository, remote)
 
-    def test_web_repositories_are_rejected_until_supported(self):
-        for value in ["https://example.com/pipeline", "http://example.com", "ftp://host/x"]:
-            with self.subTest(value=value), self.assertRaises(ConfigError) as raised:
+    def test_https_addresses_are_web_repositories(self):
+        self.assertEqual(
+            self.parse(remote_repository="https://example.com/pipeline/").remote_repository,
+            WebRepository("https://example.com/pipeline"),
+        )
+        self.assertEqual(
+            self.parse(remote_repository="http://127.0.0.1:8080").remote_repository, WebRepository("http://127.0.0.1:8080")
+        )
+
+    def test_unsafe_or_unsupported_addresses_are_rejected(self):
+        for value in [
+            "http://example.com", "ftp://host/x", "https://user:pw@example.com/p", "https://example.com/p?x=1",
+            "https://example.com/p#frag", "https:///nohost",
+        ]:
+            with self.subTest(value=value), self.assertRaises(ConfigError):
                 self.parse(remote_repository=value)
-            self.assertIn("not supported yet", str(raised.exception))
+
+    def test_the_local_store_must_be_a_folder(self):
+        with self.assertRaises(ConfigError):
+            self.parse(remote_repository="./x", bundle_repository="https://example.com/local")
 
     def test_drive_letters_are_not_mistaken_for_urls(self):
         self.assertEqual(self.parse(remote_repository="D:/share").remote_repository.name, "share")

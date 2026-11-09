@@ -1,0 +1,313 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+Gizmo {
+ help "This gizmo adds an overall glow (haze) to an image based on the luminace of things.\nIt is based on a real effect taking place in a glass lens.\nFor proof of concept it can also be used to remove the effect off a plate.\nThis is to be used to help integrating CG elements into plates or make full CG shots look more photographic.\n\nMarian (c) 2009"
+ addUserKnob {20 User l "MPC Lenshaze"}
+ addUserKnob {41 value l Color T Multiply1.value}
+ addUserKnob {41 pop3 l "Wide Blur Size" T Blur1.pop3}
+ addUserKnob {41 size_1 l "Core Blur Size" T Blur2.size}
+ addUserKnob {41 mix l "Wide Blur Mix" T Merge1.mix}
+ addUserKnob {41 which l Mix T Dissolve1.which}
+ addUserKnob {41 op2 l KeyOff T Switch2.op2}
+ addUserKnob {41 op l Operation T Switch1.op}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -431
+  ypos -338
+ }
+set N27c9a800 [stack 0]
+push $N27c9a800
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -431
+  ypos -218
+ }
+ Clamp {
+  name Clamp1
+  xpos -431
+  ypos -82
+ }
+set N27c9a000 [stack 0]
+ Group {
+  inputs 2
+  name Group1
+  xpos -222
+  ypos -76
+  addUserKnob {20 User}
+  addUserKnob {41 from0 l matteChannel T Copy4.from0}
+  addUserKnob {41 bbox l "Set BBox to " T Copy4.bbox}
+  addUserKnob {26 ""}
+  addUserKnob {41 matteMult T Switch2.matteMult}
+  addUserKnob {41 invmatte l "Invert Matte" T Switch1.invmatte}
+ }
+  Input {
+   inputs 0
+   name Matte
+   selected true
+   xpos -895
+   ypos -721
+  }
+set N27c99c00 [stack 0]
+  Invert {
+   channels alpha
+   name Invert1
+   selected true
+   xpos -895
+   ypos -642
+  }
+push $N27c99c00
+  Dot {
+   name Dot1
+   selected true
+   xpos -711
+   ypos -716
+  }
+  Dot {
+   name Dot2
+   selected true
+   xpos -711
+   ypos -553
+  }
+  Switch {
+   inputs 2
+   which {{invmatte i}}
+   name Switch1
+   selected true
+   xpos -895
+   ypos -558
+   addUserKnob {20 User}
+   addUserKnob {6 invmatte l "Invert Matte" +STARTLINE}
+  }
+  Input {
+   inputs 0
+   name Image
+   selected true
+   xpos -1011
+   ypos -720
+   number 1
+  }
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   name Copy4
+   selected true
+   xpos -1011
+   ypos -566
+  }
+set N27c98400 [stack 0]
+  Premult {
+   name Premult1
+   selected true
+   xpos -1011
+   ypos -469
+  }
+push $N27c98400
+  Dot {
+   name Dot3
+   selected true
+   xpos -836
+   ypos -488
+  }
+  Dot {
+   name Dot4
+   selected true
+   xpos -836
+   ypos -397
+  }
+  Switch {
+   inputs 2
+   which {{matteMult i}}
+   name Switch2
+   selected true
+   xpos -1011
+   ypos -402
+   addUserKnob {20 User}
+   addUserKnob {6 matteMult +STARTLINE}
+   matteMult true
+  }
+  Output {
+   name Output1
+   selected true
+   xpos -1011
+   ypos -338
+  }
+ end_group
+set N1eafd600 [stack 0]
+ Blur {
+  size 100
+  name Blur2
+  xpos -129
+  ypos -11
+ }
+push $N1eafd600
+ Blur {
+  size {{pop3 i} {pop3 i}}
+  name Blur1
+  xpos -306
+  ypos -19
+  addUserKnob {20 User}
+  addUserKnob {12 uiweq l ertr}
+  addUserKnob {7 pop3 l "Wide Blur Size" t "\t\t" R 0 1000}
+  pop3 1000
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos -219
+  ypos 45
+ }
+ Multiply {
+  channels rgb
+  value 0.065
+  name Multiply1
+  xpos -219
+  ypos 91
+ }
+set N1e6e5c00 [stack 0]
+push $N1e6e5c00
+push $N27c9a000
+ Merge2 {
+  inputs 2
+  operation out
+  name Merge2
+  xpos -431
+  ypos 170
+ }
+ Switch {
+  inputs 2
+  which {{op2 i}}
+  name Switch2
+  xpos -431
+  ypos 221
+  addUserKnob {20 User}
+  addUserKnob {6 op2 l KeyOff +STARTLINE}
+ }
+set N1e6e5400 [stack 0]
+ Clamp {
+  maximum 100
+  name Clamp2
+  xpos -431
+  ypos 263
+ }
+set N1e6e5000 [stack 0]
+push $N27c9a800
+ Clamp {
+  maximum 100
+  name Clamp4
+  xpos 32
+  ypos 122
+ }
+set N1e6e4c00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge7
+  xpos 32
+  ypos 337
+ }
+set N1e6e4800 [stack 0]
+push $N1e6e5400
+push $N27c9a800
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos -733
+  ypos 242
+ }
+push $N27c9a800
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge6
+  xpos -631
+  ypos 363
+ }
+set N1e68bc00 [stack 0]
+ Dissolve {
+  inputs 2
+  which 0.5
+  name Dissolve2
+  xpos 8
+  ypos 435
+ }
+push $N1e6e4800
+push $N1e6e5000
+ Invert {
+  name Invert1
+  xpos -431
+  ypos 334
+ }
+push $N1e6e4c00
+ Invert {
+  name Invert2
+  xpos -323
+  ypos 339
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge3
+  xpos -374
+  ypos 432
+ }
+ Invert {
+  name Invert3
+  xpos -374
+  ypos 477
+ }
+push $N1e68bc00
+push $N27c9a800
+push $N1e6e5000
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge4
+  xpos -857
+  ypos 302
+ }
+ Clamp {
+  maximum 100
+  name Clamp3
+  xpos -857
+  ypos 355
+ }
+ Switch {
+  inputs 5
+  which {{op i}}
+  name Switch1
+  xpos -374
+  ypos 580
+  addUserKnob {20 User}
+  addUserKnob {4 op l Operation M {Remove Over Screen Add "Over/Add mixed"}}
+  op "Over/Add mixed"
+ }
+push $N27c9a800
+ Dissolve {
+  inputs 2
+  which 1
+  name Dissolve1
+  xpos -263
+  ypos 627
+ }
+push $N27c9a800
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  alpha alpha2
+  name ShuffleCopy1
+  xpos -131
+  ypos 696
+ }
+ Output {
+  name Output1
+  xpos -131
+  ypos 770
+ }
+end_group

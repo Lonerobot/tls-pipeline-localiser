@@ -1,0 +1,12 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
+Multiply {
+ value {{"(asin(sin(2*pi*(frame+0.5)/2.0))/pi+0.5) * (1.0-0.0) + 0.0"}}
+ mix 0.04
+ name Multiply3
+ label ELECTRIC-FLICKER
+ selected true
+ xpos 1299
+ ypos -12191
+}

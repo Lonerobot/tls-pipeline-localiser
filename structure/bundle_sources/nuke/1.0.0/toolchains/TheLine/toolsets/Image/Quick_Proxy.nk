@@ -1,0 +1,60 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Reformat {
+ inputs 0
+ filter impulse
+ name Reformat3
+ selected true
+ xpos 6780
+ ypos 1791
+}
+Dot {
+ name Dot14
+ selected true
+ xpos 6814
+ ypos 1842
+}
+push $cut_paste_input
+Dot {
+ name Dot13
+ selected true
+ xpos 7034
+ ypos 1530
+}
+set N788ebc00 [stack 0]
+Switch {
+ inputs 2
+ which 1
+ name Switch1
+ selected true
+ xpos 7000
+ ypos 1839
+}
+push $N788ebc00
+Dot {
+ name Dot15
+ selected true
+ xpos 6814
+ ypos 1530
+}
+Reformat {
+ type scale
+ scale 0.25
+ name Reformat2
+ selected true
+ xpos 6780
+ ypos 1575
+}
+Write {
+ file "\[file dirname \[value root.name]]/renders/proxys/proxy_001_####.exr"
+ file_type exr
+ autocrop true
+ compression DWAA
+ first_part rgba
+ create_directories true
+ version 1
+ name Write2
+ selected true
+ xpos 6780
+ ypos 1623
+}

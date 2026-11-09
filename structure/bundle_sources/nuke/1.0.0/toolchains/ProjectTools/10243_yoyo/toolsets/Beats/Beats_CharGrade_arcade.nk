@@ -1,0 +1,146 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read55
+ selected true
+ xpos 6890
+ ypos -9711
+}
+Constant {
+ inputs 0
+ color {0.637597 0.304987 0.361307 1}
+ name Constant10
+ selected true
+ xpos 6890
+ ypos -9825
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read56
+ selected true
+ xpos 7440
+ ypos -10335
+}
+ColorCorrect {
+ shadows.offset {-0.017333 -0.032333 -0.040333 0.02}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.02981858328 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ unpremult rgba.alpha
+ name ColorCorrect26
+ selected true
+ xpos 7440
+ ypos -10095
+}
+Dot {
+ name Dot47
+ selected true
+ xpos 7474
+ ypos -9870
+}
+set Nc7f8ec00 [stack 0]
+Dot {
+ name Dot48
+ selected true
+ xpos 7254
+ ypos -9870
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge38
+ selected true
+ xpos 7220
+ ypos -9801
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy14
+ selected true
+ xpos 7220
+ ypos -9687
+}
+Premult {
+ name Premult22
+ selected true
+ xpos 7220
+ ypos -9657
+}
+push $Nc7f8ec00
+Merge2 {
+ inputs 2
+ name Merge39
+ selected true
+ xpos 7440
+ ypos -9657
+}
+Clamp {
+ minimum 0.01
+ unpremult rgba.alpha
+ name Clamp3
+ selected true
+ xpos 7440
+ ypos -9591
+}
+Grade {
+ black {0.019 0.002 0.07 0}
+ black_panelDropped true
+ gamma {1.04 1.08 2.44 1}
+ gamma_panelDropped true
+ unpremult rgba.alpha
+ name Grade4
+ selected true
+ xpos 7440
+ ypos -9519
+}
+ColorCorrect {
+ shadows.offset {0 -0.006 -0.17 0}
+ shadows.offset_panelDropped true
+ unpremult rgba.alpha
+ name ColorCorrect27
+ selected true
+ xpos 7440
+ ypos -9417
+}
+Transform {
+ translate {-340 120}
+ center {1024 576}
+ name Transform11
+ selected true
+ xpos 7440
+ ypos -9297
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10146_beats3/assets/complook/AracdeGirl_Normal.png
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ origset true
+ name Read57
+ selected true
+ xpos 7770
+ ypos -9687
+}
+Merge2 {
+ inputs 2
+ name Merge40
+ selected true
+ xpos 7770
+ ypos -9177
+}

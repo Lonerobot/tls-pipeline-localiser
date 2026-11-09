@@ -1,0 +1,242 @@
+#! C:/Program Files/Nuke15.1v2/nuke-15.1.2.dll -nx
+version 15.1 v2
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="2559" y="244" w="1920" h="1177" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1876" stretch="1"/>
+            <splitter orientation="2">
+                <split size="719"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="416"/>
+                <dock id="" activePageId="DopeSheet.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="2558" h="1408" screen="0">
+        <splitter orientation="1">
+            <split size="1922"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+            <split size="632"/>
+            <splitter orientation="2">
+                <split size="702"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="702"/>
+                <dock id="" activePageId="Viewer.2">
+                    <page id="Viewer.2"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/PIPELINE/config/nuke/toolchains/TheLine/0.0.2/toolsets/Gorilaz/BG_paperTexture.nk
+ colorManagement OCIO
+ OCIO_config aces_1.2
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT scene_linear
+ monitorLut "sRGB (ACES)"
+ monitorOutLUT "sRGB (ACES)"
+ int8Lut matte_paint
+ int16Lut texture_paint
+ logLut compositing_log
+ floatLut scene_linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x66262bff
+ label "BG PAPER TEXTURE"
+ note_font "Arial Bold"
+ note_font_size 25
+ note_font_color 0xdd929cff
+ xpos 2635
+ ypos -5384
+ appearance Border
+ bdwidth 605
+ bdheight 723
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x4242ff
+ label REFERENCE
+ note_font "Arial Bold"
+ note_font_size 25
+ note_font_color 0x82c4aeff
+ xpos 3290
+ ypos -5381
+ appearance Border
+ bdwidth 356
+ bdheight 234
+ z_order -1
+}
+Read {
+ inputs 0
+ file_type psd
+ file P:/10241_gorillaz/assets/pre_prod/styleframe/cave/publish/image/image_Bg_paint_Main/v003/gor_cave_image_Bg_paint_Main_v003.psd
+ format "3372 2028 0 0 3372 2028 1 10241_gorillaz"
+ origset true
+ name Read10
+ xpos 3370
+ ypos -5301
+}
+Read {
+ inputs 0
+ file_type psd
+ file P:/10241_gorillaz/assets/pre_prod/styleframe/mountain/publish/image/image_Bg_paint_Main/v004/gor_mountain_image_Bg_paint_Main_v004.psd
+ format "3372 2028 0 0 3372 2028 1 10241_gorillaz"
+ origset true
+ name Read11
+ xpos 3480
+ ypos -5301
+}
+Read {
+ inputs 0
+ file_type png
+ file P:/10241_gorillaz/assets/Textures/paper_v02_Tiled.png
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ origset true
+ version 1
+ colorspace "Output - sRGB"
+ auto_alpha true
+ name Read7
+ xpos 2715
+ ypos -5304
+}
+Group {
+ name RepTile3
+ tile_color 0x5a305ff
+ xpos 2715
+ ypos -5172
+ addUserKnob {20 User l Controls}
+ addUserKnob {14 tiles l "number of tiles" R 0 100}
+ tiles 3.6
+ addUserKnob {6 mirrorw l "mirror vertical" t "Check to mirror your tiles on the vertical axis" +STARTLINE}
+ mirrorw true
+ addUserKnob {6 mirrorh l "mirror horizontal" t "Check to mirror your tiles on the horizontal axis" -STARTLINE}
+ mirrorh true
+ addUserKnob {6 reformat_out l "reformat to source" t "Reformat to input format without cropping the image or bounding box." +STARTLINE}
+ addUserKnob {26 credit l INVISIBLE t "RepTile v1.0\n(c)2015 lucas pfaff" +INVISIBLE T "RepTile v1.0\n(c)2015 lucas pfaff"}
+}
+ Input {
+  inputs 0
+  name img
+  xpos -480
+  ypos -562
+ }
+ Reformat {
+  type scale
+  scale {{tiles.w} {tiles.h}}
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos -480
+  ypos -511
+ }
+ Tile {
+  rows {{tiles.h}}
+  mirrorRows {{mirrorh}}
+  columns {{tiles.w}}
+  mirrorCols {{mirrorw}}
+  filter impulse
+  name Tile1
+  xpos -480
+  ypos -450
+ }
+ Mirror2 {
+  flip {{mirrorh}}
+  flop {{mirrorw}}
+  name Mirror2_1
+  xpos -480
+  ypos -394
+  disable {{reformat_out-1}}
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat1.scale} {1/parent.Reformat1.scale}}
+  resize none
+  pbb true
+  name Reformat2
+  xpos -480
+  ypos -346
+  disable {{reformat_out-1}}
+ }
+ Output {
+  name Output1
+  xpos -480
+  ypos -304
+ }
+end_group
+Reformat {
+ format "3372 2028 0 0 3372 2028 1 10241_gorillaz"
+ resize none
+ name Reformat12
+ xpos 2715
+ ypos -5130
+}
+Clamp {
+ name Clamp7
+ xpos 2715
+ ypos -5082
+}
+Grade {
+ whitepoint 4
+ multiply 4
+ gamma 5
+ name Grade36
+ xpos 2715
+ ypos -5028
+}
+Grade {
+ whitepoint 0.86
+ multiply 1.18
+ gamma 1.88
+ black_clamp false
+ name Grade37
+ xpos 2715
+ ypos -4980
+}
+Dot {
+ name Dot57
+ xpos 2749
+ ypos -4881
+}
+push 0
+Merge2 {
+ inputs 2
+ operation multiply
+ mix 0.695
+ name Merge26
+ xpos 3045
+ ypos -4884
+}
+Blur {
+ size 1.6
+ name Blur9
+ xpos 3045
+ ypos -4842
+}
+Soften {
+ amount 0.075
+ size 23
+ name Soften3
+ xpos 3045
+ ypos -4794
+}

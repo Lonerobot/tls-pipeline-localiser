@@ -8,7 +8,9 @@ from .errors import ReleaseUnavailableError
 from .fsutil import atomic_write_text
 from .layout import DataLayout
 from .logs import log_event
+from .repository import as_repository
 
+ROOT_VARIABLE = "TLS_PIPELINE"  # the local pipeline root; also the prefix of the per-host variables
 SOURCE_OVERRIDE = "override"
 SOURCE_STUDIO = "studio"
 SOURCE_LAST_KNOWN = "last_known_config"
@@ -23,8 +25,11 @@ class Resolution:
 
 
 def override_variable(host: str) -> str:
-    """Placeholder name for the TD override; the mechanism is deferred (see 02_open_decisions.md)."""
-    return f"STUDIO_PIPELINE_{validate_host(host).upper()}"
+    """TLS_PIPELINE_<HOST>_BUNDLE: the release to use instead of the studio default.
+
+    `sync` selects it machine-wide (pulling it if needed); at DCC startup it is a pin for that session only.
+    """
+    return f"{ROOT_VARIABLE}_{validate_host(host).upper()}_BUNDLE"
 
 
 def resolve_release(
@@ -47,9 +52,8 @@ def resolve_release(
 
 def _load_studio_config(host, config, layout):
     """Read the studio config from the remote repository; if it is unreachable, use the last-known-good copy."""
-    share_path = config.remote_repository / "config.json"
     try:
-        text = share_path.read_text(encoding="utf-8-sig")
+        text = as_repository(config.remote_repository).read_text("config.json")
     except OSError as share_error:
         try:
             text = layout.last_known_config.read_text(encoding="utf-8-sig")

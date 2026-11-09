@@ -1,0 +1,463 @@
+set cut_paste_input [stack 0]
+version 15.1 v2
+push $cut_paste_input
+Group {
+ name GC_ColorKey_
+ knobChanged "#colorfill\nif nuke.thisKnob().name() == \"output\": \n\n    if nuke.thisKnob().value() == \"Color Fill\" or nuke.thisKnob().value() == \"Color Replace\":\n        nuke.thisGroup().knob('colorfill').setVisible(True)\n        \n        if nuke.thisKnob().value() == \"Color Fill\":\n            nuke.thisGroup().knob('colorfill_help').setVisible(True)\n            nuke.thisGroup().knob('colorreplace_help').setVisible(False)\n            \n        if nuke.thisKnob().value() == \"Color Replace\":\n            nuke.thisGroup().knob('colorfill_help').setVisible(False)\n            nuke.thisGroup().knob('colorreplace_help').setVisible(True)\n        \n    else:\n        nuke.thisGroup().knob('colorfill').setVisible(False)\n        nuke.thisGroup().knob('colorfill_help').setVisible(False)\n        nuke.thisGroup().knob('colorreplace_help').setVisible(False)"
+ tile_color 0xff5b00ff
+ gl_color 0xff0000ff
+ note_font "Verdana Bold"
+ note_font_size 15
+ note_font_color 0xffffffff
+ selected true
+ xpos -8491
+ ypos -7266
+ addUserKnob {20 SettingsTab l Settings}
+ addUserKnob {26 title l "<b>Color Picker</b>"}
+ addUserKnob {12 sample_point l x/y}
+ sample_point {1086 1136}
+ addUserKnob {18 color_picker l "" +STARTLINE}
+ color_picker {{"\[python 0\\ if\\ not\\ nuke.thisNode().input(0)\\ else\\ (\\n\\ \\ \\ \\ 0\\ if\\ not\\ (0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ <\\ nuke.thisNode().input(0).width()\\ and\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ 0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ <\\ nuke.thisNode().input(0).height())\\ else\\ \\n\\ \\ \\ \\ nuke.thisNode().input(0).sample(\\n\\ \\ \\ \\ \\ \\ \\ \\ \\\"red\\\",\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1),\\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1)\\n\\ \\ \\ \\ )\\n)]"} {"\[python 0\\ if\\ not\\ nuke.thisNode().input(0)\\ else\\ (\\n\\ \\ \\ \\ 0\\ if\\ not\\ (0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ <\\ nuke.thisNode().input(0).width()\\ and\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ 0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ <\\ nuke.thisNode().input(0).height())\\ else\\ \\n\\ \\ \\ \\ nuke.thisNode().input(0).sample(\\n\\ \\ \\ \\ \\ \\ \\ \\ \\\"green\\\",\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1),\\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1)\\n\\ \\ \\ \\ )\\n)]"} {"\[python 0\\ if\\ not\\ nuke.thisNode().input(0)\\ else\\ (\\n\\ \\ \\ \\ 0\\ if\\ not\\ (0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ <\\ nuke.thisNode().input(0).width()\\ and\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ 0\\ <\\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ <\\ nuke.thisNode().input(0).height())\\ else\\ \\n\\ \\ \\ \\ nuke.thisNode().input(0).sample(\\n\\ \\ \\ \\ \\ \\ \\ \\ \\\"blue\\\",\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[0\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1),\\n\\ \\ \\ \\ \\ \\ \\ \\ nuke.thisNode()\\\[\\\"sample_point\\\"\\].value()\\\[1\\]\\ /\\ \\n\\ \\ \\ \\ \\ \\ \\ \\ float(nuke.activeViewer().node()\\\[\\\"downrez\\\"\\].value()\\ if\\ nuke.activeViewer()\\ else\\ 1)\\n\\ \\ \\ \\ )\\n)]"}}
+ addUserKnob {6 color_picker_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 div l "" +STARTLINE T " \n "}
+ addUserKnob {6 _1_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 threshold R 0.001 0.5}
+ threshold 0.001
+ addUserKnob {4 output l Output M {Premult Unpremult "Key Out" "Color Fill" "Color Replace" "Display Matte" "" "" "" "" ""}}
+ output "Color Replace"
+ addUserKnob {26 colorfill_help l "" -STARTLINE +HIDDEN T "<b><i>*over black</b></i>"}
+ addUserKnob {26 colorreplace_help l "" -STARTLINE T "<b><i>*over original</i></b>"}
+ addUserKnob {26 _3 l "" +STARTLINE T " "}
+ addUserKnob {18 colorfill l color}
+ colorfill {0 0.3069093227 1}
+ addUserKnob {6 colorfill_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 div2 l "" +STARTLINE T " \n "}
+ addUserKnob {26 optionsText l "<b>Extra Options</b>"}
+ addUserKnob {20 optionsGrp_1 l "" +STARTLINE n 1}
+ addUserKnob {6 display l "preview current selection" +STARTLINE}
+ addUserKnob {6 edgeblur l "edge blur" +STARTLINE}
+ edgeblur true
+ addUserKnob {7 erode_matte l "erode matte" R -100 100}
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup_Extra l "" +STARTLINE n -1}
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {22 add_sampling_point l "<b>ADD SAMPLE</b>" T "import nuke\n\n## GLOBAL VARIABLES\n\nnode = nuke.thisGroup()  # The Group node\ncolor_picker_knob = node.knob(\"color_picker\")\ncount = len(\[k for k in node.knobs() if k.startswith(\"key_color\")]) # Get the current count of sample points\n\n## CREATE KNOBS\n# Create RGB color knob from sample point and set its values\nsample_knob = nuke.Color_Knob(f\"key_color_\{count\}\", f\"key_color \{count\}\")\nnode.addKnob(sample_knob)\n\nif color_picker_knob:\n    sample_knob.setExpression(\"color_picker.r\", 0)\n    sample_knob.setExpression(\"color_picker.g\", 1)\n    sample_knob.setExpression(\"color_picker.b\", 2)\n    sample_knob.clearAnimated()\n    \n    \n# Create a checkbox knob labeled \"disable\"\ndisable_knob = nuke.Boolean_Knob(f\"disable_\{count\}\", \"disable\")\nnode.addKnob(disable_knob)\n\n  \n## CREATE NODES INSIDE GROUP   \n\nwith node:\n    \n    x_offset = -100  # Horizontal offset for each set of nodes\n    \n    # Set a base X and Y position for \"branch_init\"\n    branch_init_node = nuke.toNode(\"branch_init\")    \n                           \n    # Create the Shuffle node\n    shuffle_node = nuke.createNode(\"Shuffle\", inpanel=False)\n    shuffle_node.setName(f\"Shuffle_\{count\}\")\n    shuffle_node.setXpos(branch_init_node.xpos() + x_offset * (count+1))\n    shuffle_node.setYpos(branch_init_node.ypos())\n    shuffle_node\[\"red\"].setValue(\"white\")\n    shuffle_node\[\"green\"].setValue(\"white\")\n    shuffle_node\[\"blue\"].setValue(\"white\")\n    shuffle_node\[\"alpha\"].setValue(\"white\")\n    shuffle_node.setInput(0, branch_init_node)\n\n    # Create the Grade node\n    grade_node = nuke.createNode(\"Grade\", inpanel=False)\n    grade_node.setName(f\"Grade_\{count\}\")\n    grade_node\[\"multiply\"].setSingleValue(False)        \n    grade_node\[\"multiply\"].setExpression(f\"parent.\{sample_knob.name()\}.r\", 0)  # Red channel\n    grade_node\[\"multiply\"].setExpression(f\"parent.\{sample_knob.name()\}.g\", 1)  # Green channel\n    grade_node\[\"multiply\"].setExpression(f\"parent.\{sample_knob.name()\}.b\", 2)  # Blue channel   \n\n    # Create the Merge (Difference) node\n    merge_node = nuke.createNode(\"Merge2\", inpanel=False)\n    merge_node.setName(f\"Merge_Diff_\{count\}\")\n    merge_node.setXpos(grade_node.xpos())\n    merge_node.setYpos(grade_node.ypos()+50)\n    merge_node.setInput(0, grade_node)  # A input\n    merge_node.setInput(1, branch_init_node)  # B input\n    merge_node\[\"operation\"].setValue(\"difference\")\n    \n    #Create Saturation node\n    saturation_node = nuke.createNode(\"Saturation\",inpanel=False)\n    saturation_node.setName(f\"Saturation_\{count\}\")\n    saturation_node.setXpos(merge_node.xpos())\n    saturation_node.setYpos(merge_node.ypos()+50)\n    saturation_node.setInput(0, merge_node)\n    saturation_node\['saturation'].setValue(\"0\")\n    \n    #Create Clamp node\n    clamp_node = nuke.createNode(\"Clamp\", inpanel=False)\n    clamp_node.setName(f\"Clamp_\{count\}\")\n    clamp_node.setXpos(saturation_node.xpos())\n    clamp_node.setYpos(saturation_node.ypos()+30)\n    clamp_node.setInput(0, saturation_node)\n    clamp_node\['maximum'].setExpression(\"parent.threshold\")\n    clamp_node\['MaxClampTo_enable'].setValue(True)\n        \n    #Create Invert Node\n    invert_node = nuke.createNode(\"Invert\", inpanel=False)\n    invert_node.setName(f\"Invert_\{count\}\")\n    invert_node.setXpos(clamp_node.xpos())\n    invert_node.setYpos(clamp_node.ypos()+40)\n    invert_node.setInput(0, clamp_node)\n    invert_node\['channels'].setValue(\"rgb\")    \n    \n    #Create shuffle node to disable this picker\n    disable_node = nuke.createNode(\"Shuffle\", inpanel=False)\n    disable_node.setName(f\"Disable_\{count\}\")\n    disable_node.setXpos(invert_node.xpos())\n    disable_node.setYpos(invert_node.ypos()+30)\n    disable_node\[\"red\"].setValue(\"black\")\n    disable_node\[\"green\"].setValue(\"black\")\n    disable_node\[\"blue\"].setValue(\"black\")\n    disable_node\[\"alpha\"].setValue(\"black\")\n    disable_node\[\"disable\"].setExpression(f\"!disable_\{count\}\")\n    disable_node.setInput(0, invert_node)\n    \n    disable_node.setSelected(False) \n\n    # Connect the Merge node to merge_all_mattes\n    merge_all_mattes = nuke.toNode(\"merge_all_mattes\")\n    if merge_all_mattes:\n        input_count = merge_all_mattes.inputs()\n        merge_all_mattes.setInput(input_count+1 if input_count != 2 else 3, disable_node)\n        \n        \n    multiply_alpha_node = nuke.toNode(\"Multiply_Alpha\")\n    multiply_alpha_node\['disable'].setValue(False)     \n\n# Define the remove function inline\nremove_script = f\"\"\"\nimport nuke\nnode = nuke.thisGroup()\ncount = \{count\}\n\n# Get nodes to delete\nshuffle_node = node.node('Shuffle_' + str(count))\ngrade_node = node.node('Grade_' + str(count))\nmerge_node = node.node('Merge_Diff_' + str(count))\nsaturation_node = node.node('Saturation_' + str(count))\nclamp_node = node.node('Clamp_' + str(count))\ninvert_node = node.node('Invert_' + str(count))\ndisable_node = node.node('Disable_' + str(count))\n\n# Get the merge_all_mattes node\nmerge_all_mattes = nuke.toNode('merge_all_mattes')\n\n# Disconnect the Merge node from merge_all_mattes\nif invert_node and merge_all_mattes:\n    for i in range(merge_all_mattes.inputs()):\n        if merge_all_mattes.input(i) == disable_node:\n            merge_all_mattes.setInput(i, None)\n\n# Delete the nodes\nfor n in \[shuffle_node, grade_node, merge_node, saturation_node, clamp_node, invert_node, disable_node]:\n    if n:\n        nuke.delete(n)\n\n# Remove the sample knob and button\nnode.removeKnob(node.knob('key_color_\{count\}'))\nnode.removeKnob(node.knob('remove_\{count\}'))\nnode.removeKnob(node.knob('disable_\{count\}'))\n\n# Check if the count is now zero, meaning no more samples exist\nmultiply_alpha_node = nuke.toNode(\"Multiply_Alpha\")\nif multiply_alpha_node:\n    # If no remaining sample knobs, disable Multiply_Alpha\n    if count == 0:\n        multiply_alpha_node\['disable'].setValue(True)\n        \n    else:\n        multiply_alpha_node\['disable'].setValue(False)\n\n\"\"\"\n\n# Create the remove button\nremove_btn = nuke.PyScript_Knob(f\"remove_\{count\}\", \"Remove\", remove_script)\nnode.addKnob(remove_btn)\nnode.knob('color_picker').setFlag(0)\n" +STARTLINE}
+ addUserKnob {26 _2 l "" +STARTLINE T " "}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x71c67100
+  label "live preview"
+  note_font_size 42
+  note_font_color 0xffffffff
+  xpos 1269
+  ypos -83
+  appearance Border
+  bdwidth 326
+  bdheight 578
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 456
+  ypos -3
+ }
+set Ncfbd6000 [stack 0]
+ Dot {
+  name preview
+  xpos 1469
+ }
+set Ncfbd6400 [stack 0]
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name preview_shuffle
+  xpos 1505
+  ypos -3
+ }
+ Grade {
+  multiply {{parent.color_picker.r} {parent.color_picker.g} {parent.color_picker.b} 1}
+  name preview_color
+  xpos 1505
+  ypos 28
+ }
+push $Ncfbd6400
+ Merge2 {
+  inputs 2
+  operation difference
+  name preview_diff
+  xpos 1435
+  ypos 74
+ }
+ Saturation {
+  saturation 0
+  name preview_sat
+  xpos 1435
+  ypos 98
+ }
+ Clamp {
+  maximum {{parent.threshold}}
+  MaxClampTo_enable true
+  name preview_clamp
+  xpos 1435
+  ypos 128
+ }
+ Invert {
+  channels rgb
+  name preview_invert
+  xpos 1435
+  ypos 168
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.red 0 0 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name shuffle_red
+  xpos 1435
+  ypos 218
+ }
+ FilterErode {
+  channels rgba
+  size {{parent.erode_matte}}
+  name FilterErode2
+  xpos 1435
+  ypos 242
+ }
+ EdgeBlur {
+  size 2
+  filter quadratic
+  name EdgeBlur2
+  xpos 1435
+  ypos 266
+  disable {{!this.parent.edgeblur x65 1}}
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.05
+  whitepoint 0.5
+  white_clamp true
+  name Grade3
+  xpos 1435
+  ypos 302
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 white -1 -1 rgba.red 0 0 white -1 -1 rgba.green 0 1 white -1 -1 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3"
+  name shuffle_white
+  xpos 1435
+  ypos 338
+ }
+ Grade {
+  multiply {1 0 1 1}
+  name grade_to_magenta
+  tile_color 0xdf00ffff
+  xpos 1435
+  ypos 369
+ }
+ Premult {
+  name Premult5
+  xpos 1435
+  ypos 397
+ }
+ Dot {
+  name Dot4
+  xpos 1469
+  ypos 1705
+ }
+ Merge2 {
+  inputs 0
+  name merge_all_mattes
+  xpos 245
+  ypos 390
+ }
+ Dot {
+  name branch_end
+  label branch_end
+  xpos 279
+  ypos 452
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.red 0 0 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 245
+  ypos 593
+ }
+ FilterErode {
+  channels rgba
+  size {{parent.erode_matte}}
+  name FilterErode1
+  xpos 245
+  ypos 669
+ }
+ EdgeBlur {
+  size 2
+  filter quadratic
+  name EdgeBlur1
+  xpos 245
+  ypos 693
+  disable {{!this.parent.edgeblur x65 1}}
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.05
+  whitepoint 0.5
+  white_clamp true
+  name Grade4
+  xpos 245
+  ypos 753
+ }
+set Ncfc4b400 [stack 0]
+push $Ncfbd6000
+ Unpremult {
+  name Unpremult1
+  xpos 456
+  ypos 533
+ }
+ Dot {
+  name Dot10
+  xpos 490
+  ypos 627
+ }
+set Ncfc4bc00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation multiply
+  Achannels alpha
+  Bchannels alpha
+  output alpha
+  name Multiply_Alpha
+  xpos 456
+  ypos 915
+  disable true
+ }
+set Ncfc84000 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.alpha 0 3 rgba.red 0 0 rgba.alpha 0 3 rgba.green 0 1 rgba.alpha 0 3 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle5
+  xpos 456
+  ypos 1109
+ }
+ Dot {
+  name Dot8
+  label "DISPLAY MASK"
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0xffff
+  xpos 490
+  ypos 1230
+ }
+push $Ncfc4b400
+push $Ncfc4bc00
+ Merge2 {
+  inputs 2
+  operation multiply
+  Achannels alpha
+  Bchannels alpha
+  output alpha
+  name mult
+  xpos 724
+  ypos 924
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 white -1 -1 rgba.red 0 0 white -1 -1 rgba.green 0 1 white -1 -1 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle4
+  xpos 724
+  ypos 987
+ }
+ Grade {
+  multiply {{this.parent.colorfill.r} {this.parent.colorfill.g} {this.parent.colorfill.b} 1}
+  name Grade_ColorChange
+  xpos 724
+  ypos 1011
+ }
+ Premult {
+  name Premult3
+  xpos 724
+  ypos 1109
+ }
+ Dot {
+  name Dot9
+  label COLORFILL
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0x3fffff
+  xpos 758
+  ypos 1220
+ }
+set Ncfc85c00 [stack 0]
+push $Ncfc4bc00
+ Dot {
+  name Dot3
+  xpos 1005
+  ypos 627
+ }
+set Ncfcb4000 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 971
+  ypos 1054
+ }
+ Premult {
+  name Premult2
+  xpos 971
+  ypos 1110
+ }
+ Dot {
+  name Dot2
+  label "COLOR REPLACE"
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0x1f00ffff
+  xpos 1005
+  ypos 1215
+ }
+push $Ncfc85c00
+push $Ncfc4b400
+ Invert {
+  name Invert2
+  xpos 834
+  ypos 753
+ }
+push $Ncfcb4000
+ Merge2 {
+  inputs 2
+  operation multiply
+  Achannels alpha
+  Bchannels alpha
+  output alpha
+  name Merge3
+  xpos 1131
+  ypos 753
+ }
+set Ncfcb5400 [stack 0]
+ Premult {
+  name Premult4
+  xpos 1131
+  ypos 1106
+ }
+ Dot {
+  name Dot5
+  label "KEY OUT"
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0x1f00ffff
+  xpos 1165
+  ypos 1219
+ }
+push $Ncfc84000
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.blue 0 2 rgba.blue 0 2 rgba.green 0 1 rgba.green 0 1 rgba.red 0 0 rgba.red 0 0 rgba.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 194
+  ypos 921
+ }
+push $Ncfc4bc00
+ Dot {
+  name Dot1
+  xpos -13
+  ypos 627
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -47
+  ypos 915
+  disable {{"!\[exists parent.input0]"}}
+ }
+set Ncfce2800 [stack 0]
+ Dot {
+  name Dot7
+  label UNPREMULT
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0x1f00ffff
+  xpos -13
+  ypos 1234
+ }
+push $Ncfce2800
+ Premult {
+  name Premult1
+  xpos -323
+  ypos 1045
+ }
+ Dot {
+  name Dot6
+  label PREMULT
+  note_font "Verdana Bold"
+  note_font_size 12
+  note_font_color 0x1f00ffff
+  xpos -289
+  ypos 1233
+ }
+ Switch {
+  inputs 6
+  which {{parent.output}}
+  name Switch3
+  xpos 456
+  ypos 1485
+ }
+ Dot {
+  name Dot11
+  xpos 490
+  ypos 1595
+ }
+set Ncfce3800 [stack 0]
+ Merge2 {
+  inputs 2
+  mix 0.5
+  name MergePreview
+  xpos 615
+  ypos 1702
+ }
+push $Ncfce3800
+ Switch {
+  inputs 2
+  which {{parent.display}}
+  name Switch1
+  xpos 456
+  ypos 1702
+ }
+ Output {
+  name Output1
+  xpos 456
+  ypos 1801
+ }
+push $Ncfbd6000
+ Dot {
+  name branch_init
+  label branch_init
+  xpos 279
+  ypos 122
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle_to_black
+  xpos 377
+  ypos 238
+ }
+push $Ncfcb5400
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos 1610
+  ypos -9
+  hide_input true
+ }
+end_group

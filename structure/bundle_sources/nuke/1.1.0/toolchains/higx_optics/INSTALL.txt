@@ -1,0 +1,25 @@
+Higx Optics 1.6 for Nuke (Windows, 64-bit)
+
+Nuke versions in this download: 15.0, 15.1, 15.2, 16.0, 16.1, 17.0, 17.1
+One build ships per version; the right one loads by itself.
+
+1. Copy the folder "higx" into your .nuke folder, so that this path exists:
+       C:\Users\<you>\.nuke\higx\optics\
+   If .nuke\higx already exists (another Higx product), merge the folders:
+   only "optics" is added. Leave the layout inside "optics" as it is.
+
+2. Open .nuke\init.py in a text editor (create the file if it does not
+   exist) and add this line at the end:
+       nuke.pluginAddPath('./higx/optics')
+
+3. Restart Nuke. The node is in the Higx menu of the Nodes toolbar, and Tab
+   search finds it as HigxOptics.
+
+Activate: create a HigxOptics node, open its License tab, press License...,
+paste the key from your purchase email and press Activate. One activation
+covers Nuke, After Effects and DaVinci Resolve on the same machine.
+
+Requirements: Nuke 15.0 to 17.1 (Nuke Indie and Nuke Non-Commercial are not
+yet supported); a GPU driver with Vulkan 1.2 or newer.
+
+Guide and support: https://higx.net

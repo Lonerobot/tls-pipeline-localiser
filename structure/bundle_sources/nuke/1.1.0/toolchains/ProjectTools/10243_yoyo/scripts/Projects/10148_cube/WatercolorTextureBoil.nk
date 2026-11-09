@@ -1,0 +1,271 @@
+#! C:/Program Files/Nuke12.2v3/nuke-12.2.3.dll -nx
+version 12.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2557" h="1408" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1894" stretch="1"/>
+            <splitter orientation="2">
+                <split size="800"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="563"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/nuke/NukeTools_Library/02_Scripts/Projects/10148_cube/WatercolorTextureBoil.nk
+ frame 4
+ format "3072 1728 0 0 3072 1728 1 10148_cube"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_484643622.jpeg
+ format "4865 3366 0 0 4865 3366 1 "
+ origset true
+ name Read7
+ xpos 620
+ ypos -375
+}
+Grade {
+ blackpoint 0.001
+ whitepoint 0.014
+ white 0.002
+ gamma 1.2
+ name Grade3
+ xpos 620
+ ypos -291
+}
+Grade {
+ white 0.66
+ name Grade6
+ xpos 620
+ ypos -267
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform4
+ xpos 620
+ ypos -243
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_317342216.jpeg
+ format "4581 3223 0 0 4581 3223 1 "
+ origset true
+ name Read9
+ xpos 730
+ ypos -375
+}
+ColorCorrect {
+ contrast 0.44
+ gain 0.135
+ name ColorCorrect1
+ xpos 730
+ ypos -291
+}
+Grade {
+ whitepoint 0.16
+ white 0.82
+ gamma 0.66
+ name Grade4
+ xpos 730
+ ypos -267
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform5
+ xpos 730
+ ypos -243
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_320543996.jpeg
+ format "4851 3352 0 0 4851 3352 1 "
+ origset true
+ name Read10
+ xpos 400
+ ypos -375
+}
+Grade {
+ name Grade7
+ xpos 400
+ ypos -291
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform6
+ xpos 400
+ ypos -267
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_302588360.jpeg
+ format "4858 3412 0 0 4858 3412 1 "
+ origset true
+ name Read8
+ xpos 290
+ ypos -369
+}
+Grade {
+ white 0.48
+ gamma 1.1
+ name Grade5
+ xpos 290
+ ypos -285
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform3
+ xpos 290
+ ypos -249
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_320544086.jpeg
+ format "4654 3327 0 0 4654 3327 1 "
+ origset true
+ name Read5
+ xpos 180
+ ypos -375
+}
+Grade {
+ white 1.16
+ name Grade2
+ xpos 180
+ ypos -291
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform2
+ xpos 180
+ ypos -249
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/PROJECTS/10148_cube/assets/RND_TESTS/WaterColour/assets/AdobeStock_410720285.jpeg
+ format "4728 3152 0 0 4728 3152 1 "
+ origset true
+ name Read6
+ xpos 70
+ ypos -375
+}
+Grade {
+ blackpoint 0.008
+ white 1.12
+ name Grade1
+ xpos 70
+ ypos -291
+}
+Transform {
+ translate {{((random(frame+seed)*2)-1)*amplitude.w} {((random(frame)*2)-1)*amplitude.h}}
+ center {2364 1576}
+ name Transform1
+ xpos 70
+ ypos -249
+ addUserKnob {20 User}
+ addUserKnob {14 amplitude l Amplitude R 0 100}
+ amplitude {{"format.w/2 - root.format.w/2"} {"format.h/2 - root.format.h/2"}}
+ addUserKnob {7 seed l Seed}
+ seed {{"\[lindex \[split \[value \[topnode].name] Read] 4]"}}
+}
+Switch {
+ inputs 4
+ which {{frame%this.inputs}}
+ name Switch1
+ xpos 400
+ ypos -81
+}
+Reformat {
+ format "3072 1728 0 0 3072 1728 1 10148_cube"
+ resize none
+ name Reformat20
+ xpos 400
+ ypos -33
+}
+Mirror2 {
+ flip {{random(frame)<=0.5?1:0}}
+ flop {{random(frame+10)<=0.5?1:0}}
+ name Mirror2_1
+ xpos 400
+ ypos -9
+}
+Keyer {
+ operation "luminance key"
+ range {0.01061210575 0.4072876947 1 1}
+ name Keyer2
+ xpos 400
+ ypos 57
+}
+Viewer {
+ inputs 2
+ frame 4
+ frame_range 1-29
+ frame_range_lock true
+ name Viewer1
+ xpos 1170
+ ypos -9
+}

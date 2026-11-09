@@ -1,0 +1,96 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+BackdropNode {
+ inputs 0
+ name BackdropNode9
+ tile_color 0x515151ff
+ gl_color 0x777777ff
+ label UTILITIES
+ note_font_size 42
+ selected true
+ xpos -2565
+ ypos -573
+ bdwidth 2265
+ bdheight 688
+ z_order -1
+}
+Read {
+ inputs 0
+ file_type exr
+ file Y:/TOOLS/DistortGrids/35mm_STmap_distort_4K.exr
+ format "3840 2160 0 0 3840 2160 1 UHD_4K"
+ origset true
+ version 4
+ name Read7
+ selected true
+ xpos -2448
+ ypos -317
+}
+Reformat {
+ filter Mitchell
+ name Reformat5
+ selected true
+ xpos -2448
+ ypos -231
+}
+Dot {
+ name Dot23
+ label STMap
+ selected true
+ xpos -2414
+ ypos 149
+}
+Read {
+ inputs 0
+ file_type exr
+ file Y:/TOOLS/Textures/Convolve/35mmf28_normalized_v01.exr
+ format "3908 2602 0 0 3908 2602 1 "
+ origset true
+ name Read8
+ selected true
+ xpos -2291
+ ypos -317
+}
+Dot {
+ name Dot22
+ label CONVOLVE
+ selected true
+ xpos -2257
+ ypos 149
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10123_mcx/assets/Field guide/MCX_Fieldguide.png"
+ format "3424 1926 0 0 3424 1926 1 10123_mcx"
+ origset true
+ name Read9
+ selected true
+ xpos -1860
+ ypos -310
+}
+Dot {
+ name Dot9
+ label FIELDGUIDE
+ selected true
+ xpos -1826
+ ypos 147
+}
+Read {
+ inputs 0
+ file_type png
+ file Y:/PROJECTS/10123_mcx/assets/mavrello/publish/render/CHAR_Beauty_0000.png
+ format "1600 1600 0 0 1600 1600 1 "
+ origset true
+ name Read11
+ selected true
+ xpos -1552
+ ypos -313
+}
+Dot {
+ name Dot10
+ label MAVRELLO_STYLEFRAME
+ selected true
+ xpos -1518
+ ypos 152
+}

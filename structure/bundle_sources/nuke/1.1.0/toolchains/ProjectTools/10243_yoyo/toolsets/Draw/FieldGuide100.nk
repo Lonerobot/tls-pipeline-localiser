@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+Read {
+ inputs 0
+ file_type png
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/004_REFERENCE/LAYOUT-FIELDGUIDE/LAYOUT_FIELDGUIDE_v2_100%.png"
+ format "2248 1071 0 0 2248 1071 1 SR_P1071"
+ origset true
+ name Read1
+ selected true
+ xpos -298
+ ypos -360
+}

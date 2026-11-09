@@ -1,0 +1,17 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push $cut_paste_input
+NoOp {
+ name SampleColour
+ selected true
+ xpos -452
+ ypos 400
+ addUserKnob {20 User}
+ addUserKnob {12 pc}
+ pc {170 476}
+ addUserKnob {13 PositionValue}
+ PositionValue {0.5 0.5 0.5}
+ addUserKnob {18 pixelValues}
+ pixelValues {{"\[python -execlocal my\\ =\\ nuke.thisNode()\\n\\nPosx\\ =\\ my.knob('pc').value(0)\\nPosy\\ =\\ my.knob('pc').value(1)\\n\\nret\\ =\\ nuke.sample(nuke.thisNode(),\\\"r\\\",Posx,Posy)\\n\\nret]"} {"\[python -execlocal my\\ =\\ nuke.thisNode()\\n\\nPosx\\ =\\ my.knob('pc').value(0)\\nPosy\\ =\\ my.knob('pc').value(1)\\n\\nret\\ =\\ nuke.sample(nuke.thisNode(),\\\"g\\\",Posx,Posy)\\n\\nret]"} {"\[python -execlocal my\\ =\\ nuke.thisNode()\\n\\nPosx\\ =\\ my.knob('pc').value(0)\\nPosy\\ =\\ my.knob('pc').value(1)\\n\\nret\\ =\\ nuke.sample(nuke.thisNode(),\\\"b\\\",Posx,Posy)\\n\\nret]"}}
+ addUserKnob {22 SetPosition T "m = nuke.thisNode()\nr, g, b = m\['pixelValues'].getValue()\nm\['PositionValue'].setValue(\[r, g, b])" +STARTLINE}
+}
