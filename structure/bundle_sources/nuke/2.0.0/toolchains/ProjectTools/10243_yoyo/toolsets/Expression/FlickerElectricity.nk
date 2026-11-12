@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "(sin((frame)/0.04)+1)/2 * (1-0)"
+ selected true
+ xpos 1092
+ ypos -12154
+}

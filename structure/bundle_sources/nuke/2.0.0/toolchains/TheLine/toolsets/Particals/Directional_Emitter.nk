@@ -1,0 +1,189 @@
+#! C:/Program Files/Nuke7.0v6/Nuke7.0.exe -nx
+version 7.0 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1936" h="1160" screen="1">
+        <splitter orientation="1">
+            <split size="72"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1844"/>
+            <splitter orientation="2">
+                <split size="1099"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1920" y="0" w="1936" h="1200" screen="0">
+        <splitter orientation="1">
+            <split size="1484"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+            </dock>
+            <split size="432"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name T:/BBC/0975s_TreeFuTom5/TFT_300_Shared/05_CompAssets/03_Nuke_Resources/05_Effects/02_Basic_ParticalSystems/DirectionalEmitter.nk
+ frame 30
+ fps 25
+ format "1920 1080 0 0 1920 1080 1 HD"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+Camera2 {
+ inputs 0
+ rot_order XYZ
+ translate {-14.60887909 5.79945374 106.9140015}
+ rotate {-4.800000191 -8.399999619 5.023507234e-017}
+ focal 35
+ haperture 35.99992752
+ vaperture 23.99995222
+ near 0.1000000015
+ file T:/BBC/0758s_TreeFuTom3/tft291_KEY_Comp/Temp_CAMS/TOM_MAGIC_CAM.fbx
+ version 1
+ fbx_node_name {{7} "Producer Perspective" "Producer Top" "Producer Bottom" "Producer Front" "Producer Back" "Producer Right" "Producer Left" Shot_Camera:SceneCam}
+ name Camera2
+ xpos -307
+ ypos -48
+}
+Axis2 {
+ inputs 0
+ name Axis1
+ xpos -470
+ ypos -702
+}
+set N10fc2290 [stack 0]
+Card2 {
+ inputs 0
+ cast_shadow false
+ receive_shadow false
+ rows 1
+ columns 1
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -167
+ ypos -690
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo2
+ xpos -167
+ ypos -585
+}
+push $N10fc2290
+Sphere {
+ inputs 0
+ uniform_scale 0.67
+ name Sphere1
+ xpos -297
+ ypos -693
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo1
+ xpos -297
+ ypos -589
+}
+Dot {
+ name Dot1
+ xpos -263
+ ypos -510
+}
+Switch {
+ inputs 2
+ which 1
+ name Switch1
+ xpos -167
+ ypos -513
+}
+push 0
+ParticleEmitter {
+ inputs 2
+ start_frame -100
+ emit_from faces
+ selection_threshhold 5e-005
+ lifetime 115
+ velocity 0.545
+ size 0.67
+ spread 0.145
+ name ParticleEmitter2
+ xpos -167
+ ypos -410
+}
+ParticleCurve {
+ curves {r {}
+   g {}
+   b {}
+   a {curve l 1 0.01019906998 s-2.849999905}
+   size {curve L 0.2534225583 S -0.0007462501526 s-0.25 t0}
+   mass {}}
+ affect_rgb false
+ affect_size true
+ name ParticleCurve2
+ xpos -167
+ ypos -342
+ disable true
+}
+ParticleTurbulence {
+ strength {{parent.TurbControl.TurbStrength} {parent.TurbControl.TurbStrength} {parent.TurbControl.TurbStrength}}
+ scale {{parent.TurbControl.TurbScale} {parent.TurbControl.TurbScale} {parent.TurbControl.TurbScale}}
+ offset {{parent.TurbControl.turbOffSet} {parent.TurbControl.turbOffSet} {parent.TurbControl.turbOffSet}}
+ name ParticleTurbulence2
+ xpos -167
+ ypos -278
+ disable true
+}
+ParticleDrag {
+ name ParticleDrag1
+ xpos -167
+ ypos -216
+ disable true
+}
+ParticleGravity {
+ to {0 0 0}
+ name ParticleGravity1
+ xpos -167
+ ypos -145
+ disable true
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type distance
+ name ScanlineRender2
+ xpos -167
+ ypos -27
+}
+NoOp {
+ inputs 0
+ name TurbControl
+ xpos 53
+ ypos -273
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {7 TurbScale}
+ addUserKnob {7 TurbStrength}
+ addUserKnob {7 turbOffSet}
+ turbOffSet {{frame/25}}
+}

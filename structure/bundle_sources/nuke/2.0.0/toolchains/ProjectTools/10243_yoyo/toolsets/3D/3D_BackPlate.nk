@@ -1,0 +1,49 @@
+set cut_paste_input [stack 0]
+version 7.0 v6
+Camera2 {
+ inputs 0
+ rot_order XYZ
+ translate {47.83244705 191.9195862 385.8829651}
+ rotate {-19.79999924 6 0}
+ focal 35
+ haperture 35.99992752
+ vaperture 23.99995222
+ near 0.1000000015
+ file W:/BBC/0975f_TreeFuTom5/TFT_399_KEY_Elements/TFT_399_KEY_Fx/TFT_399_KEY_Fx_TomSpellTrans/CAM.fbx
+ version 1
+ fbx_node_name {{7} "Producer Perspective" "Producer Top" "Producer Bottom" "Producer Front" "Producer Back" "Producer Right" "Producer Left" SceneCam}
+ name Camera1
+ selected true
+ xpos 1851
+ ypos 585
+}
+push $cut_paste_input
+Card2 {
+ rows 4
+ columns 4
+ z 0.1
+ lens_in_focal {{parent.Camera1.focal}}
+ lens_in_haperture {{parent.Camera1.haperture}}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos 1667
+ ypos 606
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo2
+ selected true
+ xpos 1667
+ ypos 668
+}

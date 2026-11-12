@@ -5,7 +5,6 @@ from unittest.mock import patch
 
 from localiser import apply_hosts, load_local_config, save_local_config
 from localiser.errors import ConfigError
-from localiser.provision import blender_scripts_dir, maya_app_dir
 
 from .helpers import WorkstationTestCase
 
@@ -80,6 +79,16 @@ class SaveLocalConfigTests(WorkstationTestCase):
             save_local_config(self.path, {"auto_sync": False})
         self.assertEqual(self.path.read_text(encoding="utf-8"), "{ not json")
 
+    def test_the_organisations_repository_is_never_written_and_cannot_be_changed(self):
+        env = {"TLS_PIPELINE_REPOSITORY": str(self.repo)}
+        config = save_local_config(self.path, {"hosts": {"maya": ["2026"]}}, env)
+        self.assertTrue(config.remote_locked)
+        self.assertNotIn("remote_repository", self.stored())
+        before = self.path.read_text(encoding="utf-8")
+        with self.assertRaisesRegex(ConfigError, "organisation"):
+            save_local_config(self.path, {"remote_repository": "D:/mine"}, env)
+        self.assertEqual(self.path.read_text(encoding="utf-8"), before)
+
 
 class ApplyHostsTests(WorkstationTestCase):
     def setUp(self):
@@ -91,7 +100,7 @@ class ApplyHostsTests(WorkstationTestCase):
         (self.root / "config.json").write_text(
             json.dumps({"schema_version": 1, "remote_repository": str(self.repo)}), encoding="utf-8"
         )
-        self.env = {  # no BLENDER_USER_SCRIPTS: it would make every Blender series share one folder
+        self.env = {  # where Maya and Blender would look for per-user entries
             "MAYA_APP_DIR": str(self.tmp / "maya"),
             "APPDATA": str(self.tmp / "appdata"),
         }
@@ -100,62 +109,45 @@ class ApplyHostsTests(WorkstationTestCase):
         self.addCleanup(patcher.stop)
 
     def apply(self, enabled):
-        return apply_hosts(self.root, enabled, self.env)
+        return apply_hosts(self.root, enabled)
 
-    def maya_module(self):
-        return maya_app_dir(self.env) / "modules" / "TheLinePipeline.mod"
+    def assert_no_entries_written(self):
+        self.assertFalse((self.tmp / "maya").exists())
+        self.assertFalse((self.tmp / "appdata").exists())
+        self.assertFalse((self.home / ".nuke").exists())
 
-    def blender_stub(self, series):
-        return blender_scripts_dir(series, self.env) / "startup" / "tls_pipeline_startup.py"
-
-    def test_enabling_saves_the_config_and_installs_each_entry(self):
-        config, actions = self.apply({"maya": ["2026"], "blender": ["5.1", "5.2"]})
+    def test_enabling_saves_the_config(self):
+        config = self.apply({"maya": ["2026"], "blender": ["5.1", "5.2"]})
         self.assertEqual(config.hosts, {"maya": ("2026",), "blender": ("5.1", "5.2")})
         self.assertEqual(load_local_config(self.root / "config.json").hosts, config.hosts)
-        self.assertTrue(self.maya_module().is_file())
-        self.assertTrue(self.blender_stub("5.1").is_file() and self.blender_stub("5.2").is_file())
-        self.assertEqual(len(actions), 3)
+
+    def test_saving_writes_no_per_user_entries(self):
+        self.apply({"maya": ["2026"], "nuke": ["17.0"], "blender": ["5.2"]})
+        self.assert_no_entries_written()
 
     def test_applying_the_same_thing_twice_changes_nothing(self):
         self.apply({"maya": ["2026"]})
-        _, actions = self.apply({"maya": ["2026"]})
-        self.assertEqual({action.change for action in actions}, {"unchanged"})
-
-    def test_switching_off_one_blender_series_removes_only_its_entry(self):
-        self.apply({"blender": ["5.1", "5.2"]})
-        self.apply({"blender": ["5.2"]})
-        self.assertFalse(self.blender_stub("5.1").exists())
-        self.assertTrue(self.blender_stub("5.2").is_file())
-
-    def test_maya_keeps_its_module_while_any_series_stays_enabled(self):
-        self.apply({"maya": ["2025", "2026"]})
+        before = (self.root / "config.json").read_text(encoding="utf-8")
         self.apply({"maya": ["2026"]})
-        self.assertTrue(self.maya_module().is_file())
-        self.apply({})
-        self.assertFalse(self.maya_module().exists())
+        self.assertEqual((self.root / "config.json").read_text(encoding="utf-8"), before)
 
-    def test_switching_off_a_whole_host_removes_its_entries_and_leaves_others(self):
+    def test_switching_a_host_off_removes_it_from_the_config(self):
         self.apply({"maya": ["2026"], "blender": ["5.2"]})
-        self.apply({"blender": ["5.2"]})
-        self.assertFalse(self.maya_module().exists())
-        self.assertTrue(self.blender_stub("5.2").is_file())
+        self.assertEqual(self.apply({"blender": ["5.2"]}).hosts, {"blender": ("5.2",)})
 
     def test_other_settings_are_saved_in_the_same_write(self):
-        config, _ = apply_hosts(self.root, {"maya": ["2026"]}, self.env, {"check_interval_minutes": 15, "auto_sync": False})
+        config = apply_hosts(self.root, {"maya": ["2026"]}, {"check_interval_minutes": 15, "auto_sync": False})
         self.assertEqual((config.check_interval_minutes, config.auto_sync), (15, False))
         self.assertEqual(load_local_config(self.root / "config.json").check_interval_minutes, 15)
 
     def test_a_bad_setting_stops_the_hosts_changing_too(self):
         self.apply({"maya": ["2026"]})
         with self.assertRaises(ConfigError):
-            apply_hosts(self.root, {"blender": ["5.2"]}, self.env, {"check_interval_minutes": 1})
+            apply_hosts(self.root, {"blender": ["5.2"]}, {"check_interval_minutes": 1})
         self.assertEqual(load_local_config(self.root / "config.json").hosts, {"maya": ("2026",)})
-        self.assertTrue(self.maya_module().is_file())
-        self.assertFalse(self.blender_stub("5.2").exists())
 
-    def test_an_invalid_request_changes_neither_the_config_nor_the_entries(self):
+    def test_an_invalid_request_changes_nothing(self):
         self.apply({"maya": ["2026"]})
         with self.assertRaises(ConfigError):
             self.apply({"maya": ["../x"]})
         self.assertEqual(load_local_config(self.root / "config.json").hosts, {"maya": ("2026",)})
-        self.assertTrue(self.maya_module().is_file())

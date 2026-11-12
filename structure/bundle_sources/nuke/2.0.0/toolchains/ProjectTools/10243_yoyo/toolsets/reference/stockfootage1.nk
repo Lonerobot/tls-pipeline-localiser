@@ -1,0 +1,294 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode44
+ tile_color 0x999999ff
+ label Cutting_Room_Floor
+ note_font_size 42
+ selected true
+ xpos 20528
+ ypos -1657
+ bdwidth 3385
+ bdheight 290
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ name Read252
+ selected true
+ xpos 22400
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1262
+ origlast 1262
+ origset true
+ name Read251
+ selected true
+ xpos 22290
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Severe_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1263
+ origlast 1263
+ origset true
+ name Read250
+ selected true
+ xpos 22290
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ name Read249
+ selected true
+ xpos 22180
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1237
+ origlast 1237
+ origset true
+ name Read248
+ selected true
+ xpos 22070
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Light_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1253
+ origlast 1253
+ origset true
+ name Read247
+ selected true
+ xpos 21960
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ name Read246
+ selected true
+ xpos 21850
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1244
+ origlast 1244
+ origset true
+ name Read245
+ selected true
+ xpos 21740
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Heavier_Dirt&Scratches_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1253
+ origlast 1253
+ origset true
+ name Read244
+ selected true
+ xpos 21630
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ name Read243
+ selected true
+ xpos 21520
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 931
+ origlast 931
+ origset true
+ name Read242
+ selected true
+ xpos 21410
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1275
+ origlast 1275
+ origset true
+ name Read241
+ selected true
+ xpos 21300
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Dirt_and_Hairs_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1283
+ origlast 1283
+ origset true
+ name Read240
+ selected true
+ xpos 21190
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 911
+ origlast 911
+ origset true
+ name Read239
+ selected true
+ xpos 21190
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1329
+ origlast 1329
+ origset true
+ name Read238
+ selected true
+ xpos 21080
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1266
+ origlast 1266
+ origset true
+ name Read237
+ selected true
+ xpos 20970
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Damaged_Film_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1272
+ origlast 1272
+ origset true
+ name Read236
+ selected true
+ xpos 20860
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read235
+ selected true
+ xpos 20750
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read213
+ selected true
+ xpos 20640
+ ypos -1551
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Dirt_Scratches/Cutting_Room_Floor_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 1080
+ origlast 1080
+ origset true
+ name Read211
+ selected true
+ xpos 20530
+ ypos -1551
+}
+ContactSheet {
+ inputs 20
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet32
+ tile_color 0xe955ffff
+ selected true
+ xpos 22400
+ ypos -1425
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

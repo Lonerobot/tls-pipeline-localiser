@@ -70,12 +70,42 @@ class TrayAppTests(WorkstationTestCase):
         document = {"schema_version": 1, "remote_repository": str(self.repo), "bundle_repository": str(self.root / "bundles")}
         (self.root / "config.json").write_text(json.dumps({**document, **extra}), encoding="utf-8")
 
+    def test_the_first_run_installs_the_pipeline_code_into_the_root(self):
+        manager = self.make_manager()
+        self.assertIsNone(manager.config)
+        for relative in ("__init__.py", "about.py", "bootstrap/nuke/init.py", "localiser/launch.py"):
+            self.assertTrue((self.root / relative).is_file(), relative)
+        self.assertNotIn("could not be installed", manager.window.settings.warning.text())
+
+    def test_a_stale_stub_is_refreshed_when_the_app_starts(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        stub = self.root / "bootstrap" / "maya" / "userSetup.py"
+        stub.parent.mkdir(parents=True)
+        stub.write_text("# stale\n", encoding="utf-8")
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)  # the start-up check writes into the root; let it finish
+        self.assertNotEqual(stub.read_text(encoding="utf-8"), "# stale\n")
+
     def test_the_first_run_has_no_config_and_asks_for_the_repository(self):
         manager = self.make_manager()
         self.assertIsNone(manager.config)
         self.assertIn("repository", manager.window.settings.warning.text())
         self.assertEqual(manager.level, self.model.LEVEL_IDLE)
         self.assertEqual(list(manager.window.settings.series_boxes), [("maya", SERIES)])  # installed here, not yet enabled
+
+    def test_the_organisations_repository_locks_the_field_and_needs_no_first_run_setup(self):
+        self.environ["TLS_PIPELINE_REPOSITORY"] = str(self.repo)
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        settings = manager.window.settings
+        self.assertIsNotNone(manager.config)
+        self.assertTrue(manager.config.remote_locked)
+        self.assertTrue(settings.remote.isReadOnly())
+        self.assertFalse(settings.remote_browse.isEnabled())
+        self.assertFalse(settings.remote_note.isHidden())
+        self.assertEqual(settings.remote.text(), str(self.repo))
+        self.assertNotIn("remote_repository", settings.values()[1])
+        self.assertNotIn("remote_repository", json.loads((self.root / "config.json").read_text(encoding="utf-8")))
 
     def test_saving_the_first_run_settings_writes_the_config_enables_the_host_and_updates(self):
         manager = self.make_manager()
@@ -85,10 +115,138 @@ class TrayAppTests(WorkstationTestCase):
         settings.save.click()
         self.wait_for(lambda: manager.config is not None and not manager.busy and manager.level == self.model.LEVEL_OK)
         self.assertEqual(manager.config.hosts, {"maya": (SERIES,)})
-        self.assertTrue((self.tmp / "maya" / "modules" / "TheLinePipeline.mod").is_file())
+        self.assertFalse((self.tmp / "maya" / "modules" / "TheLinePipeline.mod").exists())  # no per-user entries
+        self.assertTrue((self.root / "bootstrap" / "maya" / "userSetup.py").is_file())  # but the code a launch needs
         table = manager.window.status.table
         self.assertEqual([table.item(0, c).text() for c in (0, 1, 2, 3)], ["Maya", SERIES, "1.0", "1.0"])
         self.assertIn("Up to date", table.item(0, 4).text())
+
+    def test_the_rocket_button_starts_the_host_with_the_pipeline_environment(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        rocket = manager.window.status.launch_buttons[("maya", SERIES)]
+        self.assertFalse(rocket.icon().isNull())
+        with patch.object(self.app, "launch_host") as launch:
+            rocket.click()
+        launch.assert_called_once()
+        self.assertEqual(launch.call_args.args[:2], ("maya", SERIES))
+        self.assertEqual(launch.call_args.args[3]["TLS_PIPELINE"], str(self.root))
+
+    def test_the_launcher_offers_the_enabled_installed_hosts_and_launches_them(self):
+        self.write_local(hosts={"maya": [SERIES], "nuke": ["17.0"]})  # nuke is enabled but not installed here
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        launcher = manager.launcher
+        self.assertEqual(list(launcher.buttons), [("maya", SERIES)])
+        self.assertEqual(launcher.buttons[("maya", SERIES)].toolTip(), f"Launch Maya {SERIES}")
+        with patch.object(self.app, "launch_host") as launch:
+            launcher.buttons[("maya", SERIES)].click()
+        self.assertEqual(launch.call_args.args[:2], ("maya", SERIES))
+
+    def test_the_launcher_has_nothing_to_change(self):
+        from PySide6.QtWidgets import QCheckBox, QLineEdit
+
+        manager = self.make_manager()
+        self.assertEqual(manager.launcher.findChildren(QLineEdit) + manager.launcher.findChildren(QCheckBox), [])
+
+    def test_the_tray_menu_leads_with_the_launcher_and_settings_opens_the_manager(self):
+        manager = self.make_manager()
+        actions = [a for a in manager.menu.actions() if not a.isSeparator()]
+        self.assertEqual(actions[0].text(), "Launcher")
+        self.assertNotIn("Open pipeline manager", [a.text() for a in actions])
+        next(a for a in actions if a.text() == "Settings...").trigger()
+        self.assertTrue(manager.window.isVisible())
+        next(a for a in actions if a.text() == "Launcher").trigger()
+        self.assertTrue(manager.launcher.isVisible())
+        manager.window.hide()
+        manager.launcher.hide()
+
+    def test_a_cycle_reports_progress_for_each_entry(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        seen = []
+        manager.progressChanged.connect(lambda done, total, label: seen.append((done, total, label)))
+        manager.start_cycle(manual=True, sync=True)
+        self.assertTrue(manager.window.progress.isVisibleTo(manager.window))
+        self.wait_for(lambda: not manager.busy)
+        self.assertIn((0, 1, f"Maya {SERIES}"), seen)
+        self.assertFalse(manager.window.progress.isVisibleTo(manager.window))
+
+    def test_cloning_then_overriding_launches_from_the_clone_and_shows_the_row_in_orange(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        status = manager.window.status
+        self.assertFalse(status.override_buttons[("maya", SERIES)].isEnabled())  # nothing cloned yet
+        page = manager.window.release
+        page.tag.setText("mine")
+        page.release.setEditText("1.0")
+        page.clone.click()
+        self.wait_for(lambda: not manager.cloning)
+        self.assertIn("Cloned to", page.result.text())
+        self.assertTrue((self.root / "bundles" / "dev" / "maya" / "mine" / ".tls-clone.json").is_file())
+        toggle = status.override_buttons[("maya", SERIES)]
+        self.assertTrue(toggle.isEnabled())
+        toggle.click()
+        self.assertEqual(status.override_boxes[("maya", SERIES)].currentText(), "mine")
+        self.assertEqual(status.table.item(0, 0).background().color().name(), "#f0a030")
+        with patch.object(self.app, "launch_host") as launch:
+            status.launch_buttons[("maya", SERIES)].click()
+        launch.assert_called_once()
+        manager2_overrides = self.app.read_overrides(manager.config)
+        self.assertEqual(manager2_overrides, {f"maya/{SERIES}": "mine"})
+        status.override_buttons[("maya", SERIES)].click()  # off again
+        self.assertEqual(self.app.read_overrides(manager.config), {})
+        self.assertNotEqual(status.table.item(0, 0).background().color().name(), "#f0a030")
+        self.assertIsNone(status.table.cellWidget(0, 4))  # the drop-down goes, leaving the status text
+        self.assertNotIn(("maya", SERIES), status.override_boxes)
+
+    def test_launching_shows_a_popup_with_the_application_icon(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        with patch.object(self.app, "launch_host"):
+            manager.launch("maya", SERIES)
+        popup = manager.notifications.popups[-1]
+        self.assertEqual(popup.title_label.text(), f"Launching Maya {SERIES}")
+        self.assertEqual(popup.message_label.text(), "Pipeline 1.0")
+        self.assertFalse(popup.icon_label.pixmap().isNull())
+        popup.close()
+
+    def test_popups_stack_dismiss_and_leave_nothing_behind(self):
+        from localiser_tray.notification import NotificationManager
+
+        shown = NotificationManager()
+        first, second = shown.show("One", duration=0), shown.show("Two", "text", duration=0)
+        self.assertLessEqual(first.y() + first.height(), second.y())  # the older one sits above the newest
+        self.assertTrue(first.icon_label.isHidden() and second.message_label.isHidden() is False)
+        first.dismiss()
+        first.dismiss()  # twice is harmless
+        self.wait_for(lambda: first not in shown.popups)
+        self.assertEqual(shown.popups, [second])
+        second.close()
+        self.assertEqual(shown.popups, [])
+
+    def test_a_clone_with_no_tag_says_what_is_missing(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        page = manager.window.release
+        page.clone.click()
+        self.wait_for(lambda: not manager.cloning)
+        self.assertIn("version tag", page.result.text())
+
+    def test_a_launch_that_cannot_start_shows_why(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        shown = []
+        manager.window.show_error = lambda title, text: shown.append((title, text))
+        with patch.object(self.app, "launch_host", side_effect=self.app.LocaliserError("Maya 2026 was not found")):
+            manager.launch("maya", SERIES)
+        self.assertEqual(shown, [("Can't launch Maya 2026", "Maya 2026 was not found")])
 
     def test_a_rejected_setting_shows_an_error_and_changes_nothing(self):
         self.write_local(hosts={"maya": [SERIES]})

@@ -1,0 +1,46 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/PROJECTS/10146_beats3/003_REFERENCE/Fiddle-Taliyaa_Abstract_Section-Look_Test2.mov
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 297
+ origlast 297
+ origset true
+ name Read13
+ selected true
+ xpos 26690
+ ypos 8385
+}
+FrameHold {
+ first_frame 354
+ name FrameHold5
+ selected true
+ xpos 26690
+ ypos 8481
+}
+Text2 {
+ font_size_toolbar 100
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message KEY
+ old_message {{75 69 89}
+   }
+ box {0 1051 234 1152}
+ transforms {{0 2}
+   }
+ cursor_position 3
+ font {{ Arial : Black : ariblk.ttf : 0 }}
+ center {1024 576}
+ cursor_initialised true
+ initial_cursor_position {{0 1152}
+   }
+ group_animations {{0} imported: 0 selected: items: "root transform/"}
+ animation_layers {{1 11 1024 576 0 0 1 1 0 0 0 0}
+   }
+ name Text16
+ selected true
+ xpos 26690
+ ypos 8511
+}

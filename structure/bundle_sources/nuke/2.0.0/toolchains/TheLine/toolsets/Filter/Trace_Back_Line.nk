@@ -1,0 +1,732 @@
+set cut_paste_input [stack 0]
+version 17.0 v3
+push $cut_paste_input
+Group {
+ name Line_Trace_Back
+ tile_color 0xac7fb2ff
+ selected true
+ xpos 13093
+ ypos 142
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -920
+  ypos -651
+ }
+ Dot {
+  name Dot33
+  xpos -886
+  ypos -512
+ }
+set Nf13e7f80 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint 0.12
+  whitepoint 0.44
+  name Grade3
+  xpos -857
+  ypos -571
+ }
+ Dilate {
+  size -1.8
+  name Dilate1
+  xpos -755
+  ypos -628
+ }
+ Dilate {
+  size 5.5
+  name Dilate2
+  xpos -755
+  ypos -592
+ }
+ Erode {
+  size -4
+  blur 0.59
+  name Erode1
+  xpos -755
+  ypos -556
+ }
+push $Nf13e7f80
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge2
+  xpos -755
+  ypos -515
+ }
+ Dot {
+  name Dot30
+  xpos -600
+  ypos -512
+ }
+set Nf13e8400 [stack 0]
+ Dot {
+  name Dot8
+  xpos -470
+  ypos -512
+ }
+set Nf13e8880 [stack 0]
+ Dot {
+  name Dot2
+  xpos -273
+  ypos -513
+ }
+ Noise {
+  replace true
+  size 290
+  zoffset {{frame}}
+  translate {0 700}
+  center {1686 1014}
+  name Noise5
+  xpos -307
+  ypos -480
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.001
+  whitepoint 0.53
+  name Grade1
+  xpos -307
+  ypos -456
+ }
+ Dot {
+  name Dot3
+  xpos -273
+  ypos -394
+ }
+push $Nf13e8880
+ Noise {
+  replace true
+  size 255
+  zoffset {{frame}}
+  center {1686 1014}
+  name Noise9
+  xpos -504
+  ypos -479
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.001
+  whitepoint 0.53
+  name Grade17
+  xpos -504
+  ypos -455
+ }
+ Dot {
+  name Dot1
+  xpos -470
+  ypos -417
+ }
+push $Nf13e8400
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge11
+  xpos -634
+  ypos -420
+  disable true
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge1
+  xpos -634
+  ypos -397
+ }
+ CameraShake3 {
+  name CameraShake3_2
+  label "\[value amplitude] px at \[value frequency]"
+  xpos -634
+  ypos -359
+  amplitude 33.5
+  frequency 1
+  cs_center {{"\[value input.width 0]/2"} {"\[value input.height 0]/2"}}
+  motionblur 0
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.42
+  name Grade2
+  xpos -634
+  ypos -323
+ }
+ Group {
+  name FractalBlur
+  xpos -634
+  ypos -278
+  addUserKnob {20 User}
+  addUserKnob {4 output l Output M {rgba alpha}}
+  output alpha
+  addUserKnob {26 ""}
+  addUserKnob {7 FractalBlur_UserDilate l Spread R 0 200}
+  addUserKnob {7 FractalBlur_UserGrainSize l "Grain Size" R 0 100}
+  FractalBlur_UserGrainSize 5.5
+  addUserKnob {7 FractalBlur_UserContrast l Contrast}
+  FractalBlur_UserContrast 0.195
+  addUserKnob {7 FractalBlur_UserGamma l Gamma R 0 5}
+  FractalBlur_UserGamma 0.3
+  addUserKnob {6 FractalBlur_UserBlackWhite l "Make black and white" +STARTLINE}
+  addUserKnob {7 FractalBlur_UserThreshold l Threshold}
+  addUserKnob {6 FractalBlur_UserBW l "Clamp output" +STARTLINE}
+  FractalBlur_UserBW true
+  addUserKnob {26 ""}
+  addUserKnob {7 FractalBlur_UserGrainEvolve l "Grain Evolution" t "Keyframe this value to animate the grain" R 0 10}
+  FractalBlur_UserGrainEvolve 1
+  addUserKnob {26 ""}
+  addUserKnob {26 instructions l "" +STARTLINE T "Plug a texture into Input2 to use that instead of noise"}
+  addUserKnob {26 ""}
+  addUserKnob {26 FractalBlur_Credit l "" +STARTLINE T "Fractal Blur v1.9 by Richard Frazer - www.richardfrazer.com\nmod-v1 by Holger Hummel - www.celluloid-vfx.com"}
+ }
+  Input {
+   inputs 0
+   name TEXTURE
+   xpos 1874
+   ypos -423
+   number 1
+  }
+  Dot {
+   name Dot2
+   xpos 1908
+   ypos -118
+  }
+set N2c15d200 [stack 0]
+  Input {
+   inputs 0
+   name ALPHA
+   xpos 1249
+   ypos -506
+  }
+  Dot {
+   name Dot4
+   xpos 1283
+   ypos -413
+  }
+set N2c15db00 [stack 0]
+  Dot {
+   name Dot3
+   xpos 1550
+   ypos -370
+  }
+set N2c15df80 [stack 0]
+  Dot {
+   name Dot1
+   xpos 1748
+   ypos -370
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle10
+   xpos 1714
+   ypos -255
+  }
+  Noise {
+   cliptype none
+   size {{"\[value FractalBlur_UserGrainSize]" i}}
+   zoffset {{"\[value FractalBlur_UserGrainEvolve]" i}}
+   center {1024 778}
+   name Noise1
+   xpos 1714
+   ypos -166
+  }
+set N43349900 [stack 0]
+  Switch {
+   inputs 2
+   which {{"\[exists parent.input1]"}}
+   name Switch3
+   xpos 1714
+   ypos -122
+  }
+  Invert {
+   name Invert4
+   xpos 1714
+   ypos -72
+  }
+push $N2c15df80
+  Shuffle {
+   red alpha
+   green alpha
+   blue alpha
+   name Shuffle1
+   xpos 1516
+   ypos -333
+  }
+  Blur {
+   size {{"\[value FractalBlur_UserDilate]" i x101 0}}
+   name Blur1
+   xpos 1516
+   ypos -283
+  }
+  FilterErode {
+   channels rgba
+   size {{"(-\[value FractalBlur_UserDilate])/2" i x1 0}}
+   filter gaussian
+   name FilterErode7
+   xpos 1516
+   ypos -216
+  }
+  Dot {
+   name Dot10
+   xpos 1550
+   ypos -133
+  }
+set N2c15e880 [stack 0]
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge2
+   xpos 1660
+   ypos -6
+  }
+  Invert {
+   name Invert3
+   xpos 1660
+   ypos 37
+  }
+push $N2c15e880
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge13
+   xpos 1516
+   ypos 72
+  }
+set N23354a00 [stack 0]
+  Clamp {
+   name Clamp1
+   xpos 1408
+   ypos 116
+  }
+  Grade {
+   channels rgba
+   blackpoint {{FractalBlur_UserThreshold i}}
+   whitepoint {{FractalBlur_UserThreshold i}}
+   name Grade1
+   xpos 1408
+   ypos 195
+  }
+push $N23354a00
+  Switch {
+   inputs 2
+   which {{FractalBlur_UserBlackWhite i x47 1}}
+   name Switch1
+   xpos 1516
+   ypos 249
+  }
+  Grade {
+   channels rgba
+   blackpoint {{FractalBlur_UserContrast}}
+   whitepoint {{1-FractalBlur_UserContrast}}
+   gamma {{FractalBlur_UserGamma x101 0.985}}
+   black_clamp false
+   name Grade5
+   xpos 1516
+   ypos 329
+  }
+set N23355e00 [stack 0]
+  Clamp {
+   name Clamp2
+   xpos 1426
+   ypos 394
+  }
+push $N23355e00
+  Switch {
+   inputs 2
+   which {{FractalBlur_UserBW x47 0}}
+   name Switch2
+   xpos 1516
+   ypos 466
+  }
+  Dot {
+   name Dot6
+   xpos 1550
+   ypos 545
+  }
+set N2c15ed00 [stack 0]
+  Shuffle {
+   red alpha
+   green alpha
+   blue alpha
+   name Shuffle2
+   xpos 1516
+   ypos 619
+  }
+push $N2c15ed00
+push $N2c15db00
+  ShuffleCopy {
+   inputs 2
+   name ShuffleCopy1
+   xpos 1249
+   ypos 575
+  }
+  Dot {
+   name Dot5
+   xpos 1283
+   ypos 636
+  }
+  Switch {
+   inputs 2
+   which {{parent.output}}
+   name Switch5
+   xpos 1516
+   ypos 751
+  }
+  Output {
+   name Output1
+   xpos 1516
+   ypos 851
+  }
+push $N2c15d200
+push $N43349900
+  Switch {
+   inputs 2
+   which {{parent.altInput}}
+   name Switch4
+   xpos 1874
+   ypos -65
+  }
+ end_group
+ FrameHold {
+  firstFrame 1
+  increment 4
+  name FrameHold1
+  xpos -634
+  ypos -194
+ }
+ set Cd026a800 [stack 0]
+ Shuffle2 {
+  fromInput1 {
+   {0}
+   B
+  }
+  fromInput2 {
+   {0}
+   B
+  }
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle9
+  xpos -634
+  ypos -132
+ }
+ Blur {
+  size 1.3
+  name Blur3
+  xpos -634
+  ypos -83
+  disable true
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.98
+  name Grade95
+  xpos -634
+  ypos -26
+ }
+ Dot {
+  name Dot31
+  xpos -600
+  ypos 45
+ }
+push $Nf13e7f80
+ Merge2 {
+  inputs 2
+  name Merge12
+  xpos -920
+  ypos 42
+ }
+ Dot {
+  name Dot12
+  xpos -886
+  ypos 115
+ }
+set N3ae92480 [stack 0]
+ Dot {
+  name Dot13
+  xpos -776
+  ypos 115
+ }
+ Noise {
+  replace true
+  size 9.6
+  zoffset {{frame}}
+  center {1686 1014}
+  name Noise2
+  xpos -810
+  ypos 196
+ }
+clone $Cd026a800 {
+  xpos -812
+  ypos 228
+  selected false
+ }
+ Dot {
+  name Dot14
+  xpos -776
+  ypos 290
+ }
+push $N3ae92480
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {0}
+   B
+   A
+  }
+  fromInput2 {
+   {1}
+   B
+   A
+  }
+  in2 rgba
+  out2 forward
+  mappings "6 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3 rgba.red 1 0 forward.u 1 0 rgba.red 1 0 forward.v 1 1"
+  name Shuffle8
+  xpos -920
+  ypos 287
+ }
+ IDistort {
+  uv forward
+  uv_offset 0.096
+  uv_scale 1.1
+  name IDistort2
+  xpos -920
+  ypos 329
+ }
+ Dot {
+  name Dot15
+  xpos -886
+  ypos 974
+ }
+set N3ae93680 [stack 0]
+ Dot {
+  name Dot16
+  xpos -782
+  ypos 974
+ }
+set N3ae93b00 [stack 0]
+ Dot {
+  name Dot18
+  xpos -611
+  ypos 974
+ }
+ Noise {
+  replace true
+  size 7
+  zoffset {{frame}}
+  center {1686 1014}
+  name Noise4
+  xpos -645
+  ypos 1005
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.47
+  whitepoint 0.58
+  gamma 1.28
+  name Grade8
+  xpos -645
+  ypos 1029
+ }
+push $N3ae93b00
+ Noise {
+  replace true
+  size 11.5
+  zoffset {{frame}}
+  center {1686 1014}
+  name Noise3
+  xpos -816
+  ypos 1009
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.47
+  gamma 1.28
+  name Grade6
+  xpos -816
+  ypos 1033
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge6
+  xpos -816
+  ypos 1125
+ }
+clone $Cd026a800 {
+  xpos -816
+  ypos 1191
+  selected false
+ }
+ Dot {
+  name Dot17
+  xpos -782
+  ypos 1264
+ }
+push $N3ae93680
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge5
+  xpos -920
+  ypos 1261
+ }
+ Dot {
+  name Dot19
+  xpos -886
+  ypos 1421
+ }
+set N3ae94d00 [stack 0]
+ Dot {
+  name Dot20
+  xpos -743
+  ypos 1421
+ }
+ Noise {
+  replace true
+  size 64
+  zoffset {{frame}}
+  translate {0 500}
+  center {1686 1014}
+  name Noise6
+  xpos -777
+  ypos 1456
+ }
+clone $Cd026a800 {
+  xpos -777
+  ypos 1521
+  selected false
+ }
+ Dot {
+  name Dot22
+  xpos -743
+  ypos 1596
+ }
+push $N3ae94d00
+ Grade {
+  inputs 1+1
+  channels alpha
+  blackpoint 0.0005
+  whitepoint 0.64
+  gamma 1.52
+  white_clamp true
+  name Grade9
+  xpos -920
+  ypos 1587
+ }
+ Dot {
+  name Dot23
+  xpos -886
+  ypos 1712
+ }
+set N4f4e0000 [stack 0]
+ Dot {
+  name Dot24
+  xpos -743
+  ypos 1712
+ }
+ Noise {
+  replace true
+  size 64
+  zoffset {{frame}}
+  translate {700 700}
+  center {1686 1014}
+  name Noise8
+  xpos -777
+  ypos 1771
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.19
+  whitepoint 0.24
+  gamma 0.98
+  name Grade14
+  xpos -777
+  ypos 1795
+ }
+clone $Cd026a800 {
+  xpos -777
+  ypos 1845
+  selected false
+ }
+ Dot {
+  name Dot26
+  xpos -743
+  ypos 1921
+ }
+push $N4f4e0000
+ Grade {
+  inputs 1+1
+  channels alpha
+  blackpoint 0.145
+  white_clamp true
+  name Grade15
+  xpos -920
+  ypos 1912
+ }
+ Dot {
+  name Dot9
+  xpos -886
+  ypos 2020
+ }
+set N4f4e1200 [stack 0]
+ Dot {
+  name Dot10
+  xpos -776
+  ypos 2020
+ }
+ Noise {
+  replace true
+  size 1.9
+  zoffset {{frame}}
+  center {1686 1014}
+  name Noise1
+  xpos -810
+  ypos 2089
+ }
+clone $Cd026a800 {
+  xpos -810
+  ypos 2113
+  selected false
+ }
+ Dot {
+  name Dot11
+  xpos -776
+  ypos 2183
+ }
+push $N4f4e1200
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {0}
+   B
+   A
+  }
+  fromInput2 {
+   {1}
+   B
+   A
+  }
+  in2 rgba
+  out2 forward
+  mappings "6 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3 rgba.red 1 0 forward.u 1 0 rgba.red 1 0 forward.v 1 1"
+  name Shuffle7
+  xpos -920
+  ypos 2180
+ }
+ IDistort {
+  uv forward
+  uv_offset 0.285
+  uv_scale 2.7
+  name IDistort1
+  xpos -920
+  ypos 2222
+ }
+ Output {
+  name Output1
+  xpos -920
+  ypos 2483
+ }
+end_group

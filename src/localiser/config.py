@@ -158,6 +158,16 @@ class LocalConfig:
     hosts: dict = field(default_factory=dict)  # host -> series the user has enabled, for sync-all and the tray app
     check_interval_minutes: int = DEFAULT_CHECK_INTERVAL_MINUTES
     auto_sync: bool = True  # whether the tray app applies updates itself
+    remote_locked: bool = False  # the repository comes from TLS_PIPELINE_REPOSITORY, so it can't be changed here
+
+
+REPOSITORY_VARIABLE = "TLS_PIPELINE_REPOSITORY"  # an organisation's (or user's) repository; wins over config.json
+
+
+def managed_repository(environ: Mapping[str, str] | None = None) -> str | None:
+    """The repository supplied by the environment (user or system variable), or None if there isn't one."""
+    environ = os.environ if environ is None else environ
+    return environ.get(REPOSITORY_VARIABLE, "").strip() or None
 
 
 def default_pipeline_root(environ: Mapping[str, str] | None = None, platform: str | None = None) -> Path | None:
@@ -224,26 +234,34 @@ def _remote(value, base: Path, what: str):
     return _folder(value, base, what)
 
 
-def parse_local_config(text: str, base: Path) -> LocalConfig:
-    """Parse config.json text; relative paths resolve against `base`, the folder containing the file."""
+def parse_local_config(text: str, base: Path, environ: Mapping[str, str] | None = None) -> LocalConfig:
+    """Parse config.json text; relative paths resolve against `base`, the folder containing the file.
+
+    TLS_PIPELINE_REPOSITORY in `environ` (the process environment by default) takes precedence over the file."""
     data = _load_object(text, "local config")
     _check_schema(data, "local config")
     auto_sync = data.get("auto_sync", True)
     if type(auto_sync) is not bool:
         raise ConfigError(f"auto_sync must be true or false: {auto_sync!r}")
+    managed = managed_repository(environ)
+    if managed:
+        remote = _remote(managed, base, REPOSITORY_VARIABLE)
+    else:
+        remote = _remote(data.get("remote_repository"), base, "remote_repository")
     return LocalConfig(
-        remote_repository=_remote(data.get("remote_repository"), base, "remote_repository"),
+        remote_repository=remote,
         bundle_repository=_folder(data.get("bundle_repository", "./bundles"), base, "bundle_repository"),
         hosts=_hosts(data.get("hosts")),
         check_interval_minutes=_interval(data.get("check_interval_minutes")),
         auto_sync=auto_sync,
+        remote_locked=bool(managed),
     )
 
 
-def load_local_config(path: Path) -> LocalConfig:
+def load_local_config(path: Path, environ: Mapping[str, str] | None = None) -> LocalConfig:
     path = Path(path).absolute()
     try:
         text = path.read_text(encoding="utf-8-sig")
     except OSError as exc:
         raise ConfigError(f"local config not readable ({exc}); installation or repair is required") from None
-    return parse_local_config(text, path.parent)
+    return parse_local_config(text, path.parent, environ)

@@ -1,0 +1,75 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name HighPass_Filter
+ tile_color 0xcc7946ff
+ selected true
+ xpos 2160
+ ypos -4569
+ addUserKnob {20 HighPass}
+ addUserKnob {41 size T Blur8.size}
+ addUserKnob {41 mix T Merge14.mix}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 592
+  ypos -657
+ }
+ Dot {
+  name Dot21
+  xpos 626
+  ypos -406
+ }
+set Ne0064400 [stack 0]
+ Dot {
+  name Dot22
+  xpos 516
+  ypos -406
+ }
+set Ne031bc00 [stack 0]
+push $Ne031bc00
+ Blur {
+  size 1.4
+  name Blur8
+  xpos 262
+  ypos -415
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge12
+  xpos 262
+  ypos -289
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 0.5
+  name Constant1
+  xpos 372
+  ypos -553
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge13
+  xpos 372
+  ypos -217
+ }
+push $Ne0064400
+ Merge2 {
+  inputs 2
+  operation overlay
+  name Merge14
+  selected true
+  xpos 592
+  ypos -217
+ }
+ Output {
+  name Output1
+  xpos 592
+  ypos -33
+ }
+end_group

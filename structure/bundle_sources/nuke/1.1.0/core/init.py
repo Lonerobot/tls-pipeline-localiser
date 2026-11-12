@@ -33,7 +33,7 @@ def release_version():
 
 def get_line_logo_with_version():
     """Get the LINE logo"""
-    return f"""
+    return r"""
   _____ _  _ ___   _	___ _  _ ___			
  |_   _| || | __| | |  |_ _| \| | __|   		
 _______________________________________          

@@ -1,1 +1,0 @@
-./ayon_console.exe --use-dev addon the_line tvpaint worker --app-name tvpaint/TVPaint_11.7_pro

@@ -103,14 +103,20 @@ def is_due(status: dict | None, interval_minutes: int, now: datetime | None = No
     return (now - checked).total_seconds() >= interval_minutes * 60
 
 
-def run_cycle(config: LocalConfig, environ: Mapping[str, str], auto_sync: bool | None = None) -> CycleResult:
+def run_cycle(
+    config: LocalConfig, environ: Mapping[str, str], auto_sync: bool | None = None, progress=None
+) -> CycleResult:
     """Check every enabled host and series; when auto-sync is on, install and select what is newer.
 
     One entry failing never stops the others, and the result is recorded for the hosts and the window.
-    """
+    `progress(done, total, label)` is called before each entry and once more at the end, from whichever thread
+    runs the cycle."""
     auto_sync = config.auto_sync if auto_sync is None else auto_sync
     entries, changes, synced = [], [], False
-    for host, series in enabled_entries(config):
+    todo = enabled_entries(config)
+    for done, (host, series) in enumerate(todo):
+        if progress:
+            progress(done, len(todo), f"{display_name(host)} {series}")
         entry = check_entry(host, series, config, environ)
         if auto_sync and entry.state in NEEDS_SYNC:
             after = sync_entry(host, series, config, environ)
@@ -119,13 +125,15 @@ def run_cycle(config: LocalConfig, environ: Mapping[str, str], auto_sync: bool |
                 changes.append(Change(host, series, entry.selected, after.selected))
             entry = after
         entries.append(entry)
+    if progress:
+        progress(len(todo), len(todo), "Finishing")
     write_status(config, entries)
     return CycleResult(entries, changes, synced)
 
 
-def sync_now(config: LocalConfig, environ: Mapping[str, str]) -> CycleResult:
+def sync_now(config: LocalConfig, environ: Mapping[str, str], progress=None) -> CycleResult:
     """A cycle with auto-sync forced on: what the user gets from "Sync now"."""
-    return run_cycle(config, environ, auto_sync=True)
+    return run_cycle(config, environ, auto_sync=True, progress=progress)
 
 
 def change_message(changes: list) -> str:
@@ -144,6 +152,20 @@ class HostChoice:
 
 def _series_key(series: str) -> list:
     return [int(part) if part.isdigit() else 0 for part in series.split(".")]
+
+
+def launcher_choices(config: LocalConfig | None, roots: list | None = None) -> list:
+    """What the launcher offers: (host, series) for each host with an enabled series installed here, using the
+    newest such series, ordered by name."""
+    if config is None:
+        return []
+    choices = []
+    for name in HOSTS:
+        installed = set(detect_installed_series(name, roots))
+        usable = sorted(installed & set(config.hosts.get(name, ())), key=_series_key)
+        if usable:
+            choices.append((name, usable[-1]))
+    return sorted(choices, key=lambda choice: display_name(choice[0]).lower())
 
 
 def host_choices(config: LocalConfig | None, roots: list | None = None) -> list:

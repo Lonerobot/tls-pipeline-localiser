@@ -1,0 +1,124 @@
+set cut_paste_input [stack 0]
+version 10.5 v3
+push $cut_paste_input
+Group {
+ name ColourKey
+ tile_color 0xff00ff
+ selected true
+ xpos -605
+ ypos 131
+ addUserKnob {20 User}
+ addUserKnob {41 Keycolor T Constant1.color}
+ addUserKnob {41 gain T Difference1.gain}
+ addUserKnob {41 color T Constant2.color}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -642
+  ypos -50
+ }
+ Dot {
+  name Dot2
+  xpos -608
+  ypos 68
+ }
+set Ndd7bbc00 [stack 0]
+ Constant {
+  inputs 0
+  color {1.875 0.865 1.445 1.68}
+  name Constant1
+  xpos -367
+  ypos 41
+ }
+ Difference {
+  inputs 2
+  name Difference1
+  xpos -491
+  ypos 59
+ }
+ Constant {
+  inputs 0
+  color 0.555
+  name Constant2
+  xpos -364
+  ypos 131
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -491
+  ypos 149
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -493
+  ypos 204
+ }
+ Dot {
+  name Dot3
+  xpos -457
+  ypos 283
+ }
+set N56c29400 [stack 0]
+push $Ndd7bbc00
+ Dot {
+  name Dot4
+  xpos -608
+  ypos 192
+ }
+set N317e4400 [stack 0]
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge1
+  xpos -642
+  ypos 280
+ }
+ Dot {
+  name Dot1
+  xpos -608
+  ypos 454
+ }
+push $N317e4400
+push $N56c29400
+ Premult {
+  name Premult2
+  xpos -491
+  ypos 315
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge3
+  xpos -491
+  ypos 371
+ }
+ Unpremult {
+  name Unpremult1
+  xpos -491
+  ypos 395
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos -491
+  ypos 451
+ }
+ Output {
+  name Output1
+  selected true
+  xpos -491
+  ypos 565
+ }
+ Viewer {
+  frame_range 0-167
+  fps 25
+  name Viewer1
+  xpos -911
+  ypos 408
+ }
+end_group

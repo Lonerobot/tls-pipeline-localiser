@@ -1,0 +1,13 @@
+{
+  "TL_AYONShotBoard": {
+    "display_name": "AYON Shot Board",
+    "folder_path": "TL_AYONShotBoard",
+    "version": "0.1.0",
+    "enabled": true,
+    "build_menu": false,
+    "build_toolbar": false,
+    "description": "Load AYON reviews and plates into shot backdrops",
+    "author": "The Line",
+    "priority": 60
+  }
+}

@@ -1,0 +1,85 @@
+set cut_paste_input [stack 0]
+version 15.1 v2
+push $cut_paste_input
+Group {
+ name Alpha_Fix
+ selected true
+ xpos -1897
+ ypos -6666
+ addUserKnob {20 User}
+ addUserKnob {41 size T Dilate1.size}
+ addUserKnob {7 edgeprotect l "Outline protect" R 1 10}
+ edgeprotect 4
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -907
+  ypos -288
+ }
+ Dot {
+  name Dot4
+  xpos -873
+  ypos -248
+ }
+set N6d092400 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1179
+  ypos -248
+ }
+ Dilate {
+  channels alpha
+  size 3
+  name Dilate1
+  xpos -1213
+  ypos -218
+ }
+ Dilate {
+  channels alpha
+  size {{-parent.Dilate1.size}}
+  name Dilate2
+  xpos -1213
+  ypos -182
+ }
+ Dot {
+  name Dot6
+  xpos -1179
+  ypos -137
+ }
+set N53662400 [stack 0]
+ EdgeDetect {
+  channels alpha
+  name EdgeDetectCore1
+  xpos -1046
+  ypos -146
+ }
+ Dilate {
+  channels alpha
+  size {{parent.Dilate1.size*parent.edgeprotect}}
+  name Dilate3
+  xpos -1046
+  ypos -96
+ }
+push $N53662400
+ Dot {
+  name Dot5
+  xpos -1179
+  ypos -32
+ }
+push $N6d092400
+ Keymix {
+  inputs 3
+  channels alpha
+  invertMask true
+  bbox B
+  name Keymix1
+  xpos -907
+  ypos -41
+ }
+ Output {
+  name Output1
+  xpos -907
+  ypos 59
+ }
+end_group

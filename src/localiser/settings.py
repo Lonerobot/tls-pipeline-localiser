@@ -6,14 +6,12 @@ rejected change leaves the file as it was.
 """
 import json
 import os
-from dataclasses import replace
 from pathlib import Path
 from typing import Iterable, Mapping
 
-from .config import LocalConfig, parse_local_config, validate_host, validate_series
+from .config import REPOSITORY_VARIABLE, LocalConfig, managed_repository, parse_local_config, validate_host, validate_series
 from .errors import ConfigError
 from .fsutil import atomic_write_text
-from .provision import Action, provision, unprovision
 
 EDITABLE_KEYS = ("remote_repository", "bundle_repository", "hosts", "check_interval_minutes", "auto_sync")
 SCHEMA_VERSION = 1
@@ -53,61 +51,34 @@ def _json_value(key: str, value):
     return value
 
 
-def save_local_config(path: Path, changes: Mapping) -> LocalConfig:
-    """Apply `changes` to the config file at `path` (created if missing) and return the validated result."""
+def save_local_config(path: Path, changes: Mapping, environ: Mapping[str, str] | None = None) -> LocalConfig:
+    """Apply `changes` to the config file at `path` (created if missing) and return the validated result.
+
+    While TLS_PIPELINE_REPOSITORY is set the repository belongs to the organisation: it is never written to
+    the file, and trying to change it is an error."""
     path = Path(path).absolute()
     unknown = sorted(set(changes) - set(EDITABLE_KEYS))
     if unknown:
         raise ConfigError(f"cannot change {', '.join(unknown)}; editable keys are {', '.join(EDITABLE_KEYS)}")
+    if "remote_repository" in changes and managed_repository(environ):
+        raise ConfigError(f"the pipeline repository is controlled by your organisation ({REPOSITORY_VARIABLE})")
     document = _read_document(path)
     document.setdefault("schema_version", SCHEMA_VERSION)
     for key, value in changes.items():
         document[key] = _json_value(key, value)
     text = json.dumps(document, indent=4) + "\n"
-    config = parse_local_config(text, path.parent)  # raises ConfigError, before anything is written
+    config = parse_local_config(text, path.parent, environ)  # raises ConfigError, before anything is written
     atomic_write_text(path, text)
     return config
 
 
-def _leaving(old: Mapping, new: Mapping) -> dict:
-    """What `unprovision` should remove. Maya and Nuke have one entry for all series, so those only go when
-    the last series does; Blender has an entry per series."""
-    leaving = {}
-    for host, old_series in old.items():
-        new_series = tuple(new.get(host, ()))
-        if host == "blender":
-            gone = tuple(series for series in old_series if series not in new_series)
-        else:
-            gone = tuple(old_series) if not new_series else ()
-        if gone:
-            leaving[host] = gone
-    return leaving
-
-
 def apply_hosts(
-    root: Path,
-    enabled: Mapping[str, Iterable[str]],
+    root: Path, enabled: Mapping[str, Iterable[str]], changes: Mapping | None = None,
     environ: Mapping[str, str] | None = None,
-    changes: Mapping | None = None,
-) -> tuple[LocalConfig, list[Action]]:
-    """Enable exactly the hosts and series in `enabled`: save the config, remove the entries of what was
-    switched off, and install the entry for what is on. Idempotent.
+) -> LocalConfig:
+    """Enable exactly the hosts and series in `enabled` and save the config. Idempotent.
 
-    `changes` (other local config keys) go into the same validated write, so a bad value changes nothing."""
-    root = Path(root)
-    config_path = root / "config.json"
-    old = _read_current(config_path)
+    `changes` (other local config keys) go into the same validated write, so a bad value changes nothing.
+    Nothing else is written: a host gets the pipeline through its launcher's environment (see `launch`)."""
     saved = {**(changes or {}), "hosts": {host: list(series) for host, series in enabled.items()}}
-    config = save_local_config(config_path, saved)
-    actions = unprovision(replace(config, hosts=_leaving(old.hosts, config.hosts)), environ) if old else []
-    actions += provision(root, config, environ)
-    return config, actions
-
-
-def _read_current(config_path: Path) -> LocalConfig | None:
-    if not config_path.is_file():
-        return None
-    try:
-        return parse_local_config(config_path.read_text(encoding="utf-8-sig"), config_path.parent)
-    except (ConfigError, OSError):
-        return None  # can't tell what was enabled before; nothing is removed
+    return save_local_config(Path(root) / "config.json", saved, environ)

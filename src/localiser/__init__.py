@@ -1,5 +1,13 @@
 """Pipeline localiser core: resolve, localise and verify versioned releases. Imports no DCC modules."""
 from .api import LocalisedRelease, ensure_local_release, expose_environment, host_variable, localise
+from .clone import (
+    clone_bundle,
+    get_override,
+    installed_releases,
+    list_clones,
+    read_overrides,
+    set_override,
+)
 from .config import (
     LocalConfig,
     Manifest,
@@ -19,6 +27,7 @@ from .errors import (
     VerificationError,
 )
 from .publisher import BundlePlan, materialize_plan, plan_bundle, publish_bundle, publish_plan, publish_release
+from .install_code import install_pipeline_code
 from .provision import Action, provision, unprovision
 from .settings import apply_hosts, save_local_config
 from .status import (
@@ -31,6 +40,7 @@ from .status import (
     sync_entry,
 )
 from .sync import (
+    clean_legacy_dev_copies,
     dev_release,
     host_enabled,
     load_prepared_release,

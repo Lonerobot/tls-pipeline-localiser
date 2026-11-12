@@ -1,0 +1,95 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10145_toban/003_REFERENCE/toban_GradeReference/29 (316).jpg"
+ format "1280 544 0 0 1280 544 1 "
+ origset true
+ auto_alpha true
+ name Read53
+ selected true
+ xpos 400
+ ypos 1569
+}
+Crop {
+ box {1171.400024 432.6000061 1203.599976 485.2000122}
+ reformat true
+ crop false
+ name Crop1
+ selected true
+ xpos 400
+ ypos 1719
+}
+Saturation {
+ saturation 0
+ name Saturation1
+ selected true
+ xpos 400
+ ypos 1743
+}
+Grade {
+ blackpoint 0.002
+ whitepoint 0.06
+ name Grade2
+ selected true
+ xpos 400
+ ypos 1767
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle1
+ selected true
+ xpos 400
+ ypos 1791
+}
+Transform {
+ scale 1.08
+ center {16.5 26}
+ name Transform2
+ selected true
+ xpos 400
+ ypos 1815
+}
+Dot {
+ name Dot1
+ selected true
+ xpos 434
+ ypos 2082
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file "Y:/PROJECTS/10145_toban/003_REFERENCE/toban_GradeReference/29 (1228).jpg"
+ format "1024 423 0 0 1024 423 1 "
+ origset true
+ name Read52
+ selected true
+ xpos 510
+ ypos 1065
+}
+OCIOColorSpace {
+ in_colorspace "Output - sRGB"
+ out_colorspace "ACES - ACEScg"
+ name OCIOColorSpace2
+ selected true
+ xpos 510
+ ypos 2031
+}
+Convolve2 {
+ inputs 2
+ name Convolve1
+ selected true
+ xpos 510
+ ypos 2073
+}
+OCIOColorSpace {
+ in_colorspace "ACES - ACEScg"
+ out_colorspace "Output - sRGB"
+ name OCIOColorSpace1
+ selected true
+ xpos 510
+ ypos 2127
+}

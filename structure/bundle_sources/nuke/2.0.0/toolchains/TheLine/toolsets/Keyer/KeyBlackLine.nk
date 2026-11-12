@@ -1,0 +1,51 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name KeyBlackLine
+ selected true
+ xpos -260
+ ypos -153
+ addUserKnob {20 User}
+ addUserKnob {41 channels T Grade1.channels}
+ addUserKnob {41 whitepoint T Grade1.whitepoint}
+ addUserKnob {41 gamma T Grade1.gamma}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -27
+  ypos 5
+ }
+ Grade {
+  whitepoint 0.46
+  gamma 1.54
+  name Grade1
+  xpos -27
+  ypos 45
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle1
+  xpos -27
+  ypos 69
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -27
+  ypos 93
+ }
+ Premult {
+  name Premult1
+  xpos -27
+  ypos 129
+ }
+ Output {
+  name Output1
+  xpos -27
+  ypos 229
+ }
+end_group

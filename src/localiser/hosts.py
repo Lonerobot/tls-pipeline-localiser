@@ -22,6 +22,7 @@ class HostInfo:
     shared_destination: str = "."  # where shared packages are merged into a bundle
     install_folder: str = ""  # under Program Files; where this host's versions are installed
     install_pattern: str = ""  # a regex whose first group is the series, matched against folder names
+    executable: str = ""  # the program inside an install folder, with {series} filled in
 
     @property
     def icon(self) -> Path | None:
@@ -31,10 +32,12 @@ class HostInfo:
 
 HOSTS: dict[str, HostInfo] = {
     "maya": HostInfo(
-        "maya", "Maya", "PYTHONPATH", install_folder="Autodesk", install_pattern=r"^Maya(\d{4})$"
+        "maya", "Maya", "PYTHONPATH", install_folder="Autodesk", install_pattern=r"^Maya(\d{4})$",
+        executable="bin/maya.exe",
     ),
     "nuke": HostInfo(
-        "nuke", "Nuke", "NUKE_PATH", install_folder="", install_pattern=r"^Nuke(\d+\.\d+)v\d+$"
+        "nuke", "Nuke", "NUKE_PATH", install_folder="", install_pattern=r"^Nuke(\d+\.\d+)v\d+$",
+        executable="Nuke{series}.exe",
     ),
     "blender": HostInfo(
         "blender",
@@ -44,6 +47,7 @@ HOSTS: dict[str, HostInfo] = {
         shared_destination="modules",
         install_folder="Blender Foundation",
         install_pattern=r"^Blender (\d+\.\d+)$",
+        executable="blender.exe",
     ),
 }
 
@@ -77,3 +81,30 @@ def detect_installed_series(host: str, roots: list[Path] | None = None) -> list[
             continue
         found.update(match.group(1) for name in names if (match := pattern.match(name)))
     return sorted(found, key=lambda series: [int(part) for part in series.split(".")])
+
+
+def find_executable(host: str, series: str, roots: list[Path] | None = None) -> Path | None:
+    """The program that starts `host` `series` from the standard Windows install locations, or None if it isn't
+    installed there. Of several patch builds of one series (Nuke 15.1v2 and 15.1v10) the newest is used."""
+    info = HOSTS.get(host)
+    if info is None or not info.install_pattern or not info.executable:
+        return None
+    pattern = re.compile(info.install_pattern)
+    found = []
+    for root in program_files_roots() if roots is None else roots:
+        parent = root / info.install_folder if info.install_folder else root
+        try:
+            folders = [entry for entry in parent.iterdir() if entry.is_dir()]
+        except OSError:
+            continue
+        found += [
+            (tuple(int(part) for part in re.findall(r"\d+", folder.name)), folder)
+            for folder in folders
+            if (match := pattern.match(folder.name)) and match.group(1) == series
+        ]
+    for _, folder in sorted(found, reverse=True):
+        program = folder / info.executable.format(series=series)
+        if program.is_file():
+            return program
+    return None
+

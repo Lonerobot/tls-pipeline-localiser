@@ -1,0 +1,438 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read369
+ selected true
+ xpos -2083
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read368
+ selected true
+ xpos -2193
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/SodiumVapor_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read367
+ selected true
+ xpos -2303
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read366
+ selected true
+ xpos -2413
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read365
+ selected true
+ xpos -2523
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read364
+ selected true
+ xpos -2523
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Magic_Hour_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read363
+ selected true
+ xpos -2633
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_4_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read362
+ selected true
+ xpos -2743
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_4.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read361
+ selected true
+ xpos -2853
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_3_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read360
+ selected true
+ xpos -2963
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read359
+ selected true
+ xpos -3073
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_2_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read358
+ selected true
+ xpos -3183
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read357
+ selected true
+ xpos -3293
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read356
+ selected true
+ xpos -3403
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Fluorescent_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read355
+ selected true
+ xpos -3513
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_3.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read354
+ selected true
+ xpos -3623
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_2_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read353
+ selected true
+ xpos -3623
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_2.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read352
+ selected true
+ xpos -3733
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_1_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read351
+ selected true
+ xpos -3843
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/Dawn_1.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read350
+ selected true
+ xpos -3953
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Half_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read349
+ selected true
+ xpos -4063
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Half.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read348
+ selected true
+ xpos -4173
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Full_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read347
+ selected true
+ xpos -4283
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Full.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read346
+ selected true
+ xpos -4393
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Double_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read345
+ selected true
+ xpos -4503
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTO_Double.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read344
+ selected true
+ xpos -4613
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Half_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read343
+ selected true
+ xpos -4723
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Half.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read342
+ selected true
+ xpos -4723
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Full_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read341
+ selected true
+ xpos -4833
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Full.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read340
+ selected true
+ xpos -4943
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Double_Grad.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read339
+ selected true
+ xpos -5053
+ ypos 1152
+}
+Read {
+ inputs 0
+ file_type mov
+ file Y:/TOOLS/Resources/StockFootage/CineGrain/Optical_Filters/CTB_Double.mov
+ format "4096 2304 0 0 4096 2304 1 "
+ last 240
+ origlast 240
+ origset true
+ name Read338
+ selected true
+ xpos -5163
+ ypos 1152
+}
+ContactSheet {
+ inputs 32
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet28
+ tile_color 0xe955ffff
+ selected true
+ xpos -2083
+ ypos 1278
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}

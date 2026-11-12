@@ -1,0 +1,5 @@
+[2026-11-12 13:07:36,890][tls.nuke.ShortcutManager][INFO] Shortcuts disabled in main configuration - skipping shortcuts.json
+[2026-11-12 13:07:36,890][tls.nuke.ShortcutManager][WARNING] No configuration loaded
+[2026-11-12 13:07:36,904][tls.nuke.Config][INFO] Configuration loaded from D:\repos\tls-pipeline-localiser\structure\bundle_sources\nuke\2.0.0\core\config.json
+[2026-11-12 13:07:36,905][tls.nuke.Grid][INFO] Grid settings are disabled in configuration. Skipping grid setup.
+[2026-11-12 13:07:36,944][tls.nuke.Toolchain][INFO] [TheLine] Shortcut registered : paste_clipboard_image [ctrl+shift+v]

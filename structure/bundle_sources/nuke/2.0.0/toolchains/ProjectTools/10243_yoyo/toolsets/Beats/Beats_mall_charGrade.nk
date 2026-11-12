@@ -1,0 +1,132 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Shad/ bt3_mall_3Qrts_shad_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read31
+ selected true
+ xpos -2570
+ ypos -9429
+}
+Constant {
+ inputs 0
+ color {0.637597 0.304987 0.361307 1}
+ name Constant3
+ selected true
+ xpos -2570
+ ypos -9543
+}
+Read {
+ inputs 0
+ file_type png
+ file "Y:/PROJECTS/10146_beats3/shots/mall/mall_3Quarts/work/2d_clean/PNG/v006/Col/ bt3_mall_3Qrts_col_v####.png"
+ format "2048 1152 0 0 2048 1152 1 10146_beats3"
+ last 272
+ origlast 272
+ origset true
+ name Read32
+ selected true
+ xpos -1972
+ ypos -9885
+}
+ColorCorrect {
+ shadows.offset {0.035 0.02 0.012 0.02}
+ shadows.offset_panelDropped true
+ lookup {shadow {curve 1 s0 x0.109637171 0 s0}
+   midtone {1-shadow-highlight}
+   highlight {}}
+ unpremult rgba.alpha
+ name ColorCorrect17
+ selected true
+ xpos -1972
+ ypos -9801
+}
+Dot {
+ name Dot8
+ selected true
+ xpos -1938
+ ypos -9588
+}
+set Naf836800 [stack 0]
+Dot {
+ name Dot11
+ selected true
+ xpos -2206
+ ypos -9588
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge11
+ selected true
+ xpos -2240
+ ypos -9519
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy2
+ selected true
+ xpos -2240
+ ypos -9405
+}
+Premult {
+ name Premult10
+ selected true
+ xpos -2240
+ ypos -9369
+}
+push $Naf836800
+Merge2 {
+ inputs 2
+ name Merge12
+ selected true
+ xpos -1972
+ ypos -9369
+}
+Transform {
+ translate {-133 212}
+ center {1024 576}
+ name Transform1
+ selected true
+ xpos -1972
+ ypos -9153
+}
+Read {
+ inputs 0
+ file_type png
+ file C:/Users/freddie/Downloads/SkinColour.png
+ format "1414 1141 0 0 1414 1141 1 "
+ origset true
+ name Read29
+ selected true
+ xpos -1470
+ ypos -9351
+}
+Crop {
+ box {712 0 1414 1141}
+ name Crop5
+ selected true
+ xpos -1470
+ ypos -9267
+}
+Reformat {
+ resize none
+ name Reformat1
+ selected true
+ xpos -1470
+ ypos -9243
+}
+Merge2 {
+ inputs 2
+ name Merge23
+ selected true
+ xpos -1470
+ ypos -9033
+}

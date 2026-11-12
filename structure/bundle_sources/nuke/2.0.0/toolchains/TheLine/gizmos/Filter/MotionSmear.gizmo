@@ -1,0 +1,92 @@
+#! C:/Program Files/Nuke11.3v6/nuke-11.3.6.dll -nx
+version 11.3 v6
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {41 Size l "Smear Size" t "Size of the round smear." T ErodeRound1.size}
+ addUserKnob {41 Orientation t "Orientation of the streaks." T Rotator.rotate}
+ addUserKnob {41 SuperSampling l "Super Sampling" t "Scalar of the pre-processed image." T Reformat31.scale}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 183
+  ypos 203
+ }
+ Reformat {
+  type scale
+  scale 8
+  filter Lanczos6
+  pbb true
+  name Reformat31
+  xpos 183
+  ypos 261
+ }
+ Transform {
+  center {{input.width/2} {input.height/2}}
+  black_outside false
+  name Rotator
+  xpos 183
+  ypos 287
+ }
+ Reformat {
+  type "to box"
+  box_width {{1.05*bbox.w}}
+  box_height {{1.05*bbox.h}}
+  box_fixed true
+  resize none
+  name Reformat33
+  xpos 183
+  ypos 309
+ }
+ Transform {
+  scale {0.05 1}
+  center {{parent.Reformat33.box_width/2 x-1.400000095 0} {parent.Reformat33.box_height/2 x-1.400000095 0}}
+  filter Lanczos6
+  black_outside false
+  name Ratio
+  xpos 183
+  ypos 335
+ }
+ Y://TOOLS/CompTools/nuke/NukeTools_Library/01_Gizmos/Filter/ErodeRound.gizmo {
+  name ErodeRound1
+  xpos 183
+  ypos 381
+ }
+ Transform {
+  scale {{1/parent.Ratio.scale.w} 1}
+  center {{parent.Ratio.center.x} {parent.Ratio.center.y}}
+  filter Lanczos6
+  black_outside false
+  name Transform27
+  xpos 183
+  ypos 414
+ }
+ Transform {
+  rotate {{-parent.Rotator.rotate}}
+  center {{input.width/2} {input.height/2}}
+  black_outside false
+  name Transform25
+  xpos 183
+  ypos 456
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat31.scale}}
+  filter Lanczos6
+  pbb true
+  name Reformat32
+  xpos 183
+  ypos 482
+ }
+ Reformat {
+  resize none
+  name Reformat34
+  xpos 183
+  ypos 566
+ }
+ Output {
+  name Output1
+  xpos 183
+  ypos 666
+ }
+end_group

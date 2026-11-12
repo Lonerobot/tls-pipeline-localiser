@@ -67,7 +67,7 @@ def main():
     parser.add_argument("host", choices=sorted(ENVIRONMENT))
     parser.add_argument("--gui", action="store_true", help="launch the full application instead of headless")
     parser.add_argument("--exe", help="override the executable path")
-    parser.add_argument("--source", metavar="DIR", help="run this unpublished bundle source folder (dev mode)")
+    parser.add_argument("--source", metavar="DIR", help="run this unpublished bundle source folder in place (dev mode)")
     parser.add_argument("--bundle", metavar="RELEASE", help="use this installed release for this run only")
     parser.add_argument("--no-sync", action="store_true", help="run what was last synced, without checking the studio config")
     args = parser.parse_args()
@@ -84,7 +84,7 @@ def main():
         sync_first(args.host, env)
     if args.source:
         env[f"TLS_PIPELINE_{host}_SOURCE"] = str(Path(args.source).resolve())
-        env["TLS_PIPELINE_SHARED_SOURCES"] = str(SHARED)  # the packages every bundle gets at publish time
+        env["TLS_PIPELINE_SHARED_SOURCES"] = str(SHARED)  # the packages every bundle gets at publish time; put on sys.path in place
     if args.bundle:
         env[f"TLS_PIPELINE_{host}_BUNDLE"] = args.bundle
     for name in (f"TLS_PIPELINE_{host}_SOURCE", "TLS_PIPELINE_SHARED_SOURCES", f"TLS_PIPELINE_{host}_BUNDLE"):

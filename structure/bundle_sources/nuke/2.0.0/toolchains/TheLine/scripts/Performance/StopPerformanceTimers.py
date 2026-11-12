@@ -1,0 +1,4 @@
+import nuke
+
+nuke.stopPerformanceTimers()
+

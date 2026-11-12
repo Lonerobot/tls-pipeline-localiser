@@ -2,24 +2,31 @@
 import json
 import logging
 import os
+import re
 import shutil
-import time
-import uuid
 from pathlib import Path
 from typing import Mapping
 
 from .api import ROOT_VARIABLE, LocalisedRelease, host_variable, localise
-from .config import LocalConfig, default_pipeline_root, load_local_config, validate_host, validate_id, validate_series
-from .errors import ConfigError, ReleaseUnavailableError
+from .config import (
+    LocalConfig,
+    default_pipeline_root,
+    load_local_config,
+    validate_host,
+    validate_id,
+    validate_python_root,
+    validate_series,
+)
+from .errors import ConfigError, PublishError, ReleaseUnavailableError
 from .fsutil import atomic_write_text
 from .install import LocalRelease, _read_marker, ensure_release
-from .layout import DataLayout
+from .layout import CLONE_MARKER, DataLayout
 from .logs import log_event
-from .publisher import materialize_plan, plan_bundle
+from .publisher import plan_bundle
 from .resolve import override_variable
 
-SHARED_VARIABLE = "TLS_PIPELINE_SHARED_SOURCES"  # folders of shared packages merged into a dev source (os.pathsep list)
-DEV_KEEP_SECONDS = 3 * 24 * 3600  # unused dev copies older than this are removed the next time one is made
+SHARED_VARIABLE = "TLS_PIPELINE_SHARED_SOURCES"  # folders of shared packages a dev source gets on sys.path (os.pathsep list)
+_LEGACY_COPY = re.compile(r"^[0-9a-f]{8}$")  # what dev copies were named before dev sources ran in place
 
 
 def source_variable(host: str) -> str:
@@ -42,7 +49,7 @@ def pipeline_root(environ: Mapping[str, str]) -> Path:
 
 
 def pipeline_config(environ: Mapping[str, str]) -> LocalConfig:
-    return load_local_config(pipeline_root(environ) / "config.json")
+    return load_local_config(pipeline_root(environ) / "config.json", environ)
 
 
 def sync_release(
@@ -123,35 +130,56 @@ def _shared_folders(environ: Mapping[str, str]) -> list:
     return [part for part in environ.get(SHARED_VARIABLE, "").split(os.pathsep) if part.strip()]
 
 
-def _clean_dev_copies(host_dir: Path) -> None:
-    """Best effort: remove old throwaway copies. One still in use, or locked, is left alone."""
-    if not host_dir.is_dir():
-        return
-    cutoff = time.time() - DEV_KEEP_SECONDS
-    for entry in host_dir.iterdir():
-        try:
-            if entry.is_dir() and entry.stat().st_mtime < cutoff:
-                shutil.rmtree(entry, ignore_errors=True)
-        except OSError:
-            pass
+def read_clone_marker(folder: Path) -> dict | None:
+    """The marker `clone_bundle` leaves in a folder it made, or None if `folder` is an ordinary bundle source."""
+    try:
+        data = json.loads((Path(folder) / CLONE_MARKER).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def clean_legacy_dev_copies(config: LocalConfig) -> int:
+    """Best effort: remove the throwaway <host>/<8 hex>/<version> copies older versions made at every start.
+
+    Folders with a clone marker are the user's and are never touched. Returns how many were removed."""
+    removed = 0
+    dev = DataLayout(config.bundle_repository).dev
+    try:
+        folders = [path for host_dir in dev.iterdir() if host_dir.is_dir() for path in host_dir.iterdir()]
+    except OSError:
+        return 0
+    for folder in folders:
+        if folder.is_dir() and _LEGACY_COPY.match(folder.name) and read_clone_marker(folder) is None:
+            shutil.rmtree(folder, ignore_errors=True)
+            removed += not folder.exists()
+    return removed
 
 
 def dev_release(
     host: str, series: str, config: LocalConfig, source: str, environ: Mapping[str, str]
 ) -> LocalisedRelease:
-    """Run an unpublished bundle source folder: lay it out exactly as a release would extract, with the shared
-    packages merged in, in a throwaway folder. No zip, no checksum and no change to any selection."""
+    """Run an unpublished bundle source where it is. Nothing is copied: the copy was made at every DCC start, and
+    a DCC can start several processes. The shared packages are put on sys.path from their own folders instead
+    of being merged in. A folder made by `clone_bundle` is already a complete bundle. No change to any selection."""
     validate_host(host)
     validate_series(series)
     source_path = Path(source).resolve()
-    plan = plan_bundle(source_path, host, _shared_folders(environ))
-    host_dir = DataLayout(config.bundle_repository).dev / host
-    _clean_dev_copies(host_dir)
-    # The folder is named after the source (1.0.1, say), so anything that shows the release folder name shows that.
-    stage = host_dir / uuid.uuid4().hex[:8] / source_path.name
-    python_root = materialize_plan(plan, stage)
-    log_event(logging.WARNING, "dev_source_in_use", host=host, source=source_path, shared=",".join(plan.shared))
-    return LocalisedRelease(host, series, f"dev-{source_path.name}", "dev", stage, python_root)
+    marker = read_clone_marker(source_path)
+    if marker is not None:
+        python_root = validate_python_root(marker.get("python_root", "."))
+        shared = []
+        if not (source_path / python_root).is_dir():
+            raise PublishError(f"python_root {python_root!r} not found in the clone {source_path}")
+    else:
+        shared = _shared_folders(environ)
+        python_root = plan_bundle(source_path, host, shared).python_root  # checks it can be published as it runs
+    log_event(logging.WARNING, "dev_source_in_use", host=host, source=source_path, shared=",".join(shared))
+    return LocalisedRelease(
+        host, series, f"dev-{source_path.name}", "dev", source_path,
+        source_path if python_root == "." else source_path / python_root,
+        tuple(str(Path(folder).resolve()) for folder in shared),
+    )
 
 
 def startup_release(

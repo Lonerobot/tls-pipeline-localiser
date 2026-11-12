@@ -5,6 +5,7 @@ from .config import validate_host, validate_id, validate_series
 
 COMPLETE_MARKER = ".complete"
 HOSTS_DIR = "hosts"  # bundles live at <root>/hosts/<host>/<bundle_version>, on the remote and locally
+CLONE_MARKER = ".tls-clone.json"  # in a folder made by `clone_bundle`: a complete bundle to run in place
 
 
 class DataLayout:
@@ -15,7 +16,7 @@ class DataLayout:
         self.staging = self.root / "staging"
         self.locks = self.root / "locks"
         self.logs = self.root / "logs"
-        self.dev = self.root / "dev"  # throwaway copies of unpublished bundle sources, see sync.dev_release
+        self.dev = self.root / "dev"  # <host>/<tag>: bundles cloned for editing, see clone.clone_bundle
         self.last_known_config = self.state / "studio-config.json"
 
     def release_dir(self, package_id: str, release_id: str) -> Path:
@@ -36,6 +37,11 @@ class DataLayout:
         package_id = validate_id(package_id, "package_id")
         release_id = validate_id(release_id, "release_id")
         return self.state / "manifests" / package_id / f"{release_id}.json"
+
+    @property
+    def overrides_file(self) -> Path:
+        """Which cloned bundle each host and series launches with from the tray app, until it is cleared."""
+        return self.state / "overrides.json"
 
     @property
     def status_file(self) -> Path:

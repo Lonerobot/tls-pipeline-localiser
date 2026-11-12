@@ -1,0 +1,16 @@
+set cut_paste_input [stack 0]
+version 9.0 v8
+push $cut_paste_input
+NoOp {
+ name Orbit
+ selected true
+ xpos -280
+ ypos -178
+ addUserKnob {20 User}
+ addUserKnob {13 XYZ}
+ XYZ {{cos(Orbit.Speed)*Orbit.Size} 0 {sin(Orbit.Speed)*Orbit.Size}}
+ addUserKnob {7 Speed R 0 100}
+ Speed 6
+ addUserKnob {7 Size R 0 500}
+ Size 1.1
+}

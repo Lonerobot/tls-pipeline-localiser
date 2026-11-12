@@ -1,0 +1,71 @@
+set cut_paste_input [stack 0]
+version 9.0 v6
+BasicMaterial {
+ inputs 0
+ name BasicMaterial1
+ selected true
+ xpos -3472
+ ypos -1978
+}
+push 0
+Light2 {
+ inputs 0
+ intensity 4.8
+ translate {-3560 83 -2828}
+ depthmap_slope_bias 0.01
+ name Light1
+ selected true
+ xpos -3581
+ ypos -2104
+}
+push $cut_paste_input
+Dot {
+ name Dot2
+ selected true
+ xpos -3557
+ ypos -1872
+}
+set N56848c00 [stack 0]
+add_layer {ENV_WPOS ENV_WPOS.red ENV_WPOS.green ENV_WPOS.blue ENV_WPOS.alpha}
+add_layer {ENV_NORM ENV_NORM.red ENV_NORM.green ENV_NORM.blue ENV_NORM.alpha}
+PositionToPoints2 {
+ display textured
+ render_mode textured
+ P_channel ENV_WPOS
+ N_channel ENV_NORM
+ name PositionToPoints1
+ selected true
+ xpos -3591
+ ypos -1916
+}
+Scene {
+ inputs 2
+ name Scene1
+ selected true
+ xpos -3581
+ ypos -2002
+}
+push $N56848c00
+ReLight {
+ inputs 4
+ normal ENV_NORM
+ position ENV_WPOS
+ name ReLight1
+ selected true
+ xpos -3472
+ ypos -1916
+}
+Grade {
+ name Grade1
+ selected true
+ xpos -3472
+ ypos -1858
+}
+push 0
+Merge2 {
+ inputs 2
+ name Merge1
+ selected true
+ xpos -3472
+ ypos -1799
+}

@@ -6,11 +6,18 @@ How the folders in [`structure/`](.) relate, which script writes each one, and h
 
 ## Data flow
 
-![Data flow from bundle_sources through publish and sync to the running DCC](../docs/diagrams/data-flow.svg)
+<!-- ![Data flow from bundle_sources through publish and sync to the running DCC](../docs/diagrams/data-flow.svg) -->
+
+<img src="../docs/diagrams/data-flow.svg" alt="Data flow from bundle_sources through publish and sync to the running DCC" width="600">
+
 
 ## What each area is
 
-![Folder map grouped by who writes each area](../docs/diagrams/folder-map.svg)
+<!-- ![Folder map grouped by who writes each area](../docs/diagrams/folder-map.svg) -->
+
+<img src="../docs/diagrams/folder-map.svg" alt="Folder map grouped by who writes each area" width="400">
+
+
 
 | Area | Role | Written by |
 |---|---|---|
@@ -29,7 +36,11 @@ How the folders in [`structure/`](.) relate, which script writes each one, and h
 
 ## Making a new bundle
 
-![New bundle workflow](../docs/diagrams/new-bundle-workflow.svg)
+<!-- ![New bundle workflow](../docs/diagrams/new-bundle-workflow.svg) -->
+
+<img src="../docs/diagrams/new-bundle-workflow.svg" alt="New bundle workflow" width="400">
+
+
 
 Do not add to `fake_remote_repository`: it is generated, and the build script deletes anything placed there.
 
@@ -56,7 +67,10 @@ If you delete bundles from `bundles/` by hand, run sync again. The selection und
 
 ## What sync does
 
-![Sync sequence: resolve, install, select](../docs/diagrams/sync-sequence.svg)
+<!-- ![Sync sequence: resolve, install, select](../docs/diagrams/sync-sequence.svg) -->
+
+<img src="../docs/diagrams/sync-sequence.svg" alt="Sync sequence: resolve, install, select" width="700">
+
 
 Version resolution prefers the override variable, then the studio `config.json` on the remote, then the last-known-good copy kept locally for offline use. An already-installed release is reused without touching the network or hashing the zip.
 
@@ -86,7 +100,7 @@ Firebase Realtime Database serves one JSON tree rather than files, so it can't b
 | Run an installed release for one session, such as a project | Set `TLS_PIPELINE_<HOST>_BUNDLE=<release>`, or `launch --bundle <release> <host> <series> <exe>`. Startup never downloads, so the release must have been pulled; otherwise it fails and says which `pull` to run. |
 | Test an unpublished bundle source | Set `TLS_PIPELINE_<HOST>_SOURCE=<source folder>` and `TLS_PIPELINE_SHARED_SOURCES=<folder of shared packages>`, or `launch --source <dir> --shared <dir> ...`, or `python structure/run_host.py <host> --source <dir>`. |
 
-Dev mode copies the source into a throwaway folder under `bundles/dev/<host>/`, laid out exactly as a published release would extract (same entry point, same shared packages), so what you test is what would ship. There is no zip, no checksum and no remote, so each restart picks up your edits. Copies older than three days are removed the next time one is made.
+Dev mode runs the source **where it is**: nothing is copied. (It used to copy the source into `bundles/dev/<host>/<random>/` each time, and since a DCC can start several processes, one start left several 18 MB copies; the tray removes any such leftovers.) The entry point comes from the host defaults or `bundle.json`, and the shared packages are put on `sys.path` from their own folders (`TLS_PIPELINE_SHARED_SOURCES`) instead of being merged in, so each restart picks up your edits to the source and to the shared packages. A source that ships a package with a shared package's name is refused, as a publish would. There is no zip, no checksum and no remote. A folder made on the Release tab (a clone, see the tray app) is already a complete bundle and runs the same way, with no shared folders needed.
 
 A session starts with the first of these that applies: the source folder, then the pin, then the release `sync` selected. A source or pin that can't be used is an error, never a quiet fallback. The pipeline entry prints `RUNNING UNPUBLISHED SOURCE` or `PINNED ... bundle` so a session can't pass for a normal one. Both variables apply to every series of their host, and both only ever come from the environment, never from shared configuration. Treat a source folder like any code you run: the variable decides what executes in the DCC.
 
@@ -130,6 +144,7 @@ The local `config.json` adds optional keys to `remote_repository` and `bundle_re
 | `check_interval_minutes` | How often the tray app checks (5 to 10080, default 240). |
 | `auto_sync` | Whether the tray app applies updates itself (default true). |
 
+The repository can also come from the environment: `TLS_PIPELINE_REPOSITORY` (a folder or an https address, set as a user or system variable by an organisation) takes precedence over `remote_repository` when the config is read. It is never written to `config.json`, `config.json` needs no `remote_repository` while it is set, and the tray app shows the field locked as controlled by the organisation.
 Commands for the installer and the tray app:
 
 | Command | What it does |
@@ -137,13 +152,16 @@ Commands for the installer and the tray app:
 | `python -m localiser hosts` | The supported hosts, the versions installed here (from the standard install folders) and which are enabled. |
 | `python -m localiser check-all` | Check every enabled host and series. Exit 0 current, 1 updates available, 2 a problem. Installs nothing. |
 | `python -m localiser sync-all` | Sync every enabled host and series. One failing never stops the others; exit 2 if any failed. A series the studio config has no release for is reported as `unsupported`, not as a failure. |
-| `python -m localiser provision [--remove]` | Install, or remove, the entry each enabled DCC finds at startup. |
+| `python -m localiser install` | Put the stubs, the pipeline entry and the core into the pipeline root (see below). The tray app does this at every start. |
+| `python -m localiser provision [--remove]` | Optional. Install, or remove, a per-user entry each enabled DCC finds at startup (below). The tray app does not install these. |
 
 `check-all` and `sync-all` record their result in `bundles/state/status.json`, which the tray app and the hosts read with no network access. `localiser.selection_changed(host, series, loaded_release_id, config)` lets a running DCC ask, from local state only, whether a newer release has been selected since it started.
 
 ### How each DCC finds the stub
 
-Each DCC already reads a fixed per-user place at startup, so `provision` puts a small entry there. All three point at `<root>/bootstrap/<host>`, so a stub update needs no change to them, and none touches a global environment variable such as `PYTHONPATH`:
+The normal route is the launcher's environment: the tray app's Launch button (or AYON) starts the DCC with `TLS_PIPELINE` and the host's bootstrap folder in the variable it reads (see Environment variables below), and that stub loads `<root>/__init__.py`, which imports the core from `<root>/localiser`. `install` (run by the tray at every start) keeps `bootstrap/`, `__init__.py`, `about.py` and `localiser/` in the root equal to the ones that come with the app, replacing a file only when it differs and never touching `config.json`, bundles or state.
+
+Optionally, `provision` makes a DCC started any other way load the pipeline too. Each DCC already reads a fixed per-user place at startup, so it puts a small entry there. All three point at `<root>/bootstrap/<host>`, so a stub update needs no change to them, and none touches a global environment variable such as `PYTHONPATH`. Nothing in the tray app writes them, so a normal launch of a DCC loads no pipeline unless you ran `provision`:
 
 | Host | Entry | Verified |
 |---|---|---|
@@ -159,15 +177,20 @@ A running DCC never polls for updates or interrupts the user. A session keeps th
 
 ### The tray app
 
-`python -m localiser_tray` (`pip install .[tray]` for PySide6; add `--show` to open the window at start). It lives in `src/localiser_tray/` and only calls the core. The tray icon is coloured by the worst state (grey nothing enabled, green current, amber updates waiting, red a problem), with a menu: Open pipeline manager, Check for updates, Update now, Settings, Quit. Closing the window hides it; Quit exits.
+`python -m localiser_tray` (`pip install .[tray]` for PySide6; add `--show` to open the manager at start). It lives in `src/localiser_tray/` and only calls the core. The tray icon is coloured by the worst state (grey nothing enabled, green current, amber updates waiting, red a problem), with a menu: **Launcher** (first; clicking the icon opens it too), the status line, Check for updates, Update now, **Settings...** (opens the pipeline manager) and Quit. Closing a window hides it; Quit exits.
 
-To try it without touching your profile, `python structure/run_tray.py` runs it against a scratch root in `%TEMP%\tls_tray_test` (its own config pointing at the fake remote repository, its own bundle store, and the Maya, Nuke and Blender entries redirected there). `--enable maya:2026 nuke:17.0` pre-enables hosts, `--reset` starts clean and `--use-real-profile` removes the isolation.
+To try it as an artist would, run `python -m localiser_tray --show` against your real profile: the pipeline root is `TLS_PIPELINE` if set, otherwise `%LOCALAPPDATA%\TheLine\Pipeline`. At start it installs the stubs and core into that root. On a first run, Settings opens: set the pipeline repository (the fake one for a test is `structure/THE-LINE/pipeline/fake_remote_repository`), tick the installed versions and Save, then Update now and Launch. Only one tray runs at a time; quit an older one from its menu first.
 
+- **Launcher.** A small window with the THE LINE logo and one icon per enabled application: the newest installed version of each. Clicking an icon starts it with the pipeline environment. Nothing in it can be changed.
+- **Progress.** While a check or update runs, the manager shows a bar and the application being worked on ("Updating Nuke 17.0 (2 of 3)"); the tray tooltip says the same.
 - **When it checks.** At start, then whenever the last check recorded in `status.json` is older than `check_interval_minutes`; the app looks once a minute, which only reads that file. Checks run off the UI thread. With `auto_sync` on, anything newer is installed and selected in the same pass, and a tray notification says which application to restart. With it off, the update is reported once per set of updates and "Update now" applies it.
-- **Status tab.** One row per enabled application and version: the release installed (what the next launch will load), the studio release and a sentence for the state. A failed or unreachable repository keeps what is installed.
-- **Settings tab.** Tick the installed versions of each application (found in the standard install folders; versions enabled but not found are kept and marked), the pipeline repository (a shared folder or an https address), the local releases folder, the interval and `auto_sync`. Save is one validated write to `config.json` (`localiser.apply_hosts`): nothing changes if any value is rejected. It then installs and removes the per-application entries (`provision`) for what was switched on or off, and runs an update. On a first run with no `config.json`, the app opens on Settings and Save creates it.
+- **Status tab.** One row per enabled application and version: the release installed (what the next launch will load), the studio release and a sentence for the state, an **Override** button and a rocket button that starts that application from its standard install folder with the pipeline environment (for that process only), without waiting for it. A release that hasn't been prepared, or an application that isn't installed, is reported instead of started. The application's output is not captured: logging is the application's own (its console or script editor, and the files `tls_common` and the Nuke `PipelineLogger` write). It starts with a hidden console and its standard streams pointed at nothing (an app started from a shortcut has no console, and a host that inherits streams that don't exist fails to load the pipeline), and not with `DETACHED_PROCESS`, which makes every console program the application starts, such as Nuke's frame server, open its own empty window; Python in the host is told to write UTF-8 (`PYTHONIOENCODING`). A failed or unreachable repository keeps what is installed.
+- **Override.** Switching Override on shows a drop-down of the clones in `dev/<host>/` in the Status column; the row turns orange and every launch of that application (tray or `launch`) runs the chosen clone in place instead of the studio release, until Override is switched off. The choice is kept in `bundles/state/overrides.json`, survives restarts and is applied to the launched process only. A clone that has been deleted stops the launch with a message rather than falling back.
+- **Release tab.** Clone a bundle to work on: choose the application, a version tag, and either a published release (installed first if needed) or a bundle source folder (with an optional shared-packages folder merged in, as a publish would). The result is `bundles/dev/<host>/<tag>/`, laid out as a release extracts, with a `.tls-clone.json` marker. An existing tag is never overwritten. Publishing a clone to the repository is not in the app yet (use `python -m localiser publish`).
+- **Settings tab.** Tick the installed versions of each application (found in the standard install folders; versions enabled but not found are kept and marked), the pipeline repository (a shared folder or an https address; locked and explained when `TLS_PIPELINE_REPOSITORY` supplies it), the local releases folder, the interval and `auto_sync`. Save is one validated write to `config.json` (`localiser.apply_hosts`): nothing changes if any value is rejected. It then runs an update. It writes no per-application entries. On a first run with no `config.json`, the app opens on Settings and Save creates it (with `TLS_PIPELINE_REPOSITORY` set the config is created for you).
 - **One copy.** A lock file in the temp folder stops a second tray icon from a second launch.
-- **Not in the app yet.** Putting the stubs and core into the pipeline root (the app warns when `<root>/bootstrap` is missing), starting at login, and cleaning up old releases.
+- **Pipeline code.** At every start the app runs `install_pipeline_code`, so the root holds the stubs, entry and core that came with the app. It reads them from `structure/THE-LINE/pipeline` and this package in a checkout; shipping them inside an installed package is not done yet, and the app says so in Settings if they can't be found.
+- **Not in the app yet.** Starting at login, and cleaning up old releases.
 
 ## Bundle layout
 
@@ -195,15 +218,23 @@ A Nuke bundle's root `__init__.py` adds `core/` with `nuke.pluginAddPath`, so Nu
 
 ## Environment variables
 
+The environment is only ever supplied to the process that starts a host; nothing is written to the user's persistent environment (the registry), because a persistent value is global, outlives the tool that set it and is hard to administer. A host gets its environment from one of:
+
+- **AYON**, as part of its own launch of a host (the same variables below).
+- **The tray app's launcher and rocket buttons** (the Launcher window, and the Status tab, one per enabled application and version), which start the installed program with the variables below for that process only (`localiser.launch.launch_host`). The `launch` command and `run_host.py` do the same from a terminal.
+
+Maya, Nuke and Blender can also find the stub without any variable through the per-user entries `provision` installs (above, optional); the tray app doesn't install them.
+
 Every host also has an **About** item that shows the release, where it came from (studio default, pinned or unpublished source) and the bundle path: Nuke under Help (`bootstrap/nuke/menu.py`), Blender under Help (the stub; only when a bundle is loaded) and Maya as the last item of the THE LINE menu (`LineTools/menu.py`, so it ships with the Maya bundle). The text comes from `pipeline/about.py`, which reads the variables below, so a host needs no other access to the pipeline.
 
 | Variable | Set by | Value |
 |---|---|---|
-| `TLS_PIPELINE` | you / installer | the pipeline root (`structure/THE-LINE/pipeline`) |
-| `PYTHONPATH` (Maya), `NUKE_PATH`, `BLENDER_SYSTEM_SCRIPTS` | you / installer / `run_host.py` | `<root>/bootstrap/<host>` |
+| `TLS_PIPELINE` | AYON / the tray's Launch / `run_host.py` | the pipeline root (`structure/THE-LINE/pipeline`) |
+| `PYTHONPATH` (Maya), `NUKE_PATH`, `BLENDER_SYSTEM_SCRIPTS` | AYON / the tray's Launch / `run_host.py` | `<root>/bootstrap/<host>` |
 | `TLS_PIPELINE_MAYA` / `_NUKE` / `_BLENDER` | the localiser | the resolved bundle path |
 | `TLS_PIPELINE_<HOST>_RELEASE`, `TLS_PIPELINE_<HOST>_MODE` | the localiser | what this session is running: the release id (`1.1.0`, or `dev-<name>`) and `studio` (following the studio config), `pinned` or `dev`. Identity only: set at startup for anything in the DCC to read (a Nuke label `[getenv TLS_PIPELINE_NUKE_RELEASE]`, MEL `getenv`), never read back by the core. Different from the `_BUNDLE` and `_SOURCE` inputs below. |
 | `TLS_PIPELINE_<HOST>_BUNDLE` | you / AYON hook | pin this session to an installed release (also what `sync` selects) |
-| `TLS_PIPELINE_<HOST>_SOURCE` | you | run an unpublished bundle source folder (dev mode) |
-| `TLS_PIPELINE_SHARED_SOURCES` | you | folders of shared packages to merge into a dev source (`;`-separated on Windows) |
+| `TLS_PIPELINE_<HOST>_SOURCE` | you / the tray's Override | run a bundle source folder or a clone in place (dev mode) |
+| `TLS_PIPELINE_SHARED_SOURCES` | you | folders of shared packages put on `sys.path` for a dev source (`;`-separated on Windows) |
+| `TLS_PIPELINE_REPOSITORY` | your organisation / you | the pipeline repository (a folder or https address); overrides `remote_repository` and locks it in the tray app |
 | `BLENDER_CUSTOM_SPLASH` | the Blender stub | the bundle's `splash/splash.png`, when present |

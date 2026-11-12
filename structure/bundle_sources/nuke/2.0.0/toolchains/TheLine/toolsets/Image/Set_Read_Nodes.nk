@@ -1,0 +1,26 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+NoOp {
+name setReadNodes
+tile_color 0xff0000ff
+gl_color 0xff
+selected true
+xpos -418
+ypos -843
+addUserKnob {20 User}
+addUserKnob {26 tx l "" +STARTLINE T "Select the read nodes first\n"}
+addUserKnob {22 setFrame l "set start to 1001" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('frame_mode').setValue('start at')\n    i.knob('frame').setValue('1001')" +STARTLINE}
+addUserKnob {22 loop T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('before').setValue('loop')\n    i.knob('after').setValue('loop')" +STARTLINE}
+addUserKnob {32 ATC l autocrop T autocrop +STARTLINE}
+addUserKnob {26 loca l Localization}
+addUserKnob {22 localOn l "Localization on" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('localizationPolicy').setValue('on')\n" +STARTLINE}
+addUserKnob {22 localOff l "Localization off" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('localizationPolicy').setValue('off')\n" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {26 onerror l "" +STARTLINE T "On Error"}
+addUserKnob {22 nearestFrame l "set to nearest frame" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('on_error').setValue('nearest frame')\n" +STARTLINE}
+addUserKnob {22 setBlack l "set to black" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('on_error').setValue('black')\n" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {26 dif l Differentiation}
+addUserKnob {22 tile l "make node blue" T "n = nuke.selectedNodes()\nfor i in n:\n    i.knob('tile_color').setValue(65280)\n" +STARTLINE}
+}

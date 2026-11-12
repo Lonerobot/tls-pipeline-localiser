@@ -2,6 +2,7 @@
 import json
 from dataclasses import replace
 from datetime import datetime, timedelta, timezone
+from unittest.mock import patch
 
 from localiser import read_status
 from localiser.status import EntryStatus
@@ -20,6 +21,11 @@ class RunCycleTests(WorkstationTestCase):
 
     def select(self, release):
         self.write_studio_config({"maya": release})
+
+    def test_progress_is_reported_before_each_entry_and_at_the_end(self):
+        seen = []
+        model.run_cycle(self.config, {}, progress=lambda done, total, label: seen.append((done, total)))
+        self.assertEqual(seen, [(0, 1), (1, 1)])
 
     def test_the_first_cycle_installs_what_is_missing(self):
         result = model.run_cycle(self.config, {})
@@ -127,6 +133,14 @@ class DueTests(WorkstationTestCase):
 
 
 class HostChoiceTests(WorkstationTestCase):
+
+    def test_the_launcher_offers_the_newest_installed_enabled_series_of_each_host_by_name(self):
+        config = replace(self.config, hosts={"nuke": ("16.0", "17.0"), "maya": ("2025", "2026"), "blender": ("5.2",)})
+        installed = {"nuke": ["16.0", "17.0"], "maya": ["2025"], "blender": []}  # 2026 isn't installed, 5.2 isn't either
+        with patch.object(model, "detect_installed_series", lambda host, roots=None: installed.get(host, [])):
+            self.assertEqual(model.launcher_choices(config), [("maya", "2025"), ("nuke", "17.0")])
+        self.assertEqual(model.launcher_choices(None), [])
+
     def test_lists_installed_and_enabled_series_for_every_host(self):
         roots = [self.tmp / "pf"]
         (roots[0] / "Autodesk" / "Maya2025").mkdir(parents=True)

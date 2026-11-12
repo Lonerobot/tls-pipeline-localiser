@@ -1,0 +1,369 @@
+#! C:/Program Files/Nuke11.3v6/nuke-11.3.6.dll -nx
+version 11.3 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="50" w="2542" h="1343" screen="0">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1457" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1295"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="1031"/>
+            <splitter orientation="2">
+                <split size="646"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="645"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/Reference/AnimatedFilms/TheLine_Crystal/CrystalSequence_Reference.nk
+ frame 3018
+ first_frame 3000
+ last_frame 3120
+ lock_range true
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file Y:/TOOLS/CompTools/Reference/AnimatedFilms/TheLine_Crystal/CrystalSequence/Crystal_TrueDamage_RiotGames_####.jpg
+ format "3840 2160 0 0 3840 2160 1 UHD_4K"
+ first 0
+ last 4948
+ origfirst 0
+ origlast 4948
+ origset true
+ name Read2
+ xpos -557
+ ypos -1239
+}
+set N8d3d8000 [stack 0]
+FrameHold {
+ first_frame 4443
+ name FrameHold24
+ xpos 406
+ ypos -638
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 3458
+ name FrameHold23
+ xpos 296
+ ypos -636
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 3255
+ name FrameHold21
+ xpos 186
+ ypos -632
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 2279
+ name FrameHold18
+ xpos 76
+ ypos -632
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 2281
+ name FrameHold17
+ xpos -31
+ ypos -628
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 1527
+ name FrameHold19
+ xpos -121
+ ypos -631
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 1391
+ name FrameHold22
+ xpos -217
+ ypos -626
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 1138
+ name FrameHold20
+ xpos -309
+ ypos -626
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 608
+ name FrameHold16
+ xpos -403
+ ypos -626
+}
+push $N8d3d8000
+FrameHold {
+ first_frame 218
+ name FrameHold15
+ xpos -508
+ ypos -628
+}
+ContactSheet {
+ inputs 10
+ width {{input.width}}
+ height {{input.height}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet4
+ tile_color 0xe955ffff
+ xpos -508
+ ypos 26
+ addUserKnob {20 User l About}
+ addUserKnob {26 credit l "" -STARTLINE T "<h3>Contact Sheet +</h3>\nAuto resizes based on number of inputs.\nWorks for frames too.\n\n<h5>David Emeny 2014</h5>"}
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 1958
+ before loop
+ last 1994
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name tongue_metallic
+ xpos -895
+ ypos -621
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 1800
+ before loop
+ last 1836
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name metallic
+ xpos -1004
+ ypos -623
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 4273
+ before loop
+ last 4305
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name glitch
+ xpos -615
+ ypos -620
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 824
+ before loop
+ last 879
+ after loop
+ origlast 1
+ origset true
+ mask_metadata true
+ name look_1
+ xpos -1646
+ ypos -630
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 212
+ before loop
+ last 280
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name bg_glitch
+ xpos -1741
+ ypos -634
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 1623
+ before loop
+ last 1703
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name smokey_lady
+ xpos -705
+ ypos -617
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 4233
+ before loop
+ last 4273
+ after loop
+ origlast 1
+ origset true
+ mask_metadata true
+ name camera_bg_focus
+ xpos -800
+ ypos -624
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 3592
+ before loop
+ last 3695
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name burnt_filmlook
+ xpos -1113
+ ypos -622
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 2275
+ before loop
+ last 2364
+ after loop
+ origfirst 0
+ origlast 4948
+ origset true
+ mask_metadata true
+ name coloured_highlight
+ xpos -1203
+ ypos -624
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 2188
+ before loop
+ last 2210
+ after loop
+ origfirst 0
+ origlast 4948
+ origset true
+ mask_metadata true
+ name camera_flash
+ xpos -1309
+ ypos -624
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 1705
+ before loop
+ last 1766
+ after loop
+ origfirst 3000
+ origlast 3120
+ origset true
+ mask_metadata true
+ name exposure
+ xpos -1415
+ ypos -623
+ postage_stamp true
+}
+push $N8d3d8000
+TimeClip {
+ time ""
+ first 1252
+ before loop
+ last 1450
+ after loop
+ origfirst 0
+ origlast 3120
+ origset true
+ mask_metadata true
+ name atmos_lightrays
+ xpos -1533
+ ypos -629
+ postage_stamp true
+}
+ContactSheet {
+ inputs 12
+ width {{input.width}}
+ height {{input.height}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet2
+ tile_color 0xe955ffff
+ xpos -656
+ ypos 21
+ addUserKnob {20 User l About}
+ addUserKnob {26 credit l "" -STARTLINE T "<h3>Contact Sheet +</h3>\nAuto resizes based on number of inputs.\nWorks for frames too.\n\n<h5>David Emeny 2014</h5>"}
+}
+Viewer {
+ frame 3018
+ frame_range 3000-3120
+ frame_range_lock true
+ name Viewer1
+ xpos -553
+ ypos 305
+}

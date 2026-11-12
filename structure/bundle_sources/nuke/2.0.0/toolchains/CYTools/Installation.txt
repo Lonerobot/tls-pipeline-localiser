@@ -1,0 +1,38 @@
+
+### Installation Instructions CY Backdrop
+
+1. Locate the .nuke folder:
+   - Navigate to the .nuke folder on your system. The default path is typically:
+  
+     C:\Users\user\.nuke
+  
+
+2. Copy the CY tools folder:
+   - Copy the entire CY tools folder into the .nuke folder.
+
+3. Edit the init.py file:
+   - Open the init.py file located in the .nuke folder. You can use Notepad or any text editor for this.
+   - Add the following line of code at the end of the file:
+ 
+     nuke.pluginAddPath('./CY Tools')
+
+
+4. Save the file:
+   - Save the changes you made to the init.py file.
+
+5. Open Nuke:
+   - Start or restart Nuke to load the CY tools.
+
+EXTRA
+
+Modify the appearance options for the backdrop (Optional):
+   - If you want to change the default appearance order for the `border` or `fill` parameters of the backdrop, open the CY_Backdrop.py file located inside the CY tools folder.
+   - Go to line number 6, where you will find:
+
+     appearanceOptions = "Fill Border"
+
+   - Change the order to:
+
+     appearanceOptions = "Border Fill"
+     
+   - Save the changes you made to both the init.py and CY_Backdrop.py files.

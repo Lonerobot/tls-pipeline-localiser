@@ -1,0 +1,453 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+BackdropNode {
+ inputs 0
+ name " GROUP _backdrop11"
+ tile_color 0x2b2b2bff
+ label "LIGHT BLEED"
+ note_font_size 48
+ selected true
+ xpos -151
+ ypos -1079
+ icon Group.png
+ bdwidth 495
+ bdheight 333
+ addUserKnob {20 mainTabTK l backdropTK}
+ addUserKnob {41 label_1 l label T " GROUP _backdrop11.label"}
+ addUserKnob {22 rndClrs0 l "<font style=\"background-color:#7d97a7\"> <img size=\"8\" src=\"Read.png\"> PAINT </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.561, 0.246, 0.655]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PAINT ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PAINT '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs1 l "<font style=\"background-color:#27465e\"> <img size=\"8\" src=\"Read.png\"> 2D ANIMATION </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.57, 0.585, 0.369]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' 2D ANIMATION ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' 2D ANIMATION '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs2 l "<font style=\"background-color:#121d25\"> <img size=\"8\" src=\"Camera.png\"> CAMERA </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Camera.png')\nR,G,B= \[0.567, 0.526, 0.149]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' CAMERA ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' CAMERA '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs3 l "<font style=\"background-color:#426b53\"> <img size=\"8\" src=\"TimeClip.png\"> RETIME </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('TimeClip.png')\nR,G,B= \[0.4, 0.375, 0.42]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' RETIME ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' RETIME '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs4 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Group.png\"> GROUP </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Group.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' GROUP ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' GROUP '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs5 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Geometry.png\">3D SCENE</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Geometry.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('3D SCENE')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % '3D SCENE'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs6 l "<font style=\"background-color:#4a4a4a\"> <img size=\"8\" src=\"Read.png\"> REFERENCE </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.0, 0.0, 0.294]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' REFERENCE ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' REFERENCE '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs7 l "<font style=\"background-color:#7f7f7f\"> <img size=\"8\" src=\"Write.png\"> PUBLISHED </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Write.png')\nR,G,B= \[0.0, 0.0, 0.5]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PUBLISHED ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PUBLISHED '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs8 l "<font style=\"background-color:#862929\"> <img size=\"8\" src=\"Glow.png\">IMPORTANT</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Glow.png')\nR,G,B= \[0.0, 0.696, 0.529]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('IMPORTANT')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % 'IMPORTANT'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndColors l " <img src=\"ColorBars.png\">Randomize color " T "import colorsys, random\nn=nuke.thisNode()\nR,G,B= colorsys.hsv_to_rgb(random.random(),.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )" +STARTLINE}
+ addUserKnob {22 rndTint l " <img src=\"HueShift.png\">Randomize tint " -STARTLINE T "import colorsys, random\nn=nuke.thisNode()\nV=int(n\['tile_color'].getValue())\nR = (0xFF & V >> 24) / 255.0\nG = (0xFF & V >> 16) / 255.0\nB = (0xFF & V >> 8) / 255.0\n\nR,G,B= colorsys.rgb_to_hsv(R,G,B)\n\nR,G,B= colorsys.hsv_to_rgb(R,.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )"}
+ addUserKnob {22 grow l " <img src=\"MergeMin.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Grow(n,50)"}
+ addUserKnob {22 shrink l " <img src=\"MergeMax.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Shrink(n,50)"}
+ addUserKnob {20 version}
+ addUserKnob {26 nodeClass l Class: T backdropTK}
+ addUserKnob {26 nodeVersion l Version: T "v 2.1"}
+ addUserKnob {22 chHelp l "<img src=\":qrc/images/Help.png\"> HELP" t "Opens web page with tool's manual" -STARTLINE T "nukescripts.openurl.start (tk.getHelpUrl(nuke.thisNode()))"}
+}
+push 0
+Dot {
+ name Dot47
+ label Colour_RAW
+ selected true
+ xpos -87
+ ypos -959
+ hide_input true
+}
+HSVTool {
+ srccolor {0.2015562356 0.1301364452 0.08865556866}
+ huesrcs {22.04462242 22.04462242}
+ huerolloffrange 0.1
+ satsrcs {0.5601447225 0.5601447225}
+ satrolloffrange 0.3
+ brtsrcs {0.2015562356 0.2015562356}
+ brtrolloffrange 0.3
+ name HSVTool6
+ selected true
+ xpos -121
+ ypos -849
+}
+push 0
+Dot {
+ name Dot57
+ selected true
+ xpos -6
+ ypos -959
+ hide_input true
+}
+push 0
+Dot {
+ name Dot58
+ selected true
+ xpos 214
+ ypos -839
+ hide_input true
+}
+push $cut_paste_input
+Dot {
+ name Dot59
+ selected true
+ xpos 214
+ ypos -959
+ hide_input true
+}
+Group {
+ inputs 4
+ name Shadow_Wrap
+ selected true
+ xpos 70
+ ypos -843
+ addUserKnob {20 User}
+ addUserKnob {26 ""}
+ addUserKnob {41 Blur T Glo_NonAdd5.Blur}
+ addUserKnob {41 saturation T Saturation4.saturation}
+}
+ Input {
+  inputs 0
+  name SHADOW
+  xpos -1580
+  ypos 374
+ }
+ Dot {
+  name Dot2
+  xpos -1216
+  ypos 378
+ }
+set N52b45400 [stack 0]
+ Dot {
+  name Dot1
+  xpos -996
+  ypos 378
+ }
+ Input {
+  inputs 0
+  name LINE
+  xpos -1533
+  ypos 1310
+  number 2
+ }
+ Input {
+  inputs 0
+  name HSV
+  xpos -1580
+  ypos 902
+  number 3
+ }
+set N52b44800 [stack 0]
+push $N52b44800
+ Input {
+  inputs 0
+  name COLOUR
+  xpos -1580
+  ypos 590
+  number 1
+ }
+ Dot {
+  name Dot6
+  xpos -1546
+  ypos 718
+ }
+set N52b44000 [stack 0]
+ Dot {
+  name Dot7
+  xpos -1546
+  ypos 830
+ }
+push $N52b45400
+push $N52b44000
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge29
+  xpos -1254
+  ypos 714
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos -1254
+  ypos 826
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge3
+  xpos -1254
+  ypos 902
+ }
+ Saturation {
+  saturation 1.5
+  name Saturation4
+  xpos -1254
+  ypos 974
+ }
+ Group {
+  name Glo_NonAdd5
+  xpos -1254
+  ypos 1070
+  addUserKnob {20 User}
+  addUserKnob {7 Blur R 0 400}
+  Blur 5
+  addUserKnob {7 Grade1blackpoint l Threshold R -1 1}
+  Grade1blackpoint -1
+  addUserKnob {7 Gain R 1 50}
+  Gain 1
+  addUserKnob {41 mix T Merge7.mix}
+ }
+  Input {
+   inputs 0
+   name Mask
+   xpos -687
+   ypos -591
+   number 1
+  }
+  Input {
+   inputs 0
+   name Input1
+   xpos -879
+   ypos -723
+  }
+  Dot {
+   name Dot11
+   xpos -845
+   ypos -662
+  }
+set N52b58800 [stack 0]
+push 0
+  Merge2 {
+   inputs 2+1
+   name Merge8
+   xpos -879
+   ypos -591
+  }
+  Dot {
+   name Dot1
+   xpos -845
+   ypos -476
+  }
+set N52b58000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -972
+   ypos -476
+  }
+  Saturation {
+   saturation 0
+   name Saturation2
+   xpos -1006
+   ypos -445
+  }
+  Grade {
+   blackpoint {{parent.Grade1blackpoint}}
+   white_clamp true
+   name Grade1
+   xpos -1006
+   ypos -419
+  }
+  Premult {
+   name Premult2
+   xpos -1006
+   ypos -395
+  }
+push $N52b58000
+  ShuffleCopy {
+   inputs 2
+   alpha red
+   name ShuffleCopy1
+   xpos -879
+   ypos -395
+  }
+  Clamp {
+   channels alpha
+   name Clamp1
+   xpos -879
+   ypos -366
+  }
+  Premult {
+   name Premult1
+   xpos -879
+   ypos -321
+  }
+  Dot {
+   name Dot3
+   xpos -845
+   ypos -218
+  }
+set N52b88000 [stack 0]
+  Dot {
+   name Dot4
+   xpos -845
+   ypos -150
+  }
+set N45167c00 [stack 0]
+  Dot {
+   name Dot5
+   xpos -845
+   ypos -78
+  }
+set N45167800 [stack 0]
+  Dot {
+   name Dot6
+   xpos -845
+  }
+set N45167400 [stack 0]
+  Dot {
+   name Dot7
+   xpos -845
+   ypos 82
+  }
+set N45167000 [stack 0]
+  Dot {
+   name Dot8
+   xpos -841
+   ypos 161
+  }
+  Blur {
+   size {{parent.Blur2.size*2}}
+   filter quadratic
+   name Blur1
+   xpos -1010
+   ypos 152
+  }
+push $N45167000
+  Blur {
+   size {{parent.Blur3.size*2}}
+   filter quadratic
+   name Blur2
+   xpos -1013
+   ypos 73
+  }
+push $N45167400
+  Blur {
+   size {{parent.Blur4.size*2}}
+   filter quadratic
+   name Blur3
+   xpos -1013
+   ypos -9
+  }
+push $N45167800
+  Blur {
+   size {{parent.Blur5.size*2}}
+   filter quadratic
+   name Blur4
+   xpos -1013
+   ypos -87
+  }
+push $N45167c00
+  Blur {
+   size {{parent.Blur6.size*2}}
+   filter quadratic
+   name Blur5
+   xpos -1013
+   ypos -159
+  }
+push $N52b88000
+  Blur {
+   channels rgba
+   size {{parent.Blur}}
+   filter quadratic
+   name Blur6
+   xpos -1012
+   ypos -221
+  }
+push 0
+  Merge2 {
+   inputs 2
+   name Merge1
+   xpos -1161
+   ypos -221
+  }
+  Merge2 {
+   inputs 2
+   mix {{parent.Merge1.mix/2}}
+   name Merge2
+   xpos -1161
+   ypos -153
+  }
+  Merge2 {
+   inputs 2
+   mix {{parent.Merge2.mix/2}}
+   name Merge3
+   xpos -1161
+   ypos -81
+  }
+  Merge2 {
+   inputs 2
+   mix {{parent.Merge3.mix/2}}
+   name Merge4
+   xpos -1161
+   ypos -3
+  }
+  Merge2 {
+   inputs 2
+   mix {{parent.Merge4.mix/2}}
+   name Merge5
+   xpos -1161
+   ypos 79
+  }
+  Merge2 {
+   inputs 2
+   mix {{parent.Merge5.mix/2}}
+   name Merge6
+   xpos -1161
+   ypos 158
+  }
+  Grade {
+   white {{parent.Gain}}
+   name Grade2
+   xpos -1161
+   ypos 245
+  }
+push $N52b58800
+  Dot {
+   name Dot12
+   xpos -762
+   ypos -662
+  }
+  Dot {
+   name Dot10
+   xpos -762
+   ypos 325
+  }
+  Merge2 {
+   inputs 2
+   name Merge7
+   selected true
+   xpos -1161
+   ypos 322
+  }
+  Output {
+   name Output1
+   xpos -1161
+   ypos 422
+  }
+ end_group
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge5
+  xpos -1250
+  ypos 1166
+ }
+ Dot {
+  name Dot4
+  xpos -1220
+  ypos 1257
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge1
+  xpos -1254
+  ypos 1310
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge4
+  xpos -1030
+  ypos 1310
+ }
+set N451f1800 [stack 0]
+ Output {
+  name Output1
+  xpos -1030
+  ypos 1598
+ }
+push $N451f1800
+ Viewer {
+  frame_range 1-21
+  fps 25
+  name Viewer1
+  xpos -810
+  ypos 302
+ }
+end_group

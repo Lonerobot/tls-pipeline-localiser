@@ -1,0 +1,189 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Toolchains Configuration - Manage modular tool environments",
+  "toolchains": {
+    "NukeSurvivalToolkit": {
+      "display_name": "Nuke Survival Toolkit",
+      "folder_path": "NukeSurvivalToolkit",
+      "version": "2.1.1",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "Comprehensive collection of compositing tools and utilities",
+      "author": "Multiple Contributors",
+      "menu_icon": "SurvivalToolkit.png",
+      "source_url": "https://www.nukepedia.com/toolsets/nuke-survival-toolkit",
+      "priority": 50
+    },
+    "TL_BreakOutPSD": {
+      "display_name": "TL_BreakOutPSD",
+      "folder_path": "TL_BreakOutPSD",
+      "version": "0.0.1",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": true,
+      "description": "Custom pipeline tools for The Line studio",
+      "author": "Pipeline Team",
+      "menu_icon": "the_line_logo.png",
+      "source_url": "https://internal.theline.com/pipeline",
+      "priority": 10
+    },
+    "TheLine": {
+      "display_name": "The Line Tools",
+      "folder_path": "TheLine",
+      "version": "0.0.2",
+      "enabled": true,
+      "build_menu": false,
+      "build_toolbar": true,
+      "description": "Custom pipeline tools for The Line studio",
+      "author": "Pipeline Team",
+      "menu_icon": "the_line_logo.png",
+      "source_url": "https://internal.theline.com/pipeline",
+      "priority": 10
+    },
+    "AlignNodes": {
+      "display_name": "Align Nodes",
+      "folder_path": "AlignNodes",
+      "version": "0.0.1",
+      "enabled": true,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "customAlignTool",
+      "author": "Sebastian Faber",
+      "menu_icon": "Cy_logo.png",
+      "source_url": "https://www.nukepedia.com/tools/python/nodegraph/sbn-align-read-nodes/",
+      "priority": 10
+    },
+    "TemplateTools": {
+      "display_name": "Template Library",
+      "folder_path": "TemplateTools",
+      "version": "1.0.0",
+      "enabled": false,
+      "build_menu": true,
+      "build_toolbar": false,
+      "description": "Template and preset management tools",
+      "author": "Pipeline Team",
+      "menu_icon": "",
+      "source_url": "https://internal.theline.com/pipeline/template-tools",
+      "priority": 30,
+      "config": {
+        "_comment": "Template root directories for different platforms",
+        "template_root": {
+          "windows": "Y:/PIPELINE/config/nuke/templates",
+          "mac": "/Volumes/The Line/PIPELINE/config/nuke/templates"
+        }
+      }
+    },
+    "Stamps": {
+      "display_name": "Stamps",
+      "folder_path": "Stamps",
+      "version": "1.2",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "Template and preset management tools",
+      "author": "Adrian Pueyo",
+      "menu_icon": "stamps.png",
+      "source_url": "https://github.com/adrianpueyo/stamps",
+      "priority": 40
+    },
+    "TL_Backdrop": {
+      "display_name": "TL_Backdrop",
+      "folder_path": "TL_Backdrop",
+      "version": "1.1",
+      "enabled": true,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "Template and preset management tools",
+      "author": "Adrian Pueyo",
+      "menu_icon": "stamps.png",
+      "source_url": "https://github.com/adrianpueyo/stamps",
+      "priority": 40
+    },
+    "TL_Formats": {
+      "display_name": "TL_Formats",
+      "folder_path": "TL_Formats",
+      "version": "1.1",
+      "enabled": true,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "Template and preset management tools",
+      "author": "Adrian Pueyo",
+      "menu_icon": "stamps.png",
+      "source_url": "https://github.com/adrianpueyo/stamps",
+      "priority": 40
+    },
+      "TL_Custom_Guides": {
+      "display_name": "TL_Custom_Guides",
+      "folder_path": "TL_Custom_Guides",
+      "version": "1.1",
+      "enabled": true,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "Template and preset management tools",
+      "author": "Adrian Pueyo",
+      "menu_icon": "stamps.png",
+      "source_url": "https://github.com/adrianpueyo/stamps",
+      "priority": 40
+    },
+    "Nuke Tools": {
+      "display_name": "Nuke Tools",
+      "folder_path": "nuke_tools",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": true,
+      "description": "assorted tools",
+      "author": "Simon Bjork",
+      "menu_icon": "nuke.png",
+      "source_url": "https://github.com/simonbjork/nuke_tools",
+      "priority": 50
+    },
+    "AnimationMaker15": {
+      "display_name": "Animation Maker",
+      "folder_path": "AnimationMaker15",
+      "version": "1.5",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": true,
+      "description": "animation",
+      "author": "Peter Mercell",
+      "menu_icon": "nuke.png",
+      "source_url": "",
+      "priority": 50
+    },
+    "higx_optics": {
+      "display_name": "higx_optics",
+      "folder_path": "higx_optics",
+      "version": "Nuke17.0",
+      "enabled": false,
+      "build_menu": false,
+      "build_toolbar": false,
+      "description": "lensflare",
+      "author": " Eamonn Nugent",
+      "menu_icon": "nuke.png",
+      "source_url": "",
+      "priority": 50
+    },
+    "TL_AYONShotBoard": {
+    "display_name": "AYON Shot Board",
+    "folder_path": "TL_AYONShotBoard",
+    "version": "0.1.0",
+    "enabled": true,
+    "build_menu": false,
+    "build_toolbar": false,
+    "description": "Load AYON reviews and plates into shot backdrops",
+    "author": "The Line",
+    "priority": 60
+    }
+
+    
+  },
+  "global_settings": {
+    "auto_discover": true,
+    "load_order": "priority",
+    "error_handling": "warn",
+    "cache_toolchain_data": true
+  }
+}
+
+

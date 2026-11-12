@@ -172,7 +172,28 @@ class LocalConfigTests(unittest.TestCase):
     def test_rejects_bad_input(self):
         for text in ["not json", '{"remote_repository": "x"}', '{"schema_version": 1}', '{"schema_version": 1, "remote_repository": ""}']:
             with self.subTest(text=text), self.assertRaises(ConfigError):
-                parse_local_config(text, Path(self.base))
+                parse_local_config(text, Path(self.base), {})
+
+    def test_the_organisations_repository_wins_over_the_file_and_is_locked(self):
+        env = {"TLS_PIPELINE_REPOSITORY": "https://example.com/studio"}
+        config = parse_local_config(
+            json.dumps({"schema_version": 1, "remote_repository": "D:/mine"}), Path(self.base), env
+        )
+        self.assertEqual(config.remote_repository, WebRepository("https://example.com/studio"))
+        self.assertTrue(config.remote_locked)
+
+    def test_the_file_needs_no_repository_when_the_environment_supplies_one(self):
+        share = Path(__file__).resolve().anchor + "share"
+        config = parse_local_config('{"schema_version": 1}', Path(self.base), {"TLS_PIPELINE_REPOSITORY": share})
+        self.assertEqual(config.remote_repository, Path(share))
+
+    def test_a_blank_variable_is_ignored_and_a_bad_one_is_an_error(self):
+        config = parse_local_config(
+            json.dumps({"schema_version": 1, "remote_repository": "./r"}), Path(self.base), {"TLS_PIPELINE_REPOSITORY": "  "}
+        )
+        self.assertFalse(config.remote_locked)
+        with self.assertRaises(ConfigError):
+            parse_local_config('{"schema_version": 1}', Path(self.base), {"TLS_PIPELINE_REPOSITORY": "ftp://nope"})
 
 
 if __name__ == "__main__":

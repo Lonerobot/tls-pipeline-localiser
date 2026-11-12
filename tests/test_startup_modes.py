@@ -5,7 +5,6 @@ import io
 import json
 import os
 import sys
-import time
 from pathlib import Path
 from unittest.mock import patch
 
@@ -14,13 +13,14 @@ from localiser import (
     LocaliserError,
     PublishError,
     ReleaseUnavailableError,
+    clean_legacy_dev_copies,
     prepared_release,
     pull_release,
     startup_release,
     sync_release,
 )
 from localiser.__main__ import main
-from localiser.layout import DataLayout
+from localiser.layout import CLONE_MARKER, DataLayout
 from localiser.resolve import override_variable
 from localiser.sync import SHARED_VARIABLE, source_variable
 
@@ -107,18 +107,29 @@ class StartupModeTests(WorkstationTestCase):
 
     # dev
 
-    def test_dev_lays_the_source_out_like_a_release_with_shared_packages(self):
+    def test_dev_runs_the_source_in_place_with_shared_folders_on_the_path(self):
         source = self.source_folder({"__init__.py": "VALUE = 'dev'\n", "tool/a.py": "X = 1\n"})
         shared = self.tmp / "shared"
         (shared / "tls_common").mkdir(parents=True)
         (shared / "tls_common" / "__init__.py").write_text("", encoding="utf-8")
         release = self.startup({source_variable("maya"): str(source), SHARED_VARIABLE: str(shared)})
         self.assertEqual((release.source, release.release_id), ("dev", "dev-2.0"))
-        self.assertEqual(release.release_root.name, "2.0")  # whatever shows the folder name shows the version
-        self.assertEqual((release.python_root / "__init__.py").read_text(), "VALUE = 'dev'\n")
-        self.assertTrue((release.release_root / "tool" / "a.py").is_file())
-        self.assertTrue((release.release_root / "tls_common" / "__init__.py").is_file())
-        self.assertIn(str(DataLayout(self.data).dev), str(release.release_root))
+        self.assertEqual(release.release_root, source.resolve())
+        self.assertEqual(release.python_root, source.resolve())
+        self.assertEqual(release.extra_paths, (str(shared.resolve()),))
+
+    def test_dev_never_copies_the_source_however_often_it_starts(self):
+        env = {source_variable("maya"): str(self.source_folder())}
+        for _ in range(5):
+            self.startup(env)
+        self.assertFalse(DataLayout(self.data).dev.exists())
+
+    def test_dev_source_that_ships_a_shared_package_is_refused(self):
+        source = self.source_folder({"__init__.py": "", "tls_common/__init__.py": ""})
+        shared = self.tmp / "shared"
+        (shared / "tls_common").mkdir(parents=True)
+        with self.assertRaises(PublishError):
+            self.startup({source_variable("maya"): str(source), SHARED_VARIABLE: str(shared)})
 
     def test_dev_changes_no_selection_and_needs_no_remote(self):
         self.repo.rename(self.tmp / "offline")
@@ -137,26 +148,29 @@ class StartupModeTests(WorkstationTestCase):
         with self.assertRaises(PublishError):
             self.startup({source_variable("maya"): str(self.tmp / "nowhere")})
 
-    def test_blender_dev_uses_the_host_layout(self):
+    def test_blender_dev_uses_the_host_entry_point(self):
         source = self.source_folder({"startup/__init__.py": "", "addons/a/__init__.py": ""}, name="1.5")
-        shared = self.tmp / "shared"
-        (shared / "tls_common").mkdir(parents=True)
-        (shared / "tls_common" / "__init__.py").write_text("", encoding="utf-8")
-        env = {source_variable("blender"): str(source), SHARED_VARIABLE: str(shared)}
-        release = startup_release("blender", "5.2", self.config, env)
-        self.assertEqual(release.python_root, release.release_root / "startup")
-        self.assertTrue((release.release_root / "modules" / "tls_common" / "__init__.py").is_file())
+        release = startup_release("blender", "5.2", self.config, {source_variable("blender"): str(source)})
+        self.assertEqual(release.release_root, source.resolve())
+        self.assertEqual(release.python_root, source.resolve() / "startup")
 
-    def test_old_unused_dev_copies_are_removed_and_recent_ones_kept(self):
+    def test_a_clone_is_run_in_place_using_its_own_python_root(self):
+        clone = self.source_folder({"startup/__init__.py": "", CLONE_MARKER: json.dumps({"python_root": "startup"})}, name="mine")
+        release = startup_release("blender", "5.2", self.config, {source_variable("blender"): str(clone)})
+        self.assertEqual((release.release_id, release.python_root), ("dev-mine", clone.resolve() / "startup"))
+        self.assertEqual(release.extra_paths, ())
+
+    def test_only_legacy_throwaway_copies_are_cleaned_never_clones(self):
         host_dir = DataLayout(self.data).dev / "maya"
-        old, recent = host_dir / "old00000", host_dir / "recent00"
-        for folder in (old, recent):
-            (folder / "x").mkdir(parents=True)
-        long_ago = time.time() - 10 * 24 * 3600
-        os.utime(old, (long_ago, long_ago))
-        self.startup({source_variable("maya"): str(self.source_folder())})
-        self.assertFalse(old.exists())
-        self.assertTrue(recent.exists())
+        legacy, clone, other = host_dir / "0a1b2c3d", host_dir / "1a2b3c4d", host_dir / "my-fix"
+        (legacy / "2.0").mkdir(parents=True)
+        (legacy / "2.0" / "__init__.py").write_text("", encoding="utf-8")
+        clone.mkdir(parents=True)
+        (clone / CLONE_MARKER).write_text("{}", encoding="utf-8")
+        other.mkdir()
+        self.assertEqual(clean_legacy_dev_copies(self.config), 1)
+        self.assertFalse(legacy.exists())
+        self.assertTrue(clone.exists() and other.exists())
 
     # launch
 
@@ -223,3 +237,25 @@ class StartupModeTests(WorkstationTestCase):
         self.assertEqual(release.source, "dev")
         self.assertIn("UNPUBLISHED", shown.getvalue())
         self.assertIn(str(source), shown.getvalue())
+
+    def test_the_host_entry_imports_shared_packages_from_where_they_are(self):
+        entry = STRUCTURE / "THE-LINE" / "pipeline" / "__init__.py"
+        if not entry.is_file():
+            self.skipTest("pipeline entry not present")
+        spec = importlib.util.spec_from_file_location("test_pipeline_dev2", entry)
+        pipeline = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(pipeline)
+        shared = self.tmp / "shared"
+        (shared / "tls_shared_probe").mkdir(parents=True)
+        (shared / "tls_shared_probe" / "__init__.py").write_text("WHERE = 'shared'\n", encoding="utf-8")
+        source = self.source_folder({"__init__.py": "import tls_shared_probe\nVALUE = tls_shared_probe.WHERE\n"})
+        env = {"TLS_PIPELINE": str(self.pipeline), source_variable("maya"): str(source), SHARED_VARIABLE: str(shared)}
+        saved_path = list(sys.path)
+        try:
+            with patch.dict(sys.modules, {"test_pipeline_dev2.localiser": sys.modules["localiser"]}), \
+                    patch.dict(os.environ, env), contextlib.redirect_stdout(io.StringIO()):
+                pipeline.start("maya", SERIES)
+                self.assertEqual(sys.modules["tls_bundle_maya"].VALUE, "shared")
+        finally:
+            sys.path[:] = saved_path
+            sys.modules.pop("tls_shared_probe", None)

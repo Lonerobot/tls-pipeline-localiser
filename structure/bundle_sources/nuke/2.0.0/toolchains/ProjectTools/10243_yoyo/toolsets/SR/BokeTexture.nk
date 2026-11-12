@@ -1,0 +1,15 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+Read {
+ inputs 0
+ file_type png
+ file "/Volumes/The Line/SECURE PROJECTS/10111_SRIRACHA/assets/Textures/gobos/Boke.png"
+ localizationPolicy onDemand
+ format "3385 1651 0 0 3385 1651 1 "
+ origset true
+ auto_alpha true
+ name Read15
+ selected true
+ xpos -5650
+ ypos -5344
+}

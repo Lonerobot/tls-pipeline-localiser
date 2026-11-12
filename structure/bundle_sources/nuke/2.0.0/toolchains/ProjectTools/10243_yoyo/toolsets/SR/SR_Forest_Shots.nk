@@ -1,0 +1,780 @@
+#! C:/Program Files/Nuke11.3v6/nuke-11.3.6.dll -nx
+version 11.3 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-8" y="-8" w="2560" h="1377" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1891" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1188"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="138"/>
+                <dock id="" activePageId="DopeSheet.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="2552" y="-114" w="1920" h="1057" maximized="1" screen="1">
+        <splitter orientation="2">
+            <split size="1057"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Y:/TOOLS/CompTools/nuke/NukeTools_Library/03_ToolSets/SR/SR_Forest_Shots.nk
+ frame 65
+ last_frame 35
+ lock_range true
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x92634fff
+ label FOREST
+ note_font_size 42
+ xpos -1626
+ ypos 245
+ bdwidth 5453
+ bdheight 1670
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh070/publish/comp/comp/movie/default/SR_sc10-sh070_comp_default_v026.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 67
+ origlast 67
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read83
+ xpos 2930
+ ypos 992
+}
+set N85057800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh060/publish/comp/comp/movie/default/SR_sc10-sh060_comp_default_v014.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 34
+ origlast 34
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read82
+ xpos 2820
+ ypos 992
+}
+set N85057400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh056/publish/comp/comp/movie/default/SR_sc10-sh056_comp_default_v022.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 22
+ origlast 22
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read79
+ xpos 2600
+ ypos 1016
+}
+set N85056800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh053/publish/comp/comp/movie/default/SR_sc10-sh053_comp_default_v017.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 36
+ origlast 36
+ origset true
+ mov32_codec {{0} "Apple ProRes 422 (HQ) (appl - apch)"}
+ mov32_pixel_format {{0} "default (YCbCrA 32-bit 444 Float (r4fl))" "RGBA  8-bit" "RGBA  16-bit (b64a)" "YCbCrA 8-bit 444 (v408)" "YCbCrA 8-bit 444 Biased (r408)" "YCbCr  8-bit 422 (2vuy)" "YCbCrA 32-bit 444 Float (r4fl)" "YCbCr  16-bit 422 (v216)"}
+ name Read19
+ xpos 2160
+ ypos 1016
+}
+set N85056400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh050/publish/comp/comp/movie/default/SR_sc10-sh050_comp_default_v010.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 25
+ origlast 25
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read78
+ xpos 2050
+ ypos 1040
+}
+set N85056000 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh040/publish/comp/comp/movie/default/SR_sc10-sh040_comp_default_v034.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 92
+ origlast 92
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read172
+ xpos 1610
+ ypos 1040
+}
+set Ncbb05800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh030/publish/comp/comp/movie/default/SR_sc10-sh030_comp_default_v026.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 43
+ origlast 43
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read81
+ xpos 1280
+ ypos 1040
+}
+set Ncbb05400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh020/publish/comp/comp/movie/default/SR_sc10-sh020_comp_default_v011.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 22
+ origlast 22
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read84
+ tile_color 0xccccccff
+ xpos 1170
+ ypos 1040
+}
+set Ncbb05000 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh010/publish/comp/comp/movie/default/SR_sc10-sh010_comp_default_v008.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 24
+ origlast 24
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read80
+ xpos 1060
+ ypos 1040
+}
+set Ncbb04c00 [stack 0]
+AppendClip {
+ inputs 9
+ meta_from_first false
+ time ""
+ name AppendClip2
+ xpos 1060
+ ypos 1382
+ hide_input true
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh070/publish/comp/comp/movie/default/SR_sc07-sh070_comp_Preview_v029.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 42
+ origlast 42
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read1
+ tile_color 0xccccccff
+ xpos -1140
+ ypos 632
+}
+FrameHold {
+ first_frame 200
+ name FrameHold9
+ xpos -1140
+ ypos 718
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh050/publish/comp/comp/movie/default/SR_sc07-sh050_comp_default_v024.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 22
+ origlast 22
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read2
+ tile_color 0xccccccff
+ xpos -1030
+ ypos 632
+}
+FrameHold {
+ first_frame 5
+ name FrameHold8
+ xpos -1030
+ ypos 718
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc10-sh053/publish/comp/comp/movie/default/SR_sc10-sh053_comp_default_v017.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 36
+ origlast 36
+ origset true
+ mov32_codec {{0} "Apple ProRes 422 (HQ) (appl - apch)"}
+ mov32_pixel_format {{0} "default (YCbCrA 32-bit 444 Float (r4fl))" "RGBA  8-bit" "RGBA  16-bit (b64a)" "YCbCrA 8-bit 444 (v408)" "YCbCrA 8-bit 444 Biased (r408)" "YCbCr  8-bit 422 (2vuy)" "YCbCrA 32-bit 444 Float (r4fl)" "YCbCr  16-bit 422 (v216)"}
+ name Read5
+ xpos -920
+ ypos 632
+}
+FrameHold {
+ name FrameHold5
+ xpos -920
+ ypos 718
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh120/publish/comp/comp/movie/default/SR_sc07-sh120_comp_default_v011.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 10
+ origlast 10
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read74
+ xpos 840
+ ypos 1040
+}
+set Nc28cdc00 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh110/publish/comp/comp/movie/default/SR_sc07-sh110_comp_default_v015.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 9
+ origlast 9
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read73
+ xpos 620
+ ypos 1016
+}
+set Nc28cd800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh100/publish/comp/comp/movie/default/SR_sc07-sh100_comp_default_v013.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 19
+ origlast 19
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read76
+ xpos 290
+ ypos 1064
+}
+set Nc28cd400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh090/publish/comp/comp/movie/default/SR_sc07-sh090_comp_default_v021.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 16
+ origlast 16
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read3
+ xpos 70
+ ypos 1040
+}
+set Nc28cd000 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh080/publish/comp/comp/movie/default/SR_sc07-sh080_comp_default_v011.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 13
+ origlast 13
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read13
+ xpos -40
+ ypos 1040
+}
+set Nc28ccc00 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh070/publish/comp/comp/movie/default/SR_sc07-sh070_comp_Preview_v029.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 42
+ origlast 42
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read14
+ tile_color 0xccccccff
+ xpos -150
+ ypos 1064
+}
+set Nc28cc800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh060/publish/comp/comp/movie/default/SR_sc07-sh060_comp_default_v018.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 34
+ origlast 34
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read22
+ tile_color 0xccccccff
+ xpos -370
+ ypos 1064
+}
+set Nc28cc400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh050/publish/comp/comp/movie/default/SR_sc07-sh050_comp_default_v024.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 22
+ origlast 22
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read7
+ tile_color 0xccccccff
+ xpos -480
+ ypos 1064
+}
+set Nc28cc000 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh040/publish/comp/comp/movie/default/SR_sc07-sh040_comp_default_v031.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 12
+ origlast 12
+ origset true
+ version 1
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read67
+ tile_color 0xccccccff
+ xpos -810
+ ypos 1040
+}
+set N8507bc00 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh030/publish/comp/comp/movie/default/SR_sc07-sh030_comp_default_v017.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 17
+ origlast 17
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read71
+ tile_color 0xccccccff
+ xpos -920
+ ypos 1064
+}
+set N8507b800 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh020/publish/comp/comp/movie/default/SR_sc07-sh020_comp_Preview_v021.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 26
+ origlast 26
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read17
+ tile_color 0xccccccff
+ label "\n"
+ xpos -1030
+ ypos 1040
+}
+set N8507b400 [stack 0]
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh010/publish/comp/comp/movie/default/SR_sc07-sh010_comp_default_v045.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 67
+ origlast 67
+ origset true
+ version 1
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read70
+ tile_color 0xccccccff
+ xpos -1250
+ ypos 1064
+}
+set N8507b000 [stack 0]
+AppendClip {
+ inputs 12
+ meta_from_first false
+ time ""
+ name AppendClip1
+ xpos -1250
+ ypos 1358
+ hide_input true
+}
+Read {
+ inputs 0
+ file_type mov
+ file "Y:/SECURE PROJECTS/10111_SRIRACHA/shots/sc07-sh020/publish/comp/comp/movie/default/SR_sc07-sh020_comp_Preview_v021.mov"
+ format "2248 1072 0 0 2248 1072 1 "
+ last 26
+ origlast 26
+ origset true
+ mov32_codec {{0} "H.264 Decoder (appl - avc1)"}
+ mov32_pixel_format {{0} "default (YCbCr  8-bit 422 (2vuy))" "RGBA  8-bit" "YCbCr  8-bit 422 (2vuy)"}
+ name Read4
+ tile_color 0xccccccff
+ label "\n"
+ xpos -803
+ ypos 632
+}
+FrameHold {
+ first_frame 15
+ name FrameHold1
+ xpos -803
+ ypos 718
+}
+push $N85057800
+FrameHold {
+ first_frame 13
+ name FrameHold140
+ xpos 2930
+ ypos 1136
+}
+push $N85057400
+FrameHold {
+ first_frame 27
+ name FrameHold139
+ xpos 2820
+ ypos 1136
+}
+push $N85056800
+FrameHold {
+ first_frame 19
+ name FrameHold138
+ xpos 2710
+ ypos 1136
+}
+push $N85056800
+FrameHold {
+ name FrameHold137
+ xpos 2600
+ ypos 1136
+}
+push $N85056400
+FrameHold {
+ first_frame 50
+ name FrameHold4
+ xpos 2380
+ ypos 1160
+}
+push $N85056400
+FrameHold {
+ first_frame 14
+ name FrameHold3
+ xpos 2270
+ ypos 1160
+}
+push $N85056400
+FrameHold {
+ name FrameHold2
+ xpos 2160
+ ypos 1160
+}
+push $N85056000
+FrameHold {
+ name FrameHold136
+ xpos 2050
+ ypos 1160
+}
+push $Ncbb05800
+FrameHold {
+ first_frame 80
+ name FrameHold135
+ xpos 1940
+ ypos 1160
+}
+push $Ncbb05800
+FrameHold {
+ first_frame 55
+ name FrameHold134
+ xpos 1830
+ ypos 1160
+}
+push $Ncbb05800
+FrameHold {
+ first_frame 25
+ name FrameHold133
+ xpos 1720
+ ypos 1160
+}
+push $Ncbb05800
+FrameHold {
+ first_frame 1
+ name FrameHold132
+ xpos 1610
+ ypos 1160
+}
+push $Ncbb05400
+FrameHold {
+ first_frame 60
+ name FrameHold131
+ xpos 1500
+ ypos 1160
+}
+push $Ncbb05400
+FrameHold {
+ first_frame 30
+ name FrameHold130
+ xpos 1390
+ ypos 1160
+}
+push $Ncbb05000
+FrameHold {
+ first_frame 20
+ name FrameHold128
+ xpos 1170
+ ypos 1160
+}
+push $Ncbb05400
+FrameHold {
+ first_frame 1
+ name FrameHold129
+ xpos 1280
+ ypos 1160
+}
+push $Ncbb04c00
+FrameHold {
+ first_frame 9
+ name FrameHold127
+ xpos 1060
+ ypos 1160
+}
+push $Nc28cdc00
+FrameHold {
+ first_frame 9
+ name FrameHold126
+ xpos 950
+ ypos 1160
+}
+push $Nc28cdc00
+FrameHold {
+ first_frame 4
+ name FrameHold125
+ xpos 840
+ ypos 1160
+}
+push $Nc28cd800
+FrameHold {
+ first_frame 15
+ name FrameHold124
+ xpos 730
+ ypos 1160
+}
+push $Nc28cd800
+FrameHold {
+ name FrameHold123
+ xpos 620
+ ypos 1160
+}
+push $Nc28cd400
+FrameHold {
+ first_frame 50
+ name FrameHold122
+ xpos 510
+ ypos 1160
+}
+push $Nc28cd400
+FrameHold {
+ first_frame 10
+ name FrameHold121
+ xpos 400
+ ypos 1160
+}
+push $Nc28cd400
+FrameHold {
+ first_frame 1
+ name FrameHold120
+ xpos 290
+ ypos 1160
+}
+push $Nc28cd000
+FrameHold {
+ first_frame 20
+ name FrameHold119
+ xpos 180
+ ypos 1160
+}
+push $Nc28cd000
+FrameHold {
+ first_frame 5
+ name FrameHold118
+ xpos 70
+ ypos 1160
+}
+push $Nc28ccc00
+FrameHold {
+ first_frame 5
+ name FrameHold117
+ xpos -40
+ ypos 1160
+}
+push $Nc28cc800
+FrameHold {
+ first_frame 25
+ name FrameHold116
+ xpos -150
+ ypos 1160
+}
+push $Nc28cc400
+FrameHold {
+ first_frame 25
+ name FrameHold115
+ xpos -260
+ ypos 1160
+}
+push $Nc28cc400
+FrameHold {
+ first_frame 10
+ name FrameHold114
+ xpos -370
+ ypos 1160
+}
+push $Nc28cc000
+FrameHold {
+ first_frame 10
+ name FrameHold113
+ xpos -480
+ ypos 1160
+}
+push $N8507bc00
+FrameHold {
+ first_frame 30
+ name FrameHold112
+ xpos -590
+ ypos 1160
+}
+push $N8507bc00
+FrameHold {
+ first_frame 10
+ name FrameHold111
+ xpos -700
+ ypos 1160
+}
+push $N8507bc00
+FrameHold {
+ first_frame 1
+ name FrameHold110
+ xpos -810
+ ypos 1160
+}
+push $N8507b800
+FrameHold {
+ first_frame 16
+ name FrameHold109
+ xpos -920
+ ypos 1160
+}
+push $N8507b400
+FrameHold {
+ first_frame 15
+ name FrameHold108
+ xpos -1030
+ ypos 1160
+}
+push $N8507b000
+FrameHold {
+ first_frame 46
+ name FrameHold107
+ xpos -1140
+ ypos 1160
+}
+push $N8507b000
+FrameHold {
+ first_frame 80
+ name FrameHold106
+ xpos -1250
+ ypos 1160
+}
+ContactSheet {
+ inputs 38
+ width {{input.width*columns/Resolution_DevidedBy}}
+ height {{input.height*rows/Resolution_DevidedBy}}
+ rows {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nrows\\ =\\ int(rows)\\nif\\ rows*columns\\ <\\ num:\\n\\ \\ \\ \\ rows\\ +=\\ 1\\n\\nret\\ =\\ rows]"}}
+ columns {{"\[python -execlocal import\\ math\\nn\\ =\\ nuke.thisNode()\\nif\\ n\\\['splitinputs'\\].value()==True:\\n\\ \\ \\ \\ num\\ =\\ float(n\\\['endframe'\\].value()-n\\\['startframe'\\].value()+1)\\nelse:\\n\\ \\ \\ \\ num\\ =\\ float(n.inputs())\\nrows\\ =\\ math.sqrt(num)\\ncolumns\\ =\\ int(math.ceil(num\\ /\\ rows))\\nret\\ =\\ columns]"}}
+ center true
+ roworder TopBottom
+ startframe 1
+ endframe 10
+ name ContactSheet
+ tile_color 0xe955ffff
+ xpos 3040
+ ypos 1214
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution_DevidedBy}
+ Resolution_DevidedBy 2
+}
+Viewer {
+ inputs 2
+ frame 65
+ frame_range 1-22
+ translate {1.149000049 0.2700000107}
+ name Viewer3
+ xpos 3040
+ ypos 1262
+}

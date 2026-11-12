@@ -5,9 +5,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-from .api import ROOT_VARIABLE, expose_environment
+from .api import ROOT_VARIABLE
+from .config import default_pipeline_root
 from .errors import ConfigError, LocaliserError, ReleaseUnavailableError
 from .hosts import HOSTS, detect_installed_series
+from .install_code import install_pipeline_code
+from .launch import launch_environment
 from .layout import DataLayout
 from .provision import provision, unprovision
 from .publisher import plan_bundle, publish_plan
@@ -20,7 +23,6 @@ from .sync import (
     prepared_release,
     pull_release,
     source_variable,
-    startup_release,
     sync_release,
 )
 
@@ -55,8 +57,13 @@ def main(argv=None):
     commands.add_parser("sync-all", help="sync every host and series enabled in the local config")
     commands.add_parser("check-all", help="check every enabled host and series for updates, installing nothing")
     commands.add_parser("hosts", help="show the supported hosts, the versions installed here and which are enabled")
+    commands.add_parser(
+        "install", help="put the stubs, pipeline entry and core into the pipeline root (the tray app does this at every start)"
+    )
     entries = commands.add_parser(
-        "provision", help="install (or with --remove, remove) the per-user entry each enabled DCC finds at startup"
+        "provision",
+        help="optional: install (or with --remove, remove) a per-user entry each enabled DCC finds at startup, so a DCC "
+        "started any other way also loads the pipeline. The tray app does not install these",
     )
     entries.add_argument("--remove", action="store_true")
     for action in ("sync", "check", "launch"):
@@ -108,6 +115,15 @@ def main(argv=None):
                     f"{info.display_name:8} installed: {', '.join(installed) or 'none found'}"
                     f"   enabled: {', '.join(enabled.get(name, ())) or 'none'}"
                 )
+            return 0
+        if args.action == "install":
+            root = Path(env[ROOT_VARIABLE]) if env.get(ROOT_VARIABLE, "").strip() else default_pipeline_root(env)
+            if root is None:
+                raise ConfigError("no place to keep the pipeline could be found for this user; set TLS_PIPELINE")
+            actions = install_pipeline_code(root)
+            for action in actions:
+                print(f"{action.change:9} {action.path}")
+            print(f"{root}: " + (f"{len(actions)} files changed" if actions else "up to date"))
             return 0
         config = pipeline_config(env)
         if args.action == "provision":
@@ -165,17 +181,7 @@ def main(argv=None):
             env[source_variable(args.host)] = str(Path(args.source).absolute())
         if args.shared:
             env[SHARED_VARIABLE] = os.pathsep.join(str(Path(p).absolute()) for p in args.shared)
-        if env.get(source_variable(args.host), "").strip():
-            # The stub in the DCC lays the source out itself; check now that it can be.
-            plan_bundle(env[source_variable(args.host)], args.host, [p for p in env.get(SHARED_VARIABLE, "").split(os.pathsep) if p])
-        else:
-            expose_environment(startup_release(args.host, args.series, config, env), env)
-        bootstrap = pipeline_root(env) / "bootstrap" / args.host
-        variable = DISCOVERY_VARIABLES[args.host]
-        # Blender accepts one system scripts directory; Maya and Nuke accept search paths.
-        env[variable] = str(bootstrap)
-        if args.host != "blender" and os.environ.get(variable):
-            env[variable] += os.pathsep + os.environ[variable]
+        env = launch_environment(args.host, args.series, config, env)
         return subprocess.run(args.command, env=env).returncode
     except (LocaliserError, OSError) as exc:
         print(f"localiser: {exc}", file=sys.stderr)

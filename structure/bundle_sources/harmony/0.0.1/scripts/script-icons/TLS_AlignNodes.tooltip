@@ -1,0 +1,3 @@
+- Run normally: align vertically (default to lowest). Hold Ctrl for topmost anchor.
+- Hold Shift: align horizontally (default to rightmost). Hold Ctrl for leftmost anchor.
+- Hold Alt: distribute evenly in the chosen orientation (works with the above anchors).

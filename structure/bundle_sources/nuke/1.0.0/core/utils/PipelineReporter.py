@@ -39,7 +39,7 @@ class PipelineReporter:
             print(custom_logo)
         else:
             # Use The Line's ASCII art style but with cleaner formatting for production
-            header = """
+            header = r"""
   _____ _  _ ___   _	___ _  _ ___			
  |_   _| || | __| | |  |_ _| \| | __|   		
 _______________________________________          

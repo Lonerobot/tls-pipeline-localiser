@@ -1,0 +1,279 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+BackdropNode {
+ inputs 0
+ name " GROUP _backdrop7"
+ tile_color 0x2b2b2bff
+ label "Camera FX"
+ note_font_size 48
+ selected true
+ xpos 16620
+ ypos 1539
+ icon Group.png
+ bdwidth 1041
+ bdheight 1333
+ addUserKnob {20 mainTabTK l backdropTK}
+ addUserKnob {41 label_1 l label T " GROUP _backdrop7.label"}
+ addUserKnob {22 rndClrs0 l "<font style=\"background-color:#7d97a7\"> <img size=\"8\" src=\"Read.png\"> PAINT </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.561, 0.246, 0.655]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PAINT ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PAINT '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs1 l "<font style=\"background-color:#27465e\"> <img size=\"8\" src=\"Read.png\"> 2D ANIMATION </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.57, 0.585, 0.369]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' 2D ANIMATION ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' 2D ANIMATION '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs2 l "<font style=\"background-color:#121d25\"> <img size=\"8\" src=\"Camera.png\"> CAMERA </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Camera.png')\nR,G,B= \[0.567, 0.526, 0.149]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' CAMERA ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' CAMERA '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs3 l "<font style=\"background-color:#426b53\"> <img size=\"8\" src=\"TimeClip.png\"> RETIME </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('TimeClip.png')\nR,G,B= \[0.4, 0.375, 0.42]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' RETIME ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' RETIME '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs4 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Group.png\"> GROUP </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Group.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' GROUP ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' GROUP '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs5 l "<font style=\"background-color:#2b2b2b\"> <img size=\"8\" src=\"Geometry.png\">3D SCENE</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Geometry.png')\nR,G,B= \[0.0, 0.0, 0.17]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('3D SCENE')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % '3D SCENE'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs6 l "<font style=\"background-color:#4a4a4a\"> <img size=\"8\" src=\"Read.png\"> REFERENCE </font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Read.png')\nR,G,B= \[0.0, 0.0, 0.294]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' REFERENCE ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' REFERENCE '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndClrs7 l "<font style=\"background-color:#7f7f7f\"> <img size=\"8\" src=\"Write.png\"> PUBLISHED </font>" T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Write.png')\nR,G,B= \[0.0, 0.0, 0.5]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue(' PUBLISHED ')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % ' PUBLISHED '\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))" +STARTLINE}
+ addUserKnob {22 rndClrs8 l "<font style=\"background-color:#862929\"> <img size=\"8\" src=\"Glow.png\">IMPORTANT</font>" -STARTLINE T "import colorsys\nn=nuke.thisNode()\nlist=\[u' PAINT ', u' 2D ANIMATION ', u' CAMERA ', u' RETIME ', u' GROUP ', u'3D SCENE', u' REFERENCE ', u' PUBLISHED ', u'IMPORTANT']\nn\['icon'].setValue('Glow.png')\nR,G,B= \[0.0, 0.696, 0.529]\nR,G,B=colorsys.hsv_to_rgb(R,G,B)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ))\nif ((n\['label'].getValue()=='') or (n\['label'].getValue() in list)):\n   n\['label'].setValue('IMPORTANT')\n\nallnodes=nuke.allNodes()\nlist=\[]\nnd_name='%s_backdrop' % 'IMPORTANT'\ncurName=n\['name'].getValue().split(nd_name)\n\nif ((len(curName)>0) and (not curName\[0]=='')):\n    for nd in allnodes:\n        splt=nd.name().split(nd_name)\n        if (len(splt)>1):\n            num=splt\[1]\n            if num.isdigit():\n                list.append(int(num))\n    if len(list)>0:\n        next=int(sorted(list)\[-1])+1 \n    else: next=1\n    n\['name'].setValue('%s%s' % (nd_name,next))"}
+ addUserKnob {22 rndColors l " <img src=\"ColorBars.png\">Randomize color " T "import colorsys, random\nn=nuke.thisNode()\nR,G,B= colorsys.hsv_to_rgb(random.random(),.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )" +STARTLINE}
+ addUserKnob {22 rndTint l " <img src=\"HueShift.png\">Randomize tint " -STARTLINE T "import colorsys, random\nn=nuke.thisNode()\nV=int(n\['tile_color'].getValue())\nR = (0xFF & V >> 24) / 255.0\nG = (0xFF & V >> 16) / 255.0\nB = (0xFF & V >> 8) / 255.0\n\nR,G,B= colorsys.rgb_to_hsv(R,G,B)\n\nR,G,B= colorsys.hsv_to_rgb(R,.1+random.random()*.15,.15+random.random()*.15)\nn\['tile_color'].setValue( int('%02x%02x%02x%02x' % (R*255,G*255,B*255,255), 16 ) )"}
+ addUserKnob {22 grow l " <img src=\"MergeMin.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Grow(n,50)"}
+ addUserKnob {22 shrink l " <img src=\"MergeMax.png\">" -STARTLINE T "n=nuke.thisNode()\nautoBackdrop.Shrink(n,50)"}
+ addUserKnob {20 version}
+ addUserKnob {26 nodeClass l Class: T backdropTK}
+ addUserKnob {26 nodeVersion l Version: T "v 2.1"}
+ addUserKnob {22 chHelp l "<img src=\":qrc/images/Help.png\"> HELP" t "Opens web page with tool's manual" -STARTLINE T "nukescripts.openurl.start (tk.getHelpUrl(nuke.thisNode()))"}
+}
+RotoPaint {
+ inputs 0
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x448c8000 x4405e000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px x42280000
+        {xc40d9714 x4037e700}
+        {x448c9000 x42ea0000}
+        {x43ca4000 xc0000000}
+        {xbf46f000 xc3827a01}
+        {x45056002 x44082ccd}
+        {x3f7fe000 x43a92666}
+        {x440d8ee2 x41461380}
+        {x448e5ccf x44704ccb}
+        {xc461b99e xc1a19960}
+        {xc184b308 x433e70d8}
+        {x42e60008 x4401c666}
+        {x4187ffe0 xc3431998}}}
+      {cc
+       {f 8192}
+       {px x42280000
+        {xc40d9714 x4037e700}
+        {0 0}
+        {x43ca4000 xc0000000}
+        {xbf46f000 xc3827a01}
+        {0 0}
+        {x3f7fe000 x43a92666}
+        {x440d8ee2 x41461380}
+        {0 0}
+        {xc461b99e xc1a19960}
+        {xc184b308 x433e70d8}
+        {0 0}
+        {x4187ffe0 xc3431998}}}}
+     {tx x42280000 x44909000 x44076000}
+     {a osw x41200000 osf 0 str 1 spx x448c8000 spy x4405e000 sb 1 ltn x42280000 ltm x42280000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1124 535.5}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 42
+ lifetime_end 42
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name RotoPaint5
+ selected true
+ xpos 17470
+ ypos 2027
+}
+Invert {
+ name Invert3
+ selected true
+ xpos 17470
+ ypos 2069
+}
+Blur {
+ size 210
+ name Blur22
+ selected true
+ xpos 17470
+ ypos 2093
+}
+set Nf2f4d000 [stack 0]
+push $cut_paste_input
+Blur {
+ size 1.3
+ name Blur13
+ selected true
+ xpos 17140
+ ypos 1709
+}
+Sharpen {
+ size 2
+ mix 0.635
+ name Sharpen1
+ selected true
+ xpos 17140
+ ypos 1853
+}
+Dot {
+ name Dot66
+ selected true
+ xpos 17174
+ ypos 2007
+}
+set Nf2f4c400 [stack 0]
+Shuffle {
+ red black
+ green black
+ alpha black
+ name Shuffle13
+ selected true
+ xpos 17250
+ ypos 2075
+}
+LensDistortion2 {
+ lensType Anamorphic
+ projection "Fisheye/Fisheye Stereographic"
+ focal 56
+ distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+ distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+ keyFrame {{curve x19 19}}
+ keyingInitialised true
+ output Redistort
+ outputFormat "2248 1071 0 0 2248 1071 1 SR_P1071"
+ outputBBox {0 -14 2258 1071}
+ featuresKnob "
+version 1
+entries 0
+entries 0
+"
+ name LensDistortion3
+ selected true
+ xpos 17250
+ ypos 2141
+}
+Blur {
+ inputs 1+1
+ size 4.6
+ name Blur25
+ selected true
+ xpos 17250
+ ypos 2213
+}
+push 0
+push $Nf2f4d000
+push $Nf2f4c400
+Shuffle {
+ green black
+ blue black
+ alpha black
+ name Shuffle11
+ selected true
+ xpos 17030
+ ypos 2099
+}
+LensDistortion2 {
+ lensType Anamorphic
+ projection "Fisheye/Fisheye Stereographic"
+ focal 51.5
+ distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+ distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+ keyFrame {{curve x19 19}}
+ keyingInitialised true
+ output Redistort
+ outputFormat "2248 1071 0 0 2248 1071 1 SR_P1071"
+ outputBBox {0 -14 2258 1071}
+ featuresKnob "
+version 1
+entries 0
+entries 0
+"
+ name LensDistortion1
+ selected true
+ xpos 17030
+ ypos 2141
+}
+Blur {
+ inputs 1+1
+ size 0.2
+ name Blur23
+ selected true
+ xpos 17030
+ ypos 2213
+}
+push $Nf2f4d000
+push $Nf2f4c400
+Shuffle {
+ red black
+ blue black
+ alpha black
+ name Shuffle12
+ selected true
+ xpos 17140
+ ypos 2075
+}
+LensDistortion2 {
+ lensType Anamorphic
+ projection "Fisheye/Fisheye Stereographic"
+ focal 54
+ distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+ distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+ keyFrame {{curve x19 19}}
+ keyingInitialised true
+ output Redistort
+ outputFormat "2248 1071 0 0 2248 1071 1 SR_P1071"
+ outputBBox {0 -14 2258 1071}
+ featuresKnob "
+version 1
+entries 0
+entries 0
+"
+ name LensDistortion2
+ selected true
+ xpos 17140
+ ypos 2141
+}
+Blur {
+ inputs 1+1
+ size 1
+ name Blur24
+ selected true
+ xpos 17140
+ ypos 2213
+}
+Merge2 {
+ inputs 3+1
+ operation plus
+ name Merge51
+ selected true
+ xpos 17140
+ ypos 2291
+}
+Clamp {
+ minimum 0.001
+ name Clamp2
+ selected true
+ xpos 17140
+ ypos 2768
+}

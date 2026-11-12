@@ -17,6 +17,9 @@ def start(host, series):
     release = load_prepared_release(host, series)
     _announce(release)
     expose_environment(release)  # sets TLS_PIPELINE_<HOST> (bundle path), _RELEASE and _MODE for this session
+    for folder in release.extra_paths:  # a dev source's shared packages, imported from where they are
+        if folder not in sys.path:
+            sys.path.append(folder)
     _run_entry(release)
     return release
 

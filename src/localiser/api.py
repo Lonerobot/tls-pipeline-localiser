@@ -29,6 +29,7 @@ class LocalisedRelease:
     source: str
     release_root: Path
     python_root: Path
+    extra_paths: tuple = ()  # folders to put on sys.path as well: the shared packages of a dev source
 
 
 def localise(
@@ -86,7 +87,7 @@ def ensure_local_release(
     root = environ.get(ROOT_VARIABLE, "").strip()
     if not root:
         raise ConfigError(f"{ROOT_VARIABLE} is not set; installation or repair is required")
-    config = load_local_config(Path(root) / "config.json")
+    config = load_local_config(Path(root) / "config.json", environ)
     return localise(host, series, config, environ, lock_timeout=lock_timeout)
 
 

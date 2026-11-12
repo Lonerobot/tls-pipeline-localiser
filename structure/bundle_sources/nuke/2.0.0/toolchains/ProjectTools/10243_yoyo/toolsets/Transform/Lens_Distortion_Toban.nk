@@ -1,0 +1,395 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Group {
+ name LensDistortion_toban
+ tile_color 0x9572a3ff
+ selected true
+ xpos 400
+ ypos 663
+ addUserKnob {20 User}
+ addUserKnob {26 ""}
+ addUserKnob {26 Distortion}
+ addUserKnob {41 Squeeze T control.Squeeze}
+ addUserKnob {41 Y T control.Y}
+ addUserKnob {41 X T control.X}
+ addUserKnob {41 S T control.S}
+ addUserKnob {26 ""}
+ addUserKnob {26 Chroma_1 l Chroma}
+ addUserKnob {41 Offset T control.ChromAbb}
+ addUserKnob {41 Blur T control.Blur}
+ addUserKnob {26 ""}
+ addUserKnob {26 EdgeBlur}
+ addUserKnob {41 area T Radial1.area}
+ addUserKnob {41 scale T Blur_scale.scale}
+ addUserKnob {41 mix T Keymix1.mix}
+}
+ NoOp {
+  inputs 0
+  name control
+  xpos 290
+  ypos -9
+  addUserKnob {20 User}
+  addUserKnob {26 ""}
+  addUserKnob {26 Distortion -STARTLINE T ""}
+  addUserKnob {6 sdf_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {7 Squeeze R 10 0.1}
+  Squeeze 1.75
+  addUserKnob {7 Y R -0.5 0.5}
+  Y -0.03
+  addUserKnob {7 X R -0.5 0.5}
+  addUserKnob {7 S R -0.5 0.5}
+  S -0.015
+  addUserKnob {26 ""}
+  addUserKnob {18 ChromAbb R 5 -5}
+  ChromAbb {1.05 0.97 0.9}
+  addUserKnob {6 ChromAbb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 Blur R 0 5}
+  Blur {2.2 1.15 4.6}
+  addUserKnob {6 Blur_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 channelBlur_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 616
+  ypos -345
+ }
+ Dot {
+  name Dot20
+  xpos 650
+  ypos -206
+ }
+set N32eea800 [stack 0]
+ Dot {
+  name Dot19
+  xpos 1042
+  ypos -206
+ }
+ Radial {
+  replace true
+  invert true
+  area {-86 -226 3462 1894}
+  name Radial2
+  xpos 1008
+  ypos -9
+ }
+set N32eea000 [stack 0]
+push $N32eea800
+ Shuffle {
+  red black
+  green black
+  alpha black
+  name Shuffle7
+  xpos 726
+  ypos -57
+ }
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.b}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.b}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionB
+  xpos 730
+  ypos -15
+ }
+ Transform {
+  center {1686 802.5}
+  name Transform3
+  xpos 730
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.b}}
+  name BlurB
+  xpos 730
+  ypos 81
+ }
+push 0
+push $N32eea000
+push $N32eea800
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name Shuffle9
+  xpos 506
+  ypos -57
+ }
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.r}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.r}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionR
+  xpos 506
+  ypos -15
+ }
+ Transform {
+  center {1686 802.5}
+  name Transform1
+  xpos 506
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.r}}
+  name BlurR
+  xpos 506
+  ypos 81
+ }
+push $N32eea000
+push $N32eea800
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name Shuffle11
+  xpos 616
+  ypos -57
+ }
+ LensDistortion2 {
+  lens Anamorphic
+  anamorphicSqueeze {{parent.control.Squeeze/LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominator0 {{parent.control.S*LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominatorX00 {{parent.control.X*LensDistortion_toban.control.ChromAbb.g}}
+  distortionDenominatorY00 {{parent.control.Y*LensDistortion_toban.control.ChromAbb.g}}
+  output Redistort
+  useFisheye false
+  bboxType Input
+  lastBBoxType Input
+  outputBBox {0 0 3072 1306}
+  bboxBackup {0 -14 2258 1071}
+  bboxBackupSet true
+  outputFormatType BBox
+  featuresKnob "
+version 1
+entries 0
+entries 0
+"
+  keyFrame {{curve x19 19}}
+  projection "Fisheye/Fisheye Stereographic"
+  focal 51.5
+  distortionModelDisplayX "xu = xd / (1 + k0 * rd^2 + k1 * rd^4 + k2 * yd^2)"
+  distortionModelDisplayY "yu = yd / (1 + k0 * rd^2 + k1 * rd^4 + k3 * xd^2)"
+  name LensDistortionG
+  xpos 616
+  ypos -15
+ }
+ Transform {
+  center {1686 802.5}
+  name Transform2
+  xpos 616
+  ypos 21
+ }
+ Blur {
+  inputs 1+1
+  size {{parent.control.Blur.g}}
+  name BlurG
+  xpos 616
+  ypos 90
+ }
+ Merge2 {
+  inputs 3+1
+  operation plus
+  name Merge11
+  xpos 616
+  ypos 159
+ }
+ Dot {
+  name Dot1
+  xpos 654
+  ypos 498
+ }
+set N32e42400 [stack 0]
+ Radial {
+  replace true
+  area {-664 -752 4060 2406}
+  name Radial1
+  xpos 840
+  ypos 495
+ }
+ Reformat {
+  inputs 0
+  format "255 255 0 0 255 255 1 square255"
+  resize none
+  center false
+  black_outside true
+  name Reformat14
+  xpos 180
+  ypos 297
+  hide_input true
+ }
+ RotoPaint {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x42ff0000 x42ff0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Rectangle1 512 bezier
+     {{cc
+       {f 8192}
+       {px x40000000
+        {0 xbf3bbc00}
+        {x42f5f247 x4305999a}
+        {x40b1a370 0}
+        {xc0b1a380 0}
+        {x430ba077 x4305999a}
+        {0 xbf3bbc00}
+        {0 x3f3bbc00}
+        {x430ba077 x43036666}
+        {xc0b1a380 0}
+        {x40b1a370 0}
+        {x42f5f247 x43036666}
+        {0 x3f3bbc00}}}
+      {cc
+       {f 8192}
+       {px x40000000
+        {0 xbf3bbc00}
+        {0 0}
+        {x40b1a370 0}
+        {xc0b1a380 0}
+        {0 0}
+        {0 xbf3bbc00}
+        {0 x3f3bbc00}
+        {0 0}
+        {xc0b1a380 0}
+        {x40b1a370 0}
+        {0 0}
+        {0 x3f3bbc00}}}}
+     {tx x40000000 x43034ccd x43048000}
+     {a osw x41200000 osf 0 str 1 spx x42ff0000 spy x42ff0000 sb 1 ltn x40000000 ltm x40000000 tt x41000000}}}}}}
+  toolbox {selectAll {
+  { selectAll bm 6 src 1 str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 21 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_blending_mode color-dodge
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type single
+  toolbar_paint_source fg
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1536 653}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 2
+  lifetime_end 2
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name RotoPaint18
+  xpos 180
+  ypos 351
+ }
+ Blur {
+  size {4 0}
+  name Blur12
+  xpos 180
+  ypos 393
+ }
+ Transform {
+  rotate 5
+  scale 0.5
+  center {131.6799927 132.1999969}
+  name Blur_scale
+  xpos 180
+  ypos 447
+ }
+ Dot {
+  name Dot68
+  xpos 214
+  ypos 498
+ }
+push $N32e42400
+ Convolve2 {
+  inputs 2
+  channels rgba
+  name Convolve3
+  xpos 400
+  ypos 495
+ }
+push $N32e42400
+ Keymix {
+  inputs 3
+  invertMask true
+  mix 0.07
+  name Keymix1
+  xpos 620
+  ypos 681
+ }
+set N32da3800 [stack 0]
+ Output {
+  name Output1
+  xpos 620
+  ypos 831
+ }
+ Blur {
+  inputs 0
+  size 210
+  name Blur4
+  xpos 1147
+  ypos -71
+ }
+push $N32da3800
+ Viewer {
+  frame_range 1-24
+  show_overscan true
+  overscan 4000
+  name Viewer1
+  xpos 70
+  ypos 159
+ }
+end_group

@@ -1,0 +1,1072 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name blur_slice
+ selected true
+ xpos 2930
+ ypos 1935
+ addUserKnob {20 User l Blur}
+ addUserKnob {41 Blur_multiplyer l size T NoOp1.Blur_multiplyer}
+ addUserKnob {6 invertMask l "invert mask" +STARTLINE}
+ invertMask true
+}
+ NoOp {
+  inputs 0
+  name NoOp1
+  xpos 4800
+  ypos 1575
+  addUserKnob {20 User}
+  addUserKnob {7 Blur_multiplyer R 0 10}
+  Blur_multiplyer 1.4
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 1280
+  ypos 543
+  number 1
+ }
+set N67f63c00 [stack 0]
+ Invert {
+  name Invert1
+  xpos 1390
+  ypos 609
+ }
+push $N67f63c00
+ Switch {
+  inputs 2
+  which {{parent.invertMask}}
+  name Switch1
+  xpos 1280
+  ypos 663
+ }
+ Dot {
+  name Dot2
+  xpos 1314
+  ypos 714
+ }
+set N67f63000 [stack 0]
+ Dot {
+  name Dot3
+  xpos 1534
+  ypos 714
+ }
+set N67f62c00 [stack 0]
+ Dot {
+  name Dot11
+  xpos 1754
+  ypos 714
+ }
+set N67f62800 [stack 0]
+ Dot {
+  name Dot14
+  xpos 1974
+  ypos 714
+ }
+set N67f62400 [stack 0]
+ Dot {
+  name Dot17
+  xpos 2194
+  ypos 714
+ }
+set N67f62000 [stack 0]
+ Dot {
+  name Dot20
+  xpos 2414
+  ypos 714
+ }
+set N67f61c00 [stack 0]
+ Dot {
+  name Dot23
+  xpos 2634
+  ypos 714
+ }
+set N67f61800 [stack 0]
+ Dot {
+  name Dot26
+  xpos 2854
+  ypos 714
+ }
+set N67f61400 [stack 0]
+ Dot {
+  name Dot29
+  xpos 3074
+  ypos 714
+ }
+set N67f61000 [stack 0]
+ Dot {
+  name Dot32
+  xpos 3294
+  ypos 714
+ }
+set N67f60c00 [stack 0]
+ Dot {
+  name Dot35
+  xpos 3514
+  ypos 714
+ }
+set N67f60800 [stack 0]
+ Dot {
+  name Dot38
+  xpos 3734
+  ypos 714
+ }
+set N67f60400 [stack 0]
+ Dot {
+  name Dot41
+  xpos 3954
+  ypos 714
+ }
+set N67f2bc00 [stack 0]
+ Dot {
+  name Dot44
+  xpos 4174
+  ypos 714
+ }
+set N67f2b800 [stack 0]
+ Dot {
+  name Dot47
+  xpos 4394
+  ypos 714
+ }
+set N67f2b400 [stack 0]
+ Dot {
+  name Dot50
+  xpos 4614
+  ypos 714
+ }
+set N67f2b000 [stack 0]
+ Dot {
+  name Dot53
+  xpos 4834
+  ypos 714
+ }
+set N67f2ac00 [stack 0]
+ Dot {
+  name Dot56
+  xpos 5054
+  ypos 714
+ }
+ Keyer {
+  operation "luminance key"
+  range {0.9 {range.A} 1 {range.C}}
+  name Keyer18
+  xpos 5020
+  ypos 825
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 840
+  ypos 255
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 840
+  ypos 735
+ }
+ Grade {
+  whitepoint 0.8
+  name Grade1
+  selected true
+  xpos 840
+  ypos 759
+ }
+ OCIOColorSpace {
+  in_colorspace color_picking
+  out_colorspace "ACES - ACEScg"
+  name OCIOColorSpace15
+  xpos 840
+  ypos 831
+ }
+ Dot {
+  name Dot7
+  xpos 874
+  ypos 882
+ }
+set N67f29000 [stack 0]
+ Dot {
+  name Dot8
+  xpos 1094
+  ypos 882
+ }
+set N67f28c00 [stack 0]
+ Dot {
+  name Dot5
+  xpos 1424
+  ypos 882
+ }
+set N67f28800 [stack 0]
+ Dot {
+  name Dot12
+  xpos 1644
+  ypos 882
+ }
+set N67f28400 [stack 0]
+ Dot {
+  name Dot15
+  xpos 1864
+  ypos 882
+ }
+set N67f03c00 [stack 0]
+ Dot {
+  name Dot18
+  xpos 2084
+  ypos 882
+ }
+set N67f03800 [stack 0]
+ Dot {
+  name Dot21
+  xpos 2304
+  ypos 882
+ }
+set N67f03400 [stack 0]
+ Dot {
+  name Dot24
+  xpos 2524
+  ypos 882
+ }
+set N67f03000 [stack 0]
+ Dot {
+  name Dot27
+  xpos 2744
+  ypos 882
+ }
+set N67f02c00 [stack 0]
+ Dot {
+  name Dot30
+  xpos 2964
+  ypos 882
+ }
+set N67f02800 [stack 0]
+ Dot {
+  name Dot33
+  xpos 3184
+  ypos 882
+ }
+set N67f02400 [stack 0]
+ Dot {
+  name Dot36
+  xpos 3404
+  ypos 882
+ }
+set N67f02000 [stack 0]
+ Dot {
+  name Dot39
+  xpos 3624
+  ypos 882
+ }
+set N67f01c00 [stack 0]
+ Dot {
+  name Dot42
+  xpos 3844
+  ypos 882
+ }
+set N67f01800 [stack 0]
+ Dot {
+  name Dot45
+  xpos 4064
+  ypos 882
+ }
+set N67f01400 [stack 0]
+ Dot {
+  name Dot48
+  xpos 4284
+  ypos 882
+ }
+set N67f01000 [stack 0]
+ Dot {
+  name Dot51
+  xpos 4504
+  ypos 882
+ }
+set N67f00c00 [stack 0]
+ Dot {
+  name Dot54
+  xpos 4724
+  ypos 882
+ }
+set N67f00800 [stack 0]
+ Dot {
+  name Dot57
+  xpos 4944
+  ypos 882
+ }
+ Dot {
+  name Dot58
+  xpos 4944
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy18
+  xpos 5020
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus17.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus18
+  xpos 5020
+  ypos 1233
+ }
+ Premult {
+  name Premult18
+  xpos 5020
+  ypos 1311
+ }
+push $N67f2ac00
+ Keyer {
+  operation "luminance key"
+  range {0.8 {range.A} 1 {range.C}}
+  name Keyer17
+  xpos 4800
+  ypos 825
+ }
+push $N67f00800
+ Dot {
+  name Dot55
+  xpos 4724
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy17
+  xpos 4800
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus16.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus17
+  xpos 4800
+  ypos 1233
+ }
+ Premult {
+  name Premult17
+  xpos 4800
+  ypos 1311
+ }
+push $N67f2b000
+ Keyer {
+  operation "luminance key"
+  range {0.7 {range.A} 1 {range.C}}
+  name Keyer16
+  xpos 4580
+  ypos 825
+ }
+push $N67f00c00
+ Dot {
+  name Dot52
+  xpos 4504
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy16
+  xpos 4580
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus15.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus16
+  xpos 4580
+  ypos 1233
+ }
+ Premult {
+  name Premult16
+  xpos 4580
+  ypos 1311
+ }
+push $N67f2b400
+ Keyer {
+  operation "luminance key"
+  range {0.6 {range.A} 1 {range.C}}
+  name Keyer15
+  xpos 4360
+  ypos 825
+ }
+push $N67f01000
+ Dot {
+  name Dot49
+  xpos 4284
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy15
+  xpos 4360
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus14.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus15
+  xpos 4360
+  ypos 1233
+ }
+ Premult {
+  name Premult15
+  xpos 4360
+  ypos 1311
+ }
+push $N67f2b800
+ Keyer {
+  operation "luminance key"
+  range {0.5 {range.A} 1 {range.C}}
+  name Keyer14
+  xpos 4140
+  ypos 825
+ }
+push $N67f01400
+ Dot {
+  name Dot46
+  xpos 4064
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy14
+  xpos 4140
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus13.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus14
+  xpos 4140
+  ypos 1233
+ }
+ Premult {
+  name Premult14
+  xpos 4140
+  ypos 1311
+ }
+push $N67f2bc00
+ Keyer {
+  operation "luminance key"
+  range {0.4 {range.A} 1 {range.C}}
+  name Keyer13
+  xpos 3920
+  ypos 825
+ }
+push $N67f01800
+ Dot {
+  name Dot43
+  xpos 3844
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy13
+  xpos 3920
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus12.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus13
+  xpos 3920
+  ypos 1233
+ }
+ Premult {
+  name Premult13
+  xpos 3920
+  ypos 1311
+ }
+push $N67f60400
+ Keyer {
+  operation "luminance key"
+  range {0.3 {range.A} 1 {range.C}}
+  name Keyer12
+  xpos 3700
+  ypos 825
+ }
+push $N67f01c00
+ Dot {
+  name Dot40
+  xpos 3624
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy12
+  xpos 3700
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus11.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus12
+  xpos 3700
+  ypos 1233
+ }
+ Premult {
+  name Premult12
+  xpos 3700
+  ypos 1311
+ }
+push $N67f60800
+ Keyer {
+  operation "luminance key"
+  range {0.2 {range.A} 1 {range.C}}
+  name Keyer11
+  xpos 3480
+  ypos 825
+ }
+push $N67f02000
+ Dot {
+  name Dot37
+  xpos 3404
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy11
+  xpos 3480
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus10.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus11
+  xpos 3480
+  ypos 1233
+ }
+ Premult {
+  name Premult11
+  xpos 3480
+  ypos 1311
+ }
+push $N67f60c00
+ Keyer {
+  operation "luminance key"
+  range {0.1 {range.A} 1 {range.C}}
+  name Keyer10
+  xpos 3260
+  ypos 825
+ }
+push $N67f02400
+ Dot {
+  name Dot34
+  xpos 3184
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy10
+  xpos 3260
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus9.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus10
+  xpos 3260
+  ypos 1233
+ }
+ Premult {
+  name Premult10
+  xpos 3260
+  ypos 1311
+ }
+push $N67f61000
+ Keyer {
+  operation "luminance key"
+  range {0.09 {range.A} 1 {range.C}}
+  name Keyer9
+  xpos 3040
+  ypos 825
+ }
+push $N67f02800
+ Dot {
+  name Dot31
+  xpos 2964
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy9
+  xpos 3040
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus8.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus9
+  xpos 3040
+  ypos 1233
+ }
+ Premult {
+  name Premult9
+  xpos 3040
+  ypos 1311
+ }
+push $N67f61400
+ Keyer {
+  operation "luminance key"
+  range {0.08 {range.A} 1 {range.C}}
+  name Keyer8
+  xpos 2820
+  ypos 825
+ }
+push $N67f02c00
+ Dot {
+  name Dot28
+  xpos 2744
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy8
+  xpos 2820
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus7.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus8
+  xpos 2820
+  ypos 1233
+ }
+ Premult {
+  name Premult8
+  xpos 2820
+  ypos 1311
+ }
+push $N67f61800
+ Keyer {
+  operation "luminance key"
+  range {0.07 {range.A} 1 {range.C}}
+  name Keyer7
+  xpos 2600
+  ypos 825
+ }
+push $N67f03000
+ Dot {
+  name Dot25
+  xpos 2524
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy7
+  xpos 2600
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus6.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus7
+  xpos 2600
+  ypos 1233
+ }
+ Premult {
+  name Premult7
+  xpos 2600
+  ypos 1311
+ }
+push $N67f61c00
+ Keyer {
+  operation "luminance key"
+  range {0.06 {range.A} 1 {range.C}}
+  name Keyer6
+  xpos 2380
+  ypos 825
+ }
+push $N67f03400
+ Dot {
+  name Dot22
+  xpos 2304
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy6
+  xpos 2380
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus5.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus6
+  xpos 2380
+  ypos 1233
+ }
+ Premult {
+  name Premult6
+  xpos 2380
+  ypos 1311
+ }
+push $N67f62000
+ Keyer {
+  operation "luminance key"
+  range {0.05 {range.A} 1 {range.C}}
+  name Keyer5
+  xpos 2160
+  ypos 825
+ }
+push $N67f03800
+ Dot {
+  name Dot19
+  xpos 2084
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy5
+  xpos 2160
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus4.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus5
+  xpos 2160
+  ypos 1233
+ }
+ Premult {
+  name Premult5
+  xpos 2160
+  ypos 1311
+ }
+push $N67f62400
+ Keyer {
+  operation "luminance key"
+  range {0.04 {range.A} 1 {range.C}}
+  name Keyer4
+  xpos 1940
+  ypos 825
+ }
+push $N67f03c00
+ Dot {
+  name Dot16
+  xpos 1864
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos 1940
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus3.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus4
+  xpos 1940
+  ypos 1233
+ }
+ Premult {
+  name Premult4
+  xpos 1940
+  ypos 1311
+ }
+push $N67f62800
+ Keyer {
+  operation "luminance key"
+  range {0.03 {range.A} 1 {range.C}}
+  name Keyer3
+  xpos 1720
+  ypos 825
+ }
+push $N67f28400
+ Dot {
+  name Dot13
+  xpos 1644
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos 1720
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus2.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus3
+  xpos 1720
+  ypos 1233
+ }
+ Premult {
+  name Premult3
+  xpos 1720
+  ypos 1311
+ }
+push $N67f62c00
+ Keyer {
+  operation "luminance key"
+  range {0.02 {range.A} 1 {range.C}}
+  name Keyer2
+  xpos 1500
+  ypos 825
+ }
+push $N67f28800
+ Dot {
+  name Dot9
+  xpos 1424
+  ypos 1098
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos 1500
+  ypos 1089
+ }
+ Defocus {
+  defocus {{parent.Defocus1.defocus*NoOp1.Blur_multiplyer}}
+  ratio {{parent.Defocus1.ratio}}
+  scale {{parent.Defocus1.scale}}
+  quality {{parent.Defocus1.quality}}
+  name Defocus2
+  xpos 1500
+  ypos 1233
+ }
+ Premult {
+  name Premult2
+  xpos 1500
+  ypos 1311
+ }
+push $N67f63000
+ Keyer {
+  operation "luminance key"
+  range {0.01 {range.A} 1 {range.C}}
+  name Keyer1
+  xpos 1280
+  ypos 825
+ }
+push $N67f28c00
+ Dot {
+  name Dot4
+  xpos 1094
+  ypos 1074
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 1280
+  ypos 1065
+ }
+ Defocus {
+  ratio 0.44
+  name Defocus1
+  xpos 1280
+  ypos 1233
+ }
+ Premult {
+  name Premult1
+  xpos 1280
+  ypos 1335
+ }
+push $N67f29000
+ Dot {
+  name Dot6
+  xpos 874
+  ypos 1434
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 1280
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 1500
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos 1720
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 1940
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge6
+  xpos 2160
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge7
+  xpos 2380
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge8
+  xpos 2600
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge9
+  xpos 2820
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge10
+  xpos 3040
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge11
+  xpos 3260
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge12
+  xpos 3480
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge13
+  xpos 3700
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge14
+  xpos 3920
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 4140
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge16
+  xpos 4360
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge17
+  xpos 4580
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge18
+  xpos 4800
+  ypos 1431
+ }
+ Merge2 {
+  inputs 2
+  name Merge19
+  xpos 5020
+  ypos 1431
+ }
+ OCIOColorSpace {
+  in_colorspace "ACES - ACEScg"
+  out_colorspace color_picking
+  name OCIOColorSpace16
+  xpos 5020
+  ypos 1575
+ }
+ Output {
+  name Output1
+  xpos 5020
+  ypos 1815
+ }
+ Viewer {
+  frame_range 1-100
+  colour_sample_bbox {-0.02187499963 -0.321875006 -0.02031249925 -0.3203125}
+  samplepoints {{0.1953125 -0.09531249851}
+    }
+  name Viewer1
+  xpos 1170
+  ypos 663
+ }
+end_group

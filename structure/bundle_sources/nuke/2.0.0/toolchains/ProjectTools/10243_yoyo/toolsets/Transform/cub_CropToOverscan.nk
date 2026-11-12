@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 12.2 v3
+push $cut_paste_input
+Crop {
+ box {0 0 3372 2028}
+ name cub_CropToOverscan
+ selected true
+ xpos 2160
+ ypos 3453
+}

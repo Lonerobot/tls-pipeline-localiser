@@ -1,0 +1,11 @@
+
+
+for a in nuke.allNodes():
+   if a.Class()=='Read':
+        b = a.knob('file').getValue()
+        c = b.replace("C:/Users/freddie/Desktop/sirroco_comp", "P:/10167_sirocco/004_EXPLORATION/freddie")
+        a.knob("file").setValue(c)
+        
+     
+
+        
