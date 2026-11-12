@@ -75,5 +75,17 @@ If present, the tray application should have this field locked, with a mesaage s
 
 I dislike how the logs are written to file, and it's created a situation where 2 empyty CMD windows are spawned. I'd like to revert to leaving the logging to the hosts preference. Investigate why this was changed and try again
 
+# Latest Issues
 
+Release Workflow - Clone From discrepancies
+
+you can point the bundle source folder to a zipped bundle location, there's no check for this.
+
+should the tool detect no source code is correct and ask if the user wants to unzip the code?
+
+question to be clarified - if you specified a published release, is this looking at the zipped bundles on the remote repository? or the localised code?
+
+we should indicate in the list of published releases which is the current studio default.
+
+If the application is changed, the release list should be refreshed. As I can invoke an error as I try to collect a release that's not present.
 

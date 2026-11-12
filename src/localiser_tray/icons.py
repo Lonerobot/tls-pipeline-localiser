@@ -120,6 +120,82 @@ def rocket_icon(colour: str = "#d8dce2") -> QIcon:
     return icon
 
 
+def _mode_pixmap(kind: str, size: int, colour: str) -> QPixmap:
+    pixmap = QPixmap(size, size)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    painter.scale(size / 100, size / 100)
+    pen = QPen(QColor(colour), 7)
+    pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+    pen.setJoinStyle(Qt.PenJoinStyle.RoundJoin)
+    painter.setPen(pen)
+    painter.setBrush(Qt.BrushStyle.NoBrush)
+    if kind == "publish":  # an arrow rising out of a tray
+        painter.drawLine(50, 62, 50, 14)
+        painter.drawLine(30, 34, 50, 14)
+        painter.drawLine(70, 34, 50, 14)
+        tray = QPainterPath()
+        tray.moveTo(14, 66)
+        tray.lineTo(14, 86)
+        tray.lineTo(86, 86)
+        tray.lineTo(86, 66)
+        painter.drawPath(tray)
+    else:  # a folder holding code: the bundle you work on
+        folder = QPainterPath()
+        folder.moveTo(10, 78)
+        folder.lineTo(10, 24)
+        folder.lineTo(36, 24)
+        folder.lineTo(44, 34)
+        folder.lineTo(90, 34)
+        folder.lineTo(90, 78)
+        folder.closeSubpath()
+        painter.drawPath(folder)
+        painter.drawLine(40, 50, 30, 58)
+        painter.drawLine(30, 58, 40, 66)
+        painter.drawLine(60, 50, 70, 58)
+        painter.drawLine(70, 58, 60, 66)
+    painter.end()
+    return pixmap
+
+
+def mode_icon(kind: str, colour: str = "#d8dce2") -> QIcon:
+    """An outline icon for the Create tab's two choices: "local" (a folder of code) or "publish" (an arrow
+    rising from a tray)."""
+    icon = QIcon()
+    for size in (24, 32, 48, 64, 96):
+        icon.addPixmap(_mode_pixmap(kind, size, colour))
+    return icon
+
+
+def admin_icon(colour: str = "#f0a030") -> QIcon:
+    """A shield with a key hole, for admin mode."""
+    icon = QIcon()
+    for size in (16, 24, 32, 48):
+        pixmap = QPixmap(size, size)
+        pixmap.fill(Qt.GlobalColor.transparent)
+        painter = QPainter(pixmap)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        painter.scale(size / 100, size / 100)
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.setBrush(QBrush(QColor(colour)))
+        shield = QPainterPath()
+        shield.moveTo(50, 6)
+        shield.lineTo(88, 20)
+        shield.lineTo(88, 50)
+        shield.cubicTo(88, 74, 70, 90, 50, 96)
+        shield.cubicTo(30, 90, 12, 74, 12, 50)
+        shield.lineTo(12, 20)
+        shield.closeSubpath()
+        painter.drawPath(shield)
+        painter.setBrush(QBrush(QColor("#1b1d21")))
+        painter.drawEllipse(QRectF(38, 30, 24, 24))  # the key hole: a round top and a stem
+        painter.drawRect(QRectF(46, 48, 8, 24))
+        painter.end()
+        icon.addPixmap(pixmap)
+    return icon
+
+
 def logo_pixmap(width: int) -> QPixmap | None:
     """THE LINE logo rendered `width` pixels wide, or None if the SVG support isn't available."""
     try:

@@ -13,6 +13,14 @@ class UnsupportedSeriesError(ConfigError):
     """The studio config has no release for this host or DCC series."""
 
 
+class NoBundleSelectedError(LocaliserError):
+    """The studio config lists this host and DCC series but selects no bundle for it (`bundle_version` null)."""
+
+    def __init__(self, host, series):
+        super().__init__(f"the studio has no bundle selected for {host} {series}")
+        self.host, self.series = host, series
+
+
 class ReleaseUnavailableError(LocaliserError):
     """The requested release cannot be resolved or fetched. The message names the host and release."""
 

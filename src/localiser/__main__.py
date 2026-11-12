@@ -15,7 +15,8 @@ from .layout import DataLayout
 from .provision import provision, unprovision
 from .publisher import plan_bundle, publish_plan
 from .resolve import SOURCE_LAST_KNOWN, override_variable, resolve_release
-from .status import NOT_PREPARED, PROBLEMS, UPDATE_AVAILABLE, EntryStatus, check_enabled, sync_enabled
+from .status import PROBLEMS, EntryStatus, check_enabled, needs_sync, sync_enabled
+from .studio import set_studio_bundle, studio_entries
 from .sync import (
     SHARED_VARIABLE,
     pipeline_config,
@@ -55,6 +56,13 @@ def main(argv=None):
     pull.add_argument("host", choices=sorted(DISCOVERY_VARIABLES))
     pull.add_argument("release", help="the release ID to install, such as 1.0.3")
     commands.add_parser("sync-all", help="sync every host and series enabled in the local config")
+    studio = commands.add_parser("studio", help="show or change which bundle the studio config selects (repository must be a folder)")
+    studio_actions = studio.add_subparsers(dest="studio_action", required=True)
+    studio_actions.add_parser("show", help="list the studio config's entries")
+    studio_set = studio_actions.add_parser("set", help="select a bundle for a host and series")
+    studio_set.add_argument("host", choices=sorted(DISCOVERY_VARIABLES))
+    studio_set.add_argument("series")
+    studio_set.add_argument("bundle", help='the release ID, or "none" to select no bundle (the pipeline then loads nothing)')
     commands.add_parser("check-all", help="check every enabled host and series for updates, installing nothing")
     commands.add_parser("hosts", help="show the supported hosts, the versions installed here and which are enabled")
     commands.add_parser(
@@ -126,6 +134,15 @@ def main(argv=None):
             print(f"{root}: " + (f"{len(actions)} files changed" if actions else "up to date"))
             return 0
         config = pipeline_config(env)
+        if args.action == "studio":
+            if args.studio_action == "show":
+                for (host, series), version in sorted(studio_entries(config).items()):
+                    print(f"{host:8} {series:8} {version or '(no bundle)'}")
+                return 0
+            version = None if args.bundle.lower() == "none" else args.bundle
+            set_studio_bundle(config, args.host, args.series, version)
+            print(f"Studio config: {args.host} {args.series} -> {version or 'no bundle'}. Machines pick it up at their next sync.")
+            return 0
         if args.action == "provision":
             actions = unprovision(config, env) if args.remove else provision(pipeline_root(env), config, env)
             if not actions:
@@ -143,7 +160,7 @@ def main(argv=None):
                 print(_describe(entry))
             if any(entry.state in PROBLEMS for entry in entries):
                 return 2
-            if not syncing and any(entry.state in (UPDATE_AVAILABLE, NOT_PREPARED) for entry in entries):
+            if not syncing and any(needs_sync(entry) for entry in entries):
                 print("Run sync-all, then restart the DCCs to use the updates.")
                 return 1
             return 0

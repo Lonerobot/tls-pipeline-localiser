@@ -1,10 +1,15 @@
 """Pipeline localiser core: resolve, localise and verify versioned releases. Imports no DCC modules."""
 from .api import LocalisedRelease, ensure_local_release, expose_environment, host_variable, localise
 from .clone import (
+    ReleaseChoice,
+    ZippedSourceError,
+    available_releases,
     clone_bundle,
+    find_zipped_bundle,
     get_override,
     installed_releases,
     list_clones,
+    publish_to_repository,
     read_overrides,
     set_override,
 )
@@ -21,6 +26,7 @@ from .errors import (
     ConfigError,
     LocaliserError,
     LockTimeoutError,
+    NoBundleSelectedError,
     PublishError,
     ReleaseUnavailableError,
     UnsafeArchiveError,
@@ -34,11 +40,13 @@ from .status import (
     EntryStatus,
     check_enabled,
     check_entry,
+    needs_sync,
     read_status,
     selection_changed,
     sync_enabled,
     sync_entry,
 )
+from .studio import can_edit_studio, set_studio_bundle, studio_entries
 from .sync import (
     clean_legacy_dev_copies,
     dev_release,

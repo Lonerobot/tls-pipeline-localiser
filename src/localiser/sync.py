@@ -17,7 +17,7 @@ from .config import (
     validate_python_root,
     validate_series,
 )
-from .errors import ConfigError, PublishError, ReleaseUnavailableError
+from .errors import ConfigError, NoBundleSelectedError, PublishError, ReleaseUnavailableError
 from .fsutil import atomic_write_text
 from .install import LocalRelease, _read_marker, ensure_release
 from .layout import CLONE_MARKER, DataLayout
@@ -69,6 +69,15 @@ def sync_release(
     return release
 
 
+def clear_prepared(host: str, series: str, config: LocalConfig) -> None:
+    """Select no bundle for `host` `series`: the studio has none for it. Installed bundles are left alone, since
+    a running session may be using one; a DCC started now loads no pipeline and says so."""
+    atomic_write_text(
+        DataLayout(config.bundle_repository).prepared_file(host, series),
+        json.dumps({"schema_version": 1, "release_id": None}, sort_keys=True) + "\n",
+    )
+
+
 def prepared_release(host: str, series: str, config: LocalConfig) -> LocalisedRelease:
     """Read only local state and a completion marker; never resolve, download or repair."""
     validate_host(host)
@@ -78,7 +87,11 @@ def prepared_release(host: str, series: str, config: LocalConfig) -> LocalisedRe
         state = json.loads(layout.prepared_file(host, series).read_text(encoding="utf-8"))
         if not isinstance(state, dict) or type(state.get("schema_version")) is not int or state["schema_version"] != 1:
             raise ValueError("invalid prepared selection")
+        if "release_id" in state and state["release_id"] is None:
+            raise NoBundleSelectedError(host, series)
         release_id = validate_id(state.get("release_id"), "prepared release_id")
+    except NoBundleSelectedError:
+        raise
     except (OSError, ValueError, ConfigError) as exc:
         raise ReleaseUnavailableError(
             f"no valid prepared bundle for {host} {series}; run sync before starting the DCC ({exc})",

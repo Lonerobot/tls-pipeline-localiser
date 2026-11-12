@@ -59,6 +59,12 @@ class FolderRepository:
     def fetch(self, relative: str, destination: Path) -> None:
         shutil.copyfile(self.root / relative, destination)
 
+    def list_folders(self, relative: str) -> list[str]:
+        """Names of the folders under `relative`; empty if there are none or it can't be read."""
+        try:
+            return sorted(p.name for p in (self.root / relative).iterdir() if p.is_dir() and not p.name.startswith("."))
+        except OSError:
+            return []
 
 @dataclass(frozen=True)
 class WebRepository:
@@ -89,6 +95,8 @@ class WebRepository:
         with self._open(relative) as response, open(destination, "wb") as sink:
             shutil.copyfileobj(response, sink, 1024 * 1024)
 
+    def list_folders(self, relative: str) -> list[str]:
+        return []  # static web hosting has no directory listing; the studio config names the releases in use
 
 Repository = FolderRepository | WebRepository
 

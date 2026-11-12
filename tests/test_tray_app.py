@@ -174,18 +174,19 @@ class TrayAppTests(WorkstationTestCase):
         self.assertIn((0, 1, f"Maya {SERIES}"), seen)
         self.assertFalse(manager.window.progress.isVisibleTo(manager.window))
 
-    def test_cloning_then_overriding_launches_from_the_clone_and_shows_the_row_in_orange(self):
+    def test_creating_then_overriding_launches_from_the_new_bundle_and_shows_the_row_in_orange(self):
         self.write_local(hosts={"maya": [SERIES]})
         manager = self.make_manager()
         self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
         status = manager.window.status
-        self.assertFalse(status.override_buttons[("maya", SERIES)].isEnabled())  # nothing cloned yet
-        page = manager.window.release
+        self.assertFalse(status.override_buttons[("maya", SERIES)].isEnabled())  # nothing created yet
+        page = manager.window.create
         page.tag.setText("mine")
-        page.release.setEditText("1.0")
-        page.clone.click()
-        self.wait_for(lambda: not manager.cloning)
-        self.assertIn("Cloned to", page.result.text())
+        self.wait_for(lambda: page.release.count() > 0)
+        page.release.setCurrentIndex(page.release.findData("1.0"))
+        page.create_button.click()
+        self.wait_for(lambda: not manager.creating)
+        self.assertIn("Created", page.result.text())
         self.assertTrue((self.root / "bundles" / "dev" / "maya" / "mine" / ".tls-clone.json").is_file())
         toggle = status.override_buttons[("maya", SERIES)]
         self.assertTrue(toggle.isEnabled())
@@ -215,6 +216,252 @@ class TrayAppTests(WorkstationTestCase):
         self.assertFalse(popup.icon_label.pixmap().isNull())
         popup.close()
 
+    def test_the_release_list_marks_the_studio_default_and_follows_the_chosen_application(self):
+        self.publish("maya", "0.9")  # published but never installed here
+        self.publish("nuke", "5.0")
+        self.write_studio_config({"maya": "1.0", "nuke": {"17.0": "5.0"}})
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        page = manager.window.create
+        self.wait_for(lambda: page.release.count() == 2)
+        labels = [page.release.itemText(i) for i in range(page.release.count())]
+        self.assertEqual(page.release.itemData(0), "1.0")
+        self.assertIn("studio default", labels[0])
+        self.assertIn("downloaded when used", labels[1])  # 0.9 isn't installed
+        self.assertEqual(page.release.currentData(), "1.0")  # starts on the studio default
+        page.host.setCurrentIndex(page.host.findData("nuke"))  # another application: its own releases, no leftovers
+        self.wait_for(lambda: [page.release.itemData(i) for i in range(page.release.count())] == ["5.0"])
+        self.assertEqual(page.request().get("release"), "5.0")
+
+    def test_a_zipped_source_asks_before_unzipping(self):
+        import zipfile
+
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        folder = self.tmp / "zipped"
+        folder.mkdir()
+        with zipfile.ZipFile(folder / "pipeline.zip", "w") as archive:
+            archive.writestr("__init__.py", "VALUE = 1\n")
+        page = manager.window.create
+        page.from_source.setChecked(True)
+        page.source.setText(str(folder))
+        page.tag.setText("from-zip")
+        asked = []
+        manager.window.confirm = lambda title, text: asked.append(text) or False
+        page.create_button.click()
+        self.wait_for(lambda: bool(asked) and not manager.creating)
+        self.assertIn("zipped bundle", asked[0])
+        self.assertFalse((self.root / "bundles" / "dev" / "maya" / "from-zip").exists())
+        manager.window.confirm = lambda title, text: True
+        page.create_button.click()
+        self.wait_for(lambda: (self.root / "bundles" / "dev" / "maya" / "from-zip" / "__init__.py").is_file())
+        self.wait_for(lambda: not manager.creating)
+        self.assertIn("Created", page.result.text())
+
+    def test_the_create_tab_asks_what_to_create_and_shows_only_that_form(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        page = manager.window.create
+        self.assertEqual(page.mode, "local")
+        self.assertEqual(page.mode_local.title_label.text(), "A local pipeline bundle")
+        self.assertEqual(page.mode_publish.title_label.text(), "Publish new studio bundle")
+        self.assertTrue(page.mode_local.isChecked() and not page.mode_publish.isChecked())
+        shown = lambda widget: widget.isVisibleTo(page)  # noqa: E731
+        self.assertTrue(shown(page.local_panel) and shown(page.create_button))
+        self.assertFalse(shown(page.publish_panel) or shown(page.publish_button))
+        page.mode_publish.click()
+        self.assertEqual(page.mode, "publish")
+        self.assertFalse(page.mode_local.isChecked())  # one at a time
+        self.assertFalse(shown(page.local_panel) or shown(page.create_button))
+        self.assertTrue(shown(page.publish_panel) and shown(page.publish_button))
+        page.mode_local.click()
+        self.assertTrue(shown(page.local_panel))
+
+    def test_publishing_a_dev_bundle_asks_first_and_uses_its_name_as_the_version(self):
+        from localiser import clone_bundle
+
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        clone_bundle(manager.config, "maya", "2.0-wip", release="1.0")
+        manager._refresh_bundles()
+        page = manager.window.create
+        page.mode_publish.click()
+        self.assertEqual(page.bundle.currentData(), "2.0-wip")
+        self.assertEqual(page.version.text(), "2.0-wip")  # the folder name, until the user says otherwise
+        page.version.textEdited.emit("2.0")  # typing a version of their own: no longer follows the bundle name
+        page.version.setText("2.0")
+        asked = []
+        manager.window.confirm = lambda title, text: asked.append(text) or False
+        page.publish_button.click()
+        self.assertIn("can't be changed or removed", asked[0])
+        self.assertFalse((self.repo / "hosts" / "maya" / "2.0").exists())  # declined: nothing published
+        manager.window.confirm = lambda title, text: True
+        page.publish_button.click()
+        self.wait_for(lambda: (self.repo / "hosts" / "maya" / "2.0" / "pipeline.zip").is_file())
+        self.wait_for(lambda: not manager.creating)
+        self.assertIn("Published Maya 2.0", page.result.text())
+        self.assertIn("bundle_version", page.result.text())
+        self.assertFalse(page.open_folder.isHidden())  # to see the release in the repository
+
+    def test_publishing_says_what_is_missing_without_asking(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        page = manager.window.create
+        page.mode_publish.click()
+        asked = []
+        manager.window.confirm = lambda title, text: asked.append(text) or True
+        page.publish_button.click()
+        self.assertIn("version", page.result.text())
+        page.version.setText("3.0")
+        page.publish_button.click()
+        self.assertIn("development bundle", page.result.text())
+        page.pub_from_source.setChecked(True)
+        page.publish_button.click()
+        self.assertIn("source folder", page.result.text())
+        self.assertEqual(asked, [])
+
+    # admin mode
+
+    def enter_admin(self, manager):
+        with patch.object(self.app.QApplication, "keyboardModifiers", return_value=self.app.Qt.KeyboardModifier.ShiftModifier):
+            manager.open_settings()
+
+    def test_shift_on_settings_opens_admin_mode_and_plain_settings_leaves_it(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        window = manager.window
+        self.assertFalse(window.tabs.isTabVisible(window.tabs.indexOf(window.create)))  # Create is for admins only
+        manager.open_settings()
+        self.assertFalse(window.admin)
+        self.assertEqual(window.windowTitle(), "THE LINE Pipeline")
+        self.assertTrue(window.settings.hosts_group.isHidden())  # choosing applications is an admin choice
+        self.enter_admin(manager)
+        self.assertTrue(window.admin)
+        self.assertEqual(window.windowTitle(), "THE LINE Pipeline - ADMIN MODE")
+        self.assertTrue(window.tabs.isTabVisible(window.tabs.indexOf(window.create)))
+        self.assertFalse(window.settings.hosts_group.isHidden())
+        self.assertFalse(window.status.admin_label.isHidden())
+        self.assertFalse(window.status.admin_icon.isHidden())
+        window.tabs.setCurrentWidget(window.create)
+        manager.open_settings()  # Settings... again without Shift
+        self.assertFalse(window.admin)
+        self.assertFalse(window.tabs.isTabVisible(window.tabs.indexOf(window.create)))
+        self.assertIs(window.tabs.currentWidget(), window.status)  # not left on the tab that has gone
+        self.assertTrue(window.settings.hosts_group.isHidden())
+        self.assertTrue(window.status.admin_label.isHidden())
+        window.hide()
+
+    def test_closing_the_window_ends_admin_mode(self):
+        manager = self.make_manager()
+        self.enter_admin(manager)
+        self.assertTrue(manager.window.admin)
+        manager.window.close()
+        self.assertFalse(manager.window.admin)
+        self.assertEqual(manager.window.windowTitle(), "THE LINE Pipeline")
+
+    def test_admin_save_keeps_the_enabled_applications(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        self.enter_admin(manager)
+        self.assertEqual(manager.window.settings.values()[0], {"maya": [SERIES]})
+        manager.window.close()
+
+    def studio_ready(self, manager, key=("maya", SERIES), count=3):
+        status = manager.window.status
+        self.wait_for(lambda: key in status.studio_boxes and status.studio_boxes[key].count() >= count)
+        return status.studio_boxes[key]
+
+    def test_admin_status_offers_none_and_every_published_release_in_the_studio_column(self):
+        self.publish("maya", "1.1")
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        self.assertNotIn(("maya", SERIES), manager.window.status.studio_boxes)  # plain mode: text only
+        self.enter_admin(manager)
+        box = self.studio_ready(manager)
+        self.assertEqual([box.itemData(i) for i in range(box.count())], ["", "1.1", "1.0"])
+        self.assertEqual(box.currentData(), "1.0")
+        self.assertEqual(manager.window.status.table.item(0, 3).text(), "")  # the drop-down alone shows it; text underneath would garble it
+        manager.window.close()
+        self.assertEqual(manager.window.status.studio_boxes, {})
+        self.assertIsNone(manager.window.status.table.cellWidget(0, 3))
+        self.assertEqual(manager.window.status.table.item(0, 3).text(), "1.0")  # the text is back once the drop-down goes
+
+    def test_choosing_another_studio_release_writes_the_studio_config_and_syncs(self):
+        self.publish("maya", "1.1")
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        self.enter_admin(manager)
+        box = self.studio_ready(manager)
+        index = box.findData("1.1")
+        box.setCurrentIndex(index)
+        box.activated.emit(index)
+        self.wait_for(lambda: json.loads((self.repo / "config.json").read_text())["hosts"]["maya"][SERIES]["bundle_version"] == "1.1")
+        self.wait_for(lambda: not manager.busy and manager.window.status.table.item(0, 2).text() == "1.1")
+        self.assertIn("Up to date", manager.window.status.table.item(0, 4).text())
+        manager.window.close()
+
+    def test_choosing_none_selects_no_bundle_and_the_row_says_so(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        self.enter_admin(manager)
+        box = self.studio_ready(manager, count=2)
+        box.setCurrentIndex(0)
+        box.activated.emit(0)
+        self.wait_for(lambda: json.loads((self.repo / "config.json").read_text())["hosts"]["maya"][SERIES]["bundle_version"] is None)
+        self.wait_for(lambda: not manager.busy and manager.window.status.table.item(0, 2).text() == "-")
+        self.assertIn("No studio bundle", manager.window.status.table.item(0, 4).text())
+        self.assertEqual(manager.level, self.model.LEVEL_UPDATE)
+        manager.window.close()
+
+    def test_admin_status_also_lists_studio_versions_not_enabled_here(self):
+        self.write_studio_config({"maya": {SERIES: "1.0", "2025": "1.0"}})
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        status = manager.window.status
+        self.assertEqual(status.table.rowCount(), 1)
+        self.enter_admin(manager)
+        self.studio_ready(manager, ("maya", "2025"), 2)
+        self.assertEqual(status.table.rowCount(), 2)
+        self.assertIn("Not enabled", status.table.item(1, 4).text())
+        self.assertIsNone(status.table.cellWidget(1, 5))  # nothing to launch or override
+        manager.window.close()
+        self.assertEqual(status.table.rowCount(), 1)
+
+    def test_a_web_repository_disables_the_studio_drop_downs_with_the_reason(self):
+        self.write_local(hosts={"maya": [SERIES]}, remote_repository="https://example.com/studio")
+        manager = self.make_manager()
+        self.enter_admin(manager)
+        status = manager.window.status
+        self.wait_for(lambda: status.studio_editable[0] is False)
+        box = status.studio_boxes.get(("maya", SERIES))
+        if box is not None:
+            self.assertFalse(box.isEnabled())
+            self.assertIn("web address", box.toolTip())
+        manager.window.close()
+
+    def test_a_studio_write_that_fails_says_why(self):
+        self.write_local(hosts={"maya": [SERIES]})
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy and manager.level == self.model.LEVEL_OK)
+        self.enter_admin(manager)
+        shown = []
+        manager.window.show_error = lambda title, text: shown.append(text)
+        (self.repo / "config.json").write_text("{ not json", encoding="utf-8")
+        manager.change_studio_release("maya", SERIES, "1.0")
+        self.wait_for(lambda: bool(shown))
+        self.assertIn("not valid JSON", shown[0])
+        manager.window.close()
+
     def test_popups_stack_dismiss_and_leave_nothing_behind(self):
         from localiser_tray.notification import NotificationManager
 
@@ -229,13 +476,13 @@ class TrayAppTests(WorkstationTestCase):
         second.close()
         self.assertEqual(shown.popups, [])
 
-    def test_a_clone_with_no_tag_says_what_is_missing(self):
+    def test_creating_with_no_tag_says_what_is_missing(self):
         self.write_local(hosts={"maya": [SERIES]})
         manager = self.make_manager()
         self.wait_for(lambda: not manager.busy)
-        page = manager.window.release
-        page.clone.click()
-        self.wait_for(lambda: not manager.cloning)
+        page = manager.window.create
+        page.create_button.click()
+        self.wait_for(lambda: not manager.creating)
         self.assertIn("version tag", page.result.text())
 
     def test_a_launch_that_cannot_start_shows_why(self):

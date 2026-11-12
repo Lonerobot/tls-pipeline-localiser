@@ -9,12 +9,16 @@ def start(host, series):
     """Load the bundle this session should use (local files only), expose it, and run its entry point.
 
     Returns None, loading nothing, when this host and series isn't enabled in the local config."""
-    from .localiser import load_prepared_release, expose_environment, host_enabled
+    from .localiser import NoBundleSelectedError, load_prepared_release, expose_environment, host_enabled
 
     if not host_enabled(host, series):
         print("TLS pipeline: {} {} is not enabled in the local config; not loading".format(host, series))
         return None
-    release = load_prepared_release(host, series)
+    try:
+        release = load_prepared_release(host, series)
+    except NoBundleSelectedError:
+        print("TLS pipeline: WARNING the studio has no bundle selected for {} {}; not loading".format(host, series))
+        return None
     _announce(release)
     expose_environment(release)  # sets TLS_PIPELINE_<HOST> (bundle path), _RELEASE and _MODE for this session
     for folder in release.extra_paths:  # a dev source's shared packages, imported from where they are

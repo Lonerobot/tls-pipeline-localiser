@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 from localiser import read_status
-from localiser.status import EntryStatus
+from localiser.status import EntryStatus, enabled_entries
 from localiser_tray import model
 
 from .helpers import SERIES, WorkstationTestCase
@@ -76,10 +76,33 @@ class RunCycleTests(WorkstationTestCase):
         self.assertEqual(states[("nuke", "17.0")], "current")
         self.assertEqual(states[("nuke", "99.9")], "unsupported")
 
-    def test_nothing_enabled_is_idle_and_still_writes_a_status(self):
-        result = model.run_cycle(replace(self.config, hosts={}), {})
+    def test_nothing_enabled_and_nothing_of_the_studio_installed_here_is_idle_and_still_writes_a_status(self):
+        with patch("localiser.status.detect_installed_series", return_value=[]):
+            result = model.run_cycle(replace(self.config, hosts={}), {})
         self.assertEqual((result.entries, result.level), ([], model.LEVEL_IDLE))
         self.assertIsNotNone(read_status(self.config))
+
+    def test_with_nothing_enabled_a_fresh_machine_follows_the_studio_config_for_what_is_installed(self):
+        self.write_studio_config({"maya": {SERIES: "1.0", "2025": "1.0"}, "nuke": {"17.0": "1.0"}})
+        installed = {"maya": [SERIES], "nuke": []}  # 2025 and Nuke aren't installed here
+        with patch("localiser.status.detect_installed_series", lambda host, roots=None: installed.get(host, [])):
+            result = model.run_cycle(replace(self.config, hosts={}), {})
+            self.assertEqual([(e.host, e.series, e.state) for e in result.entries], [("maya", SERIES, "current")])
+            self.assertEqual(enabled_entries(replace(self.config, hosts={})), [("maya", SERIES)])
+            offline = replace(self.config, hosts={}, remote_repository=self.tmp / "gone")
+            self.assertEqual(enabled_entries(offline), [("maya", SERIES)])  # from the last copy of the studio config
+            self.assertEqual(enabled_entries(offline, cached_only=True), [("maya", SERIES)])
+            # an explicit choice wins: nothing from the studio config is added to it
+            self.assertEqual(enabled_entries(replace(self.config, hosts={"maya": ("2025",)})), [("maya", "2025")])
+
+    def test_the_launcher_offers_what_the_studio_lists_when_nothing_is_enabled(self):
+        self.write_studio_config({"maya": {SERIES: "1.0"}})
+        config = replace(self.config, hosts={})
+        with patch("localiser.status.detect_installed_series", return_value=[SERIES]), \
+                patch.object(model, "detect_installed_series", lambda host, roots=None: [SERIES] if host == "maya" else []):
+            self.assertEqual(model.launcher_choices(config), [])  # no copy of the studio config on this machine yet
+            model.run_cycle(config, {})  # the first check keeps one
+            self.assertEqual(model.launcher_choices(config), [("maya", SERIES)])
 
 
 class SummaryTests(WorkstationTestCase):

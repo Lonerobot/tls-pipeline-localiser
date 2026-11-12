@@ -13,7 +13,7 @@ from typing import Mapping
 from urllib.parse import urlsplit
 from urllib.request import url2pathname
 
-from .errors import ConfigError, UnsupportedSeriesError
+from .errors import ConfigError, NoBundleSelectedError, UnsupportedSeriesError
 from .repository import WebRepository, parse_web_url
 
 SCHEMA_VERSION = 1
@@ -76,11 +76,13 @@ def _check_schema(data: dict, what: str) -> None:
 
 @dataclass(frozen=True)
 class StudioConfig:
-    """The studio default: hosts[<host>][<dcc series>] -> bundle version."""
+    """The studio default: hosts[<host>][<dcc series>] -> bundle version, or None when the studio lists the
+    version but has selected no bundle for it."""
 
-    hosts: dict[str, dict[str, str]]
+    hosts: dict[str, dict[str, str | None]]
 
-    def bundle_version(self, host: str, series: str) -> str:
+    def entry(self, host: str, series: str) -> str | None:
+        """The bundle version for `host` `series`, or None for "no bundle". Raises if there is no entry at all."""
         versions = self.hosts.get(host)
         if versions is None:
             raise UnsupportedSeriesError(f"studio config has no entry for host {host!r}")
@@ -89,6 +91,12 @@ class StudioConfig:
                 f"studio config has no entry for {host} {series!r}; available: {', '.join(sorted(versions))}"
             )
         return versions[series]
+
+    def bundle_version(self, host: str, series: str) -> str:
+        version = self.entry(host, series)
+        if version is None:
+            raise NoBundleSelectedError(host, series)
+        return version
 
 
 def parse_studio_config(text: str) -> StudioConfig:
@@ -107,7 +115,12 @@ def parse_studio_config(text: str) -> StudioConfig:
             validate_series(series)
             if not isinstance(entry, dict):
                 raise ConfigError(f"studio config 'hosts.{host}.{series}' must be an object")
-            hosts[host][series] = validate_id(entry.get("bundle_version"), f"bundle_version for {host} {series}")
+            version = entry.get("bundle_version")
+            # null is "no bundle selected"; a missing key is still a mistake.
+            hosts[host][series] = (
+                None if "bundle_version" in entry and version is None
+                else validate_id(version, f"bundle_version for {host} {series}")
+            )
     return StudioConfig(hosts=hosts)
 
 

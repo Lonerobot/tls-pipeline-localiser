@@ -9,6 +9,7 @@ from localiser.hosts import HOSTS, detect_installed_series
 from localiser.status import (
     CURRENT,
     ERROR,
+    NO_BUNDLE,
     NOT_PREPARED,
     OFFLINE,
     UNSUPPORTED,
@@ -19,13 +20,12 @@ from localiser.status import (
     sync_entry,
     write_status,
 )
+from localiser.status import needs_sync as status_needs_sync
 
 LEVEL_IDLE = "idle"  # nothing enabled
 LEVEL_OK = "ok"
 LEVEL_UPDATE = "update"  # something newer is waiting to be applied
 LEVEL_PROBLEM = "problem"
-
-NEEDS_SYNC = (UPDATE_AVAILABLE, NOT_PREPARED)
 
 
 @dataclass(frozen=True)
@@ -66,7 +66,32 @@ def describe(entry: EntryStatus) -> str:
         return f"Can't reach the repository{have}"
     if state == UNSUPPORTED:
         return "Not supported by the studio config"
+    if state == NO_BUNDLE:
+        return "No studio bundle selected - the pipeline won't load"
+    if state == NOT_ENABLED:
+        return "Not enabled on this computer"
     return entry.message or "Something went wrong"
+
+
+def needs_sync(entry: EntryStatus) -> bool:
+    """Whether syncing would change what a DCC starts with."""
+    return status_needs_sync(entry)
+
+
+NOT_ENABLED = "not_enabled"  # shown to admins only: the studio config lists it, this computer doesn't use it
+
+
+def admin_rows(entries: list, studio: dict) -> list:
+    """The rows of the admin Status tab: this computer's enabled entries, plus a row for every version the studio
+    config lists that isn't enabled here, so the studio release of any of them can be changed. `studio` maps
+    (host, series) to its bundle version or None."""
+    have = {(entry.host, entry.series) for entry in entries}
+    extra = [
+        EntryStatus(host, series, NOT_ENABLED, None, version)
+        for (host, series), version in sorted(studio.items())
+        if (host, series) not in have
+    ]
+    return list(entries) + extra
 
 
 def overall(entries: list) -> tuple[str, str]:
@@ -80,9 +105,12 @@ def overall(entries: list) -> tuple[str, str]:
         return LEVEL_PROBLEM, f"{errors} problem(s) - open the pipeline manager"
     if offline:
         return LEVEL_PROBLEM, "Can't reach the repository" if offline == len(states) else "Some updates can't be checked"
-    waiting = sum(state in NEEDS_SYNC for state in states)
+    waiting = sum(needs_sync(entry) for entry in entries)
     if waiting:
         return LEVEL_UPDATE, f"{waiting} update(s) ready to install"
+    empty = states.count(NO_BUNDLE)
+    if empty:
+        return LEVEL_UPDATE, f"{empty} application(s) have no studio bundle selected"
     return LEVEL_OK, "Pipeline is up to date"
 
 
@@ -118,7 +146,7 @@ def run_cycle(
         if progress:
             progress(done, len(todo), f"{display_name(host)} {series}")
         entry = check_entry(host, series, config, environ)
-        if auto_sync and entry.state in NEEDS_SYNC:
+        if auto_sync and needs_sync(entry):
             after = sync_entry(host, series, config, environ)
             synced = True
             if after.state == CURRENT and after.selected != entry.selected:
@@ -159,10 +187,11 @@ def launcher_choices(config: LocalConfig | None, roots: list | None = None) -> l
     newest such series, ordered by name."""
     if config is None:
         return []
+    enabled = enabled_entries(config, cached_only=True)  # the launcher is built on the UI thread: no repository reads
     choices = []
     for name in HOSTS:
         installed = set(detect_installed_series(name, roots))
-        usable = sorted(installed & set(config.hosts.get(name, ())), key=_series_key)
+        usable = sorted(installed & {series for host, series in enabled if host == name}, key=_series_key)
         if usable:
             choices.append((name, usable[-1]))
     return sorted(choices, key=lambda choice: display_name(choice[0]).lower())

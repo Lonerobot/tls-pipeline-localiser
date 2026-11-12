@@ -38,7 +38,6 @@ def _load_pipeline():
         spec.loader.exec_module(module)
     return sys.modules["tls_pipeline"]
 
-
 try:
     from maya import cmds
 

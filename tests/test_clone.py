@@ -1,21 +1,28 @@
 """Cloning a bundle into the dev folder, and launching a host from a clone."""
 import json
 import sys
+from dataclasses import replace
 from unittest.mock import patch
 
 from localiser import (
     PublishError,
     ReleaseUnavailableError,
+    ZippedSourceError,
+    available_releases,
     clone_bundle,
+    find_zipped_bundle,
     get_override,
     installed_releases,
     list_clones,
+    publish_to_repository,
+    pull_release,
     set_override,
     startup_release,
     sync_release,
 )
 from localiser.launch import launch_environment
 from localiser.layout import CLONE_MARKER, DataLayout
+from localiser.repository import WebRepository
 from localiser.sync import source_variable
 
 from .helpers import SERIES, WorkstationTestCase
@@ -79,6 +86,112 @@ class CloneTests(WorkstationTestCase):
         sync_release("maya", SERIES, self.config, {})
         clone_bundle(self.config, "maya", "mine", release="1.0")
         self.assertEqual(installed_releases(self.config, "maya"), ["1.0"])
+
+    def test_a_folder_of_nothing_is_refused_with_a_reason(self):
+        empty = self.tmp / "empty"
+        (empty / "sub").mkdir(parents=True)
+        with self.assertRaisesRegex(PublishError, "no files"):
+            clone_bundle(self.config, "maya", "x", source=empty)
+        self.assertEqual(list_clones(self.config, "maya"), [])
+
+    def test_a_zipped_bundle_is_detected_and_only_unzipped_when_asked(self):
+        import zipfile
+
+        published = self.repo / "hosts" / "maya" / "1.0"  # a release folder as it sits on the remote
+        self.assertEqual(find_zipped_bundle(published), published / "pipeline.zip")
+        self.assertEqual(find_zipped_bundle(published / "pipeline.zip"), published / "pipeline.zip")
+        self.assertIsNone(find_zipped_bundle(self.source_folder()))
+        with self.assertRaises(ZippedSourceError) as raised:
+            clone_bundle(self.config, "maya", "z", source=published)
+        self.assertEqual(raised.exception.archive, published / "pipeline.zip")
+        self.assertEqual(list_clones(self.config, "maya"), [])
+        clone = clone_bundle(self.config, "maya", "z", source=published, unzip=True)
+        self.assertEqual((clone / "tool" / "a.py").read_text(), "X = 1\n")
+        self.assertEqual(json.loads((clone / CLONE_MARKER).read_text())["origin"][:3], "zip")
+        loose = self.tmp / "loose.zip"
+        with zipfile.ZipFile(loose, "w") as archive:
+            archive.writestr("__init__.py", "")
+        self.assertEqual(find_zipped_bundle(loose), loose)
+
+    def test_the_release_list_has_installed_published_and_studio_releases_with_the_default_marked(self):
+        self.publish("maya", "1.1")  # published, not installed
+        self.write_studio_config({"maya": {"2026": "1.1", "2025": "1.0"}})
+        clone_bundle(self.config, "maya", "x", release="1.0")  # installs 1.0
+        choices = {c.release_id: c for c in available_releases(self.config, "maya")}
+        self.assertEqual(list(choices), ["1.1", "1.0"])  # newest first
+        self.assertEqual((choices["1.1"].installed, choices["1.1"].studio_series), (False, ("2026",)))
+        self.assertEqual((choices["1.0"].installed, choices["1.0"].studio_series), (True, ("2025",)))
+
+    def test_the_release_list_still_works_offline_from_what_is_installed(self):
+        clone_bundle(self.config, "maya", "x", release="1.0")
+        (self.repo / "config.json").unlink()
+        self.assertEqual([c.release_id for c in available_releases(self.config, "maya")], ["1.0"])
+
+    # publishing
+
+    def test_a_dev_bundle_is_published_as_it_is_without_the_clone_marker(self):
+        import zipfile
+
+        clone_bundle(self.config, "maya", "mine", release="1.0")
+        (self.dev / "mine" / "tool" / "a.py").write_text("X = 2\n", encoding="utf-8")
+        manifest, folder = publish_to_repository(self.config, "maya", "1.1", bundle="mine")
+        self.assertEqual((manifest.package_id, manifest.release_id, manifest.python_root), ("maya", "1.1", "."))
+        self.assertEqual(folder, self.repo / "hosts" / "maya" / "1.1")
+        with zipfile.ZipFile(folder / "pipeline.zip") as archive:
+            names = archive.namelist()
+            self.assertNotIn(CLONE_MARKER, names)
+            self.assertEqual(archive.read("tool/a.py").decode().strip(), "X = 2")
+        self.assertEqual(self.config.remote_repository, self.repo)
+        self.assertEqual(json.loads(self.read_config_studio())["hosts"]["maya"][SERIES]["bundle_version"], "1.0")  # not selected
+
+    def read_config_studio(self):
+        return (self.repo / "config.json").read_text(encoding="utf-8")
+
+    def test_a_published_dev_bundle_installs_and_runs_like_any_release(self):
+        clone_bundle(self.config, "blender", "b", source=self.source_folder({"startup/__init__.py": "VALUE = 'b'\n"}))
+        publish_to_repository(self.config, "blender", "3.0", bundle="b")
+        release = pull_release("blender", "3.0", self.config)
+        self.assertEqual(release.python_root, release.release_root / "startup")
+        self.assertEqual((release.python_root / "__init__.py").read_text(), "VALUE = 'b'\n")
+
+    def test_a_source_folder_is_published_with_the_shared_packages_merged_in(self):
+        shared = self.tmp / "shared"
+        (shared / "tls_common").mkdir(parents=True)
+        (shared / "tls_common" / "__init__.py").write_text("", encoding="utf-8")
+        publish_to_repository(self.config, "maya", "2.0", source=self.source_folder(), shared=[shared])
+        release = pull_release("maya", "2.0", self.config)
+        self.assertTrue((release.release_root / "tls_common" / "__init__.py").is_file())
+        self.assertEqual((release.release_root / "__init__.py").read_text(), "VALUE = 'source'\n")
+
+    def test_a_dev_bundle_given_as_a_source_folder_is_published_as_a_bundle(self):
+        clone = clone_bundle(self.config, "maya", "mine", release="1.0")
+        publish_to_repository(self.config, "maya", "1.2", source=clone)
+        self.assertTrue((pull_release("maya", "1.2", self.config).release_root / "tool" / "a.py").is_file())
+
+    def test_publishing_refuses_what_it_cannot_do_and_changes_nothing(self):
+        clone_bundle(self.config, "maya", "mine", release="1.0")
+        before = sorted(p.name for p in (self.repo / "hosts" / "maya").iterdir())
+        web = replace(self.config, remote_repository=WebRepository("https://example.com/p"))
+        for kwargs, config in (
+            ({"bundle": "mine"}, web),  # a web repository can't be published to
+            ({"bundle": "nothing"}, self.config),  # no such dev bundle
+            ({}, self.config),  # nothing chosen
+            ({"bundle": "mine", "source": self.tmp}, self.config),  # both chosen
+            ({"source": self.tmp / "nowhere"}, self.config),
+            ({"source": self.tmp / "work"}, self.config),  # doesn't exist yet
+        ):
+            with self.subTest(kwargs=sorted(kwargs)), self.assertRaises(PublishError):
+                publish_to_repository(config, "maya", "9.9", **kwargs)
+        with self.assertRaises(PublishError):  # releases are immutable
+            publish_to_repository(self.config, "maya", "1.0", bundle="mine")
+        with self.assertRaises(Exception):
+            publish_to_repository(self.config, "maya", "../x", bundle="mine")
+        self.assertEqual(sorted(p.name for p in (self.repo / "hosts" / "maya").iterdir()), before)
+
+    def test_a_zipped_source_is_not_published(self):
+        published = self.repo / "hosts" / "maya" / "1.0"
+        with self.assertRaises(ZippedSourceError):
+            publish_to_repository(self.config, "maya", "1.5", source=published)
 
     # overrides
 
