@@ -92,8 +92,11 @@ class TrayAppTests(WorkstationTestCase):
         self.assertIn("repository", manager.window.settings.warning.text())
         self.assertEqual(manager.level, self.model.LEVEL_IDLE)
         self.assertEqual(list(manager.window.settings.series_boxes), [("maya", SERIES)])  # installed here, not yet enabled
+        self.assertFalse(manager.window.create.open_dev.isEnabled())
 
     def test_the_organisations_repository_locks_the_field_and_needs_no_first_run_setup(self):
+        from PySide6.QtWidgets import QToolButton
+
         self.environ["TLS_PIPELINE_REPOSITORY"] = str(self.repo)
         manager = self.make_manager()
         self.wait_for(lambda: not manager.busy)
@@ -102,10 +105,62 @@ class TrayAppTests(WorkstationTestCase):
         self.assertTrue(manager.config.remote_locked)
         self.assertTrue(settings.remote.isReadOnly())
         self.assertFalse(settings.remote_browse.isEnabled())
+        self.assertTrue(settings.remote.parentWidget().findChild(QToolButton).isEnabled())
         self.assertFalse(settings.remote_note.isHidden())
         self.assertEqual(settings.remote.text(), str(self.repo))
         self.assertNotIn("remote_repository", settings.values()[1])
         self.assertNotIn("remote_repository", json.loads((self.root / "config.json").read_text(encoding="utf-8")))
+
+    def test_folder_shortcuts_open_current_locations_and_handle_web_repositories(self):
+        from pathlib import Path
+        from PySide6.QtWidgets import QAbstractSpinBox, QLineEdit, QToolButton
+        from localiser_tray.window import SettingsPage
+
+        settings = SettingsPage()
+        self.addCleanup(settings.deleteLater)
+        location_fields = {
+            edit for edit in settings.findChildren(QLineEdit)
+            if not isinstance(edit.parentWidget(), QAbstractSpinBox)
+        }
+        self.assertEqual(location_fields, {settings.remote, settings.bundles})
+        remote_button = settings.remote.parentWidget().findChild(QToolButton)
+        self.assertFalse(remote_button.isEnabled())
+        settings.remote.setText("https://example.com/pipeline")
+        self.assertFalse(remote_button.isEnabled())
+        self.assertIn("web address", remote_button.toolTip())
+        settings.remote.setText(str(self.repo))
+        releases = self.tmp / "local releases"
+        releases.mkdir()
+        settings.bundles.setText(str(releases))
+        with patch("localiser_tray.widgets.QDesktopServices.openUrl", return_value=True) as opened:
+            for edit in (settings.remote, settings.bundles):
+                button = edit.parentWidget().findChild(QToolButton)
+                self.assertEqual(button.text(), "")
+                self.assertFalse(button.icon().isNull())
+                button.click()
+                self.assertEqual(Path(opened.call_args.args[0].toLocalFile()), Path(edit.text()).absolute())
+        settings.bundles.clear()
+        self.assertFalse(settings.bundles.parentWidget().findChild(QToolButton).isEnabled())
+
+    def test_folder_shortcuts_report_missing_folders_and_desktop_open_failures(self):
+        from PySide6.QtWidgets import QToolButton
+        from localiser_tray.window import SettingsPage
+
+        settings = SettingsPage()
+        self.addCleanup(settings.deleteLater)
+        missing = self.tmp / "not created"
+        settings.bundles.setText(str(missing))
+        button = settings.bundles.parentWidget().findChild(QToolButton)
+        with patch("localiser_tray.widgets.QMessageBox.warning") as warning, \
+                patch("localiser_tray.widgets.QDesktopServices.openUrl", return_value=False) as opened:
+            button.click()
+            opened.assert_not_called()
+            self.assertIn(str(missing), warning.call_args.args[2])
+            self.assertFalse(missing.exists())
+            settings.bundles.setText(str(self.repo))
+            button.click()
+            opened.assert_called_once()
+            self.assertIn("could not be opened", warning.call_args.args[2])
 
     def test_saving_the_first_run_settings_writes_the_config_enables_the_host_and_updates(self):
         manager = self.make_manager()
@@ -350,6 +405,44 @@ class TrayAppTests(WorkstationTestCase):
         self.assertTrue(shown(page.publish_panel) and shown(page.publish_button))
         page.mode_local.click()
         self.assertTrue(shown(page.local_panel))
+
+    def test_the_host_icon_follows_the_application_for_both_source_folder_modes(self):
+        from PySide6.QtGui import QIcon
+        from localiser.hosts import HOSTS
+        from localiser_tray.create_page import CreatePage
+
+        page = CreatePage()
+        self.addCleanup(page.deleteLater)
+        page.from_source.setChecked(True)
+        page.pub_from_source.setChecked(True)
+        for mode, request in ((page.mode_local, page.request), (page.mode_publish, page.publish_request)):
+            mode.click()
+            for host, info in HOSTS.items():
+                with self.subTest(mode=page.mode, host=host):
+                    page.host.setCurrentIndex(page.host.findData(host))
+                    self.assertTrue(page.host_icon.isVisibleTo(page))
+                    self.assertFalse(page.host_icon.pixmap().isNull())
+                    self.assertEqual(page.host_icon.toolTip(), f"Selected application: {info.display_name}")
+                    self.assertEqual(page.host_icon.pixmap().toImage(), QIcon(str(info.icon)).pixmap(40, 40).toImage())
+                    self.assertEqual(request()["host"], host)
+
+    def test_the_dev_folder_shortcut_uses_the_configured_releases_folder_in_both_modes(self):
+        from pathlib import Path
+
+        self.write_local(hosts={"maya": [SERIES]}, bundle_repository=str(self.tmp / "custom bundles"))
+        manager = self.make_manager()
+        self.wait_for(lambda: not manager.busy)
+        dev_folder = manager.config.bundle_repository / "dev"
+        dev_folder.mkdir()
+        page = manager.window.create
+        with patch("localiser_tray.widgets.QDesktopServices.openUrl", return_value=True) as opened:
+            for mode in (page.mode_local, page.mode_publish):
+                mode.click()
+                self.assertTrue(page.open_dev.isEnabled())
+                self.assertEqual(page.open_dev.text(), "")
+                self.assertFalse(page.open_dev.icon().isNull())
+                page.open_dev.click()
+                self.assertEqual(Path(opened.call_args.args[0].toLocalFile()), dev_folder)
 
     def test_publishing_a_dev_bundle_asks_first_and_uses_its_name_as_the_version(self):
         from localiser import clone_bundle

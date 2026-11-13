@@ -88,6 +88,8 @@ Installer 0.1.5 reads the live keyboard state for Shift-clicking the tray icon, 
 
 Installer 0.1.6 changes first-install bundle storage to `%LOCALAPPDATA%\TheLine\pipeline\bundles`. Existing configurations and bundles are retained, not moved. See [AYON launch examples](structure/DATA.md#ayon-launch-examples) for the application-specific discovery variables and optional installed-release pins; published bundles do not need a separate shared-source path.
 
+Installer 0.1.7 adds self-contained Nuke plugins under `plugins/<tool>/`, alongside the existing configured toolchains. Create and Publish show the selected host's icon and larger action buttons. Flat folder shortcuts open the repository and local releases from the existing Settings fields, and the development folder from Create/Publish without adding another setting. Quit the tray before upgrading, then start it again to refresh the Nuke bootstrap.
+
 ## Test workstation
 
 [`structure/`](structure) is a working prototype of the blueprint: a pipeline root (`THE-LINE/pipeline`) with a shared entry, per-host bootstrap stubs, a fake remote repository and fake bundle sources. Hosts find their stub through their own variable; the stub detects the DCC version, loads the prepared local selection, and runs the bundle's `__init__.py`.

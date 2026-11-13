@@ -187,12 +187,13 @@ To try it as an artist would, run `python -m localiser_tray --show` against your
 - **When it checks.** At start, then whenever the last check recorded in `status.json` is older than `check_interval_minutes`; the app looks once a minute, which only reads that file. Checks run off the UI thread. With `auto_sync` on, anything newer is installed and selected in the same pass, and a tray notification says which application to restart. With it off, the update is reported once per set of updates and "Update now" applies it.
 - **Status tab.** One row per enabled application and version: the release installed (what the next launch will load), the studio release and a sentence for the state, an **Override** button and a rocket button that starts that application from its standard install folder with the pipeline environment (for that process only), without waiting for it. A release that hasn't been prepared, or an application that isn't installed, is reported instead of started. The application's output is not captured: logging is the application's own (its console or script editor, and the files `tls_common` and the Nuke `PipelineLogger` write). It starts with a hidden console and its standard streams pointed at nothing (an app started from a shortcut has no console, and a host that inherits streams that don't exist fails to load the pipeline), and not with `DETACHED_PROCESS`, which makes every console program the application starts, such as Nuke's frame server, open its own empty window; Python in the host is told to write UTF-8 (`PYTHONIOENCODING`). A failed or unreachable repository keeps what is installed.
 - **Override.** Switching Override on shows a drop-down of the bundles made on the Create tab (in `dev/<host>/`) in the Status column; the row turns orange and every launch of that application (tray or `launch`) runs the chosen bundle in place instead of the studio release, until Override is switched off. The choice is kept in `bundles/state/overrides.json`, survives restarts and is applied to the launched process only. A bundle that has been deleted stops the launch with a message rather than falling back.
-- **Create tab.** Only shown in admin mode (see below). Opens with "What do you want to create?" and two big buttons; the choice decides which form is shown.
+- **Create tab.** Only shown in admin mode (see below). Opens with "What do you want to create?" and two big buttons; the choice decides which form is shown. The selected application's icon stays beside the Application selector in both forms, including when a source folder is chosen; the host is still the explicit selection, not inferred from that folder. An icon-only folder shortcut beside the selector opens `<local releases>/dev` in either mode, without adding a setting. The Create bundle and Publish bundle actions have larger, bold buttons.
   - **A local pipeline bundle** (for developing new features). Choose the application, a version tag, and start from either a published release or a bundle source folder (with an optional shared-packages folder merged in, as a publish would). The release list shows what can be started from for the chosen application, newest first: the releases installed here, those published on the repository (listed only when it is a folder; an https repository can't be listed, so there it shows the installed ones and the ones the studio config names), with the studio default marked ("studio default (17.0)") and any not yet installed marked "downloaded when used". Starting from a release copies the extracted, local copy of it, installing it first from the repository's zip if need be. The list is rebuilt whenever the application changes, so it never offers another application's release. If the source folder holds a zipped bundle (a `.zip`, or a published release folder with `pipeline.zip`) the app says so and asks whether to unzip it and start from what is inside; an empty folder is refused with a reason. The result is `bundles/dev/<host>/<tag>/`, laid out as a release extracts, with a `.tls-clone.json` marker. An existing tag is never overwritten. Override an application with it on the Status tab.
   - **Publish new studio bundle** (push a new release to the studio repository). Choose the application, the release version, and publish from either a local development bundle (the version defaults to its folder name and can be changed) or a bundle source folder that lives somewhere else. A development bundle is published as it is, minus its marker; a source folder is published as `python -m localiser publish` would, with any shared-packages folder you give merged in. Shared packages (such as logging) rarely change, so they are normally already inside the bundle, and the folder is usually left empty. The app asks before publishing, because a release can't be changed or removed afterwards, and it needs the repository to be a folder (an https repository can't be published to). Publishing does not select the release: nothing uses it until `bundle_version` in the studio config names it. A zipped source is refused.
 - **Admin mode.** Hold Shift while choosing **Settings...** in the tray menu (or start the app with `--admin`). The manager title becomes "THE LINE Pipeline - ADMIN MODE", the Status tab shows an admin badge, the **Create** tab appears (it is hidden otherwise), and the **Studio release** column becomes a drop-down per row: `(none)` plus every release published in the repository. Rows are this computer's enabled versions plus any version the studio config lists that isn't enabled here ("Not enabled on this computer", editable but not synced). Choosing a release writes that one entry of the studio config (`localiser.set_studio_bundle`, the same as `python -m localiser studio set <host> <series> <release|none>`), then runs an update so the change is applied here straight away; everyone else gets it at their next check. Admin mode lasts until Settings... is opened again without Shift, the tray icon is Shift-clicked, or the window is closed. It needs a repository that is a folder you can write to; otherwise the drop-downs are disabled and say why. It is not a security boundary: no password, and the folder's permissions are what protect the studio config.
 - **No bundle.** `(none)` writes `"bundle_version": null` for that version. The version stays listed, shows "No studio bundle selected - the pipeline won't load", and an update clears the version's selection, so a DCC started afterwards prints a warning (`TLS pipeline: WARNING the studio has no bundle selected for ...`) and loads no pipeline. Installed bundles are left on disk, and a pin or a dev source still loads. Older copies of the tool reject a studio config containing `null`, so update the tool on every machine before using it.
 - **Settings tab.** In normal and admin mode, tick the installed versions of each application under "Applications to keep up to date" (found in the standard install folders; versions enabled but not found are kept and marked). The other settings are the pipeline repository (a shared folder or an https address; locked and explained when `TLS_PIPELINE_REPOSITORY` supplies it), the local releases folder, the interval and `auto_sync`. A selectable application version at the bottom identifies the running installer release (not a host bundle version), from package metadata shipped with the app. Save is one validated write to `config.json` (`localiser.apply_hosts`): nothing changes if any value is rejected. It then runs an update. It writes no per-application entries and never touches the studio config. On a first run with no `config.json`, the app opens on Settings and Save creates it (with `TLS_PIPELINE_REPOSITORY` set the config is created for you).
+  Icon-only folder shortcuts open the displayed pipeline repository and local releases folder. Repository access remains available when the field is organisation-controlled; the folder shortcut is disabled for web repositories and empty fields. Shortcuts do not create missing folders, and missing/inaccessible folders or desktop-open failures show a warning.
 - **One copy.** A lock file in the temp folder stops a second tray icon from a second launch.
 - **Pipeline code.** At every start the app runs `install_pipeline_code`, so the root holds the stubs, entry and core that came with the app. It reads them from `structure/THE-LINE/pipeline` and this package in a checkout; shipping them inside an installed package is not done yet, and the app says so in Settings if they can't be found.
 - **Not in the app yet.** Starting at login, and cleaning up old releases.
@@ -237,6 +238,32 @@ A Maya bundle's root `__init__.py` is its entry point (`python_root` is `.`), an
 
 A Nuke bundle's root `__init__.py` adds `core/` with `nuke.pluginAddPath`, so Nuke runs `core/init.py` once the stub returns and `core/menu.py` when the UI loads. Everything is derived from where `core/` sits, so nothing depends on `NUKE_PATH`, which stays the studio's. `core/init.py` exports `TLA_COMP_CORE` (the core folder), `TLA_COMP_PIPELINE_ROOT` and `TLA_COMP_TOOLCHAINS`, and `toolchains/<name>/` holds one copy of each tool with no version folders. The release id is the version shown in the banner. Runtime logs go to `bundles/logs` (set as `TLS_LOG_DIR` by the entry), never into a release. `core/utils/PipelineLogger.py` keeps its API but sits on `tls_common`: every pipeline logger is `tls.nuke.<name>`, the console and daily `pipeline_<date>.log` handlers live on the `tls` logger, and Nuke's and AYON's root logger is left alone.
 
+Nuke bundles can also ship **self-contained drop-in plugins**, independently of the configured toolchains:
+
+```text
+<bundle>/
+    __init__.py
+    plugins/
+        example_tool/
+            init.py
+            menu.py
+            example_tool.py
+            gizmos/
+```
+
+After the bundle entry loads successfully, the stable Nuke bootstrap adds each immediate directory under `plugins/` with `nuke.pluginAddPath`, using absolute paths in alphabetical order and skipping paths already registered. Nuke handles each plugin's `init.py` at startup and `menu.py` in GUI sessions; Python modules such as `example_tool.py` become importable but are not automatically imported. Hidden folders, `__`-prefixed internal/cache folders and loose files directly under `plugins/` are ignored. The directory is optional, and nothing is registered if no bundle is selected.
+
+Each plugin owns its imports, menu commands and nested paths. For example, `example_tool/init.py` can expose its gizmos with:
+
+```python
+from pathlib import Path
+import nuke
+
+nuke.pluginAddPath(str(Path(__file__).resolve().parent / "gizmos"))
+```
+
+Its `menu.py` can import `example_tool` and add the tool's menu commands. The bootstrap does not recursively flatten plugin contents, import every `.py` file or generate menus. No toolchain JSON entry is needed for these plugins; existing `core/`, configured `toolchains/`, disabled toolchains and user paths are unchanged. Include only plugins intended to run, because their startup scripts execute as normal Nuke plugins. A `plugins/` directory does not replace the required bundle entry point. Installed machines need the updated stable bootstrap to use this convention.
+
 ## Environment variables
 
 The environment is only ever supplied to the process that starts a host; nothing is written to the user's persistent environment (the registry), because a persistent value is global, outlives the tool that set it and is hard to administer. A host gets its environment from one of:
@@ -273,7 +300,10 @@ The examples below pin each host to its already installed `1.0.0` release. Repla
 ```json
 {
     "TLS_PIPELINE": "{LOCALAPPDATA}\\TheLine\\pipeline",
-    "NUKE_PATH": "{LOCALAPPDATA}\\TheLine\\pipeline\\bootstrap\\nuke",
+    "NUKE_PATH": [
+        "{LOCALAPPDATA}\\TheLine\\pipeline\\bootstrap\\nuke",
+        "{NUKE_PATH}"
+    ],
     "TLS_PIPELINE_NUKE_BUNDLE": "1.0.0"
 }
 ```
@@ -283,7 +313,10 @@ The examples below pin each host to its already installed `1.0.0` release. Repla
 ```json
 {
     "TLS_PIPELINE": "{LOCALAPPDATA}\\TheLine\\pipeline",
-    "PYTHONPATH": "{LOCALAPPDATA}\\TheLine\\pipeline\\bootstrap\\maya",
+    "PYTHONPATH": [
+        "{LOCALAPPDATA}\\TheLine\\pipeline\\bootstrap\\maya",
+        "{PYTHONPATH}"
+    ],
     "TLS_PIPELINE_MAYA_BUNDLE": "1.0.0"
 }
 ```
@@ -298,7 +331,7 @@ The examples below pin each host to its already installed `1.0.0` release. Repla
 }
 ```
 
-Preserve any existing `NUKE_PATH` or `PYTHONPATH` entries by adding the stub path to the list rather than replacing it. AYON accepts path lists; if the corresponding variable is already defined in the inherited environment, it can be included as `"{NUKE_PATH}"` or `"{PYTHONPATH}"`. Do not include an undefined self-reference: AYON leaves missing tokens literal. Blender accepts a single `BLENDER_SYSTEM_SCRIPTS` directory, not a path list.
+The Maya and Nuke examples prepend the bootstrap folder and preserve existing path entries with `"{PYTHONPATH}"` and `"{NUKE_PATH}"`; do not replace either entire path with just the bootstrap folder. AYON joins these lists using the platform's path separator (`;` on Windows). These self-references assume the corresponding variable is already defined in the inherited environment; omit an undefined self-reference because AYON leaves missing tokens literal. Blender accepts a single `BLENDER_SYSTEM_SCRIPTS` directory, not a path list.
 
 `TLS_PIPELINE_<HOST>_BUNDLE` takes a release ID, not a folder path. Remove the corresponding `TLS_PIPELINE_<HOST>_SOURCE` variable when using a pin: source mode takes precedence. Do not point `_SOURCE` at a downloaded release under `bundles\hosts\<host>\<release>`; use `_BUNDLE` and let the local config locate the installed release.
 

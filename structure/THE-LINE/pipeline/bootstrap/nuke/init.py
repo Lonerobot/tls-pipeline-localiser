@@ -41,9 +41,30 @@ def _load_pipeline():
     return sys.modules["tls_pipeline"]
 
 
+def _expose_plugins(release_root):
+    plugins_root = os.path.join(os.path.abspath(release_root), "plugins")
+    try:
+        entries = os.scandir(plugins_root)
+    except FileNotFoundError:
+        return
+    with entries:
+        folders = sorted(
+            entry.path for entry in entries
+            if not entry.name.startswith((".", "__")) and entry.is_dir()
+        )
+    existing = {os.path.normcase(os.path.abspath(path)) for path in nuke.pluginPath()}
+    for folder in folders:
+        key = os.path.normcase(folder)
+        if key not in existing:
+            nuke.pluginAddPath(folder)
+            existing.add(key)
+
+
 try:
     _series = f"{nuke.NUKE_VERSION_MAJOR}.{nuke.NUKE_VERSION_MINOR}"  # "17.0"
-    _load_pipeline().start("nuke", _series)
+    _release = _load_pipeline().start("nuke", _series)
+    if _release is not None:
+        _expose_plugins(_release.release_root)
 except Exception:
     # Never stop Nuke starting; report the failure instead.
     traceback.print_exc()

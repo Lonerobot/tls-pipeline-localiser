@@ -227,6 +227,7 @@ class Manager(QObject):
         """The bundles in the dev folder, which the Create tab can publish from."""
         clones = {host: list_clones(self.config, host) for host in HOSTS} if self.config else {}
         self.window.create.set_bundles(clones)
+        self.window.create.set_dev_folder(self.config.bundle_repository / "dev" if self.config else None)
 
     def _override_view(self):
         """What the Status tab needs to offer overrides: the saved overrides and the bundles each host has."""

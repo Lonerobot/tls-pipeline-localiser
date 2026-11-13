@@ -1,6 +1,8 @@
 """The Create tab: make a local bundle to develop with, or publish a bundle as a new studio release."""
-from PySide6.QtCore import Qt, QUrl, Signal
-from PySide6.QtGui import QDesktopServices
+from pathlib import Path
+
+from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QButtonGroup,
     QComboBox,
@@ -11,14 +13,15 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QRadioButton,
+    QToolButton,
     QVBoxLayout,
     QWidget,
 )
 
 from localiser.hosts import HOSTS
 
-from .icons import mode_icon
-from .widgets import with_browse
+from .icons import folder_icon, mode_icon
+from .widgets import open_folder, with_browse
 
 LOCAL, PUBLISH = "local", "publish"
 BRAND = "#FF391E"
@@ -82,6 +85,7 @@ class CreatePage(QWidget):
         self.releases = {}  # host -> ReleaseChoices to offer
         self.bundles = {}  # host -> tags of the bundles in the dev folder
         self.folder = None
+        self.dev_folder: Path | None = None
         self._version_edited = False
 
         self.mode_local = ModeButton(LOCAL, "A local pipeline bundle", "Use for developing new features")
@@ -101,8 +105,25 @@ class CreatePage(QWidget):
         self.host = QComboBox()
         for name, info in HOSTS.items():
             self.host.addItem(info.display_name, name)
+        self.host_icon = QLabel()
+        self.host_icon.setFixedSize(40, 40)
+        self.host_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.open_dev = QToolButton()
+        self.open_dev.setIcon(folder_icon())
+        self.open_dev.setIconSize(QSize(20, 20))
+        self.open_dev.setAutoRaise(True)
+        self.open_dev.setAccessibleName("Open development bundles folder")
+        self.open_dev.clicked.connect(self._open_dev_folder)
+        self.set_dev_folder(None)
+        host_row = QWidget()
+        host_layout = QHBoxLayout(host_row)
+        host_layout.setContentsMargins(0, 0, 0, 0)
+        host_layout.addWidget(self.host_icon)
+        host_layout.addWidget(self.host, 1)
+        host_layout.addWidget(self.open_dev)
         application = QFormLayout()
-        application.addRow("Application", self.host)
+        application.addRow("Application", host_row)
+        self._update_host_icon()
 
         self.local_panel = self._build_local()
         self.publish_panel = self._build_publish()
@@ -113,6 +134,11 @@ class CreatePage(QWidget):
         self.open_folder.setVisible(False)
         self.create_button = QPushButton("Create bundle")
         self.publish_button = QPushButton("Publish bundle")
+        for button in (self.create_button, self.publish_button):
+            button.setMinimumSize(160, 44)
+            font = button.font()
+            font.setBold(True)
+            button.setFont(font)
         buttons = QHBoxLayout()
         buttons.addWidget(self.result, 1)
         buttons.addWidget(self.open_folder)
@@ -247,11 +273,28 @@ class CreatePage(QWidget):
         self.bundles = {host: list(tags) for host, tags in bundles.items()}
         self._fill_bundles(keep=True)
 
+    def set_dev_folder(self, folder: Path | None):
+        self.dev_folder = folder
+        self.open_dev.setEnabled(folder is not None)
+        self.open_dev.setToolTip(
+            f"Open development bundles folder:\n{folder}" if folder is not None
+            else "Set the local releases folder in Settings first"
+        )
+
     def _on_host_changed(self):
+        self._update_host_icon()
         self._fill_releases(keep=False)  # another application's release can't be used for this one
         self._version_edited = False
         self._fill_bundles(keep=False)
         self.hostChanged.emit(self.host.currentData())
+
+    def _update_host_icon(self):
+        info = HOSTS[self.host.currentData()]
+        self.host_icon.clear()
+        if info.icon:
+            self.host_icon.setPixmap(QIcon(str(info.icon)).pixmap(40, 40))
+        self.host_icon.setToolTip(f"Selected application: {info.display_name}")
+        self.host_icon.setAccessibleName(f"Selected application: {info.display_name}")
 
     def _fill_releases(self, keep: bool = False):
         previous = self.release.currentData() if keep else None
@@ -328,4 +371,8 @@ class CreatePage(QWidget):
 
     def _open_folder(self):
         if self.folder:
-            QDesktopServices.openUrl(QUrl.fromLocalFile(str(self.folder)))
+            open_folder(self.folder, self)
+
+    def _open_dev_folder(self):
+        if self.dev_folder is not None:
+            open_folder(self.dev_folder, self)

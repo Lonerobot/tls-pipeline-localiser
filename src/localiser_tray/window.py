@@ -32,7 +32,7 @@ from localiser.hosts import HOSTS
 from . import model
 from .create_page import CreatePage
 from .icons import COLOURS, admin_icon, brand_icon, level_icon, rocket_icon
-from .widgets import with_browse
+from .widgets import open_folder_button, with_browse
 
 STATE_LEVEL = {
     "current": model.LEVEL_OK,
@@ -309,7 +309,9 @@ class SettingsPage(QWidget):
         layout.addLayout(buttons)
 
     def _with_browse(self, edit: QLineEdit) -> QWidget:
-        return with_browse(edit, self)
+        row = with_browse(edit, self)
+        row.layout().addWidget(open_folder_button(edit, self))
+        return row
 
     def load(self, config, choices, warning: str = ""):
         """Fill the form from the saved config and the versions found on this computer."""

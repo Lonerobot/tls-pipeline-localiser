@@ -141,7 +141,7 @@ def _mode_pixmap(kind: str, size: int, colour: str) -> QPixmap:
         tray.lineTo(86, 86)
         tray.lineTo(86, 66)
         painter.drawPath(tray)
-    else:  # a folder holding code: the bundle you work on
+    else:  # a folder, with code for the local-bundle choice
         folder = QPainterPath()
         folder.moveTo(10, 78)
         folder.lineTo(10, 24)
@@ -151,10 +151,11 @@ def _mode_pixmap(kind: str, size: int, colour: str) -> QPixmap:
         folder.lineTo(90, 78)
         folder.closeSubpath()
         painter.drawPath(folder)
-        painter.drawLine(40, 50, 30, 58)
-        painter.drawLine(30, 58, 40, 66)
-        painter.drawLine(60, 50, 70, 58)
-        painter.drawLine(70, 58, 60, 66)
+        if kind != "folder":
+            painter.drawLine(40, 50, 30, 58)
+            painter.drawLine(30, 58, 40, 66)
+            painter.drawLine(60, 50, 70, 58)
+            painter.drawLine(70, 58, 60, 66)
     painter.end()
     return pixmap
 
@@ -165,6 +166,14 @@ def mode_icon(kind: str, colour: str = "#d8dce2") -> QIcon:
     icon = QIcon()
     for size in (24, 32, 48, 64, 96):
         icon.addPixmap(_mode_pixmap(kind, size, colour))
+    return icon
+
+
+def folder_icon(colour: str = "#d8dce2") -> QIcon:
+    """A plain outline folder matching the Create tab's line icons."""
+    icon = QIcon()
+    for size in (16, 20, 24, 32, 48):
+        icon.addPixmap(_mode_pixmap("folder", size, colour))
     return icon
 
 
