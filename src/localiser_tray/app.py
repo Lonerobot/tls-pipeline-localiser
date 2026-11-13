@@ -34,7 +34,8 @@ from localiser import (
 )
 from localiser.config import LocalConfig, default_pipeline_root, load_local_config, managed_repository
 from localiser.errors import ConfigError, LocaliserError
-from localiser.hosts import HOSTS
+from localiser.hosts import HOSTS, ICONS_DIR
+from localiser.install_code import pipeline_source
 from localiser.launch import launch_host
 
 from . import model
@@ -554,9 +555,17 @@ def acquire_single_instance() -> QLockFile | None:
 
 def main(argv=None) -> int:
     argv = list(sys.argv if argv is None else argv)
+    smoke_test = "--smoke-test" in argv
     app = QApplication(argv)
     app.setApplicationName(APP_NAME)
     app.setQuitOnLastWindowClosed(False)  # the tray keeps it alive
+    if smoke_test:
+        source = pipeline_source()
+        if source is None or not (ICONS_DIR / "TheLineLogo.svg").is_file():
+            raise LocaliserError("The packaged pipeline payload or logo is missing")
+        with tempfile.TemporaryDirectory(prefix="theline-payload-") as directory:
+            install_pipeline_code(Path(directory))
+        return 0
     lock = acquire_single_instance()
     if lock is None:
         print(f"{APP_NAME} is already running.")

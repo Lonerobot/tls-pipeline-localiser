@@ -9,6 +9,7 @@ one at a time and only when their content differs, so a running host is never le
 """
 import os
 import shutil
+import sys
 import uuid
 from pathlib import Path
 
@@ -22,7 +23,12 @@ CORE_FOLDER = "localiser"
 
 
 def pipeline_source() -> Path | None:
-    """The folder with the stubs and the pipeline entry: structure/THE-LINE/pipeline in a checkout of this project."""
+    """The packaged pipeline payload, or structure/THE-LINE/pipeline in a source checkout."""
+    bundle_root = getattr(sys, "_MEIPASS", None)
+    if bundle_root:
+        candidate = Path(bundle_root) / "pipeline"
+        if (candidate / STUB_FOLDER).is_dir() and (candidate / ENTRY_FILES[0]).is_file():
+            return candidate
     candidate = Path(__file__).resolve().parents[2] / "structure" / "THE-LINE" / "pipeline"
     return candidate if (candidate / STUB_FOLDER).is_dir() and (candidate / ENTRY_FILES[0]).is_file() else None
 
@@ -75,6 +81,8 @@ def install_pipeline_code(root: Path, source: Path | None = None, core: Path | N
     if source is None or not (source / STUB_FOLDER).is_dir():
         raise LocaliserError("the pipeline files to install (bootstrap stubs and entry) were not found next to this program")
     core = Path(core) if core else Path(__file__).resolve().parent
+    if not (core / "__init__.py").is_file():
+        raise LocaliserError(f"the core Python source files were not found in {core}; reinstall the application")
     if root.resolve() == source.resolve():
         return []  # the source tree is itself a root: nothing to copy
     actions: list[Action] = []

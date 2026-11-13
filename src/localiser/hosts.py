@@ -39,6 +39,10 @@ HOSTS: dict[str, HostInfo] = {
         "nuke", "Nuke", "NUKE_PATH", install_folder="", install_pattern=r"^Nuke(\d+\.\d+)v\d+$",
         executable="Nuke{series}.exe",
     ),
+    "harmony": HostInfo(
+        "harmony", "Harmony", "TOONBOOM_GLOBAL_SCRIPT_LOCATION", install_folder="Toon Boom Animation", install_pattern=r"Toon Boom Harmony (\d{2}) Premium$",
+        executable="win64/bin/HarmonyPremium.exe",
+    ),
     "blender": HostInfo(
         "blender",
         "Blender",
@@ -50,6 +54,7 @@ HOSTS: dict[str, HostInfo] = {
         executable="blender.exe",
     ),
 }
+
 
 
 def program_files_roots(environ: Mapping[str, str] | None = None) -> list[Path]:

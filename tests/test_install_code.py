@@ -2,12 +2,14 @@
 import contextlib
 import io
 import os
+import sys
 from pathlib import Path
 from unittest.mock import patch
 
 from localiser import install_pipeline_code
 from localiser.__main__ import main
 from localiser.errors import LocaliserError
+from localiser.install_code import pipeline_source
 from localiser.provision import CREATED, REMOVED, UPDATED
 
 from .helpers import WorkstationTestCase
@@ -51,13 +53,13 @@ class InstallPipelineCodeTests(WorkstationTestCase):
 
     def test_only_changed_files_are_replaced_and_dropped_ones_removed(self):
         self.install()
-        write(self.core / "api.py", "API = 2\n")
-        (self.core / "__init__.py").unlink()
+        write(self.core / "__init__.py", "CORE = 2\n")
+        (self.core / "api.py").unlink()
         write(self.source / "bootstrap" / "nuke" / "init.py", "NUKE = 1\n")
         changes = {action.path.name: action.change for action in self.install()}
-        self.assertEqual(changes, {"api.py": UPDATED, "__init__.py": REMOVED, "init.py": CREATED})
-        self.assertEqual((self.root / "localiser" / "api.py").read_text(encoding="utf-8"), "API = 2\n")
-        self.assertFalse((self.root / "localiser" / "__init__.py").exists())
+        self.assertEqual(changes, {"__init__.py": UPDATED, "api.py": REMOVED, "init.py": CREATED})
+        self.assertEqual((self.root / "localiser" / "__init__.py").read_text(encoding="utf-8"), "CORE = 2\n")
+        self.assertFalse((self.root / "localiser" / "api.py").exists())
 
     def test_config_bundles_and_state_in_the_root_are_never_touched(self):
         write(self.root / "config.json", "{}")
@@ -78,6 +80,16 @@ class InstallPipelineCodeTests(WorkstationTestCase):
         with self.assertRaisesRegex(LocaliserError, "not found"):
             install_pipeline_code(self.root, self.tmp / "nowhere", self.core)
 
+    def test_missing_core_sources_are_reported_before_changing_the_root(self):
+        self.install()
+        before = {path.relative_to(self.root): path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        (self.core / "__init__.py").unlink()
+        write(self.source / "about.py", "ABOUT = 2\n")
+        with self.assertRaisesRegex(LocaliserError, "core Python source"):
+            self.install()
+        after = {path.relative_to(self.root): path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        self.assertEqual(before, after)
+
     def test_this_checkout_installs_a_root_that_can_start_a_host(self):
         actions = install_pipeline_code(self.root)
         self.assertTrue(actions)
@@ -85,6 +97,13 @@ class InstallPipelineCodeTests(WorkstationTestCase):
                          "bootstrap/blender/startup/tls_pipeline_startup.py", "localiser/api.py", "localiser/launch.py"):
             self.assertTrue((self.root / relative).is_file(), relative)
         self.assertEqual(install_pipeline_code(self.root), [])
+
+    def test_packaged_pipeline_payload_is_used_when_frozen(self):
+        packaged = self.tmp / "pipeline"
+        write(packaged / "__init__.py", "ENTRY = 1\n")
+        write(packaged / "bootstrap" / "maya" / "userSetup.py", "MAYA = 1\n")
+        with patch.object(sys, "_MEIPASS", str(self.tmp), create=True):
+            self.assertEqual(pipeline_source(), packaged)
 
     def test_install_command_uses_the_pipeline_root(self):
         out = io.StringIO()

@@ -2,7 +2,7 @@
 
 Planning and R&D for THE LINE's lightweight, host-aware pipeline localiser. A dedicated sync command resolves, copies and verifies immutable bundles before Maya, Blender or Nuke starts. Host startup only loads the prepared local selection.
 
-**Status: R&D complete for host exposure on Windows (Blender 5.2, Maya 2026, Nuke 17.0v3). The stdlib-only core and publisher are implemented and tested, and a test workstation in [`structure/`](structure) localises real bundles and exposes them in all three hosts (Blender add-ons and splash, the Maya menu and paths, the Nuke core and toolchains). The core side of a per-user installation is built too: enabled hosts, `sync-all`/`check-all`, per-host entries that need no environment variables, the pin and dev mode, and the tray app (status, settings, background check and sync). Not yet built: packaging and login start-up, and cleanup of old releases.** The original eight planning documents have been consolidated into:
+**Status: R&D complete for host exposure on Windows (Blender 5.2, Maya 2026, Nuke 17.0v3). The stdlib-only core and publisher are implemented and tested, and a test workstation in [`structure/`](structure) localises real bundles and exposes them in all three hosts (Blender add-ons and splash, the Maya menu and paths, the Nuke core and toolchains). The core side of a per-user installation is built too: enabled hosts, `sync-all`/`check-all`, per-host entries that need no environment variables, the pin and dev mode, and the tray app (status, settings, background check and sync). An experimental per-user Windows installer is now buildable; clean-system validation and cleanup of old releases remain.** The original eight planning documents have been consolidated into:
 
 | Document | Contents |
 |---|---|
@@ -44,7 +44,23 @@ Selections are stored separately per host and DCC series under `state/prepared/`
 
 To run something other than the selection without changing it: `python -m localiser pull <host> <release>` installs a release without selecting it, and `TLS_PIPELINE_<HOST>_BUNDLE=<release>` (or `launch --bundle`) pins one session to it. `TLS_PIPELINE_<HOST>_SOURCE=<folder>` (or `launch --source`) runs an unpublished bundle source in place, without copying it. See [`structure/DATA.md`](structure/DATA.md).
 
-`launch` never syncs. It sets `TLS_PIPELINE_<HOST>` and the host's bootstrap discovery variable in the child process, preserving existing Maya/Nuke search paths, and returns the child exit code. A sync process cannot alter its parent shell or an already-running DCC's environment. For launches outside this command, the installer must provide `TLS_PIPELINE` and the bootstrap discovery variable; the host stub then exposes the prepared bundle locally. The native OS installer/provisioning remains a separate deployment task.
+`launch` never syncs. It sets `TLS_PIPELINE_<HOST>` and the host's bootstrap discovery variable in the child process, preserving existing Maya/Nuke search paths, and returns the child exit code. A sync process cannot alter its parent shell or an already-running DCC's environment. For DCCs started outside this command, a separate per-user or studio deployment must provide `TLS_PIPELINE` and the bootstrap discovery variable; the host stub then exposes the prepared bundle locally. The Windows user installer packages the tray app and bootstrap payload; it does not provision DCC startup hooks.
+
+## Windows user installer
+
+The experimental installer targets 64-bit Windows and installs per user under `%LOCALAPPDATA%\Programs\TheLinePipeline`. It includes the Python runtime, the tray application, PySide6/Qt, and the host bootstrap payload. It also includes the Python, PySide6/Qt and PyInstaller license notices supplied by the build dependencies. Bundle sources and releases are deliberately excluded; configure the studio's existing folder or HTTPS repository in the app on first launch. The installer's optional sign-in task starts the tray app for the current user. Uninstall leaves the user's pipeline configuration and downloaded bundles under `%LOCALAPPDATA%\TheLine\Pipeline` intact.
+
+Build on Windows with Python 3.11 or newer and Inno Setup 6:
+
+```powershell
+.\packaging\windows\build.ps1
+```
+
+The script installs the tray and packaging build dependencies into the selected Python environment, creates a PyInstaller one-folder application, runs its packaged Qt/payload smoke test, and compiles `dist\installer\TheLinePipeline-Setup-<version>-x64.exe`. Before compiling, an isolated Python also installs the packaged payload into a temporary pipeline root and initializes synthetic prepared Maya, Blender and Nuke bundles offline. The core is shipped as ordinary `.py` files as well as frozen app modules: the DCCs use their own Python runtimes and cannot import the app's frozen archive. It uses `.venv\Scripts\python.exe` when available; pass `-PythonExecutable` to select another Python. Run the resulting installer on a clean Windows account/VM to validate install, first-run repository setup, tray startup, host launch, and uninstall.
+
+Launch DCCs through the tray's Launcher; it supplies bootstrap discovery paths to that process only. The installer does not configure startup hooks for launches from desktop shortcuts or other launchers. The tray launcher deliberately hides console windows and sends stdout/stderr to the null device, so printed startup errors may not be visible in Blender. For diagnosis, launch Blender from a terminal with `TLS_PIPELINE` set to the pipeline root and `BLENDER_SYSTEM_SCRIPTS` to its `bootstrap\blender` folder.
+
+Installer 0.1.1 fixes missing DCC core source files in 0.1.0. Quit the tray, install the update, then start the tray again to repair the pipeline root before restarting the DCCs. Configuration and existing bundles are retained; they do not need to be downloaded again.
 
 ## Test workstation
 
