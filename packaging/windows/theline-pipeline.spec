@@ -2,6 +2,7 @@ import sys
 from importlib.metadata import distribution
 from pathlib import Path
 
+from PyInstaller.utils.hooks import copy_metadata
 
 ROOT = Path(SPECPATH).resolve().parents[1]
 PIPELINE = ROOT / "structure" / "THE-LINE" / "pipeline"
@@ -43,7 +44,7 @@ datas = [
     (license_file("PySide6", "LicenseRef-Qt-Commercial.txt"), "ThirdPartyLicenses/Qt"),
     (license_file("PyInstaller", "COPYING.txt"), "ThirdPartyLicenses/PyInstaller"),
     (str(Path(sys.base_prefix) / "LICENSE.txt"), "ThirdPartyLicenses/Python"),
-] + bootstrap_datas + core_datas
+] + bootstrap_datas + core_datas + copy_metadata("tls-pipeline-localiser")
 
 if not (Path(sys.base_prefix) / "LICENSE.txt").is_file():
     raise FileNotFoundError(f"Python license file was not found: {Path(sys.base_prefix) / 'LICENSE.txt'}")

@@ -166,6 +166,15 @@ class LocalConfigTests(unittest.TestCase):
         with self.assertRaises(ConfigError):
             self.parse(remote_repository="./x", bundle_repository="https://example.com/local")
 
+    def test_external_python_homes_resolve_against_the_local_config(self):
+        config = self.parse(remote_repository="./r", python_homes={"harmony": "../Python39"})
+        self.assertEqual(config.python_homes, {"harmony": Path(self.base).parent / "Python39"})
+
+    def test_invalid_external_python_homes_are_rejected(self):
+        for value in (None, [], {"../harmony": "Python39"}, {"harmony": ""}, {"harmony": 39}):
+            with self.subTest(value=value), self.assertRaises(ConfigError):
+                self.parse(remote_repository="./r", python_homes=value)
+
     def test_drive_letters_are_not_mistaken_for_urls(self):
         self.assertEqual(self.parse(remote_repository="D:/share").remote_repository.name, "share")
 

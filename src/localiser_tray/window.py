@@ -1,10 +1,11 @@
 """The pipeline manager window: what each application is running, and the settings behind it."""
 from datetime import datetime
 
-from PySide6.QtCore import QSize, Signal
+from PySide6.QtCore import QSize, Qt, Signal
 from PySide6.QtGui import QBrush, QColor, QIcon
 from PySide6.QtWidgets import (
     QAbstractItemView,
+    QApplication,
     QCheckBox,
     QComboBox,
     QFormLayout,
@@ -263,7 +264,6 @@ class SettingsPage(QWidget):
         self.hosts_layout = QVBoxLayout()
         self.hosts_group = QGroupBox("Applications to keep up to date")
         self.hosts_group.setLayout(self.hosts_layout)
-        self.hosts_group.setVisible(False)  # admin mode only
         hosts = self.hosts_group
 
         self.remote = QLineEdit()
@@ -292,8 +292,12 @@ class SettingsPage(QWidget):
 
         self.save = QPushButton("Save")
         self.revert = QPushButton("Revert")
+        self.version_label = QLabel(f"Application version: {QApplication.applicationVersion()}")
+        self.version_label.setToolTip("Version of the running application, matching its installer release.")
+        self.version_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         self.save.clicked.connect(self._emit_save)
         buttons = QHBoxLayout()
+        buttons.addWidget(self.version_label)
         buttons.addStretch(1)
         buttons.addWidget(self.revert)
         buttons.addWidget(self.save)
@@ -361,11 +365,6 @@ class SettingsPage(QWidget):
             other["bundle_repository"] = self.bundles.text().strip()
         return hosts, other
 
-    def set_admin(self, admin: bool):
-        """Choosing which applications and versions are kept up to date is an admin choice, so the section is only
-        shown in admin mode. The checkboxes keep their state either way, so Save loses nothing."""
-        self.hosts_group.setVisible(admin)
-
     def _emit_save(self):
         self.saveRequested.emit(*self.values())
 
@@ -402,8 +401,7 @@ class MainWindow(QMainWindow):
         self.tabs.setTabVisible(self.tabs.indexOf(self.create), False)  # Create is for admins only
 
     def set_admin(self, admin: bool):
-        """Admin mode: the studio release can be changed on the Status tab and the Create tab is available; the
-        applications section is hidden. It lasts until it is switched off or the window is closed."""
+        """Admin mode enables studio release changes and the Create tab until switched off or closed."""
         if admin == self.admin:
             return
         self.admin = admin
@@ -413,7 +411,6 @@ class MainWindow(QMainWindow):
         if not admin and was_on_create:
             self.tabs.setCurrentWidget(self.status)
         self.status.set_admin(admin)
-        self.settings.set_admin(admin)
         self.adminChanged.emit(admin)
 
     def on_revert(self, callback):

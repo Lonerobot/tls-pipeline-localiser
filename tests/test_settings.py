@@ -41,6 +41,13 @@ class SaveLocalConfigTests(WorkstationTestCase):
         self.assertEqual(self.stored()["remote_repository"], str(self.repo))
         self.assertEqual(load_local_config(self.path).bundle_repository, self.data)
 
+    def test_external_python_paths_are_saved_and_kept_when_other_settings_change(self):
+        home = self.tmp / "Python39"
+        save_local_config(self.path, {"remote_repository": self.repo, "python_homes": {"harmony": home}})
+        save_local_config(self.path, {"auto_sync": False})
+        self.assertEqual(self.stored()["python_homes"], {"harmony": str(home)})
+        self.assertEqual(load_local_config(self.path).python_homes, {"harmony": home})
+
     def test_an_https_address_is_accepted_as_the_remote(self):
         self.write({"schema_version": 1, "remote_repository": str(self.repo)})
         config = save_local_config(self.path, {"remote_repository": "https://example.org/pipeline"})

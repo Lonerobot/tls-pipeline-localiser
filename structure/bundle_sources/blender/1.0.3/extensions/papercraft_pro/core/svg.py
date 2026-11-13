@@ -1,0 +1,577 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+"""SVG pages for printing or for cutting machines (Cricut, laser, plotter).
+
+Layers (Inkscape layers, so they can be toggled for print vs cut):
+  faces     face colours or UV-mapped texture (print)
+  tabs      glue tab fill (print)
+  mountain  dash-dot folds (fold away from you, printed side up)
+  valley    dashed folds (fold towards you)
+  cut       outline to cut
+  numbers   matching glue-edge numbers
+
+Line styles:
+  DEFAULT   black cuts, red mountain, blue valley
+  CUSTOM    one colour of your choice at a chosen opacity (e.g. white at
+            40% over dark art, black at 30% over light art)
+  NONE      lines kept in the file but hidden (print art only; show the
+            layers again in Inkscape for a cutting machine)
+
+Numbers: FACES (inside both edges), CLEAN (on the tab, and on the scrap
+just outside the other edge, so nothing prints on the art) or OFF.
+"""
+
+import math
+from xml.sax.saxutils import escape
+
+from . import geom as g
+from .unfold import KIND_FOLD, edge_key
+
+LINE_STYLES = ("DEFAULT", "CUSTOM", "NONE")
+NUMBER_MODES = ("FACES", "CLEAN", "OFF")
+
+
+class Texture:
+    """An image to print on faces. href is a data: URI (or a file path);
+    width/height are the image's pixel size (UV 0..1 spans these)."""
+
+    __slots__ = ("href", "width", "height", "masked")
+
+    def __init__(self, href, width, height, masked=False):
+        self.href = href
+        self.masked = masked  # a baked page already trimmed to the pieces + bleed
+        self.width = width
+        self.height = height
+
+
+def _hex(rgb):
+    r, gg, b = (max(0, min(255, int(round(c * 255)))) for c in rgb[:3])
+    return f"#{r:02x}{gg:02x}{b:02x}"
+
+
+def _fmt(v):
+    return f"{v:.3f}".rstrip("0").rstrip(".") or "0"
+
+
+def _line_styles(style, width, color=(0.0, 0.0, 0.0), opacity=1.0, dashed=True):
+    w = _fmt(width)
+    if dashed:
+        dash_m = f"{_fmt(width * 12)},{_fmt(width * 4)},{_fmt(width * 2)},{_fmt(width * 4)}"
+        dash_v = f"{_fmt(width * 6)},{_fmt(width * 4)}"
+    else:  # cutting machines score each dash as a separate little line
+        dash_m = dash_v = "none"
+    base = f"fill:none;stroke-width:{w};stroke-linejoin:round;stroke-linecap:round"
+    if style == "CUSTOM":
+        extra = f";stroke:{_hex(color)};stroke-opacity:{_fmt(max(0.0, min(1.0, opacity)))}"
+        return {
+            "cut": base + extra,
+            "mountain": base + extra + f";stroke-dasharray:{dash_m}",
+            "valley": base + extra + f";stroke-dasharray:{dash_v}",
+        }
+    styles = {
+        "cut": base + ";stroke:#000000",
+        "mountain": base + f";stroke:#c0392b;stroke-dasharray:{dash_m}",
+        "valley": base + f";stroke:#2471a3;stroke-dasharray:{dash_v}",
+    }
+    if style == "NONE":
+        styles = {k: v + ";display:none" for k, v in styles.items()}
+    return styles
+
+
+OUTER_GUIDE_INSET = 1.0  # mm, at most; never more than a fifth of the tab's depth
+
+
+def glue_footprints(res, lay):
+    """Where each tab lands when glued: [(page, (outer, points)), ...] in
+    page mm. The tab's outline is turned about its hinge edge onto the same
+    edge of the face it glues to (a rotation: both faces are seen from the
+    printed side), so it lands on that face's side of the edge. Outside
+    tabs' guides are inset (see OUTER_GUIDE_INSET) so the tab hides them."""
+    island_of = {f: isl for isl in res.islands for f in isl.faces}
+    out = []
+    for tab in lay.tabs:
+        if tab.partner is None:
+            continue
+        face = res.faces[tab.face]
+        partner = res.faces[tab.partner[0]]
+        own_isl, p_isl = island_of.get(tab.face), island_of.get(partner.index)
+        if own_isl is None or p_isl is None:
+            continue
+        n, m = len(face.loop), len(partner.loop)
+        ko = tab.partner[1]
+        if ko >= m:
+            continue
+        own = lay.face_points(res, own_isl, tab.face)
+        ppts = lay.face_points(res, p_isl, partner.index)
+        a, b = own[tab.corner], own[(tab.corner + 1) % n]
+        # The partner runs the shared edge the other way: its corner ko is
+        # this edge's end b (also for flaps joining separately made parts,
+        # whose vertices are different ones in the same place).
+        pa, pb = ppts[(ko + 1) % m], ppts[ko]
+        turn = (math.atan2(pb[1] - pa[1], pb[0] - pa[0])
+                - math.atan2(b[1] - a[1], b[0] - a[0]))
+        c, s_ = math.cos(turn), math.sin(turn)
+        pts = []
+        for x, y in lay.tab_points(tab):
+            dx, dy = x - a[0], y - a[1]
+            pts.append((pa[0] + c * dx - s_ * dy, pa[1] + s_ * dx + c * dy))
+        if tab.outer:
+            # An outside tab lies on top of this guide: keep the guide well
+            # inside it, so small slips in cutting and gluing still hide it.
+            ln = math.hypot(pb[0] - pa[0], pb[1] - pa[1]) or 1.0
+            depth = max(abs((pb[0] - pa[0]) * (q[1] - pa[1]) - (pb[1] - pa[1]) * (q[0] - pa[0])) / ln
+                        for q in pts)
+            pts = g.shrink_convex(pts, min(OUTER_GUIDE_INSET, 0.2 * depth))
+            if not pts:
+                continue
+        out.append((lay.placements[p_isl.index].page, (tab.outer, pts)))
+    return out
+
+
+def page_clip_polygons(res, lay, bleed=0.2, tab_texture=False):
+    """Per page, the polygons (page mm, y up) a baked page image shows
+    through: every face grown by the bleed, plus tabs that carry art (all
+    tabs with Texture on Tabs, outside tabs always), grown too."""
+    out = [[] for _ in range(max(lay.page_count, 1))]
+    for isl in res.islands:
+        page = lay.placements[isl.index].page
+        for f in isl.order:
+            pts = lay.face_points(res, isl, f)
+            for a, b, c in g.triangulate_2d(pts):
+                out[page].append(g.grow_triangle([pts[a], pts[b], pts[c]], bleed))
+    for tab in lay.tabs:
+        if tab_texture or tab.outer:
+            page = lay.placements[tab.island].page
+            out[page].append(g.grow_convex(lay.tab_points(tab), bleed))
+    return out
+
+
+def export_pages(
+    res,
+    lay,
+    colors=None,
+    fill_faces=True,
+    numbers=True,
+    title="Papercraft",
+    textures=None,
+    uvs=None,
+    line_style="DEFAULT",
+    line_color=(0.0, 0.0, 0.0),
+    line_opacity=1.0,
+    line_width=0.25,
+    fold_min_angle=1.0,
+    bleed=0.2,
+    tab_color=(0.914, 0.902, 0.875),
+    page_images=None,
+    tab_texture=False,
+    content="PRINT",
+    dashed=True,
+    tab_fill=True,
+    board=None,
+    glue_guides=True,
+    glue_front=False,
+    piece_letters=True,
+    assembly=False,
+):
+    """Return a list of SVG documents (strings), one per page.
+
+    colors    per material index (r, g, b) floats, or None
+    textures  per material index Texture, or None
+    uvs       per material index: per *source* polygon list of (u, v) per
+              corner (the UV map that material's image uses)
+    page_images  per page Texture of a baked page (overrides face fills)
+    content   PRINT (art and lines), or for cutting machines: CUT (outlines
+              only), CREASE (fold lines only) or LINES (both; creases red so
+              they import as their own colour layer). Lines-only files are
+              plain solid strokes: no art, numbers or text.
+              ART_CUT is Print with the art carried onto the tabs and only the
+              cut lines drawn (no fold lines on the art).
+    dashed    dash the fold lines (turn off for cutting machines)
+    tab_texture  continue each face's art (baked page, image texture or
+              flat colour) onto its tabs
+    tab_fill  fill plain tabs grey (False: leave them paper white)
+    glue_guides  outline where each tab lands on the face it glues to. Inside
+              tabs glue to the face's back, so their guides go on BACK pages
+              (or on the front too with glue_front, for plain models painted
+              after building); outside tabs glue on top, so theirs print on
+              the front, hidden by the tab once glued.
+    piece_letters  letter each piece (A, B, C ...) to match the assembly page:
+              inside its largest face with numbers On Faces (and always on
+              BACK pages), on the scrap below it with Tabs & Scrap, none
+              with numbers Off.
+    assembly  add the assembly page (see core.assembly) after the sheets.
+    board     thick materials: dict(thickness=mm, fold_style, join_style).
+              Content BACK draws the back of each sheet mirrored (outlines,
+              V-grooves with their fold line, mitre bevels).
+    fold_min_angle  folds flatter than this (degrees) are not drawn
+    bleed     mm of colour/texture spill past edges, hides white slivers
+    """
+    H = lay.page_h
+    min_fold = math.radians(max(0.0, fold_min_angle))
+    lines = _line_styles(line_style, line_width, line_color, line_opacity, dashed)
+    lines_only = content in ("CUT", "CREASE", "LINES", "BACK")
+    mirror = content == "BACK"
+    W = lay.page_w
+    if content == "ART_CUT":
+        tab_texture = True
+    if lines_only:
+        fill_faces = False
+        page_images = None
+        textures = None
+        numbers = "OFF"
+        tab_texture = False
+        base = (f"fill:none;stroke-width:{_fmt(line_width)};stroke-linejoin:round;"
+                "stroke-linecap:round")
+        crease = "#ff0000" if content == "LINES" else "#000000"
+        solid = _line_styles("DEFAULT", line_width, dashed=dashed)
+        lines = {
+            "cut": base + ";stroke:#000000",
+            "mountain": base + f";stroke:{crease}" + solid["mountain"].split(";stroke:#c0392b")[1],
+            "valley": base + f";stroke:{crease}" + solid["valley"].split(";stroke:#2471a3")[1],
+        }
+    if numbers is True:
+        numbers = "FACES"
+    elif not numbers:
+        numbers = "OFF"
+
+    def svgp(p):
+        return (W - p[0] if mirror else p[0], H - p[1])
+
+    def pt(p):
+        return f"{_fmt(W - p[0] if mirror else p[0])},{_fmt(H - p[1])}"
+
+    def line(a, b):
+        return f'<path d="M {pt(a)} L {pt(b)}"/>'
+
+    page_count = max(lay.page_count, 1)
+    pages = [
+        {"defs": [], "faces": [], "tabs": [], "cut": [], "mountain": [], "valley": [],
+         "numbers": [], "tex_used": set(), "clip": [], "groove": [], "bevel": [], "glue": [], "pieces": []}
+        for _ in range(page_count)
+    ]
+    pattern_n = [0]
+
+    tab_on = {(t.face, t.corner): t for t in lay.tabs}
+
+    def face_uvs(face, material):
+        layer = uvs[material] if uvs and material < len(uvs) else None
+        if layer and face.source < len(layer) and layer[face.source]:
+            src_uv = layer[face.source]
+            return [src_uv[c] for c in face.corners]
+        return None
+
+    def face_fill(page, face, pts):
+        """Append the face's print fill: texture triangles or flat colour."""
+        fill_poly(page, face.material, pts, face_uvs(face, face.material))
+
+    def fill_poly(page, material, pts, face_uv):
+        tex = None
+        if textures and material < len(textures):
+            tex = textures[material]
+        if tex is not None and face_uv is not None:
+            done = 0
+            for a, b, c in g.triangulate_2d(pts):
+                img = [
+                    (face_uv[k][0] * tex.width, (1.0 - face_uv[k][1]) * tex.height)
+                    for k in (a, b, c)
+                ]
+                dst = [svgp(pts[k]) for k in (a, b, c)]
+                m = g.affine_from_triangles(img, dst)
+                if m is None:
+                    continue
+                tid = f"tex{textures.index(tex)}"
+                page["tex_used"].add(tid)
+                pattern_n[0] += 1
+                pid = f"p{pattern_n[0]}"
+                page["defs"].append(
+                    f'<pattern id="{pid}" patternUnits="userSpaceOnUse" '
+                    f'width="{tex.width}" height="{tex.height}" '
+                    f'patternTransform="matrix({" ".join(f"{v:.8g}" for v in m)})">'
+                    f'<use xlink:href="#{tid}" href="#{tid}"/></pattern>'
+                )
+                grown = g.grow_triangle(dst, bleed)
+                page["faces"].append(
+                    f'<polygon points="{" ".join(f"{_fmt(x)},{_fmt(y)}" for x, y in grown)}" '
+                    f'fill="url(#{pid})"/>'
+                )
+                done += 1
+            if done:
+                return
+        col = "#ffffff"
+        if colors and material < len(colors) and colors[material]:
+            col = _hex(colors[material])
+        page["faces"].append(
+            f'<polygon points="{" ".join(pt(p) for p in pts)}" '
+            f'style="fill:{col};stroke:{col};stroke-width:{_fmt(max(bleed * 2, 0.05))};'
+            f'stroke-linejoin:round"/>'
+        )
+
+    for isl in res.islands:
+        place = lay.placements[isl.index]
+        page = pages[place.page]
+        folds_done = set()
+        for f in isl.order:
+            face = res.faces[f]
+            pts = lay.face_points(res, isl, f)
+            count = len(pts)
+            if page_images and page_images[place.page] is not None:
+                pass  # the baked page image covers it (see page_clip_polygons)
+            elif fill_faces:
+                face_fill(page, face, pts)
+            for k in range(count):
+                a, b = pts[k], pts[(k + 1) % count]
+                key = edge_key(face.loop[k], face.loop[(k + 1) % count])
+                info = res.edges[key]
+                if info.kind == KIND_FOLD:
+                    if key in folds_done:
+                        continue
+                    folds_done.add(key)
+                    if abs(info.angle) >= min_fold and abs(info.angle) > 1e-9:
+                        page["mountain" if info.angle > 0 else "valley"].append(line(a, b))
+                    continue
+                tab = tab_on.get((f, k))
+                numbered = numbers != "OFF" and info.kind != KIND_FOLD and info.number
+                if tab is not None:
+                    tp = lay.tab_points(tab)
+                    poly = f'<polygon points="{" ".join(pt(p) for p in tp)}"/>'
+                    page["tabs"].append(poly)
+                    baked_page = page_images and page_images[place.page] is not None
+                    grown_tp = g.grow_convex(tp, bleed)
+                    if tab_texture and not tab.outer and fill_faces and not baked_page:
+                        # Continue the face's own art (or colour) across its tab.
+                        fill_poly(page, face.material, grown_tp,
+                                  _extend_uvs(pts, face_uvs(face, face.material), k, grown_tp))
+                    if tab.outer and fill_faces and not baked_page:
+                        # Outside tab: print the art of the face it covers.
+                        partner = res.faces[tab.partner[0]]
+                        p_uv = face_uvs(partner, partner.material)
+                        tab_uv = None
+                        if p_uv:
+                            tab_uv = [
+                                (sum(p_uv[c][0] * w for c, w in ws), sum(p_uv[c][1] * w for c, w in ws))
+                                for ws in tab.weights
+                            ]
+                            tab_uv = _map_uvs(tp, tab_uv, grown_tp)
+                        fill_poly(page, partner.material, grown_tp, tab_uv)
+                    page["cut"].append(
+                        f'<path d="M {pt(tp[0])} ' + " ".join(f"L {pt(p)}" for p in tp[1:]) + '"/>'
+                    )
+                    # The tab follows the face it glues to: same fold direction.
+                    page["valley" if tab.angle < -1e-6 else "mountain"].append(line(a, b))
+                    if numbered and numbers == "CLEAN" and tab.outer:
+                        pass  # nothing printed on a visible tab
+                    elif numbered and numbers == "CLEAN":
+                        tc = g.polygon_centroid(tp)
+                        page["numbers"].append(_number(a, b, info.number, H, at=tc, outward=True))
+                else:
+                    page["cut"].append(line(a, b))
+                    if numbered and numbers == "CLEAN":
+                        page["numbers"].append(_number(a, b, info.number, H, outside=True))
+                if numbered and numbers == "FACES":
+                    page["numbers"].append(_number(a, b, info.number, H))
+
+    if board and board.get("thickness", 0.0) > 0.0:
+        from .board import board_marks
+
+        marks = board_marks(res, lay, board["thickness"], board.get("fold_style", "CREASE"),
+                            board.get("join_style", "TABS"), min_fold)
+        centre = f'style="stroke-dasharray:{_fmt(line_width * 6)},{_fmt(line_width * 4)}"'
+        for n, m in enumerate(marks):
+            if n >= len(pages):
+                break
+            if mirror:
+                for a, b in m["groove_back"]:
+                    pages[n]["groove"].append(line(a, b))
+                for a, b in m["groove_centre"]:
+                    pages[n]["groove"].append(
+                        f'<path d="M {pt(a)} L {pt(b)}" {centre}/>')
+                for a, b in m["bevel_back"]:
+                    pages[n]["bevel"].append(line(a, b))
+    if glue_guides and content in ("PRINT", "ART_CUT", "BACK"):
+        for page_n, poly in glue_footprints(res, lay):
+            outer, pts_ = poly
+            show = (not outer) if mirror else (outer or glue_front)
+            if show and page_n < len(pages):
+                pages[page_n]["glue"].append(
+                    f'<polygon points="{" ".join(pt(q) for q in pts_)}"/>')
+    letters = None
+    if piece_letters and content in ("PRINT", "ART_CUT", "BACK"):
+        from .assembly import piece_labels
+
+        letters = piece_labels(res, lay)
+        where = "FACE" if (mirror or numbers == "FACES") else (
+            "SCRAP" if numbers == "CLEAN" else None)
+        for isl in res.islands if where else ():
+            label = letters.get(isl.index)
+            if label is None:
+                continue
+            page = lay.placements[isl.index].page
+            if where == "FACE":
+                c = g.polygon_centroid(lay.face_points(res, isl, isl.root))
+                y = c[1] - 1.4
+            else:
+                pts = [q for f in isl.faces for q in lay.face_points(res, isl, f)]
+                low = min(pts, key=lambda q: q[1])
+                c, y = low, low[1] - 4.5
+                if y < lay.margin * 0.4:  # no room below: above the piece
+                    high = max(pts, key=lambda q: q[1])
+                    c, y = high, high[1] + 1.5
+            if page < len(pages):
+                pages[page]["pieces"].append(
+                    f'<text x="{_fmt(W - c[0] if mirror else c[0])}" y="{_fmt(H - y)}" '
+                    f'text-anchor="middle">{escape(label)}</text>')
+    clip_polys = page_clip_polygons(res, lay, bleed, tab_texture) if page_images else None
+    docs = []
+    for n, layers in enumerate(pages, 1):
+        footer = (
+            f"{escape(title)} · page {n}/{page_count} · 1 model unit = "
+            f"{lay.scale:.2f} mm · model height {lay.model_height_mm(res):.0f} mm"
+        )
+        parts = [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            f'<svg xmlns="http://www.w3.org/2000/svg" '
+            f'xmlns:xlink="http://www.w3.org/1999/xlink" '
+            f'xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" '
+            f'width="{_fmt(lay.page_w)}mm" height="{_fmt(lay.page_h)}mm" '
+            f'viewBox="0 0 {_fmt(lay.page_w)} {_fmt(lay.page_h)}">',
+            f"<title>{escape(title)} page {n}</title>",
+            "<defs>",
+        ]
+        for tid in sorted(layers["tex_used"]):
+            tex = textures[int(tid[3:])]
+            parts.append(
+                f'<image id="{tid}" width="{tex.width}" height="{tex.height}" '
+                f'preserveAspectRatio="none" xlink:href="{tex.href}" href="{tex.href}"/>'
+            )
+        parts.extend(layers["defs"])
+        baked = page_images[n - 1] if page_images and n - 1 < len(page_images) else None
+        if baked is not None:
+            clip_attr = ""
+            if not baked.masked:  # trim with a clip path (renderers vary here)
+                parts.append('<clipPath id="pieces" clipPathUnits="userSpaceOnUse">')
+                for poly in clip_polys[n - 1]:
+                    parts.append(f'<polygon points="{" ".join(pt(q) for q in poly)}"/>')
+                parts.append("</clipPath>")
+                clip_attr = 'clip-path="url(#pieces)" '
+            layers["faces"].insert(0, (
+                f'<image x="0" y="0" width="{_fmt(lay.page_w)}" height="{_fmt(lay.page_h)}" '
+                f'preserveAspectRatio="none" {clip_attr}'
+                f'xlink:href="{baked.href}" href="{baked.href}"/>'
+            ))
+        parts.append("</defs>")
+        groups = [
+            ("tabs", f"fill:{_hex(tab_color)};stroke:none" if tab_fill else "fill:none;stroke:none"),
+            ("faces", ""),
+            ("glue", f"fill:#000000;fill-opacity:0.06;stroke:#808080;"
+                     f"stroke-width:{_fmt(line_width)};stroke-dasharray:1,0.8"),
+            ("mountain", lines["mountain"]),
+            ("valley", lines["valley"]),
+            ("cut", lines["cut"]),
+            ("groove", f"fill:none;stroke:#1f6fbf;stroke-width:{_fmt(line_width)};"
+                       "stroke-linecap:round"),
+            ("bevel", f"fill:none;stroke:#d9711c;stroke-width:{_fmt(line_width)};"
+                      "stroke-linecap:round"),
+            ("numbers", "font-family:sans-serif;fill:#333333"),
+            ("pieces", "font-family:sans-serif;font-size:4px;fill:#555555"),
+        ]
+        if content == "ART_CUT":
+            groups = [(name, style) for name, style in groups if name not in ("mountain", "valley")]
+        if lines_only:
+            keep = {"CUT": ("cut",), "CREASE": ("mountain", "valley"),
+                    "LINES": ("mountain", "valley", "cut"),
+                    "BACK": ("glue", "cut", "groove", "bevel", "pieces")}[content]
+            groups = [(name, style) for name, style in groups if name in keep]
+        for name, style in groups:
+            attr = f' style="{style}"' if style else ""
+            parts.append(
+                f'<g id="{name}" inkscape:groupmode="layer" inkscape:label="{name}"{attr}>'
+            )
+            parts.extend(layers[name])
+            parts.append("</g>")
+        if mirror:
+            parts.append(
+                f'<text x="{_fmt(lay.margin)}" y="{_fmt(H - lay.margin / 3)}" '
+                f'style="font-family:sans-serif;font-size:2.5px;fill:#888888">'
+                f'{escape(title)} · page {n} BACK (mirrored) · grey: glue guides · blue: V-grooves '
+                f'(dashed = fold line) · orange: mitre, carve the back away to this line</text>'
+            )
+        if not lines_only:  # text would import into cutter software as shapes
+            parts.append(
+                f'<text x="{_fmt(lay.margin)}" y="{_fmt(H - lay.margin / 3)}" '
+                f'style="font-family:sans-serif;font-size:2.5px;fill:#888888">{footer}</text>'
+            )
+        parts.append("</svg>")
+        docs.append("\n".join(parts))
+    if assembly and content in ("PRINT", "ART_CUT") and res.islands:
+        from .assembly import assembly_page
+
+        docs.append(assembly_page(res, lay, title, letters, line_width))
+    return docs
+
+
+def _map_uvs(pts, uvs, new_pts):
+    """UVs for new_pts by extending the affine pts -> uvs mapping."""
+    n = len(pts)
+    for j in range(1, n - 1):
+        m = g.affine_from_triangles([pts[0], pts[j], pts[j + 1]], [uvs[0], uvs[j], uvs[j + 1]])
+        if m is not None:
+            a, b, c, d, e, f = m
+            return [(a * x + c * y + e, b * x + d * y + f) for x, y in new_pts]
+    return None
+
+
+def _extend_uvs(pts, face_uv, k, tab_pts):
+    """UVs for a tab on edge k of a face: the face's own texture mapping
+    carried on past that edge, so its art continues across the tab."""
+    if not face_uv:
+        return None
+    n = len(pts)
+    k1 = (k + 1) % n
+    a, b = pts[k], pts[k1]
+    best, j_best = 0.0, None
+    for j in range(n):
+        if j in (k, k1):
+            continue
+        area = abs((b[0] - a[0]) * (pts[j][1] - a[1]) - (pts[j][0] - a[0]) * (b[1] - a[1]))
+        if area > best:
+            best, j_best = area, j
+    if j_best is None:
+        return None
+    m = g.affine_from_triangles([a, b, pts[j_best]], [face_uv[k], face_uv[k1], face_uv[j_best]])
+    if m is None:
+        return None
+    ma, mb, mc, md, me, mf = m
+    return [(ma * x + mc * y + me, mb * x + md * y + mf) for x, y in tab_pts]
+
+
+def _number(a, b, number, page_h, at=None, outside=False, outward=False):
+    """Glue number along edge a->b of a CCW face.
+
+    default   just inside the face, reading from inside
+    outside   on the scrap just beyond the cut line
+    at        centred on a point (a tab), reading outwards"""
+    d = g.sub2(b, a)
+    length = g.len2(d)
+    if length < 1e-6:
+        return ""
+    size = max(1.4, min(3.0, length * 0.3))
+    dn = g.mul2(d, 1.0 / length)
+    inside = (-dn[1], dn[0])  # left of a->b is inside a CCW face
+    mid = g.mul2(g.add2(a, b), 0.5)
+    angle = math.degrees(math.atan2(dn[1], dn[0]))
+    if at is not None or outside:
+        # Read with "up" pointing away from the piece.
+        angle += 180.0
+        if at is not None:
+            # Baseline half a text-height "below" the tab centre.
+            pos = g.add2(at, g.mul2(inside, size * 0.35))
+        else:
+            # Baseline just outside the cut; text grows away from the piece.
+            pos = g.add2(mid, g.mul2(inside, -0.6))
+    else:
+        pos = g.add2(mid, g.mul2(inside, size * 0.35))
+    x, y = pos[0], page_h - pos[1]
+    return (
+        f'<text x="{_fmt(x)}" y="{_fmt(y)}" text-anchor="middle" '
+        f'style="font-size:{_fmt(size)}px" '
+        f'transform="rotate({_fmt(-angle)} {_fmt(x)} {_fmt(y)})">{number}</text>'
+    )

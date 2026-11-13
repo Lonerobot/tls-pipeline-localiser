@@ -8,10 +8,12 @@ import sys
 import tempfile
 import threading
 from datetime import datetime, timezone
+from importlib.metadata import version
 from pathlib import Path
 from typing import Mapping
 
 from PySide6.QtCore import QLockFile, QObject, Qt, QTimer, Signal
+from PySide6.QtGui import QColor, QPalette
 from PySide6.QtWidgets import QApplication, QMenu, QSystemTrayIcon
 
 from localiser import (
@@ -46,6 +48,38 @@ from .window import MainWindow
 
 TICK_SECONDS = 60  # how often to ask whether a check is due; cheap, it only reads the status file
 APP_NAME = "THE LINE Pipeline"
+
+
+def apply_dark_theme(app: QApplication) -> None:
+    """Use the same widget style and colours regardless of the desktop's theme."""
+    app.setStyle("Fusion")
+    palette = app.style().standardPalette()
+    for role, colour in (
+        (QPalette.ColorRole.Window, "#262626"),
+        (QPalette.ColorRole.WindowText, "#d8dce2"),
+        (QPalette.ColorRole.Base, "#1e1e1e"),
+        (QPalette.ColorRole.AlternateBase, "#303030"),
+        (QPalette.ColorRole.Text, "#d8dce2"),
+        (QPalette.ColorRole.Button, "#333333"),
+        (QPalette.ColorRole.ButtonText, "#d8dce2"),
+        (QPalette.ColorRole.ToolTipBase, "#333333"),
+        (QPalette.ColorRole.ToolTipText, "#d8dce2"),
+        (QPalette.ColorRole.BrightText, "#ffffff"),
+        (QPalette.ColorRole.Highlight, "#ff391e"),
+        (QPalette.ColorRole.HighlightedText, "#ffffff"),
+        (QPalette.ColorRole.Link, "#ff6a52"),
+        (QPalette.ColorRole.PlaceholderText, "#999999"),
+        (QPalette.ColorRole.Light, "#484848"),
+        (QPalette.ColorRole.Midlight, "#3b3b3b"),
+        (QPalette.ColorRole.Mid, "#222222"),
+        (QPalette.ColorRole.Dark, "#181818"),
+        (QPalette.ColorRole.Shadow, "#101010"),
+    ):
+        palette.setColor(role, QColor(colour))
+    for role in (QPalette.ColorRole.WindowText, QPalette.ColorRole.Text, QPalette.ColorRole.ButtonText):
+        palette.setColor(QPalette.ColorGroup.Disabled, role, QColor("#7a7f87"))
+    palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Highlight, QColor("#484848"))
+    app.setPalette(palette)
 
 
 class Manager(QObject):
@@ -289,7 +323,12 @@ class Manager(QObject):
 
     def _tray_activated(self, reason):
         if reason in (QSystemTrayIcon.ActivationReason.DoubleClick, QSystemTrayIcon.ActivationReason.Trigger):
-            self.launcher.bring_to_front()
+            # Tray callbacks can arrive without Qt receiving the corresponding key events.
+            if QApplication.queryKeyboardModifiers() & Qt.KeyboardModifier.ShiftModifier:
+                self.window.set_admin(False)
+                self.window.show_settings()
+            else:
+                self.launcher.bring_to_front()
 
     # launching, overrides and creating bundles --------------------------------------------------
 
@@ -557,7 +596,9 @@ def main(argv=None) -> int:
     argv = list(sys.argv if argv is None else argv)
     smoke_test = "--smoke-test" in argv
     app = QApplication(argv)
+    apply_dark_theme(app)
     app.setApplicationName(APP_NAME)
+    app.setApplicationVersion(version("tls-pipeline-localiser"))
     app.setQuitOnLastWindowClosed(False)  # the tray keeps it alive
     if smoke_test:
         source = pipeline_source()
@@ -565,6 +606,9 @@ def main(argv=None) -> int:
             raise LocaliserError("The packaged pipeline payload or logo is missing")
         with tempfile.TemporaryDirectory(prefix="theline-payload-") as directory:
             install_pipeline_code(Path(directory))
+        window = MainWindow()
+        if window.settings.version_label.text() != f"Application version: {app.applicationVersion()}":
+            raise LocaliserError("The packaged settings do not show the running application version")
         return 0
     lock = acquire_single_instance()
     if lock is None:

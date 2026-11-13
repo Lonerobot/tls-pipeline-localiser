@@ -13,7 +13,7 @@ from .config import REPOSITORY_VARIABLE, LocalConfig, managed_repository, parse_
 from .errors import ConfigError
 from .fsutil import atomic_write_text
 
-EDITABLE_KEYS = ("remote_repository", "bundle_repository", "hosts", "check_interval_minutes", "auto_sync")
+EDITABLE_KEYS = ("remote_repository", "bundle_repository", "hosts", "check_interval_minutes", "auto_sync", "python_homes")
 SCHEMA_VERSION = 1
 
 
@@ -34,6 +34,8 @@ def _read_document(path: Path) -> dict:
 
 
 def _json_value(key: str, value):
+    if key == "python_homes" and isinstance(value, Mapping):
+        return {host: os.fspath(home) if isinstance(home, os.PathLike) else home for host, home in value.items()}
     if key in ("remote_repository", "bundle_repository"):
         return os.fspath(value) if isinstance(value, os.PathLike) else value
     if key == "hosts":

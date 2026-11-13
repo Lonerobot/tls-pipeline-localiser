@@ -14,6 +14,7 @@ STUBS = {
     "maya": BOOTSTRAP / "maya" / "userSetup.py",
     "nuke": BOOTSTRAP / "nuke" / "init.py",
     "blender": BOOTSTRAP / "blender" / "startup" / "tls_pipeline_startup.py",
+    "harmony": BOOTSTRAP / "harmony" / "init.py",
 }
 
 
@@ -49,7 +50,7 @@ class StubRootTests(unittest.TestCase):
         self.install(expected)
         for name, stub in STUBS.items():
             with self.subTest(stub=name), patch("sys.platform", "win32"), patch.dict(os.environ, env, clear=True):
-                self.assertEqual(Path(load_pipeline_root(stub)()), expected)
+                self.assertEqual(load_pipeline_root(stub)(), str(expected))
                 self.assertEqual(os.environ["TLS_PIPELINE"], str(expected))
 
     def test_every_stub_agrees_with_the_core_on_each_platform(self):

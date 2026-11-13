@@ -23,6 +23,7 @@ class HostInfo:
     install_folder: str = ""  # under Program Files; where this host's versions are installed
     install_pattern: str = ""  # a regex whose first group is the series, matched against folder names
     executable: str = ""  # the program inside an install folder, with {series} filled in
+    python_version: str | None = None  # external runtime required by the host; other DCCs bring their own
 
     @property
     def icon(self) -> Path | None:
@@ -42,6 +43,7 @@ HOSTS: dict[str, HostInfo] = {
     "harmony": HostInfo(
         "harmony", "Harmony", "TOONBOOM_GLOBAL_SCRIPT_LOCATION", install_folder="Toon Boom Animation", install_pattern=r"Toon Boom Harmony (\d{2}) Premium$",
         executable="win64/bin/HarmonyPremium.exe",
+        python_version="3.9",
     ),
     "blender": HostInfo(
         "blender",
@@ -54,8 +56,6 @@ HOSTS: dict[str, HostInfo] = {
         executable="blender.exe",
     ),
 }
-
-
 
 def program_files_roots(environ: Mapping[str, str] | None = None) -> list[Path]:
     environ = os.environ if environ is None else environ

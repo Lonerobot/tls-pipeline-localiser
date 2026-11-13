@@ -46,9 +46,25 @@ To run something other than the selection without changing it: `python -m locali
 
 `launch` never syncs. It sets `TLS_PIPELINE_<HOST>` and the host's bootstrap discovery variable in the child process, preserving existing Maya/Nuke search paths, and returns the child exit code. A sync process cannot alter its parent shell or an already-running DCC's environment. For DCCs started outside this command, a separate per-user or studio deployment must provide `TLS_PIPELINE` and the bootstrap discovery variable; the host stub then exposes the prepared bundle locally. The Windows user installer packages the tray app and bootstrap payload; it does not provision DCC startup hooks.
 
+### Harmony's external Python
+
+Harmony is the only registered host with an external `python_version` requirement in `src/localiser/hosts.py`: 64-bit Python 3.9. Its internal console requires that version, not the tray app's Python or another DCC's bundled Python. See [Harmony 24's Python documentation](https://docs.toonboom.com/help/harmony-24/premium/go/scripting/python/index.html).
+
+On Windows, the launcher discovers Python 3.9 from PythonCore's per-user/machine registry entries, standard Python installation folders, or `PATH`. It validates the interpreter's version and architecture and requires `python39.dll` beside `python.exe`. An explicit local override takes precedence; add this key to the pipeline root's existing `config.json` for a custom installation:
+
+```json
+"python_homes": {
+    "harmony": "C:\\Python39"
+}
+```
+
+Without that override, an inherited `PYTHON_LIB_PATH` is honored and validated before automatic discovery. An invalid explicit path or a missing compatible runtime stops the launch with an actionable error. The runtime must already be installed; it is not installed or downloaded by the launcher.
+
+Only Harmony's child environment gets `PYTHON_LIB_PATH` and its Python folder prepended to `PATH`; existing `PYTHONPATH` is retained. Nothing is written to the Windows environment or Harmony preferences, and Maya, Blender and Nuke retain their bundled runtimes. This enables Harmony's Python console; it does not make the localiser's Python 3.11+ core compatible with Harmony's Python 3.9 interpreter.
+
 ## Windows user installer
 
-The experimental installer targets 64-bit Windows and installs per user under `%LOCALAPPDATA%\Programs\TheLinePipeline`. It includes the Python runtime, the tray application, PySide6/Qt, and the host bootstrap payload. It also includes the Python, PySide6/Qt and PyInstaller license notices supplied by the build dependencies. Bundle sources and releases are deliberately excluded; configure the studio's existing folder or HTTPS repository in the app on first launch. The installer's optional sign-in task starts the tray app for the current user. Uninstall leaves the user's pipeline configuration and downloaded bundles under `%LOCALAPPDATA%\TheLine\Pipeline` intact.
+The experimental installer targets 64-bit Windows and installs per user under `%LOCALAPPDATA%\Programs\TheLinePipeline`. It includes the Python runtime, the tray application, PySide6/Qt, and the host bootstrap payload. It also includes the Python, PySide6/Qt and PyInstaller license notices supplied by the build dependencies. Bundle sources and releases are deliberately excluded. On first install, when no local config exists, it writes `%LOCALAPPDATA%\TheLine\pipeline\config.json` with repository `P:\pipeline\repository` and bundle downloads under `%LOCALAPPDATA%\TheLine\pipeline\bundles`, beside the pipeline code. `TLS_PIPELINE`, if set, overrides the config/code root and first-install bundle downloads default to its `bundles` subfolder. Existing config files are never overwritten, so reinstalling retains a previously chosen bundle location. The repository and download location can be changed in the app. The installer's optional sign-in task starts the tray app for the current user. Uninstall leaves the user's pipeline configuration and downloaded bundles intact.
 
 Build on Windows with Python 3.11 or newer and Inno Setup 6:
 
@@ -61,6 +77,16 @@ The script installs the tray and packaging build dependencies into the selected 
 Launch DCCs through the tray's Launcher; it supplies bootstrap discovery paths to that process only. The installer does not configure startup hooks for launches from desktop shortcuts or other launchers. The tray launcher deliberately hides console windows and sends stdout/stderr to the null device, so printed startup errors may not be visible in Blender. For diagnosis, launch Blender from a terminal with `TLS_PIPELINE` set to the pipeline root and `BLENDER_SYSTEM_SCRIPTS` to its `bootstrap\blender` folder.
 
 Installer 0.1.1 fixes missing DCC core source files in 0.1.0. Quit the tray, install the update, then start the tray again to repair the pipeline root before restarting the DCCs. Configuration and existing bundles are retained; they do not need to be downloaded again.
+
+Installer 0.1.2 includes Blender bundle asset libraries: immediate `assets/TLP_*` folders are registered with Link imports and absolute paths, and stale pipeline entries are removed without changing other user libraries. Quit the tray before upgrading, then start it again and relaunch Blender to load the updated startup stub. This updates the application and bootstrap code, not bundle contents; bundle entry-point dependencies such as `modules/tls_common` must still be included in the bundle.
+
+Installer 0.1.3 introduced first-install configuration, originally with bundle storage under Documents, and uses lowercase `pipeline` in the Windows config/code root. Windows still resolves existing uppercase `Pipeline` folders; upgrades do not rename them or move existing bundles.
+
+Installer 0.1.4 forces a consistent dark UI. Click the tray icon for the launcher, or Shift-click it for normal Settings. "Applications to keep up to date" is available in normal Settings again. Shift-click **Settings...** in the tray menu for admin mode; the Create tab remains admin-only.
+
+Installer 0.1.5 reads the live keyboard state for Shift-clicking the tray icon, including when the app is unfocused. Settings now shows a selectable application version matching the running installer's release, for troubleshooting.
+
+Installer 0.1.6 changes first-install bundle storage to `%LOCALAPPDATA%\TheLine\pipeline\bundles`. Existing configurations and bundles are retained, not moved. See [AYON launch examples](structure/DATA.md#ayon-launch-examples) for the application-specific discovery variables and optional installed-release pins; published bundles do not need a separate shared-source path.
 
 ## Test workstation
 

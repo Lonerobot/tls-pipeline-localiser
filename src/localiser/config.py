@@ -172,6 +172,7 @@ class LocalConfig:
     check_interval_minutes: int = DEFAULT_CHECK_INTERVAL_MINUTES
     auto_sync: bool = True  # whether the tray app applies updates itself
     remote_locked: bool = False  # the repository comes from TLS_PIPELINE_REPOSITORY, so it can't be changed here
+    python_homes: dict[str, Path] = field(default_factory=dict)  # optional external runtime folders, keyed by host
 
 
 REPOSITORY_VARIABLE = "TLS_PIPELINE_REPOSITORY"  # an organisation's (or user's) repository; wins over config.json
@@ -189,7 +190,7 @@ def default_pipeline_root(environ: Mapping[str, str] | None = None, platform: st
     platform = sys.platform if platform is None else platform
     if platform.startswith("win"):
         base = environ.get("LOCALAPPDATA", "").strip()
-        return Path(base) / "TheLine" / "Pipeline" if base else None
+        return Path(base) / "TheLine" / "pipeline" if base else None
     home = environ.get("HOME", "").strip()
     if platform == "darwin":
         return Path(home) / "Library" / "Application Support" / "TheLine" / "Pipeline" if home else None
@@ -247,6 +248,15 @@ def _remote(value, base: Path, what: str):
     return _folder(value, base, what)
 
 
+def _python_homes(value, base: Path) -> dict[str, Path]:
+    if not isinstance(value, dict):
+        raise ConfigError("local config 'python_homes' must be an object of host -> Python installation folder")
+    return {
+        validate_host(host): _folder(home, base, f"python_homes.{host}")
+        for host, home in value.items()
+    }
+
+
 def parse_local_config(text: str, base: Path, environ: Mapping[str, str] | None = None) -> LocalConfig:
     """Parse config.json text; relative paths resolve against `base`, the folder containing the file.
 
@@ -268,6 +278,7 @@ def parse_local_config(text: str, base: Path, environ: Mapping[str, str] | None 
         check_interval_minutes=_interval(data.get("check_interval_minutes")),
         auto_sync=auto_sync,
         remote_locked=bool(managed),
+        python_homes=_python_homes(data.get("python_homes", {}), base),
     )
 
 

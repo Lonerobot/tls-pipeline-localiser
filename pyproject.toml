@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tls-pipeline-localiser"
-version = "0.1.1"
+version = "0.1.6"
 description = "Resolve, localise and expose versioned pipeline releases for DCC hosts."
 requires-python = ">=3.11"
 dependencies = []

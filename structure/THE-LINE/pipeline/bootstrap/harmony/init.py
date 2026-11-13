@@ -22,7 +22,7 @@ def _pipeline_root():
         return root
     if sys.platform.startswith("win"):
         base = os.environ.get("LOCALAPPDATA", "")
-        root = os.path.join(base, "TheLine", "Pipeline") if base else ""
+        root = os.path.join(base, "TheLine", "pipeline") if base else ""
     elif sys.platform == "darwin":
         root = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "TheLine", "Pipeline")
     else:

@@ -59,8 +59,9 @@ class DefaultRootTests(WorkstationTestCase):
     def test_default_location_per_platform(self):
         self.assertEqual(
             default_pipeline_root({"LOCALAPPDATA": r"C:\Users\a\AppData\Local"}, "win32"),
-            Path(r"C:\Users\a\AppData\Local") / "TheLine" / "Pipeline",
+            Path(r"C:\Users\a\AppData\Local") / "TheLine" / "pipeline",
         )
+        self.assertEqual(default_pipeline_root({"LOCALAPPDATA": r"C:\Users\a\AppData\Local"}, "win32").name, "pipeline")
         self.assertEqual(
             default_pipeline_root({"HOME": "/Users/a"}, "darwin"),
             Path("/Users/a/Library/Application Support/TheLine/Pipeline"),
@@ -72,7 +73,7 @@ class DefaultRootTests(WorkstationTestCase):
         self.assertIsNone(default_pipeline_root({}, "win32"))
 
     def test_the_variable_wins_and_the_default_is_used_only_when_installed(self):
-        installed = self.tmp / "Local" / "TheLine" / "Pipeline"
+        installed = self.tmp / "Local" / "TheLine" / "pipeline"
         env = {"LOCALAPPDATA": str(self.tmp / "Local")}
         with patch("sys.platform", "win32"):
             with self.assertRaisesRegex(ConfigError, "no installation"):

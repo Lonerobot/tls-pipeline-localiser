@@ -8,7 +8,7 @@
 #endif
 
 #ifndef AppVersion
-  #define AppVersion "0.1.1"
+  #define AppVersion "0.1.6"
 #endif
 
 [Setup]
@@ -43,3 +43,48 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 
 [Run]
 Filename: "{app}\{#AppExeName}"; Description: "Launch THE LINE Pipeline"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function JsonPath(const Path: String): String;
+begin
+  Result := Path;
+  StringChangeEx(Result, '\', '\\', True);
+  StringChangeEx(Result, '"', '\"', True);
+  Result := '"' + Result + '"';
+end;
+
+procedure InitializePipelineConfig(const Root: String);
+var
+  ConfigPath, BundlesPath, Document: String;
+begin
+  ConfigPath := AddBackslash(Root) + 'config.json';
+  if FileExists(ConfigPath) then
+    Exit;
+
+  BundlesPath := AddBackslash(Root) + 'bundles';
+  if not ForceDirectories(Root) then
+    RaiseException('Could not create the pipeline folder: ' + Root);
+  if not ForceDirectories(BundlesPath) then
+    RaiseException('Could not create the bundle download folder: ' + BundlesPath);
+
+  Document := '{' + #13#10 +
+    '    "schema_version": 1,' + #13#10 +
+    '    "remote_repository": ' + JsonPath('P:\pipeline\repository') + ',' + #13#10 +
+    '    "bundle_repository": ' + JsonPath(BundlesPath) + #13#10 +
+    '}' + #13#10;
+  if not SaveStringToFile(ConfigPath, Utf8Encode(Document), False) then
+    RaiseException('Could not write the pipeline configuration: ' + ConfigPath);
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+  Root: String;
+begin
+  if CurStep = ssPostInstall then
+  begin
+    Root := Trim(GetEnv('TLS_PIPELINE'));
+    if Root = '' then
+      Root := ExpandConstant('{localappdata}\TheLine\pipeline');
+    InitializePipelineConfig(Root);
+  end;
+end;

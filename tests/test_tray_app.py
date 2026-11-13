@@ -162,6 +162,78 @@ class TrayAppTests(WorkstationTestCase):
         manager.window.hide()
         manager.launcher.hide()
 
+    def test_plain_tray_click_opens_only_the_launcher(self):
+        manager = self.make_manager()
+        manager.window.hide()
+        with patch.object(
+            self.app.QApplication, "keyboardModifiers", return_value=self.app.Qt.KeyboardModifier.ShiftModifier
+        ), patch.object(
+            self.app.QApplication, "queryKeyboardModifiers", return_value=self.app.Qt.KeyboardModifier.NoModifier
+        ):
+            manager._tray_activated(self.app.QSystemTrayIcon.ActivationReason.Trigger)
+        self.assertTrue(manager.launcher.isVisible())
+        self.assertFalse(manager.window.isVisible())
+        manager.launcher.hide()
+
+    def test_shift_tray_click_opens_normal_settings_even_after_admin_mode(self):
+        manager = self.make_manager()
+        for was_admin in (False, True):
+            with self.subTest(was_admin=was_admin):
+                manager.window.set_admin(was_admin)
+                manager.window.hide()
+                manager.launcher.hide()
+                with patch.object(
+                    self.app.QApplication, "keyboardModifiers", return_value=self.app.Qt.KeyboardModifier.NoModifier
+                ), patch.object(
+                    self.app.QApplication, "queryKeyboardModifiers", return_value=self.app.Qt.KeyboardModifier.ShiftModifier
+                ):
+                    manager._tray_activated(self.app.QSystemTrayIcon.ActivationReason.Trigger)
+                self.assertTrue(manager.window.isVisible())
+                self.assertIs(manager.window.tabs.currentWidget(), manager.window.settings)
+                self.assertFalse(manager.window.admin)
+                self.assertFalse(manager.window.tabs.isTabVisible(manager.window.tabs.indexOf(manager.window.create)))
+                self.assertFalse(manager.window.settings.hosts_group.isHidden())
+                self.assertFalse(manager.launcher.isVisible())
+
+    def test_settings_displays_the_running_application_version_in_both_modes(self):
+        original = self.qt.applicationVersion()
+        self.addCleanup(self.qt.setApplicationVersion, original)
+        self.qt.setApplicationVersion("9.8.7")
+        manager = self.make_manager()
+        for admin in (False, True):
+            with self.subTest(admin=admin):
+                manager.window.set_admin(admin)
+                manager.window.show_settings()
+                label = manager.window.settings.version_label
+                self.assertEqual(label.text(), "Application version: 9.8.7")
+                self.assertTrue(label.isVisible())
+
+    def test_dark_theme_overrides_a_light_palette_for_windows_and_controls(self):
+        from PySide6.QtGui import QColor, QPalette
+
+        original = self.qt.palette()
+        self.addCleanup(self.qt.setPalette, original)
+        light = QPalette()
+        for role in (QPalette.ColorRole.Window, QPalette.ColorRole.Base, QPalette.ColorRole.Button):
+            light.setColor(role, QColor("white"))
+        self.qt.setPalette(light)
+        self.app.apply_dark_theme(self.qt)
+        manager = self.make_manager()
+        for widget, background, foreground in (
+            (manager.window, QPalette.ColorRole.Window, QPalette.ColorRole.WindowText),
+            (manager.window.settings.remote, QPalette.ColorRole.Base, QPalette.ColorRole.Text),
+            (manager.window.settings.save, QPalette.ColorRole.Button, QPalette.ColorRole.ButtonText),
+            (manager.menu, QPalette.ColorRole.Window, QPalette.ColorRole.WindowText),
+        ):
+            with self.subTest(widget=type(widget).__name__):
+                palette = widget.palette()
+                self.assertLess(palette.color(background).lightness(), 80)
+                self.assertGreater(palette.color(foreground).lightness(), 180)
+                self.assertGreater(
+                    palette.color(QPalette.ColorGroup.Disabled, foreground).lightness(),
+                    palette.color(background).lightness(),
+                )
+
     def test_a_cycle_reports_progress_for_each_entry(self):
         self.write_local(hosts={"maya": [SERIES]})
         manager = self.make_manager()
@@ -339,7 +411,7 @@ class TrayAppTests(WorkstationTestCase):
         manager.open_settings()
         self.assertFalse(window.admin)
         self.assertEqual(window.windowTitle(), "THE LINE Pipeline")
-        self.assertTrue(window.settings.hosts_group.isHidden())  # choosing applications is an admin choice
+        self.assertFalse(window.settings.hosts_group.isHidden())
         self.enter_admin(manager)
         self.assertTrue(window.admin)
         self.assertEqual(window.windowTitle(), "THE LINE Pipeline - ADMIN MODE")
@@ -352,7 +424,7 @@ class TrayAppTests(WorkstationTestCase):
         self.assertFalse(window.admin)
         self.assertFalse(window.tabs.isTabVisible(window.tabs.indexOf(window.create)))
         self.assertIs(window.tabs.currentWidget(), window.status)  # not left on the tab that has gone
-        self.assertTrue(window.settings.hosts_group.isHidden())
+        self.assertFalse(window.settings.hosts_group.isHidden())
         self.assertTrue(window.status.admin_label.isHidden())
         window.hide()
 

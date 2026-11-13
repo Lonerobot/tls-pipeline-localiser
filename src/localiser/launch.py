@@ -15,6 +15,7 @@ from .clone import override_source_folder
 from .config import LocalConfig
 from .errors import LocaliserError
 from .hosts import HOSTS, find_executable
+from .python_runtime import find_python_home
 from .resolve import ROOT_VARIABLE
 from .sync import dev_release, pipeline_root, source_variable, startup_release
 
@@ -41,6 +42,10 @@ def launch_environment(
     # Blender accepts one system scripts directory; Maya and Nuke accept search paths.
     if host != "blender" and existing:
         env[variable] += os.pathsep + existing
+    if version := HOSTS[host].python_version:
+        home = find_python_home(version, config.python_homes.get(host), env)
+        env["PYTHON_LIB_PATH"] = str(home)
+        env["PATH"] = str(home) + (os.pathsep + env["PATH"] if env.get("PATH") else "")
     return env
 
 

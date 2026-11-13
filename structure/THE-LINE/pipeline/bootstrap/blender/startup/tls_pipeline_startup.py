@@ -11,6 +11,7 @@ After localising, the stub exposes what the bundle ships (all optional):
                         blender_manifest.toml. All are enabled.
 - addons/<name>      -> legacy add-ons (bl_info). All are enabled. Keep extensions out of addons/:
                         Blender would list them a second time as legacy add-ons.
+- assets/TLP_<name>/ -> pipeline-owned asset libraries, linked with absolute paths.
 """
 import importlib.util
 import os
@@ -25,6 +26,7 @@ EXTENSION_REPO_MODULE = "tls_pipeline"  # extensions load as bl_ext.tls_pipeline
 EXTENSION_REPO_NAME = "THE LINE Pipeline"
 SPLASH_VARIABLE = "BLENDER_CUSTOM_SPLASH"
 SPLASH_FILE = os.path.join("splash", "splash.png")
+ASSET_LIBRARY_PREFIX = "TLP_"
 
 
 def _pipeline_root():
@@ -34,7 +36,7 @@ def _pipeline_root():
         return root
     if sys.platform.startswith("win"):
         base = os.environ.get("LOCALAPPDATA", "")
-        root = os.path.join(base, "TheLine", "Pipeline") if base else ""
+        root = os.path.join(base, "TheLine", "pipeline") if base else ""
     elif sys.platform == "darwin":
         root = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "TheLine", "Pipeline")
     else:
@@ -120,6 +122,34 @@ def _expose_release(release_root, extensions_dir, extensions):
             prefs.addons.remove(addon)
 
     bpy.utils.refresh_script_paths()
+
+
+def _expose_asset_libraries(release_root):
+    """Reconcile the reserved TLP_ libraries without touching user libraries or asset files."""
+    assets_dir = os.path.join(os.path.abspath(release_root), "assets")
+    wanted = {}
+    if os.path.isdir(assets_dir):
+        for name in sorted(os.listdir(assets_dir)):
+            path = os.path.join(assets_dir, name)
+            if name.startswith(ASSET_LIBRARY_PREFIX) and os.path.isdir(path):
+                wanted[name] = path
+
+    libraries = bpy.context.preferences.filepaths.asset_libraries
+    for library in list(libraries):
+        if not library.name.startswith(ASSET_LIBRARY_PREFIX):
+            continue
+        path = wanted.pop(library.name, None)
+        if path is None:
+            libraries.remove(library)
+        else:
+            library.path = path
+            library.import_method = "LINK"
+            library.use_relative_path = False
+
+    for name, path in wanted.items():
+        library = libraries.new(name=name, directory=path)
+        library.import_method = "LINK"
+        library.use_relative_path = False
 
 
 def _enable_addons(extensions, legacy):
@@ -211,6 +241,7 @@ def register():
         _set_splash(release_root)
         extensions_dir, extensions, legacy = _shipped_addons(release_root)
         _expose_release(release_root, extensions_dir, extensions)
+        _expose_asset_libraries(release_root)
         _enable_addons_after_startup(extensions, legacy)
         _register_about()
     except Exception:
